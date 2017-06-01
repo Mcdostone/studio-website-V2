@@ -4,12 +4,16 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import studioTheme from './studioTheme';
 import './App.css';
 import Navbar from './components/Navbar';
+import Media from './components/Media';
 
 class App extends Component {
 	render() {
 		return (
 			<MuiThemeProvider muiTheme={getMuiTheme(studioTheme)}>
-				<Navbar />
+				<div>
+					<Navbar />
+					<Media />
+				</div>
 			</MuiThemeProvider>
 		);
 	}

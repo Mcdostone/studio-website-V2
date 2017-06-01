@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import EventListener from 'react-event-listener';
+import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import './Search.css';
@@ -27,17 +28,29 @@ const stylesInput = {
 
 class Search extends React.Component {
 
-	keyPressed(e) {
-		console.log('hell', e);
+	constructor(props) {
+		super(props);
+		this.handleKeyUp = this.handleKeyUp.bind(this);
+	}
+
+	handleKeyUp(e) {
+		if (e.keyCode === 27) {
+			this.props.toggleSearch();
+		}
 	}
 
 	render() {
 		return (
 			<Paper style={styles}>
+				<EventListener
+					target="window"
+					onKeyUp={this.handleKeyUp}
+				/>
 				<TextField
+					autoFocus
 					style={stylesInput}
 					hintStyle={{ bottom: `${FONT_SIZE / 2}px` }}
-					hintText="Search..."
+					hintText="Search a tag, event..."
 					onKeyPress={this.keyPressed}
 				/>
 			</Paper>
@@ -45,6 +58,8 @@ class Search extends React.Component {
 	}
 }
 
-
+Search.propTypes = {
+	toggleSearch: PropTypes.func.isRequired,
+};
 
 export default Search;

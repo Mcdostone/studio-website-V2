@@ -1,0 +1,27 @@
+:root {
+	--height: 300px;
+	--overlay: rgba(0,0,0, 0.6);
+}
+
+.cover {
+	display: flex;
+	position: relative;
+	height: var(--height);
+	width: 100%;
+}
+
+.cover:after {
+	content: '';
+	position: absolute;
+	background: var(--overlay);
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.cover img {
+	object-fit: cover;
+	width: 100%;
+}
+
