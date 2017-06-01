@@ -1,0 +1,46 @@
+.navbar {
+	height: 60px;
+}
+
+.navbar-link {
+	height: 100%;
+	display: flex;
+	padding: 20px;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	transition: background-color 0.3s ease;
+	cursor: pointer;
+}
+
+.navbar-link:hover, .navbar-active {
+	transition: background-color 0.2s ease;
+	background: #424242;
+}
+
+#navbar-logo {
+	padding: 10px 40px;
+}
+
+#navbar-logo img {
+	height: 100%;
+	box-sizing: border-box;
+	width: auto;
+}
+
+.navbar a, .navbar a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+
+.navigator {
+	display: flex;
+	margin-left: auto;
+}
+
+.navigator-search {
+	font-style: italic;
+	font-weight: 100;
+	cursor: text;
+}
