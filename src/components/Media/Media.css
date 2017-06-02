@@ -1,0 +1,9 @@
+.media {
+	display: flex;
+	flex-direction: column;
+}
+
+
+.media-container {
+	padding: 0 20%;
+}

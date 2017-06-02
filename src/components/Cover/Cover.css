@@ -1,10 +1,21 @@
+@font-face {
+	font-family: 'Moonlights on the Beach';
+	src: 	url('../../assets/MoonlightsontheBeach.eot');
+	src: 	url('../../assets/MoonlightsontheBeach.eot?#iefix') format('embedded-opentype'),
+				url('../../assets/MoonlightsontheBeach.woff') format('woff'),
+				url('../../assets/MoonlightsontheBeach.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
 :root {
-	--height: 300px;
+	--height: 250px;
 	--overlay: rgba(0,0,0, 0.6);
 }
 
 .cover {
-	display: flex;
+	display: inline-block;
+	overflow: hidden;
 	position: relative;
 	height: var(--height);
 	width: 100%;
@@ -21,7 +32,21 @@
 }
 
 .cover img {
+	position: relative;
 	object-fit: cover;
 	width: 100%;
 }
 
+.cover-title {
+	position: absolute;
+	top: 50%;
+	margin: 0;
+	left: 50%;
+	z-index: 10;
+	color: white;
+	transform: translate(-50%, -50%);
+	font-family: 'Moonlights on the Beach';
+	font-weight: 300;
+	font-size: 5em;
+	font-style: normal;
+}

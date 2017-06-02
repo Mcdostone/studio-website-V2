@@ -1,0 +1,11 @@
+.media-list {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.media-item {
+	width: 25%;
+	object-fit: contain;
+	height: auto;
+}
