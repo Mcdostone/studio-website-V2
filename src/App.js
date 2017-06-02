@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Media from './components/Media';
 import Events from './components/Events';
+import Types from './components/Types';
 
 
 class App extends React.Component {
@@ -19,9 +20,10 @@ class App extends React.Component {
 					<Router>
 						<div>
 							<Navbar />
-							<Route exact  path="/" component={Home} />
+							<Route exact path="/" component={Home} />
 							<Route path="/media" component={Media} />
 							<Route path="/events" component={Events} />
+							<Route path="/types" component={Types} />
 						</div>
 					</Router>
 				</div>

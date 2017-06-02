@@ -1,9 +1,8 @@
-.media {
+.layout-studio {
 	display: flex;
 	flex-direction: column;
 }
 
-
-.media-container {
+.container {
 	padding: 0 20%;
 }

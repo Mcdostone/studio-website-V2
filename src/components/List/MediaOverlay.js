@@ -1,5 +1,4 @@
 import React from 'react';
-import './MediaList.css';
 import FavoriteAction from 'material-ui/svg-icons/action/favorite';
 
 class MediaList extends React.Component {

@@ -5,15 +5,12 @@ import Layout from '../Layout';
 class Events extends React.Component {
 
 	render() {
-		const cover = <Cover title="Events" />;
+		const cover = <Cover title="Types" />;
 		const container = (
 			<div>
 			</div>
 		);
-
-		return (
-			<Layout cover={cover} container={container} />
-		);
+		return (<Layout cover={cover} container={container} />);
 	}
 }
 

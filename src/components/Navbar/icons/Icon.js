@@ -3,8 +3,17 @@ import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
 
 class Icon extends React.Component {
+
 	render() {
-		return undefined;
+		return (
+			<IconButton
+				className="navbar-icon"
+				style={this.props.style}
+				onTouchTap={this.props.onTouchTap}
+			>
+				{this.props.children}
+			</IconButton>
+		);
 	}
 }
 

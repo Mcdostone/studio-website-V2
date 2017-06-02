@@ -53,9 +53,9 @@ class Navbar extends React.Component {
 					<Link className="navbar-link" to="/events">
 						Events
 					</Link>
-					<a href="/" className="navbar-link">
+					<Link className="navbar-link" to="/types">
 						Types
-					</a>
+					</Link>
 
 					<Navigator onSearchTap={this.toggleSearch} />
 				</AppBar>
