@@ -1,11 +1,52 @@
+:root {
+	--width-square: 23%;
+	--margin-square: 1%;
+	--cols: 4;
+}
+
 .media-list {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
+	text-align: center;
 }
 
 .media-item {
-	width: 25%;
-	object-fit: contain;
-	height: auto;
+	float:left;
+	position: relative;
+	width: var(--width-square);
+	height: 0;
+	margin: var(--margin-square);
+	margin-left: 0;
+	padding-bottom : var(--width-square);
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-size:cover; /* you change this to "contain" if you don't want the images to be cropped */
+}
+
+.media-item:nth-child(4n) {
+	margin-right: 0;
+}
+
+.media-overlay {
+	opacity: 0;
+	position: absolute;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0, 0.5);
+}
+
+.media-overlay-infos {
+	display: flex;
+	color: white;
+	justify-content: center;
+	align-items: center;
+}
+
+.media-overlay:hover {
+	opacity: 1;
 }

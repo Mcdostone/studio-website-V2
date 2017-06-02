@@ -11,7 +11,7 @@ class IconViewQuilt extends Icon {
 			<IconButton
 				disableTouchRipple={true}
 				className="navbar-icon"
-				style={this.props.style}
+				style={{ padding: 0, margin: 0, width: 'auto' }}
 				onTouchTap={this.props.onTouchTap}
 			>
 				<ViewQuilteAction

@@ -6,8 +6,11 @@
     "material-ui": "^0.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
+    "react-component-gallery": "^1.2.1",
     "react-dom": "^15.5.4",
     "react-event-listener": "^0.4.5",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1"
   },
   "devDependencies": {

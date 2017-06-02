@@ -1,16 +1,25 @@
 import React from 'react';
+import {GridList, GridTile} from 'material-ui/GridList';
+import ComponentGallery from 'react-component-gallery';
+import M from './M';
 import './MediaList.css';
 
 class MediaList extends React.Component {
 	render() {
-		const list = [];
+		const images = [];
 		for (let index = 1; index <= 9; index++) {
-			list.push((<img className="media-item" src={`http://lorempicsum.com/futurama/255/200/${index}`} alt="" />));
+			images.push(`http://lorempicsum.com/futurama/400/400/${index}`);
 		}
+
 
 		return (
 			<div className="media-list">
-				{list}
+				{
+					images.map(img => (
+							<M src={img} />
+					))
+
+				}
 			</div>
 		);
 	}

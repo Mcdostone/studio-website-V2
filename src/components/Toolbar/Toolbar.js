@@ -10,12 +10,12 @@ class ToolbarStudio extends React.Component {
 
 	render() {
 		return (
-			<Toolbar style={{ backgroundColor: 'transparent', margin: 0 }}>
+			<Toolbar style={{ backgroundColor: 'transparent', margin: 0, padding: 0 }}>
 
 				<ToolbarGroup>
 					<DropDownMenu
 						value={1}
-						labelStyle={{ color: grey500 }}
+						labelStyle={{ color: grey500,  paddingLeft: 0 }}
 					>
 						<MenuItem value={1} primaryText="Last added" />
 						<MenuItem value={2} primaryText="Most popular" />

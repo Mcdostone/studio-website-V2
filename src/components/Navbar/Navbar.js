@@ -1,5 +1,6 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
+import { Link } from 'react-router-dom';
 import StudioDrawer from '../StudioDrawer';
 import Search from './Search';
 import logo from '../../assets/logo.png';
@@ -43,15 +44,15 @@ class Navbar extends React.Component {
 				>
 					<IconMore style={{ margin: '0 8px 0 -16px', width: '60px', height: '60px' }} onTouchTap={this.toggleDrawer} />
 
-					<a href="/" className="navbar-link" id="navbar-logo">
+					<Link className="navbar-link" id="navbar-logo" to="/">
 						<img src={logo} alt="" />
-					</a>
-					<a href="/" className="navbar-link">
+					</Link>
+					<Link className="navbar-link" to="/media">
 						Media
-					</a>
-					<a href="/" className="navbar-link">
+					</Link>
+					<Link className="navbar-link" to="/events">
 						Events
-					</a>
+					</Link>
 					<a href="/" className="navbar-link">
 						Types
 					</a>
