@@ -2,35 +2,41 @@ import React from 'react';
 import Cover from '../Cover';
 import Layout from '../Layout';
 import MediaToolbar from './MediaToolbar';
-import SquareList from '../List/SquareList';
+import StudioList from '../List/StudioList';
 
 class Media extends React.Component {
 	constructor(props) {
 		super(props);
+
+		const media = [];
+		for (let index = 1; index <= 9; index++) {
+			media.push(`http://lorempicsum.com/futurama/1000/600/${index}`);
+		}
+		media.push('http://lorempicsum.com/simpsons/600/1000/4');
+
 		this.state = {
-			quilt: false,
+			squareView: true,
+			media,
 		};
-		this.handleQuiltMode = this.handleQuiltMode.bind(this);
+
+
+		this.handleSquareView = this.handleSquareView.bind(this);
 	}
 
-	handleQuiltMode(quiltMode) {
-		this.setState({ quilt: quiltMode });
+	handleSquareView(isSquareView) {
+		this.setState({ squareView: isSquareView });
 	}
 
 	render() {
-		const images = [];
-		for (let index = 1; index <= 9; index++) {
-			images.push(`http://lorempicsum.com/futurama/400/400/${index}`);
-		}
-
 		const cover = <Cover title="Media" />;
 		const container = (
 			<div>
-				<pre>
-					quilt mode: {this.state.quilt ? 'yes' : 'no'}
-				</pre>
-				<MediaToolbar quilt={this.state.quilt} handleQuilt={this.handleQuiltMode} />
-				<SquareList media={images}/>
+				<MediaToolbar squareView={this.state.squareView} handleSquareView={this.handleSquareView} />
+				{<StudioList
+					square={this.state.squareView}
+					gutter={5}
+					media={this.state.media}
+				/>}
 			</div>
 		);
 		return (<Layout cover={cover} container={container} />);

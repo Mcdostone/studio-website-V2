@@ -3,17 +3,14 @@ import MediaOverlay from './MediaOverlay';
 
 class M extends React.Component {
 
-	render() {
-		const styles = {
-			background: `url(${this.props.src}) no-repeat`,
-			backgroundSize: 'cover',
-			backgroundPosition: 'center',
-		}
+	constructor(props) {
+		super(props);
+	}
 
+	render() {
+		const classNames = this.props.square ? 'media-item square' : 'media-item';
 		return (
-			<div className="m media-item" style={styles}>
-				<MediaOverlay />
-			</div>
+			<div className={classNames}><img src={this.props.src} alt="" /><MediaOverlay /></div>
 		);
 	}
 }

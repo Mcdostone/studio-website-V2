@@ -8,7 +8,7 @@ class SquareList extends React.Component {
 			<div className="media-list">
 				{
 					this.props.media.map(img => (
-						<M src={img} key={img} />
+						<M src={img} key={img} square={true} />
 					))
 				}
 			</div>

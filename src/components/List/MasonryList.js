@@ -1,9 +1,19 @@
 import React from 'react';
-import Masonry from 'react-masonry-component';
+import StackGrid from 'react-stack-grid';
+import M from './M';
 
 class MasonryList extends React.Component {
+
 	render() {
-		return undefined;
+		return (
+			<StackGrid
+				columnWidth={'33%'}
+				gutterHeight={10}
+				gutterWidth={10}
+			>
+				{this.props.media.map(src => <M src={src} key={src} />)}
+      </StackGrid>
+		);
 	}
 }
 

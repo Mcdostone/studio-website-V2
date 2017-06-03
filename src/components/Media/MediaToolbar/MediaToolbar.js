@@ -33,10 +33,10 @@ class MediaToolbar extends React.Component {
 				</ToolbarGroup>
 
 				<ToolbarGroup>
-					<IconViewModule active={!this.props.quilt} onTouchTap={() => this.props.handleQuilt(false)} />
+					<IconViewModule active={this.props.squareView} onTouchTap={() => this.props.handleSquareView(true)} />
 					<IconViewQuilt
-						active={this.props.quilt}
-						onTouchTap={() => this.props.handleQuilt(true)}
+						active={!this.props.squareView}
+						onTouchTap={() => this.props.handleSquareView(false)}
 						style={{ padding: 0, margin: 0, width: 'auto' }}
 					/>
 				</ToolbarGroup>
