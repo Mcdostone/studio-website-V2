@@ -14,6 +14,8 @@
 		"no-tabs": 0,
 		"react/jsx-indent": [2, "tab"],
 		"react/jsx-indent-props": [2, "tab"],
-		"max-len": ["error", 110]
+		"max-len": ["error", 110],
+		"no-useless-constructor": ["warning", "double"]
+
 	}
 }
