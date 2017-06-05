@@ -4,10 +4,6 @@ import Overlay from '../List/Overlay';
 
 class M extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<div className="item-content">
