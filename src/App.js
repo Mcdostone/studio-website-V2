@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import studioTheme from './studioTheme';
@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Media from './components/Media';
 import Events from './components/Events';
 import Types from './components/Types';
+import Profile from './components/Profile';
 
 
 class App extends React.Component {
@@ -17,15 +18,16 @@ class App extends React.Component {
 		return (
 			<MuiThemeProvider muiTheme={getMuiTheme(studioTheme)}>
 				<div className="studio-app">
-					<Router>
+					<BrowserRouter>
 						<div>
 							<Navbar />
 							<Route exact path="/" component={Home} />
 							<Route path="/media" component={Media} />
 							<Route path="/events" component={Events} />
 							<Route path="/types" component={Types} />
+							<Route path="/profile" component={Profile} />
 						</div>
-					</Router>
+					</BrowserRouter>
 				</div>
 			</MuiThemeProvider>
 		);

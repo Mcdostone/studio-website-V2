@@ -1,4 +1,4 @@
-.item {
+.item-content {
 	display: inline-block;
 	float: left;
 	position: relative;
@@ -10,4 +10,14 @@
 	height: 0;
 	position: relative;
   padding-top: 100%;
+}
+
+
+.square .item-content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	float: left;
 }

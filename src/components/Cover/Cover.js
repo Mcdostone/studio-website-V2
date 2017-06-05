@@ -23,17 +23,19 @@ class Cover extends React.Component {
 
 		return (
 			<div className="cover">
-				<h2 className="cover-title">{this.props.title}</h2>
 				<img src="http://lorempicsum.com/futurama/600/600/2" alt="" />
-				{settings}
-
+				<div className="cover-content">
+					<h2 className="cover-title">{this.props.title}</h2>
+					{this.props.children}
+					{settings}
+				</div>
 			</div>
 		);
 	}
 }
 
 Cover.propTypes = {
-	title: PropTypes.string.isRequired,
+	title: PropTypes.string,
 };
 
 export default Cover;

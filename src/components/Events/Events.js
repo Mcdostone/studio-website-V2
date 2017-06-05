@@ -1,14 +1,40 @@
 import React from 'react';
 import Cover from '../Cover';
 import Layout from '../Layout';
+import StudioList from '../List/StudioList';
+import Item from '../List/Item';
+import E from './E';
+
 
 class Events extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			events: [
+				{
+					name: 'WEI 2015',
+					cover: 'https://pbs.twimg.com/profile_images/839643754126417920/6trsFcTQ.jpg',
+					date: '08/01/2015',
+				},
+				{
+					name: 'Gala 2015',
+					cover: 'https://cdn.pixabay.com/photo/2015/02/18/11/50/mountain-landscape-640617_960_720.jpg',
+					date: '08/05/2016',
+				},
+			],
+		};
+	}
 
 	render() {
 		const cover = <Cover title="Events" />;
 		const container = (
-			<div>
-			</div>
+			<StudioList
+				gutter={5}
+				className="studio-list-space"
+			>
+				{this.state.events.map(event => <Item><E event={event} /></Item>)}
+			</StudioList>
 		);
 
 		return (

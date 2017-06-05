@@ -30,19 +30,28 @@ class Navbar extends React.Component {
 		this.handleNavigationMenu(!this.state.drawerOpened);
 	}
 
+	handleSearch(opened) {
+		this.setState({ searchOpened: opened });
+	}
+
 	toggleSearch() {
-		this.setState({ searchOpened: !this.state.searchOpened });
+		this.handleSearch(!this.state.searchOpened);
+	}
+
+	closeSearch() {
+		this.handleSearch(false);
 	}
 
 	render() {
 		return (
 			<div>
 				<AppBar
+					style={{ padding: 0 }}
 					className="navbar"
 					titleStyle={{ flex: '0' }}
 					showMenuIconButton={false}
 				>
-					<IconMore style={{ margin: '0 8px 0 -16px', width: '60px', height: '60px' }} onTouchTap={this.toggleDrawer} />
+					<IconMore style={{ margin: '0 8px 0 0', width: '60px', height: '60px' }} onTouchTap={this.toggleDrawer} />
 
 					<Link className="navbar-link" id="navbar-logo" to="/">
 						<img src={logo} alt="" />
