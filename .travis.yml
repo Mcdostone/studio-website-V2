@@ -1,9 +1,5 @@
 language: node_js
 
-node_js:
-  - "7.3"
-
-
 branches:
   only:
     - master
@@ -16,4 +12,4 @@ script:
   - npm run build
 
 after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
+  - firebase deploy --token  --token=${FIREBASE_TOKEN}
