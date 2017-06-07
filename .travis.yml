@@ -15,5 +15,3 @@ script:
 
 after_success:
 	firebase deploy --token "$FIREBASE_TOKEN"
-firebase deploy --token "1/z2MtaKLeoHv3EeBmz_8gU_80cTmjQ2xaXBG8d58FqEtrS3jnsEhZx7nBnM_Q64dN"
-1/z2MtaKLeoHv3EeBmz_8gU_80cTmjQ2xaXBG8d58FqEtrS3jnsEhZx7nBnM_Q64dN
