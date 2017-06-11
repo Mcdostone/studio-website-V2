@@ -1,6 +1,7 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import StudioDrawer from '../StudioDrawer';
 import Search from './Search';
 import logo from '../../assets/logo.png';
@@ -43,6 +44,20 @@ class Navbar extends React.Component {
 	}
 
 	render() {
+		let menu = undefined
+		if(this.props.auth.user !== null)
+			menu =
+			<div style={{ display: 'flex' }}>
+				<Link className="navbar-link" to="/media">
+					Media
+				</Link>
+				<Link className="navbar-link" to="/events">
+					Events
+				</Link>
+				<Link className="navbar-link" to="/types">
+					Types
+				</Link>
+			</div>
 		return (
 			<div>
 				<AppBar
@@ -56,16 +71,7 @@ class Navbar extends React.Component {
 					<Link className="navbar-link" id="navbar-logo" to="/">
 						<img src={logo} alt="" />
 					</Link>
-					<Link className="navbar-link" to="/media">
-						Media
-					</Link>
-					<Link className="navbar-link" to="/events">
-						Events
-					</Link>
-					<Link className="navbar-link" to="/types">
-						Types
-					</Link>
-
+					{menu}
 					<Navigator onSearchTap={this.toggleSearch} />
 				</AppBar>
 
@@ -79,4 +85,10 @@ class Navbar extends React.Component {
 	}
 }
 
-export default Navbar;
+function mapStateToProps(state) {
+	return {
+		auth: state.auth
+	}
+}
+
+export default connect(mapStateToProps, null)(Navbar);

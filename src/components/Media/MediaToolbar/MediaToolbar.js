@@ -1,12 +1,19 @@
 import React from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { squareView, masonryView } from '../../../actions/uiActions';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import { grey500 } from 'material-ui/styles/colors';
 import IconViewModule from './icons/IconViewModule';
 import IconViewQuilt from './icons/IconViewQuilt';
 
 class MediaToolbar extends React.Component {
+
+	constructor(props) {
+		super(props);
+	}
 
 	render() {
 		return (
@@ -33,10 +40,10 @@ class MediaToolbar extends React.Component {
 				</ToolbarGroup>
 
 				<ToolbarGroup>
-					<IconViewModule active={this.props.squareView} onTouchTap={() => this.props.handleSquareView(true)} />
+					<IconViewModule active={this.props.squareView} onTouchTap={this.props.activeSquareView} />
 					<IconViewQuilt
 						active={!this.props.squareView}
-						onTouchTap={() => this.props.handleSquareView(false)}
+						onTouchTap={this.props.activeMasonryView}
 						style={{ padding: 0, margin: 0, width: 'auto' }}
 					/>
 				</ToolbarGroup>
@@ -46,4 +53,17 @@ class MediaToolbar extends React.Component {
 	}
 }
 
-export default MediaToolbar;
+function mapStateToProps(state) {
+	return {
+		squareView: state.ui.squareView
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+		activeSquareView: squareView,
+		activeMasonryView: masonryView
+	}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MediaToolbar);

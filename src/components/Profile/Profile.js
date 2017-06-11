@@ -1,5 +1,7 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Layout from '../Layout';
 import Cover from '../Cover';
 
@@ -10,9 +12,9 @@ class Profile extends React.Component {
 			<Cover>
 				<Avatar
 					size={150}
-					src="http://lorempicsum.com/futurama/255/200/2"
+					src={this.props.auth.user.profile.imageUrl}
         />
-				<p className="cover-name">Yann Prono</p>
+				<p className="cover-name">{this.props.auth.user.profile.name}</p>
 
 			</Cover>
 		);
@@ -24,4 +26,15 @@ class Profile extends React.Component {
 	}
 }
 
-export default Profile;
+function mapStateToProps(state) {
+	return {
+		auth: state.auth
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

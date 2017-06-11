@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
-const injectTapEventPlugin = require('react-tap-event-plugin');
-
-injectTapEventPlugin();
-
 class StudioDrawer extends React.Component {
 	render() {
 		return (
