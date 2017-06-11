@@ -5,6 +5,7 @@ import Avatar from 'material-ui/Avatar';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { userLogin, userLogout } from '../../../actions/authActions'
+import { openSearch } from '../../../actions/uiActions'
 import Menu from 'material-ui/Menu';
 import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
@@ -77,7 +78,7 @@ class Navigator extends React.Component {
 		else {
 			content =
 			<div style={{ display: 'flex' }}>
-				<IconSearch className="navbar-link" onTouchTap={this.props.onSearchTap} />
+				<IconSearch className="navbar-link" onTouchTap={this.props.openSearch} />
 				<div onClick={this.handleRequestOpen} className="navbar-link">
 					<Avatar src={this.props.auth.user.profile.imageUrl} style={{ marginRight: '5px' }} />
 					{this.props.auth.user.profile.name}
@@ -119,6 +120,7 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
     login: userLogin,
 		logout: userLogout,
+		openSearch,
   }, dispatch);
 }
 

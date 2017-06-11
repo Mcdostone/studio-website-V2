@@ -11,10 +11,6 @@ import IconViewQuilt from './icons/IconViewQuilt';
 
 class MediaToolbar extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<Toolbar style={{ backgroundColor: 'transparent', margin: 0, padding: 0 }}>

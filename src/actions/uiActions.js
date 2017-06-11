@@ -3,6 +3,8 @@ export const DRAWER_CLOSE = 'DRAWER_CLOSE';
 export const DRAWER_TOGGLE = 'DRAWER_TOGGLE';
 export const ACTIVE_SQUARE_VIEW = 'ACTIVE_SQUARE_VIEW';
 export const ACTIVE_MASONRY_VIEW = 'ACTIVE_MASONRY_VIEW';
+export const SEARCH_OPEN = 'SEARCH_OPEN';
+export const SEARCH_CLOSE = 'SEARCH_CLOSE';
 
 export const openDrawer = () => ({
     type: DRAWER_OPEN,
@@ -14,7 +16,9 @@ export const closeDrawer = () => ({
 		payload: false,
 });
 
-export const toggleDrawer = () => ({ type: DRAWER_TOGGLE });
+export const toggleDrawer = () => ({
+	type: DRAWER_TOGGLE
+});
 
 export const squareView = () => ({
     type: ACTIVE_SQUARE_VIEW,
@@ -24,4 +28,12 @@ export const squareView = () => ({
 export const masonryView = () => ({
     type: ACTIVE_MASONRY_VIEW,
 		payload: false,
+});
+
+export const openSearch = () => ({
+    type: SEARCH_OPEN,
+});
+
+export const closeSearch = () => ({
+    type: SEARCH_CLOSE,
 });

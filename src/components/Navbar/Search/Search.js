@@ -1,8 +1,10 @@
 import React from 'react';
 import EventListener from 'react-event-listener';
-import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Paper from 'material-ui/Paper';
+import { closeSearch } from '../../../actions/uiActions'
 import './Search.css';
 
 const styles = {
@@ -37,7 +39,7 @@ class Search extends React.Component {
 
 	handleKeyUp(e) {
 		if (e.keyCode === 27) {
-			this.props.toggleSearch();
+			this.props.closeSearch();
 		}
 	}
 
@@ -60,8 +62,10 @@ class Search extends React.Component {
 	}
 }
 
-Search.propTypes = {
-	toggleSearch: PropTypes.func.isRequired,
-};
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+		closeSearch,
+  }, dispatch);
+}
 
-export default Search;
+export default connect(null, mapDispatchToProps)(Search);
