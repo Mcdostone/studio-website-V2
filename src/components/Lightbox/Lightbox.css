@@ -7,4 +7,21 @@
 	z-index: 1200;
 	overflow: auto;
 	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.lightbox-infos {
+	display: flex;
+	height: 500px;
+	width: 100px;
+	background: white;
+}
+
+.lightbox-controls {
+	height: 100%;
+	width: 100%;
+	display: inline-block;
+	position: absolute;
 }

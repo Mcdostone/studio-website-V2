@@ -11,23 +11,23 @@ import Navigator from './Navigator';
 import IconMore from './icons/IconMore';
 import './Navbar.css';
 
-
 class Navbar extends React.Component {
 
 	render() {
-		let menu = undefined
-		if(this.props.auth.user !== null)
+		let menu = undefined;
+
+		if(this.props.auth.user === null)
 			menu =
-			<div style={{ display: 'flex' }}>
-				<Link className="navbar-link" to="/media">
-					Media
-				</Link>
-				<Link className="navbar-link" to="/events">
-					Events
-				</Link>
-				<Link className="navbar-link" to="/types">
-					Types
-				</Link>
+				<div style={{ display: 'flex' }}>
+					<Link className="navbar-link" to="/media">
+						Media
+					</Link>
+					<Link className="navbar-link" to="/events">
+						Events
+					</Link>
+					<Link className="navbar-link" to="/types">
+						Types
+					</Link>
 			</div>
 		return (
 			<div>

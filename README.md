@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Mcdostone/studio-website-V2.svg?branch=master)](https://travis-ci.org/Mcdostone/studio-website-V2)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

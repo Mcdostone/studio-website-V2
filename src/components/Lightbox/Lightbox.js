@@ -1,36 +1,31 @@
 import React from 'react';
 import AutoLockScrolling from 'material-ui/internal/AutoLockScrolling';
-import EventListener from 'react-event-listener';
+import Picture from './Picture';
+import LightboxInfos from './Lightbox-infos';
+import LightboxControls from './Lightbox-controls';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { closeLightbox, openLightbox } from '../../actions/lightboxActions'
 import './Lightbox.css';
 
 class Lightbox extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.handleKeyUp = this.handleKeyUp.bind(this);
-	}
-
-	handleKeyUp(e) {
-		if (e.keyCode === 27) {
-			this.props.closeLightbox();
+	generateMedium(medium) {
+		switch(medium.type) {
+			case 'picture':
+				return <Picture src={medium.src} />
+			default:
+				return <Picture src={medium.src} />
 		}
 	}
 
 	render() {
 		if(this.props.open) {
 			return (
-				<EventListener
-					target="window"
-					onKeyUp={this.handleKeyUp}
-				>
-					<div className="lightbox">
-						<img src={this.props.media} alt=""/>
-						<AutoLockScrolling lock={this.props.open}/>
-					</div>
-				</EventListener>
+				<div className="lightbox">
+					{this.generateMedium(this.props.medium)}
+					<LightboxInfos />
+					<LightboxControls />
+					<AutoLockScrolling lock={this.props.open}/>
+				</div>
 			);
 		}
 		return null;
@@ -44,10 +39,4 @@ function mapStateToProps(state) {
 	}
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		closeLightbox
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Lightbox);
+export default connect(mapStateToProps, null)(Lightbox);
