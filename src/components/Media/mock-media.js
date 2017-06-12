@@ -13,7 +13,7 @@ export default [
 	},
 	{
 		type: 'picture',
-		src: 'http://www.ceten.fr/wp-content/uploads/2017/02/IMG_4157.jpg'
+		src: 'https://image.ibb.co/nRxkqv/18644379_1732758443681227_824857558_n.png'
 	},
 	{
 		type: 'video',

@@ -5,7 +5,7 @@ class Video extends React.Component {
 
 	render() {
 		if(this.props.src !== null)
-			return <Youtube videoId="y1kwJBLXF_M" className={this.props.className} alt=""/>;
+			return <Youtube videoId={this.props.src} className={this.props.className} alt=""/>;
 		return null;
 	}
 }

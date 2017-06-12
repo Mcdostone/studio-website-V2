@@ -2,7 +2,7 @@ import React from 'react';
 import AutoLockScrolling from 'material-ui/internal/AutoLockScrolling';
 import Picture from './Picture';
 import Video from './Video';
-import LightboxInfos from './Lightbox-infos';
+// import LightboxInfos from './Lightbox-infos';
 import LightboxControls from './Lightbox-controls';
 import { connect } from 'react-redux';
 import './Lightbox.css';

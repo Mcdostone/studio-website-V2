@@ -16,7 +16,7 @@ class Navbar extends React.Component {
 	render() {
 		let menu = undefined;
 
-		if(this.props.auth.user === null)
+		if(this.props.auth.user !== null)
 			menu =
 				<div style={{ display: 'flex' }}>
 					<Link className="navbar-link" to="/media">
