@@ -10,12 +10,19 @@ class LightboxControls extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleKeyUp = this.handleKeyUp.bind(this);
-	}
+}
 
 	handleKeyUp(e) {
 		e.preventDefault();
 		if (e.keyCode === 27) {
 			this.props.closeLightbox();
+		}
+
+		if(e.keyCode === 39) {
+		}
+
+		if(e.keyCode === 37) {
+
 		}
 	}
 

@@ -26,6 +26,7 @@
     "react-stack-grid": "^0.2.1",
     "react-stonecutter": "^0.3.4",
     "react-tap-event-plugin": "^2.0.1",
+    "react-youtube": "^7.4.0",
     "redux": "^3.6.0"
   },
   "devDependencies": {

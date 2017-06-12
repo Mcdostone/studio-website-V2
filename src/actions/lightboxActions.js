@@ -1,6 +1,12 @@
+export const ADD_MEDIA = 'ADD_MEDIA';
 export const SHOW_MEDIUM = 'SHOW_MEDIUM';
 export const LIGHTBOX_OPEN = 'LIGHTBOX_OPEN';
 export const LIGHTBOX_CLOSE = 'LIGHTBOX_CLOSE';
+
+export const addMedia = (media) => ({
+    type: ADD_MEDIA,
+		payload: media,
+});
 
 export const showMedium = (medium) => ({
     type: SHOW_MEDIUM,

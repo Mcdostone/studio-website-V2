@@ -4,8 +4,7 @@ class Picture extends React.Component {
 
 	render() {
 		if(this.props.src !== null)
-			return <img src={this.props.src} alt=""/>;
-
+			return <img className={this.props.className} src={this.props.src} alt=""/>;
 		return null;
 	}
 }

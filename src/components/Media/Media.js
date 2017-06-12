@@ -8,9 +8,10 @@ import MediaToolbar from './MediaToolbar';
 import StudioList from '../List/StudioList';
 import Item from '../List/Item';
 import M from './M';
-import { showMedium } from '../../actions/lightboxActions'
-
+import { showMedium, addMedia } from '../../actions/lightboxActions';
+import img from '../../assets/img.jpg';
 import Lightbox from '../Lightbox';
+import mock from './mock-media';
 
 class Media extends React.Component {
 	constructor(props) {
@@ -22,29 +23,30 @@ class Media extends React.Component {
 			media.push(`http://lorempicsum.com/futurama/1000/600/${index}`);
 		}
 		media.push('http://lorempicsum.com/simpsons/600/1000/4');
-
 		this.state = { media, };
 		this.showMedium = this.showMedium.bind(this);
+		this.props.addMedia(mock);
 	}
 
 	showMedium() {
-		const medium = {
+		const m = 	{
 			type: 'picture',
-			src: 'http://lorempicsum.com/futurama/627/200/3'
+			src: 'https://images.pexels.com/photos/126282/pexels-photo-126282.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'
 		}
-		this.props.showMedium(medium);
+		console.log(this.props);
+		this.props.tt(m);
 	}
 
 	render() {
 		const cover = <Cover title="Media" />;
-
+		const media = this.props.media;
 		const container = (
 			<div>
 				<Lightbox />
 				<RaisedButton label="Open lightbox" onTouchTap={this.showMedium} />
 				<MediaToolbar />
 				<StudioList gutter={5}>
-					{this.state.media.map(medium => <Item square={this.props.squareView} key={medium}><M medium={medium} /></Item>)}
+					{this.props.media.map(medium => <Item square={this.props.squareView} data={medium} key={medium.src}><M medium={medium} /></Item>)}
 				</StudioList>
 			</div>
 		);
@@ -55,13 +57,15 @@ class Media extends React.Component {
 function mapStateToProps(state) {
 	return {
 		lightbox: state.lightbox,
-		squareView: state.ui.squareView
+		squareView: state.ui.squareView,
+		media: state.lightbox.media,
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-    showMedium,
+    tt: showMedium,
+		addMedia,
   }, dispatch);
 }
 

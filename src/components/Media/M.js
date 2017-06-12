@@ -7,7 +7,7 @@ class M extends React.Component {
 	render() {
 		return (
 			<div className="item-content">
-				<img src={this.props.medium} alt="" />
+				<img src={this.props.medium.src} alt="" />
 				<Overlay>
 					<span>
 						<FavoriteAction style={{ marginRight: 5 }} color="white" />
