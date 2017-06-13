@@ -16,13 +16,11 @@ class M extends React.Component {
     	width: size * 1.5,
     	height: size * 1.5,
     	padding: 0,
-			/*borderRadius: '50%',
-			border: '0.5px solid rgba(255,255,255,0.6)',*/
   	};
 		let src = this.props.medium.src;
 		let contentOverlay = <span>
 			<FavoriteAction style={{ marginRight: 5 }} color="white" />
-			<p>24</p>
+			<p>{this.props.medium.likes}</p>
 		</span>
 
 		if(this.props.medium.type === 'video') {

@@ -7,7 +7,11 @@ import MediaToolbar from './MediaToolbar';
 import StudioList from '../List/StudioList';
 import Item from '../List/Item';
 import M from './M';
-import { showMedium, addMedia } from '../../actions/lightboxActions';
+import { closeLightbox, showMedium, addMedia } from '../../actions/lightboxActions';
+import { SORT_LAST_ADDED,
+	SORT_POPULARITY,
+	SORT_LIKES } from '../../actions/mediaListActions';
+
 import Lightbox from '../Lightbox';
 import mock from './mock-media';
 
@@ -18,9 +22,29 @@ class Media extends React.Component {
 		this.props.addMedia(mock);
 	}
 
+	componentWillUnmount() {
+		this.props.closeLightbox();
+	}
+
+	sortMedia() {
+		const copy = [...this.props.media];
+		switch(this.props.typeSorting) {
+			case SORT_LIKES:
+				return copy.sort((a, b) => (b.likes > a.likes) ? 1 : ((a.likes > b.likes) ? -1 : 0));
+			case SORT_LAST_ADDED:
+				return copy;
+			case SORT_POPULARITY:;
+				return copy;
+			default:
+				return copy;
+		}
+	}
+
 	render() {
 		const cover = <Cover title="Media" />;
-		const media = this.props.media;
+		const media = this.sortMedia();
+		console.log(media);
+
 		const container = (
 			<div>
 				<Lightbox />
@@ -47,6 +71,7 @@ function mapStateToProps(state) {
 		lightbox: state.lightbox,
 		squareView: state.ui.squareView,
 		media: state.lightbox.media,
+		typeSorting: state.mediaList.sortBy,
 	}
 }
 
@@ -54,6 +79,7 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
     showMedium,
 		addMedia,
+		closeLightbox,
   }, dispatch);
 }
 

@@ -1,6 +1,5 @@
 import { ADD_MEDIA, LIGHTBOX_CLOSE, LIGHTBOX_OPEN, SHOW_MEDIUM } from '../actions/lightboxActions';
 
-
 const initialState = {
 		medium: null,
 		lightboxOpened: false,

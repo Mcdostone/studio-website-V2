@@ -30,7 +30,6 @@ class Navigator extends React.Component {
 	}
 
 	handleRequestOpen(event) {
-		console.log(event.currentTarget);
 		event.preventDefault();
 		this.setState({
 			userMenuOpened: true,
@@ -62,7 +61,6 @@ class Navigator extends React.Component {
 
 	render() {
 		let content = undefined;
-		console.log(this.state.widthMenu);
 		if(this.props.auth.user === null) {
 			content =
 				<GoogleLogin
