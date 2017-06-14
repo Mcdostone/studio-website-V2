@@ -11,6 +11,7 @@ import Events from './components/Events';
 import Types from './components/Types';
 import Profile from './components/Profile';
 import Login from './components/Auth/Login';
+import StudioCountdown from './components/StudioCountdown';
 import studioTheme from './studioTheme';
 import './App.css';
 
@@ -31,6 +32,7 @@ class App extends React.Component {
 							<Route path="/types" component={Types} />
 							<Route path="/profile" component={Profile} />
 							<Route path="/login" component={Login} />
+							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> }  />
 
 						</div>
 					</BrowserRouter>

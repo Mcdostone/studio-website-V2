@@ -7,6 +7,7 @@ const initialState = {
 		filters: ['all'],
 };
 
+
 export default function (state = initialState, action) {
 	switch(action.type) {
 		case SORT_BY:
@@ -21,7 +22,8 @@ export default function (state = initialState, action) {
 
 		case ADD_MEDIA:
 			return Object.assign({}, state, {
-				media: [...state.media, ...action.payload],
+				// Get unicity of media if there are duplicate data
+				media: [...new Set([...state.media, ...action.payload])],
 				filters: [...state.filters, ...action.payload.map(m => m.type)]
 				.filter((v, i, a) => a.indexOf(v) === i)
 				.sort()

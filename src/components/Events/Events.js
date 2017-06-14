@@ -33,7 +33,7 @@ class Events extends React.Component {
 				gutter={5}
 				className="studio-list-space"
 			>
-				{this.state.events.map(event => <Item><E event={event} /></Item>)}
+				{this.state.events.map(event => <Item key={event.name}><E event={event} /></Item>)}
 			</StudioList>
 		);
 
