@@ -1,0 +1,36 @@
+@keyframes techno {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+	20% {
+		transform: scale3d(1, 1, 1);
+	}
+
+  50% {
+    transform: scale3d(1.2, 1.2, 1.2);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
+@keyframes loading {
+	100% {
+		transform:rotate(360deg);
+	}
+}
+
+.techno {
+	animation-iteration-count: infinite;
+	animation-duration: 0.377358491s;
+	animation-name: techno;
+}
+
+
+.rotate-lol {
+	animation-name: loading;
+	animation: loading 2s linear infinite;
+}

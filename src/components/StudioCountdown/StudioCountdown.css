@@ -9,5 +9,27 @@
 .countdown-video {
 	height: 100%;
 	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
+.countdown-overlay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 2001;
+}
+
+#cuming {
+	font-size: 4em;
+	font-family: "Comic Sans MS", "Comic Sans", cursive;
+	color: white;
+}
+
+.countdown-image {
+	z-index: 2002;
+	position: fixed;
+	width: 250px;
+	height: auto;
+}

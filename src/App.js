@@ -32,7 +32,7 @@ class App extends React.Component {
 							<Route path="/types" component={Types} />
 							<Route path="/profile" component={Profile} />
 							<Route path="/login" component={Login} />
-							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> }  />
+							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />
 
 						</div>
 					</BrowserRouter>
