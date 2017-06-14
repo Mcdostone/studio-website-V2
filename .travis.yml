@@ -9,8 +9,6 @@ branches:
 
 script:
   - npm run build
-
-after_script:
   - npm install -g firebase-tools
 
 after_success:
