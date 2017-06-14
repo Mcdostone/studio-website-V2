@@ -11,20 +11,30 @@ import IconViewQuilt from './icons/IconViewQuilt';
 import { SORT_LAST_ADDED,
 	SORT_POPULARITY,
 	SORT_LIKES,
-	sortBy } from '../../../actions/mediaListActions';
+	sortBy,
+	filterBy } from '../../../actions/mediaListActions';
 
 class MediaToolbar extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.handleOnSortByChange = this.handleOnSortByChange.bind(this);
+		this.handleOnFilterByChange = this.handleOnFilterByChange.bind(this);
 	}
 
 	handleOnSortByChange(event, index, value) {
 		this.props.sortBy(value);
 	}
 
+	handleOnFilterByChange(event, index, value) {
+		this.props.filterBy(value);
+	}
+
 	render() {
+		const style = {
+			textTransform: 'capitalize',
+		};
+
 		return (
 			<Toolbar style={{ backgroundColor: 'transparent', margin: 0, padding: 0 }}>
 
@@ -33,20 +43,22 @@ class MediaToolbar extends React.Component {
 						labelStyle={{ color: grey500, paddingLeft: 0 }}
 						onChange={this.handleOnSortByChange}
 						value={this.props.typeSorting}
+						menuItemStyle={style}
 					>
-						<MenuItem value={SORT_LAST_ADDED} primaryText="Last added" />
+						<MenuItem  value={SORT_LAST_ADDED} primaryText="Last added" />
 						<MenuItem value={SORT_POPULARITY} primaryText="Most popular" />
 						<MenuItem value={SORT_LIKES} primaryText="Most liked" />
 					</DropDownMenu>
 
 					<DropDownMenu
-						value={1}
+						value={this.props.filter}
+						onChange={this.handleOnFilterByChange}
 						labelStyle={{ color: grey500 }}
+						menuItemStyle={style}
 					>
-						<MenuItem primaryText="all" />
-						<MenuItem value={1} primaryText="Photo" />
-						<MenuItem value={2} primaryText="Video" />
-						<MenuItem value={3} primaryText="Poster" />
+						{this.props.filters.map((filter, index) =>
+							<MenuItem value={index} key={filter} primaryText={filter} />
+						)}
 					</DropDownMenu>
 				</ToolbarGroup>
 
@@ -67,7 +79,9 @@ class MediaToolbar extends React.Component {
 function mapStateToProps(state) {
 	return {
 		squareView: state.ui.squareView,
-		typeSorting: state.mediaList.sortBy
+		typeSorting: state.mediaList.sortBy,
+		filter: state.mediaList.filterBy,
+		filters: state.mediaList.filters,
 	}
 }
 
@@ -75,7 +89,8 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		activeSquareView: squareView,
 		activeMasonryView: masonryView,
-		sortBy
+		sortBy,
+		filterBy,
 	}, dispatch);
 }
 

@@ -6,6 +6,11 @@ export default [
 	},
 	{
 		type: 'picture',
+		src: '	https://github.com/thepracticaldev/orly-full-res/blob/master/copyingandpasting-big.png?raw=true',
+		likes: 666,
+	},
+	{
+		type: 'picture',
 		src: 'https://images.pexels.com/photos/88779/pexels-photo-88779.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb',
 		likes: 12,
 	},
@@ -15,7 +20,7 @@ export default [
 		likes: 5,
 	},
 	{
-		type: 'picture',
+		type: 'photo',
 		src: 'https://image.ibb.co/nRxkqv/18644379_1732758443681227_824857558_n.png'
 		,
 		likes: 155,

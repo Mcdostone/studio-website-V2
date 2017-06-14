@@ -9,14 +9,12 @@ import {
 
 const initialState = {
 		drawerOpened: false,
-		currentMedium: null,
 		squareView: true,
 		searchOpened: false,
 };
 
 export default function (state = initialState, action) {
   switch(action.type) {
-
 		case DRAWER_CLOSE:
 			return Object.assign({}, state, {
         drawerOpened: false

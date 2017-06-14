@@ -13,8 +13,10 @@ export default function (state = initialState, action) {
         user: action.payload,
 				authentificated: true
       });
+
 		case USER_LOGOUT:
 			return Object.assign({}, state, initialState);
+
 		default:
 			return state;
 	}

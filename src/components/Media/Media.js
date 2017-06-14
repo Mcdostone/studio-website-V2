@@ -7,7 +7,9 @@ import MediaToolbar from './MediaToolbar';
 import StudioList from '../List/StudioList';
 import Item from '../List/Item';
 import M from './M';
-import { closeLightbox, showMedium, addMedia } from '../../actions/lightboxActions';
+import { closeLightbox, showMedium } from '../../actions/lightboxActions';
+import { addMedia } from '../../actions/mediaListActions';
+
 import { SORT_LAST_ADDED,
 	SORT_POPULARITY,
 	SORT_LIKES } from '../../actions/mediaListActions';
@@ -20,14 +22,20 @@ class Media extends React.Component {
 	constructor(props) {
 		super(props);
 		this.props.addMedia(mock);
+		this.getSortedAndFilteredMedia = this.getSortedAndFilteredMedia.bind(this);
 	}
 
 	componentWillUnmount() {
 		this.props.closeLightbox();
 	}
 
-	sortMedia() {
-		const copy = [...this.props.media];
+	getSortedAndFilteredMedia() {
+		let copy = [...this.props.mediaList.media];
+		const filter = this.props.mediaList.filters[this.props.mediaList.filterBy];
+		if(filter !== 'all') {
+			copy = this.props.mediaList.media.filter(medium => medium.type.toLowerCase().trim() === filter.toLowerCase().trim());
+		}
+
 		switch(this.props.typeSorting) {
 			case SORT_LIKES:
 				return copy.sort((a, b) => (b.likes > a.likes) ? 1 : ((a.likes > b.likes) ? -1 : 0));
@@ -40,10 +48,12 @@ class Media extends React.Component {
 		}
 	}
 
+
+
+
 	render() {
 		const cover = <Cover title="Media" />;
-		const media = this.sortMedia();
-		console.log(media);
+		let media = this.getSortedAndFilteredMedia();
 
 		const container = (
 			<div>
@@ -70,7 +80,7 @@ function mapStateToProps(state) {
 	return {
 		lightbox: state.lightbox,
 		squareView: state.ui.squareView,
-		media: state.lightbox.media,
+		mediaList: state.mediaList,
 		typeSorting: state.mediaList.sortBy,
 	}
 }
