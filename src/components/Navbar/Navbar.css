@@ -7,7 +7,7 @@
 	height: 60px;
 }
 
-.navbar-link {
+.navbar .navbar-link {
 	height: 100%;
 	display: flex;
 	padding: 20px;

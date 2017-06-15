@@ -58,7 +58,6 @@ class StudioCountdown extends React.Component {
       },
 		};
 
-
 		return (
 			<div className="countdown">
 				<Youtube
@@ -142,45 +141,3 @@ class StudioCountdown extends React.Component {
 }
 
 export default StudioCountdown;
-
-/*setTimeout(() => document.getElementById('eliot').classList.add('techno'), 21800)
-
-
-  	  setTimeout(() => add_image("/images/loading1.png", ['rotate-lol']), 3600)
-  	  setTimeout(() => add_image("/images/illuminabite.gif"), 5200)
-  	  setTimeout(() => add_image("/images/loading3.png", ['animated', 'rubberBand', 'infinite']), 6800)
-  	  setTimeout(() => eliot(), 9650)
-			setTimeout(() => add_image("https://s3.amazonaws.com/image.blingee.com/images19/content/output/000/000/000/81f/868742399_1251338.gif", ['animated', 'slideOutDOwn', 'infinite']), 12000)
-
-  	  setTimeout(() => add_image("/images/loading22.gif",), 15000)
-  	  setTimeout(() => add_image("https://media.giphy.com/media/bKWSxiGpx2BRS/source.gif",), 18500)
-
-  	  setTimeout(() => add_image("/images/patou.jpg", ['animated', 'lightSpeedIn', 'infinite']), 23800)
-  	  setTimeout(() => add_image("https://media.giphy.com/media/uudNRE0I3Ehyg/giphy.gif", ['techno']), 26800)
-  	  setTimeout(() => add_image("/images/loading18.png", ['rotate-lol']), 28000)
-
-  	  setTimeout(() => add_image("/images/loading5.png", ['techno']), 29000)
-  	  setTimeout(() => add_image("/images/il_y_une_image_qui_charge_pas.png", ['animated', 'zoomInDown', 'infinite']), 30000)
-  	  setTimeout(() => add_image("/images/loading6.png", ['animated', 'flipInY', 'infinite']), 31000)
-  	  setTimeout(() => add_image("/images/default-profile-picture.png", ['techno']), 32000)
-  	  setTimeout(() => add_image("/images/loading7.gif"), 35000)
-  	  setTimeout(() => add_image("/images/loading8.gif", ['techno']), 35000)
-  	  setTimeout(() => add_image("/images/loading9.jpg", ['animated', 'zoomOutLeft', 'infinite']), 38000)
-  	  setTimeout(() => add_image("/images/loading10.jpg", ['animated', 'fadeInLeft', 'infinite']), 40000)
-  	  setTimeout(() => add_image("/images/loading11.gif"), 45000)
-  	  setTimeout(() => add_image("/images/loading12.png", ['animated', 'flipInX', 'infinite']), 48000)
-  	  setTimeout(() => add_image("/images/loading13.gif", ['techno']), 51000)
-  	  setTimeout(() => add_image("/images/nothing2.gif", ['techno']), 53000)
-  	  setTimeout(() => add_image("/images/nothing1.gif", ['techno']), 58000)
-  	  setTimeout(() => add_image("/images/loading14.gif", ['techno']), 60000)
-  	  setTimeout(() => add_image("/images/loading16.gif"), 63000)
-  	  setTimeout(() => add_image("https://media.giphy.com/media/13jtwqhcZM6Xi8/giphy.gif",), 67500)
-  	  setTimeout(() => add_image("https://media.giphy.com/media/l0O9zBvk5nZ71Molq/giphy.gif",), 85000)
-  	  setTimeout(() => add_image("/images/loading17.gif" ['techno']), 72000)
-  	  setTimeout(() => add_image("/images/loading19.jpg", ['rotate-lol']), 92000)
-  	  setTimeout(() => add_image("/images/loading20.png", ['animated', 'flipInX', 'infinite']), 95000)
-  	  setTimeout(() => add_image("/images/loading20.JPG", ['techno']), 98000)
-  	  setTimeout(() => add_image("https://media.giphy.com/media/p04CSILL5ZUfS/giphy.gif ", ['techno']), 98000)
-  	  setTimeout(() => add_image("img.pr0gramm.com/2017/02/12/1671e7f6f8e2bd1d.gif", ['techno']), 110000)
-  	  setTimeout(() => add_image("https://media.giphy.com/media/jKVJKhpPq9og8/giphy.gif",), 130000)
-  	  done = true;*/

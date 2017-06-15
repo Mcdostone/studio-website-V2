@@ -25,7 +25,7 @@ class M extends React.Component {
 
 		if(this.props.medium.type === 'video') {
 			src = `http://img.youtube.com/vi/${this.props.medium.src}/hqdefault.jpg`
-			contentOverlay = <span>
+			contentOverlay = <span className="flex-center-row">
 				<IconButton
       		iconStyle={styleIcon}
       		style={style}

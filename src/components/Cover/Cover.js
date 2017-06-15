@@ -16,10 +16,9 @@ class Cover extends React.Component {
 				anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
 				targetOrigin={{ horizontal: 'right', vertical: 'top' }}
 			>
-				<MenuItem primaryText="Settings" />
+				<MenuItem primaryText="Dashboard admin" />
 			</IconMenu>
 		);
-
 
 		return (
 			<div className="cover">

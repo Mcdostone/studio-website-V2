@@ -35,6 +35,7 @@
 	animation: loading 2s linear infinite;
 }
 
-#eliot {
 
+a, a:visited {
+	color: inherit;
 }
