@@ -118,7 +118,6 @@ export function addImage(url, classes) {
 	img.style.left =  left + 'px'
 	img.style.transform =  'rotate(' + rotate +'deg)'
 	let parent = document.getElementsByClassName('countdown')[0];
-	console.log(parent);
 	parent.insertBefore(img, document.getElementsByClassName('countdown-overlay')[0]);
 }
 
