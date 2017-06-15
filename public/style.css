@@ -1,3 +1,17 @@
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
 @keyframes techno {
   from {
     transform: scale3d(1, 1, 1);
@@ -16,11 +30,49 @@
   }
 }
 
-
 @keyframes loading {
-	100% {
-		transform:rotate(360deg);
+	from {
+		transform: rotate(0deg);
 	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes boum {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes rotateBoum {
+  from {
+    transform: scale3d(1, 1, 1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05) rotate(180deg);
+	}
+
+  to {
+    transform: scale3d(1, 1, 1) rotate(360deg);
+	}
+}
+
+.boum {
+  animation-name: boum;
+  animation-iteration-count: infinite;
+	animation-duration: 0.377358491s;
+	animation-fill-mode: both;
 }
 
 .techno {
@@ -29,12 +81,15 @@
 	animation-name: techno;
 }
 
-
 .rotate-lol {
-	animation-name: loading;
 	animation: loading 2s linear infinite;
+	animation-fill-mode: both;
 }
 
+.rotate-boum {
+	animation: rotateBoum 2s linear infinite;
+	animation-fill-mode: both;
+}
 
 a, a:visited {
 	color: inherit;

@@ -32,7 +32,7 @@ class StudioCountdown extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {done: false}
 		this.onReady = this.onReady.bind(this);
 		this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
 		this.eliot = this.eliot.bind(this);
@@ -77,7 +77,7 @@ class StudioCountdown extends React.Component {
 	onPlayerStateChange(event) {
 		const el = document.getElementsByClassName('countdown-overlay')[0];
 		if (event.data === 1 && !this.state.done) {
-
+			this.setState({done: true});
 			setTimeout(() => addImage(loading1, ['rotate-lol']), 3600)
 
 
@@ -99,16 +99,22 @@ class StudioCountdown extends React.Component {
     	setTimeout(() => addImage("/images/il_y_une_image_qui_charge_pas.png", ['animated', 'zoomInDown', 'infinite']), 30000);
     	setTimeout(() => addImage(loading6, ['animated', 'flipInY', 'infinite']), 31000);
     	setTimeout(() => addImage("/images/default-profile-picture.png", ['techno']), 32000);
+			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.add('boum'), 33900);
     	setTimeout(() => addImage(loading7), 35000);
     	setTimeout(() => addImage(loading8, ['techno']), 35000);
     	setTimeout(() => addImage(loading9, ['animated', 'zoomOutLeft', 'infinite']), 38000);
+			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.remove('boum'), 46000);
+
     	setTimeout(() => addImage(loading11), 45000);
     	setTimeout(() => addImage(loading12, ['animated', 'flipInX', 'infinite']), 48000);
     	setTimeout(() => addImage(loading13, ['techno']), 51000);
     	setTimeout(() => addImage(nothing2, ['techno']), 53000);
+			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.add('boum'), 58000);
     	setTimeout(() => addImage(nothing1, ['techno']), 58000);
+
     	setTimeout(() => addImage(loading14, ['techno']), 60000);
     	setTimeout(() => addImage(loading16), 63000);
+
 
     	setTimeout(() => addImage("https://media.giphy.com/media/13jtwqhcZM6Xi8/giphy.gif",), 67500);
     	setTimeout(() => addImage("https://media.giphy.com/media/l0O9zBvk5nZ71Molq/giphy.gif",), 85000);
@@ -117,7 +123,10 @@ class StudioCountdown extends React.Component {
     	setTimeout(() => addImage(loading20, ['animated', 'flipInX', 'infinite']), 95000);
     	setTimeout(() => addImage("https://media.giphy.com/media/p04CSILL5ZUfS/giphy.gif ", ['techno']), 98000);
     	setTimeout(() => addImage("img.pr0gramm.com/2017/02/12/1671e7f6f8e2bd1d.gif", ['techno']), 110000);
+			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.remove('boum'), 117000);
+			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.add('boum'), 118350);
     	setTimeout(() => addImage("https://media.giphy.com/media/jKVJKhpPq9og8/giphy.gif",), 130000);
+			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.add('rotate-boum'), 142500);
 
   	}
 	}
