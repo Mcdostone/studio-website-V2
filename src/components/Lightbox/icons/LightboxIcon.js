@@ -1,28 +1,31 @@
 import React from 'react';
 import IconButton from 'material-ui/IconButton';
-import { grey700 } from 'material-ui/styles/colors';
+import { grey500 } from 'material-ui/styles/colors';
 
 class LightboxIcon extends React.Component {
 	render() {
+		const size = this.props.size ? this.props.size : 36;
 		const iconStyles = {
-    	width: 36,
-    	height: 36,
+    	width: size,
+    	height: size,
   	};
 
 		const styles = {
-			width: 72,
-    	height: 72,
-    	padding: 16,
-			position: 'absolute',
+			width: size * 2,
+    	height: size * 2,
+			padding: '0 8px',
 		};
 
 		return (
 			<IconButton
-				iconStyle={iconStyles}
+				disableTouchRipple={this.props.disableTouchRipple}
+				iconStyle={{...iconStyles, ...this.props.iconS}}
 				style={{...styles, ...this.props.style}}
 				onTouchTap={this.props.onTouchTap}
+				tooltip={this.props.tooltip}
+				className={this.props.className}
 			>
-			  {React.cloneElement(this.props.children, { color: grey700, hoverColor: 'white' })}
+			  {React.cloneElement(this.props.children, { color: grey500, hoverColor: 'white' })}
 			</IconButton>
 		);
 	}

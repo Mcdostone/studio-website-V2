@@ -7,8 +7,8 @@ import MediaToolbar from './MediaToolbar';
 import StudioList from '../List/StudioList';
 import Item from '../List/Item';
 import M from './M';
-import { closeLightbox, showMedium } from '../../actions/lightboxActions';
 import { addMedia } from '../../actions/mediaListActions';
+import { showMedium } from '../../actions/lightboxActions';
 
 import { SORT_LAST_ADDED,
 	SORT_POPULARITY,
@@ -23,10 +23,15 @@ class Media extends React.Component {
 		super(props);
 		this.props.addMedia(mock);
 		this.getSortedAndFilteredMedia = this.getSortedAndFilteredMedia.bind(this);
+		this.showMedium = this.showMedium.bind(this);
 	}
 
 	componentWillUnmount() {
 		this.props.closeLightbox();
+	}
+
+	showMedium(mediumData) {
+		this.props.openMediumInLightbox(mediumData);
 	}
 
 	getSortedAndFilteredMedia() {
@@ -48,9 +53,6 @@ class Media extends React.Component {
 		}
 	}
 
-
-
-
 	render() {
 		const cover = <Cover title="Media" />;
 		let media = this.getSortedAndFilteredMedia();
@@ -60,11 +62,12 @@ class Media extends React.Component {
 				<Lightbox />
 				<MediaToolbar />
 				<StudioList gutter={5}>
-					{media.map(medium =>
+					{media.map((medium, index) =>
 						<Item
 							square={this.props.squareView}
-							data={medium}
+							data={{medium, index}}
 							key={medium.src}
+							onClick={this.showMedium}
 						>
 							<M medium={medium} />
 						</Item>
@@ -87,9 +90,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-    showMedium,
 		addMedia,
-		closeLightbox,
+		openMediumInLightbox: showMedium
   }, dispatch);
 }
 

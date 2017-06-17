@@ -3,20 +3,15 @@ import LightboxIcon from './LightboxIcon';
 import Left from 'material-ui/svg-icons/navigation/chevron-left';
 
 class PreviousIcon extends React.Component {
-	render() {
-		const styles = {
-			left: 10,
-			top: '50%',
-		};
 
+	render() {
 		return (
-			<LightboxIcon
-				style={styles}
-			>
+			<LightboxIcon style={this.props.style} className={this.props.className}>
 				<Left />
 			</LightboxIcon>
 		);
 	}
+
 }
 
 export default PreviousIcon;

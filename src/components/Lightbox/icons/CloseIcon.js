@@ -4,14 +4,10 @@ import CloseNavigation from 'material-ui/svg-icons/navigation/close';
 
 class CloseIcon extends React.Component {
 	render() {
-		const styles = {
-			right: 10,
-			top: 10,
-		};
-
 		return (
 			<LightboxIcon
-				style={styles}
+				size={this.props.size}
+				disableTouchRipple
 				onTouchTap={this.props.closeLightbox}
 			>
 				<CloseNavigation />

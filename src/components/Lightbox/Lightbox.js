@@ -2,8 +2,9 @@ import React from 'react';
 import AutoLockScrolling from 'material-ui/internal/AutoLockScrolling';
 import Picture from './Picture';
 import Video from './Video';
-// import LightboxInfos from './Lightbox-infos';
-import LightboxControls from './Lightbox-controls';
+ import LightboxInfos from './Lightbox-infos';
+import LightboxToolbar from './Lightbox-toolbar';
+import LightboxViewer from './Lightbox-viewer';
 import { connect } from 'react-redux';
 import './Lightbox.css';
 
@@ -30,13 +31,11 @@ class Lightbox extends React.Component {
 	}
 
 	render() {
-//		<LightboxInfos />
 		if(this.props.open) {
 			return (
 				<div className="lightbox">
-					{this.generateMedium(this.props.medium)}
-					<LightboxControls />
-					<AutoLockScrolling lock={this.props.open}/>
+					<LightboxViewer medium={this.props.medium} />
+					<AutoLockScrolling lock={this.props.open} />
 				</div>
 			);
 		}
@@ -50,5 +49,6 @@ function mapStateToProps(state) {
 		medium: state.lightbox.medium
 	}
 }
+
 
 export default connect(mapStateToProps, null)(Lightbox);
