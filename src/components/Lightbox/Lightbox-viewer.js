@@ -1,5 +1,4 @@
 import React from 'react';
-import AutoLockScrolling from 'material-ui/internal/AutoLockScrolling';
 import EventListener from 'react-event-listener';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -46,6 +45,7 @@ class LightboxViewer extends React.Component {
 			case 39:
 				this.handleNextMedium();
 				break;
+			default:
 		}
 	}
 
