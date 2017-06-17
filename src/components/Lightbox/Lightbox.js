@@ -46,7 +46,7 @@ class Lightbox extends React.Component {
 function mapStateToProps(state) {
 	return {
 		open: state.lightbox.lightboxOpened,
-		medium: state.lightbox.medium
+		medium: state.lightbox.medium,
 	}
 }
 

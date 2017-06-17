@@ -10,12 +10,14 @@ export const showMedium = (mediumData) => ({
 		payload: mediumData,
 });
 
-export const nextMedium = () => ({
+export const nextMedium = (mediaList) => ({
 	type: LIGHTBOX_NEXT,
+	payload: mediaList,
 });
 
-export const previousMedium = () => ({
+export const previousMedium = (mediaList) => ({
 	type: LIGHTBOX_PREVIOUS,
+	payload: mediaList,
 });
 
 export const closeLightbox = () => ({

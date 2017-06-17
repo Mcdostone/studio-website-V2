@@ -7,7 +7,7 @@ import Picture from './Picture';
 import Video from './Video';
 import LightboxToolbar from './Lightbox-toolbar';
 import { NextIcon , PreviousIcon } from './icons';
-import { closeLightbox } from '../../actions/lightboxActions'
+import { closeLightbox, previousMedium, nextMedium } from '../../actions/lightboxActions'
 import './Lightbox.css';
 
 
@@ -17,6 +17,16 @@ class LightboxViewer extends React.Component {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
 		this.handleKeyUp = this.handleKeyUp.bind(this);
+		this.handleNextMedium = this.handleNextMedium.bind(this);
+		this.handlePreviousMedium = this.handlePreviousMedium.bind(this);
+	}
+
+	handlePreviousMedium() {
+		this.props.previousMedium(this.props.media);
+	}
+
+	handleNextMedium() {
+		this.props.nextMedium(this.props.media);
 	}
 
 	handleClick(event) {
@@ -26,10 +36,17 @@ class LightboxViewer extends React.Component {
 
 	handleKeyUp(e) {
 		e.preventDefault();
-		if (e.keyCode === 27)
-			this.props.closeLightbox();
-		if(e.keyCode === 39) { }
-		if(e.keyCode === 37) { }
+		switch(e.keyCode) {
+			case 27:
+				this.props.closeLightbox();
+				break;
+			case 37:
+				this.handlePreviousMedium();
+				break;
+			case 39:
+				this.handleNextMedium();
+				break;
+		}
 	}
 
 	generateMedium(medium) {
@@ -76,8 +93,12 @@ class LightboxViewer extends React.Component {
 					/>
 					<LightboxToolbar />
 					{this.generateMedium(this.props.medium)}
-					<NextIcon style={{...styles.icon, ...styles.next}}/>
-					<PreviousIcon style={{...styles.icon, ...styles.previous}}/>
+					<NextIcon
+						onTouchTap={this.handleNextMedium}
+						style={{...styles.icon, ...styles.next}}/>
+					<PreviousIcon
+						onTouchTap={this.handlePreviousMedium}
+						style={{...styles.icon, ...styles.previous}}/>
 				</div>
 			);
 		}
@@ -88,13 +109,16 @@ class LightboxViewer extends React.Component {
 function mapStateToProps(state) {
 	return {
 		open: state.lightbox.lightboxOpened,
-		medium: state.lightbox.medium
+		medium: state.lightbox.medium,
+		media: state.mediaList.media
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		closeLightbox
+		closeLightbox,
+		nextMedium,
+		previousMedium,
   }, dispatch);
 }
 

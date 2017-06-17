@@ -6,7 +6,10 @@ class PreviousIcon extends React.Component {
 
 	render() {
 		return (
-			<LightboxIcon style={this.props.style} className={this.props.className}>
+			<LightboxIcon
+				style={this.props.style}
+				className={this.props.className}
+				onTouchTap={this.props.onTouchTap}>
 				<Left />
 			</LightboxIcon>
 		);

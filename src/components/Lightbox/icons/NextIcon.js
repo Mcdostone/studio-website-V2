@@ -6,7 +6,10 @@ class NextIcon extends React.Component {
 
 	render() {
 		return (
-			<LightboxIcon style={this.props.style} className={this.props.className}>
+			<LightboxIcon
+				onTouchTap={this.props.onTouchTap}
+				style={this.props.style}
+				className={this.props.className}>
 				<Right />
 			</LightboxIcon>
 		);

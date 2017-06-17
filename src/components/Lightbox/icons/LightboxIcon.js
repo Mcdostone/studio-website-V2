@@ -24,6 +24,7 @@ class LightboxIcon extends React.Component {
 				onTouchTap={this.props.onTouchTap}
 				tooltip={this.props.tooltip}
 				className={this.props.className}
+				onClick={(e) => e.stopPropagation()}
 			>
 			  {React.cloneElement(this.props.children, { color: grey500, hoverColor: 'white' })}
 			</IconButton>

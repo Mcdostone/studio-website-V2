@@ -24,15 +24,19 @@ export default function (state = initialState, action, root) {
       });
 
 		case LIGHTBOX_NEXT:
+			const newIndex = (state.index + 1) % action.payload.length;
 			return Object.assign({}, state, {
         lightboxOpened: true,
-				currentMedium: action.payload
+				medium: action.payload[newIndex],
+				index: newIndex,
       });
 
 		case LIGHTBOX_PREVIOUS:
+			const i = (state.index + action.payload.length - 1) % action.payload.length;
 			return Object.assign({}, state, {
         lightboxOpened: true,
-				currentMedium: action.payload
+				medium: action.payload[i],
+				index: i,
       });
 
 		default:
