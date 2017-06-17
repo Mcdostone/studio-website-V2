@@ -110,7 +110,7 @@ function mapStateToProps(state) {
 	return {
 		open: state.lightbox.lightboxOpened,
 		medium: state.lightbox.medium,
-		media: state.mediaList.media
+		media: state.mediaList.processedMedia
 	}
 }
 

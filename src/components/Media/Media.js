@@ -9,11 +9,6 @@ import Item from '../List/Item';
 import M from './M';
 import { addMedia } from '../../actions/mediaListActions';
 import { showMedium } from '../../actions/lightboxActions';
-
-import { SORT_LAST_ADDED,
-	SORT_POPULARITY,
-	SORT_LIKES } from '../../actions/mediaListActions';
-
 import Lightbox from '../Lightbox';
 import mock from './mock-media';
 
@@ -22,7 +17,6 @@ class Media extends React.Component {
 	constructor(props) {
 		super(props);
 		this.props.addMedia(mock);
-		this.getSortedAndFilteredMedia = this.getSortedAndFilteredMedia.bind(this);
 		this.showMedium = this.showMedium.bind(this);
 	}
 
@@ -34,35 +28,15 @@ class Media extends React.Component {
 		this.props.openMediumInLightbox(mediumData);
 	}
 
-	getSortedAndFilteredMedia() {
-		let copy = [...this.props.mediaList.media];
-		const filter = this.props.mediaList.filters[this.props.mediaList.filterBy];
-		if(filter !== 'all') {
-			copy = this.props.mediaList.media.filter(medium => medium.type.toLowerCase().trim() === filter.toLowerCase().trim());
-		}
-
-		switch(this.props.typeSorting) {
-			case SORT_LIKES:
-				return copy.sort((a, b) => (b.likes > a.likes) ? 1 : ((a.likes > b.likes) ? -1 : 0));
-			case SORT_LAST_ADDED:
-				return copy;
-			case SORT_POPULARITY:;
-				return copy;
-			default:
-				return copy;
-		}
-	}
-
 	render() {
 		const cover = <Cover title="Media" />;
-		let media = this.getSortedAndFilteredMedia();
 
 		const container = (
 			<div>
 				<Lightbox />
 				<MediaToolbar />
 				<StudioList gutter={5}>
-					{media.map((medium, index) =>
+					{this.props.mediaList.map((medium, index) =>
 						<Item
 							square={this.props.squareView}
 							data={{medium, index}}
@@ -83,7 +57,7 @@ function mapStateToProps(state) {
 	return {
 		lightbox: state.lightbox,
 		squareView: state.ui.squareView,
-		mediaList: state.mediaList,
+		mediaList: state.mediaList.processedMedia,
 		typeSorting: state.mediaList.sortBy,
 	}
 }

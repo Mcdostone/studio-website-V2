@@ -9,7 +9,7 @@ import './Lightbox.css';
 class Lightbox extends React.Component {
 
 	generateMedium(medium) {
-		let elem = null
+		let elem = null;
 		switch(medium.type) {
 			case 'picture':
 				elem = <Picture className="lightbox-medium" src={medium.src} />
@@ -47,6 +47,5 @@ function mapStateToProps(state) {
 		medium: state.lightbox.medium,
 	}
 }
-
 
 export default connect(mapStateToProps, null)(Lightbox);
