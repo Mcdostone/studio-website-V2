@@ -34,7 +34,7 @@ class Lightbox extends React.Component {
 			return (
 				<div className="lightbox">
 					<LightboxViewer medium={this.props.medium} />
-					<LightboxInfos />
+					<LightboxInfos medium={this.props.medium} />
 					<AutoLockScrolling lock={this.props.open} />
 				</div>
 			);

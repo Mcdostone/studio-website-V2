@@ -1,23 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import DashboardIconMenu from '../shared/DashboardIconMenu';
 import './Cover.css';
 
 
 class Cover extends React.Component {
 	render() {
 		const settings = (
-			<IconMenu
+			<DashboardIconMenu
 				style={{ zIndex: 15, position: 'absolute', right: 100, bottom: 0 }}
-				iconButtonElement={<IconButton><MoreVertIcon color="white" /></IconButton>}
-				anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-				targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-			>
-				<MenuItem primaryText="Dashboard admin" />
-			</IconMenu>
+			/>
 		);
 
 		return (

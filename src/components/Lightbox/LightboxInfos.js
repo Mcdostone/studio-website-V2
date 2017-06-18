@@ -2,6 +2,7 @@ import React from 'react';
 import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { grey500, grey900 } from 'material-ui/styles/colors';
 import DashboardIconMenu from '../shared/DashboardIconMenu';
 import TagsList from './TagsList';
 import LikeButton from './LikeButton';
@@ -13,23 +14,24 @@ class LightboxInfos extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			tags: ['prout', 'lol', 'cette beubar',
-			'gro PD', 'fdfs','fs,ddfsd', 'ffds'],
-			/*'fdsfd', 'sfdgfdgdfgh', 'gdf', 'fgd',
-			'fsdfsddfsd', 'grols','fssfsdf', 'sdflksdklfs', 'fsdjksjkf',
-			'fdsfsfsd', 'fshjsjh', 'zaa', 'caca', 'fshjssfhjsd',
-			'weee', 'weash', 'fskdfjs', 'presqei', 'fi,o', 'note', 'a', 'cul',
-			'last', 'ligne', 'piur ', 'fjksfjksfjks', 'fhshdjfshjdfhjs', 'fjksdk'],*/
+			inputTag: '',
+			tags: ['prout', 'lol', 'cette beubar'],
 		};
 		this.onKeyPress = this.onKeyPress.bind(this);
+		this.handleOnChange = this.handleOnChange.bind(this);
 	}
 
 	onKeyPress(event) {
 		if (event.charCode === 13) {
     	event.preventDefault();
-			this.setState({tags: [...this.state.tags, event.target.value]})
-  		event.target.value = null;
+			this.setState({tags: [...this.state.tags, event.target.value.trim()]})
+  		this.setState({inputTag: ''})
+			event.target.blur();
 		}
+	}
+
+	handleOnChange(event) {
+		this.setState({inputTag: event.target.value});
 	}
 
 	render() {
@@ -42,7 +44,7 @@ class LightboxInfos extends React.Component {
 
 		const adminButton = (
 			<div className="lightbox-infos-top">
-				<DashboardIconMenu />
+				<DashboardIconMenu color={grey500} hoverColor={grey900} />
 			</div>
 		);
 
@@ -51,14 +53,17 @@ class LightboxInfos extends React.Component {
 				<Scrollbars >
 					<div className="lightbox-infos-container">
 						{adminButton}
-						<LikeButton  />
+						<LikeButton likes={this.props.medium.likes} />
 						<div style={{marginTop: 24}}></div>
 						<ExifInfos />
 						<Divider style={styleDivider} />
 						<TextField
+							ref="textField"
 							onKeyPress={this.onKeyPress}
+							onChange={this.handleOnChange}
 							hintText="Add a tag: loul sass"
 							maxLength="14"
+							value={this.state.inputTag}
 						/>
 						<TagsList tags={this.state.tags} />
 					</div>

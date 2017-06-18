@@ -10,13 +10,13 @@ const initialState = {
 		filterBy: 0,
 		media: [],
 		processedMedia: [],
-		filters: ['all'],
+		filters: ['All'],
 };
 
 function getProcessedMedia(media, filter, sort) {
 	let copy = [...media];
 
-	if(filter !== 'all' ) {
+	if(filter.toLowerCase() !== 'all' ) {
 		copy = media.filter(medium => medium.type.toLowerCase().trim() === filter.toLowerCase().trim());
 	}
 
@@ -50,8 +50,7 @@ export default function (state = initialState, action) {
 			const newMedia = [...new Set([...state.media, ...action.payload])];
 			return Object.assign({}, state, {
 				media: newMedia,
-				filters: [...state.filters, ...action.payload.map(m => m.type)]
-				.filter((v, i, a) => a.indexOf(v) === i)
+				filters: [...new Set([...state.filters, ...action.payload.map(m => m.type)])]
 				.map((v) => v.charAt(0).toUpperCase() + v.slice(1))
 				.sort(),
 				processedMedia: getProcessedMedia(newMedia, state.filters[state.filterBy], state.sortBy)

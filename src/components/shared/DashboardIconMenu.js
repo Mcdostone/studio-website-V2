@@ -3,7 +3,6 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreIcon from 'material-ui/svg-icons/navigation/more-horiz';
-import { grey500, grey900 } from 'material-ui/styles/colors';
 
 
 class DashboardIconMenu extends React.Component {
@@ -11,11 +10,12 @@ class DashboardIconMenu extends React.Component {
 	render() {
 		return (
 			<IconMenu
+				style={this.props.style}
 				iconButtonElement={
 					<IconButton>
 					<MoreIcon
-						color={this.props.dark ? grey900 : grey500 }
-						hoverColor={this.props.dark ? grey500 : grey900 }
+						color={this.props.color ? this.props.color : 'white'}
+						hoverColor={this.props.hoverColor ? this.props.hoverColor : 'white'}
 					/>
 					</IconButton>
 				}

@@ -154,6 +154,10 @@
 .exif-icon:nth-child(3) img, .exif-icon:nth-child(5) img, .exif-icon:nth-child(7) img {
 	height: 21px
 }
+.exif-icon:nth-child(3) img {
+	margin-right: 27px;
+}
+
 
 .lightbox-infos-exif {
 	display: flex;

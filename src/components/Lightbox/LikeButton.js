@@ -10,13 +10,15 @@ class LikeButton extends React.Component {
 		super(props);
 		this.state = {
 			liked: false,
+			likes: this.props.likes
 		}
 		this.handleOnClick = this.handleOnClick.bind(this);
 	}
 
 	handleOnClick() {
 		this.setState({
-			liked: !this.state.liked
+			liked: !this.state.liked,
+			likes : this.state.likes + (this.state.liked ? -1 : 1),
 		});
 	}
 
@@ -35,7 +37,7 @@ class LikeButton extends React.Component {
 			<IconButton disableTouchRipple>
 				{icon}
 			</IconButton>
-			hello there
+			{this.state.likes}
 		</div>
 	}
 
