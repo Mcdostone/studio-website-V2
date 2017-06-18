@@ -105,20 +105,27 @@ export function insertRandomGif() {
 }
 
 export function addImage(url, classes) {
-	let img = document.createElement('img')
-	img.src = url
-	img.classList.add('countdown-image')
+	let img = document.createElement('img');
+	img.src = url;
+	img.classList.add('countdown-image');
 	if(classes !== undefined) {
-  	classes.forEach(e => img.classList.add(e))
+  	classes.forEach(e => img.classList.add(e));
 	}
-	let top = Math.floor(Math.random() * window.innerHeight - 100)
-	let left = Math.floor(Math.random() * window.innerWidth - 100)
+	let top = Math.floor(Math.random() * window.innerHeight - 100);
+	let left = Math.floor(Math.random() * window.innerWidth - 100);
 	let rotate = Math.floor(Math.random() * 90) + -90;
-	img.style.top = top + 'px'
-	img.style.left =  left + 'px'
+	img.style.top = top + 'px';
+	img.style.left =  left + 'px';
 	img.style.transform =  'rotate(' + rotate +'deg)'
-	let parent = document.getElementsByClassName('countdown')[0];
+	const parent =  document.getElementsByClassName('countdown')[0];
 	parent.insertBefore(img, document.getElementsByClassName('countdown-overlay')[0]);
+}
+
+export function addBackground(url) {
+	let img = document.createElement('img');
+	img.src = url;
+	const parent =  document.getElementsByClassName('countdown-background')[0];
+	parent.appendChild(img);
 }
 
 

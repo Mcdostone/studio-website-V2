@@ -17,6 +17,7 @@
     "react-cntdwn": "^0.3.0",
     "react-component-gallery": "^1.2.1",
     "react-count-down": "^1.1.0",
+    "react-custom-scrollbars": "^4.1.2",
     "react-dom": "^15.5.4",
     "react-event-listener": "^0.4.5",
     "react-google-login": "^2.8.9",

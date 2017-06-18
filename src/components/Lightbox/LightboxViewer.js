@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Picture from './Picture';
 import Video from './Video';
-import LightboxToolbar from './Lightbox-toolbar';
+import LightboxToolbar from './LightboxToolbar';
 import { NextIcon , PreviousIcon } from './icons';
 import { closeLightbox, previousMedium, nextMedium } from '../../actions/lightboxActions'
 import './Lightbox.css';

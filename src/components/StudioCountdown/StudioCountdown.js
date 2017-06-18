@@ -1,6 +1,6 @@
 import React from 'react';
 import Youtube from 'react-youtube';
-import { insertRandomGif, randomColor, addImage } from './animations';
+import { insertRandomGif, randomColor, addImage, addBackground } from './animations';
 import $ from 'jquery';
 import loading1 from '../../assets/countdown/loading1.png';
 import loading2 from '../../assets/countdown/loading2.png';
@@ -24,6 +24,7 @@ import illuminabite from '../../assets/countdown/illuminabite.gif';
 import nothing1 from '../../assets/countdown/nothing1.gif';
 import nothing2 from '../../assets/countdown/nothing2.gif';
 import nothing5 from '../../assets/countdown/nothing5.gif';
+import loul from '../../assets/countdown/loul.jpg';
 import patou from '../../assets/countdown/patou.jpg'
 import './StudioCountdown.css';
 require('jquery-countdown');
@@ -59,18 +60,23 @@ class StudioCountdown extends React.Component {
 		};
 
 		return (
-			<div className="countdown">
-				<Youtube
-					className="countdown-video"
-					videoId={this.props.videoId}
-					opts={opts}
-					onReady={this.onReady}
-					onStateChange={this.onPlayerStateChange}
-				/>
-				<div className="countdown-overlay">
-					<div id="cuming"></div>
+			<div>
+				<div className="countdown-background">
+				</div>
+				<div className="countdown">
+					<Youtube
+						className="countdown-video"
+						videoId={this.props.videoId}
+						opts={opts}
+						onReady={this.onReady}
+						onStateChange={this.onPlayerStateChange}
+					/>
+					<div className="countdown-overlay">
+						<div id="cuming"></div>
+					</div>
 				</div>
 			</div>
+
 		);
 	}
 
@@ -114,7 +120,7 @@ class StudioCountdown extends React.Component {
 
     	setTimeout(() => addImage(loading14, ['techno']), 60000);
     	setTimeout(() => addImage(loading16), 63000);
-
+			setTimeout(() => addBackground(loul), 5000);
 
     	setTimeout(() => addImage("https://media.giphy.com/media/13jtwqhcZM6Xi8/giphy.gif",), 67500);
     	setTimeout(() => addImage("https://media.giphy.com/media/l0O9zBvk5nZ71Molq/giphy.gif",), 85000);
@@ -123,7 +129,7 @@ class StudioCountdown extends React.Component {
     	setTimeout(() => addImage(loading20, ['animated', 'flipInX', 'infinite']), 95000);
     	setTimeout(() => addImage("https://media.giphy.com/media/p04CSILL5ZUfS/giphy.gif ", ['techno']), 98000);
     	setTimeout(() => addImage("img.pr0gramm.com/2017/02/12/1671e7f6f8e2bd1d.gif", ['techno']), 110000);
-			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.remove('boum'), 117000);
+			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.remove('boum'), 116800);
 			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.add('boum'), 118350);
     	setTimeout(() => addImage("https://media.giphy.com/media/jKVJKhpPq9og8/giphy.gif",), 130000);
 			setTimeout(() => document.getElementsByClassName('countdown')[0].classList.add('rotate-boum'), 142500);

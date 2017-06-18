@@ -57,10 +57,13 @@
 	flex-direction: column;
 	height: 100%;
 	flex: 0 1 25%;
-	padding: 1.5%;
-	padding-top: 16px;
 	box-sizing: border-box;
 	background: white;
+}
+
+.lightbox-infos-container {
+	box-sizing: border-box;
+	padding: 24px;
 }
 
 .lightbox-controls, .lightbox-toolbar {
@@ -91,6 +94,7 @@
 	height: 30px;
 	width: 100%;
 	display: flex;
+	width: 100%;
 	justify-content: flex-end;
 	flex-direction: row;
 	align-items: center;
@@ -116,4 +120,56 @@
 	align-items: center;
 	padding: 10px;
 	transition: background 0.2s, border-color 0.2s;
+}
+
+.divider {
+	width: 100%;
+	height: 2px;
+	background: red;
+}
+
+.exif-icon img {
+	height: 24px;
+	width: auto;
+	text-align: right;
+	margin-right: 24px;
+}
+
+.exif-cell {
+	display: flex;
+	align-items: center;
+	flex: 2 2 calc(50%);
+	height: 28px;
+	color: var(--grey);
+	line-height: 28px;
+	font-style: italic;
+}
+
+.exif-cell.exif-icon {
+	text-align: right;
+	justify-content: flex-end;
+	flex: 2 2 calc(30%);
+}
+
+.exif-icon:nth-child(3) img, .exif-icon:nth-child(5) img, .exif-icon:nth-child(7) img {
+	height: 21px
+}
+
+.lightbox-infos-exif {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.tags-list, .tags-list-container {
+	display: flex;
+	flex: 1 1;
+	margin-top: 16px;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.tags-list {
+		padding-top: 24px;
 }

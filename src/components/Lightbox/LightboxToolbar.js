@@ -9,7 +9,7 @@ class LightboxToolbar extends React.Component {
 
 	render() {
 		return (
-			<div className="lightbox-toolbar">
+			<div className="lightbox-toolbar" onClick={(e) => e.stopPropagation()}>
 				<ReportButton size={26} />
 				<CloseIcon
 					size={26}
