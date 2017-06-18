@@ -31,10 +31,6 @@ class MediaToolbar extends React.Component {
 	}
 
 	render() {
-		const style = {
-			textTransform: 'capitalize',
-		};
-
 		return (
 			<Toolbar style={{ backgroundColor: 'transparent', margin: 0, padding: 0 }}>
 
@@ -43,7 +39,6 @@ class MediaToolbar extends React.Component {
 						labelStyle={{ color: grey500, paddingLeft: 0 }}
 						onChange={this.handleOnSortByChange}
 						value={this.props.typeSorting}
-						menuItemStyle={style}
 					>
 						<MenuItem  value={SORT_LAST_ADDED} primaryText="Last added" />
 						<MenuItem value={SORT_POPULARITY} primaryText="Most popular" />
@@ -54,7 +49,6 @@ class MediaToolbar extends React.Component {
 						value={this.props.filter}
 						onChange={this.handleOnFilterByChange}
 						labelStyle={{ color: grey500 }}
-						menuItemStyle={style}
 					>
 						{this.props.filters.map((filter, index) =>
 							<MenuItem value={index} key={filter} primaryText={filter} />

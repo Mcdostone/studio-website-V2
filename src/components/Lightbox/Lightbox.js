@@ -3,6 +3,7 @@ import AutoLockScrolling from 'material-ui/internal/AutoLockScrolling';
 import Picture from './Picture';
 import Video from './Video';
 import LightboxViewer from './Lightbox-viewer';
+import LightboxInfos from './Lightbox-infos';
 import { connect } from 'react-redux';
 import './Lightbox.css';
 
@@ -33,6 +34,7 @@ class Lightbox extends React.Component {
 			return (
 				<div className="lightbox">
 					<LightboxViewer medium={this.props.medium} />
+					<LightboxInfos />
 					<AutoLockScrolling lock={this.props.open} />
 				</div>
 			);

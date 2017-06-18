@@ -1,6 +1,9 @@
 :root {
 	--heightToolbar: 48px;
 	--overlay: rgba(0,0,0, 0.6);
+	--grey: #9E9E9E;
+	--red-like: #FE6262;
+
 }
 
 .lightbox {
@@ -13,16 +16,16 @@
 	overflow: auto;
 	background: rgba(0, 0, 0, 1);
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 }
 
 .lightbox-viewer {
 	position: relative;
-	width: 100%;
 	height: 100%;
 	display: flex;
+	flex: 0 1 100%;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -31,7 +34,7 @@
 .lightbox-container-medium {
 	display: flex;
 	height: 100vh;
-	width: 100vw;
+	width: 100%;
 	justify-content: center;
 	align-items: center;
 	z-index: 100;
@@ -49,8 +52,14 @@
 
 .lightbox-infos {
 	display: flex;
-	height: 500px;
-	width: 100px;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+	height: 100%;
+	flex: 0 1 25%;
+	padding: 1.5%;
+	padding-top: 16px;
+	box-sizing: border-box;
 	background: white;
 }
 
@@ -74,4 +83,37 @@
 	flex-wrap: wrap-reverse;
 	align-items: center;
 	background: rgba(0, 0, 0, 0.5);
+}
+
+
+.lightbox-infos-top {
+	position: relative;
+	height: 30px;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: row;
+	align-items: center;
+}
+
+.button-like {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--grey);
+	margin-top: 24px;
+	border: 2px solid var(--grey);
+	cursor: pointer;
+	transition: background 0.3s, border-color 0.3s;
+}
+
+.button-like:hover, .liked {
+	display: flex;
+	color: white;
+	background: var(--red-like);
+	border-color: var(--red-like);
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	transition: background 0.2s, border-color 0.2s;
 }

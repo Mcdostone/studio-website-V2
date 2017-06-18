@@ -52,6 +52,7 @@ export default function (state = initialState, action) {
 				media: newMedia,
 				filters: [...state.filters, ...action.payload.map(m => m.type)]
 				.filter((v, i, a) => a.indexOf(v) === i)
+				.map((v) => v.charAt(0).toUpperCase() + v.slice(1))
 				.sort(),
 				processedMedia: getProcessedMedia(newMedia, state.filters[state.filterBy], state.sortBy)
       });

@@ -8,7 +8,7 @@ import StudioList from '../List/StudioList';
 import Item from '../List/Item';
 import M from './M';
 import { addMedia } from '../../actions/mediaListActions';
-import { showMedium } from '../../actions/lightboxActions';
+import { showMedium, closeLightbox } from '../../actions/lightboxActions';
 import Lightbox from '../Lightbox';
 import mock from './mock-media';
 
@@ -65,7 +65,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		addMedia,
-		openMediumInLightbox: showMedium
+		openMediumInLightbox: showMedium,
+		closeLightbox,
   }, dispatch);
 }
 
