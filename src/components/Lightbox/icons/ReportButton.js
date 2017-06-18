@@ -8,6 +8,7 @@ class NextIcon extends React.Component {
 			<LightboxIcon
 				size={this.props.size}
 				disableTouchRipple
+				onTouchTap={this.props.onTouchTap}
 				tooltip="report"
 			>
 				<AlertWarning />

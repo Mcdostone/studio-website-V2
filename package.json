@@ -11,6 +11,7 @@
     "history": "^4.6.1",
     "jquery": "^3.2.1",
     "jquery-countdown": "^2.2.0",
+    "loglevel": "^1.4.1",
     "material-ui": "^0.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
