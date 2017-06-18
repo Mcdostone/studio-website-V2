@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import FavoriteIcon from 'material-ui/svg-icons/action/favorite';
 import FavoriteBorderIcon from 'material-ui/svg-icons/action/favorite-border';
-import { grey500, grey900 } from 'material-ui/styles/colors';
+import { grey500 } from 'material-ui/styles/colors';
 
 class LikeButton extends React.Component {
 
