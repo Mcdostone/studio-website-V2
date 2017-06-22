@@ -1,0 +1,14 @@
+@media screen and (max-width: 700px) {
+  .media-toolbar {
+		flex-direction: column;
+		height: auto !important;
+	}
+
+	.media-toolbar .dropdown {
+		flex-direction: column;
+	}
+
+	.media-toolbar .view-mode {
+		justify-content: flex-end;
+	}
+}

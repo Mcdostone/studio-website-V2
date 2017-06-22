@@ -14,6 +14,9 @@ import { SORT_LAST_ADDED,
 	sortBy,
 	filterBy } from '../../../actions/mediaListActions';
 
+import './MediaToolbar.css';
+
+
 class MediaToolbar extends React.Component {
 
 	constructor(props) {
@@ -32,9 +35,9 @@ class MediaToolbar extends React.Component {
 
 	render() {
 		return (
-			<Toolbar style={{ backgroundColor: 'transparent', margin: 0, padding: 0 }}>
+			<Toolbar className="media-toolbar" style={{ backgroundColor: 'transparent', margin: 0, padding: 0 }}>
 
-				<ToolbarGroup>
+				<ToolbarGroup className="dropdown">
 					<DropDownMenu
 						labelStyle={{ color: grey500, paddingLeft: 0 }}
 						onChange={this.handleOnSortByChange}
@@ -56,12 +59,11 @@ class MediaToolbar extends React.Component {
 					</DropDownMenu>
 				</ToolbarGroup>
 
-				<ToolbarGroup>
+				<ToolbarGroup className="view-mode">
 					<IconViewModule active={this.props.squareView} onTouchTap={this.props.activeSquareView} />
 					<IconViewQuilt
 						active={!this.props.squareView}
 						onTouchTap={this.props.activeMasonryView}
-						style={{ padding: 0, margin: 0, width: 'auto' }}
 					/>
 				</ToolbarGroup>
 
