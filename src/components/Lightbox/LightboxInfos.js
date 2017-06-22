@@ -16,15 +16,33 @@ class LightboxInfos extends React.Component {
 		this.state = {
 			inputTag: '',
 			tags: ['prout', 'lol', 'cette beubar'],
+			width: 0,
 		};
 		this.onKeyPress = this.onKeyPress.bind(this);
 		this.handleOnChange = this.handleOnChange.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
 	}
 
+	updateDimensions() {
+		this.setState({width: document.body.offsetWidth});
+	}
+
+	componentWillMount() {
+		this.updateDimensions();
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.updateDimensions);
+	}
+
+	componentDidMount() {
+		window.addEventListener('resize', this.updateDimensions);
+  }
+
 	onKeyPress(event) {
-		if (event.charCode === 13) {
+		if (event.charCode === 13 && event.target.value.length > 0) {
     	event.preventDefault();
-			this.setState({tags: [...this.state.tags, event.target.value.trim()]})
+			this.setState({tags: [...new Set([...this.state.tags, event.target.value.trim()])]})
   		this.setState({inputTag: ''})
 			event.target.blur();
 		}
@@ -35,11 +53,11 @@ class LightboxInfos extends React.Component {
 	}
 
 	render() {
-		const margin = 24;
+		const margin = 32;
 		const styleDivider = {
 			width: '100%',
 			marginTop: margin,
-			marginBottom: margin,
+			height: 0,
 		};
 
 		const adminButton = (
@@ -48,26 +66,29 @@ class LightboxInfos extends React.Component {
 			</div>
 		);
 
+		const container = (
+			<div className="lightbox-infos-container">
+				{adminButton}
+				<LikeButton likes={this.props.medium.likes} />
+				<Divider style={styleDivider} />
+				<ExifInfos />
+				<Divider style={styleDivider} />
+				<TextField
+					ref="textField"
+					onKeyPress={this.onKeyPress}
+					onChange={this.handleOnChange}
+					hintText="Add a tag: loul sass"
+					maxLength="14"
+					fullWidth
+					value={this.state.inputTag}
+				/>
+				<TagsList tags={this.state.tags} />
+			</div>
+		);
+
 		return (
 			<Paper className="lightbox-infos">
-				<Scrollbars >
-					<div className="lightbox-infos-container">
-						{adminButton}
-						<LikeButton likes={this.props.medium.likes} />
-						<div style={{marginTop: 24}}></div>
-						<ExifInfos />
-						<Divider style={styleDivider} />
-						<TextField
-							ref="textField"
-							onKeyPress={this.onKeyPress}
-							onChange={this.handleOnChange}
-							hintText="Add a tag: loul sass"
-							maxLength="14"
-							value={this.state.inputTag}
-						/>
-						<TagsList tags={this.state.tags} />
-					</div>
-				</Scrollbars>
+				{ this.state.width > 1400 ?	<Scrollbars>{container}</Scrollbars> : container }
 			</Paper>
 		)
 	}

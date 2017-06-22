@@ -1,5 +1,6 @@
 import React from 'react';
 import AutoLockScrolling from 'material-ui/internal/AutoLockScrolling';
+import { Scrollbars } from 'react-custom-scrollbars';
 import Picture from './Picture';
 import Video from './Video';
 import LightboxViewer from './LightboxViewer';
@@ -33,9 +34,13 @@ class Lightbox extends React.Component {
 		if(this.props.open) {
 			return (
 				<div className="lightbox">
-					<LightboxViewer medium={this.props.medium} />
-					<LightboxInfos medium={this.props.medium} />
-					<AutoLockScrolling lock={this.props.open} />
+					<Scrollbars >
+						<div className="lightbox-container">
+							<LightboxViewer medium={this.props.medium} />
+							<LightboxInfos medium={this.props.medium} />
+							<AutoLockScrolling lock={this.props.open} />
+						</div>
+					</Scrollbars>
 				</div>
 			);
 		}

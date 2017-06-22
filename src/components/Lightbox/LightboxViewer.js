@@ -9,7 +9,6 @@ import { NextIcon , PreviousIcon } from './icons';
 import { closeLightbox, previousMedium, nextMedium } from '../../actions/lightboxActions'
 import './Lightbox.css';
 
-
 class LightboxViewer extends React.Component {
 
 	constructor(props) {
