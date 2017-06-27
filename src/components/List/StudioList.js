@@ -1,7 +1,8 @@
 import React from 'react';
 import StackGrid from 'react-stack-grid';
 import EventListener from 'react-event-listener';
-
+import Waypoint from 'react-waypoint';
+import Loading from './Loading';
 import './StudioList.css';
 
 class StudioList extends React.Component {
@@ -9,14 +10,21 @@ class StudioList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			width: '25%',
+			width: '33.33%',
 		};
 		this.handleResize = this.handleResize.bind(this);
+		this.handleOnEnter = this.handleOnEnter.bind(this);
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.handleResize();
 	}
+
+	handleOnEnter() {
+		if(this.props.fetchMoreData)
+			this.props.fetchMoreData();
+	}
+
 	handleResize() {
 		const newWidth = document.body.offsetWidth;
 		this.setState({width: newWidth < 700 ? '33.33%': '25%'});
@@ -24,18 +32,24 @@ class StudioList extends React.Component {
 
 	render() {
 		return (
-			<StackGrid
-				className={this.props.className}
-				columnWidth={this.state.width}
-				gutterHeight={this.props.gutter}
-				monitorImagesLoaded={true}
-				gutterWidth={this.props.gutter}
-			>
-				<EventListener target="window" onResize={this.handleResize} />
-				{this.props.children}
-      </StackGrid>
+			<div className="studio-list">
+				<StackGrid
+					className={this.props.className}
+					columnWidth={this.state.width}
+					gutterHeight={this.props.gutter}
+					monitorImagesLoaded={true}
+					gutterWidth={this.props.gutter}
+				>
+					{this.props.children}
+				</StackGrid>
+				<EventListener target="window" style={{display: 'none'}} onResize={this.handleResize} />
+				<Waypoint onEnter={this.handleOnEnter} />
+				<Loading />
+			</div>
 		);
 	}
+				//	{this.props.loading ? <Loading /> : null}
+
 }
 
 export default StudioList;

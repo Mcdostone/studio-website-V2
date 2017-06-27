@@ -1,3 +1,6 @@
+import "isomorphic-fetch";
+
+
 export const ADD_MEDIA = 'ADD_MEDIA';
 export const SHOW_MEDIUM = 'SHOW_MEDIUM';
 export const LIGHTBOX_CLOSE = 'LIGHTBOX_CLOSE';

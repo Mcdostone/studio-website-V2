@@ -7,10 +7,11 @@ import MediaToolbar from './MediaToolbar';
 import StudioList from '../List/StudioList';
 import Item from '../List/Item';
 import M from './M';
-import { addMedia } from '../../actions/mediaListActions';
+import { addMedia, fetchMedia } from '../../actions/mediaListActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
 import Lightbox from '../Lightbox';
 import mock from './mock-media';
+
 
 class Media extends React.Component {
 
@@ -18,10 +19,19 @@ class Media extends React.Component {
 		super(props);
 		this.props.addMedia(mock);
 		this.showMedium = this.showMedium.bind(this);
+		this.loadMoreMedia = this.loadMoreMedia.bind(this);
 	}
 
 	componentWillUnmount() {
 		this.props.closeLightbox();
+	}
+
+	loadMoreMedia() {
+		this.props.fetchMedia(this.props.index);
+	}
+
+	componentDidMount() {
+		this.loadMoreMedia();
 	}
 
 	showMedium(mediumData) {
@@ -35,7 +45,11 @@ class Media extends React.Component {
 			<div>
 				<Lightbox />
 				<MediaToolbar />
-				<StudioList gutter={5}>
+				<StudioList
+					gutter={5}
+					loading={this.props.loading}
+					fetchMoreData={this.loadMoreMedia}
+				>
 					{this.props.mediaList.map((medium, index) =>
 						<Item
 							square={this.props.squareView}
@@ -58,6 +72,8 @@ function mapStateToProps(state) {
 		lightbox: state.lightbox,
 		squareView: state.ui.squareView,
 		mediaList: state.mediaList.processedMedia,
+		index: state.mediaList.index,
+		loading: state.mediaList.loading,
 		typeSorting: state.mediaList.sortBy,
 	}
 }
@@ -67,6 +83,7 @@ function mapDispatchToProps(dispatch) {
 		addMedia,
 		openMediumInLightbox: showMedium,
 		closeLightbox,
+		fetchMedia,
   }, dispatch);
 }
 

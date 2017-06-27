@@ -51,7 +51,6 @@
 	opacity: 1;
 }
 
-
 .studio-list-space {
 	margin-top: 56px;
 }
@@ -76,4 +75,17 @@
 
 .item-overlay span.date {
 	font-style: italic;
+}
+
+.loading {
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+	z-index: 192;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+.studio-list {
+	margin-bottom: 64px;
 }
