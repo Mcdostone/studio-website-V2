@@ -8,7 +8,7 @@ class Icon extends React.Component {
 		return (
 			<IconButton
 				disableTouchRipple={true}
-				className="navbar-icon"
+				className="media-toolbar-icon"
 				style={this.props.style}
 				onTouchTap={this.props.onTouchTap}
 			>

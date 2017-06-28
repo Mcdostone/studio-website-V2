@@ -63,6 +63,7 @@ class MediaToolbar extends React.Component {
 					<IconViewModule active={this.props.squareView} onTouchTap={this.props.activeSquareView} />
 					<IconViewQuilt
 						active={!this.props.squareView}
+						style={{marginRight: -12}}
 						onTouchTap={this.props.activeMasonryView}
 					/>
 				</ToolbarGroup>

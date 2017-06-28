@@ -9,12 +9,12 @@ class M extends React.Component {
 	render() {
 		const size = 100;
 		const styleIcon =  {
+    	width: size * 0.5,
+    	height: size * 0.5,
+  	};
+		const style = {
     	width: size,
     	height: size,
-  	};
-		const  style = {
-    	width: size * 1.5,
-    	height: size * 1.5,
     	padding: 0,
   	};
 		let src = this.props.medium.src;

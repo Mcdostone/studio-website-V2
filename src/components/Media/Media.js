@@ -9,6 +9,7 @@ import Item from '../List/Item';
 import M from './M';
 import { addMedia, fetchMedia } from '../../actions/mediaListActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
+import { push } from 'react-router-redux'
 import Lightbox from '../Lightbox';
 import mock from './mock-media';
 
@@ -32,6 +33,12 @@ class Media extends React.Component {
 
 	componentDidMount() {
 		this.loadMoreMedia();
+		window.onpopstate = (event) => {
+			if(this.props.lightbox.lightboxOpened === true) {
+				this.props.closeLightbox();
+				this.props.push(this.props.history.location.pathname);
+			}
+		};
 	}
 
 	showMedium(mediumData) {
@@ -46,7 +53,9 @@ class Media extends React.Component {
 				<Lightbox />
 				<MediaToolbar />
 				<StudioList
-					gutter={5}
+					gutter={16}
+					monitorImagesLoaded={true}
+					appear={{border: '2px solid red'}}
 					loading={this.props.loading}
 					fetchMoreData={this.loadMoreMedia}
 				>
@@ -83,6 +92,7 @@ function mapDispatchToProps(dispatch) {
 		addMedia,
 		openMediumInLightbox: showMedium,
 		closeLightbox,
+		push,
 		fetchMedia,
   }, dispatch);
 }
