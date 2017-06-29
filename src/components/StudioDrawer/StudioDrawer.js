@@ -54,6 +54,12 @@ class StudioDrawer extends React.Component {
 						Your profile
 					</MenuItem>
 				</Link>
+				<Link to="/sandbox">
+					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+						Sandbox
+					</MenuItem>
+				</Link>
+
 				<Link to="/logout">
 					<MenuItem onTouchTap={this.props.onToggleDrawer}>
 						Logout

@@ -2,6 +2,7 @@ export const SORT_LAST_ADDED = 1;
 export const SORT_POPULARITY = 2;
 export const SORT_LIKES = 3;
 export const ADD_MEDIA = 'ADD_MEDIA';
+export const ADD_DRIVE_MEDIUM = 'ADD_DRIVE_MEDIUM';
 export const SORT_BY = 'SORT_BY';
 export const FILTER_BY = 'FILTER_BY';
 export const MEDIA_LOADING = 'MEDIA_LOADING';
@@ -23,6 +24,11 @@ export const filterBy = (typeFilter) => ({
 export const addMedia = (media) => ({
     type: ADD_MEDIA,
 		payload: media,
+});
+
+export const addDriveMedium = (mediumId) => ({
+    type: ADD_DRIVE_MEDIUM,
+		payload: mediumId,
 });
 
 export const loadMedia = () => ({

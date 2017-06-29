@@ -19,6 +19,11 @@ const initialState = {
 		filters: ['All'],
 };
 
+function getUniqueDataset(dataset, transformer) {
+	const tranformedDataset = dataset.map(el => transformer(el));
+	return [...new Set(tranformedDataset)];
+}
+
 function getProcessedMedia(media, filter, sort) {
 	let copy = [...media];
 
@@ -56,7 +61,7 @@ export default function (state = initialState, action) {
 			const newMedia = [...new Set([...state.media, ...action.payload])];
 			return Object.assign({}, state, {
 				media: newMedia,
-				filters: [...new Set([...state.filters, ...action.payload.map(m => m.type)])]
+				filters: getUniqueDataset([...state.filters, ...action.payload.map(p => p.type)], (el) => { return el.toLowerCase().trim()})
 				.map((v) => v.charAt(0).toUpperCase() + v.slice(1))
 				.sort(),
 				processedMedia: getProcessedMedia(newMedia, state.filters[state.filterBy], state.sortBy),

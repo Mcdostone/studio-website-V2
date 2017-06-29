@@ -18,7 +18,6 @@ class Media extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.props.addMedia(mock);
 		this.showMedium = this.showMedium.bind(this);
 		this.loadMoreMedia = this.loadMoreMedia.bind(this);
 	}
@@ -27,18 +26,12 @@ class Media extends React.Component {
 		this.props.closeLightbox();
 	}
 
-	loadMoreMedia() {
-		this.props.fetchMedia(this.props.index);
+	componentDidMount() {
+		this.props.addMedia(mock);
 	}
 
-	componentDidMount() {
-		this.loadMoreMedia();
-		window.onpopstate = (event) => {
-			if(this.props.lightbox.lightboxOpened === true) {
-				this.props.closeLightbox();
-				this.props.push(this.props.history.location.pathname);
-			}
-		};
+	loadMoreMedia() {
+		this.props.fetchMedia(this.props.index);
 	}
 
 	showMedium(mediumData) {

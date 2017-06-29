@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bragi-browser": "0.0.12",
     "es6-promise": "^4.1.0",
+    "googleapis": "^20.0.1",
     "history": "^4.6.3",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",

@@ -1,14 +1,19 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-// import { delay } from 'redux-saga';
+import { call, put, takeLatest, takeEvery, select } from 'redux-saga/effects';
+import GoogleDriveApi from './GoogleDriveApi';
+import logger from '../Logger';
 import {
 	MEDIA_FETCH,
 	MEDIA_FETCH_SUCCESS,
 	MEDIA_FETCH_FAILURE,
 	ADD_MEDIA,
+	ADD_DRIVE_MEDIUM,
 	MEDIA_LOADING } from '../actions/mediaListActions';
-
 import 'isomorphic-fetch';
 require('es6-promise').polyfill()
+
+
+const googleDriveApi = new GoogleDriveApi(window.gapi, window.logger);
+
 
 const request = () => {
 	return fetch('https://jsonplaceholder.typicode.com/photos')
@@ -44,8 +49,24 @@ function* fetchMedia(action) {
 	}
 }
 
+function* fetchDriveMedium(action) {
+		const state = yield select();
+		logger.react('authentificated: ' + state.auth.authentificated);
+		if(state.auth.authentificated === true) {
+			const medium = yield call(googleDriveApi.getFile, action.payload);
+			const newMedium = {
+				id: medium.id,
+				src: medium.thumbnailLink,
+				type: 'picture',
+				likes: medium.version
+			}
+			yield put({type: ADD_MEDIA, payload: [newMedium]});
+		}
+}
+
 function* mediaListSaga() {
 	yield takeLatest(MEDIA_FETCH, fetchMedia);
+	yield takeEvery(ADD_DRIVE_MEDIUM, fetchDriveMedium);
 }
 
 export default mediaListSaga;

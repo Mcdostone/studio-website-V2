@@ -16,6 +16,7 @@ import reducers from './reducers';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Media from './components/Media';
+import Sandbox from './components/Sandbox';
 import Events from './components/Events';
 import Types from './components/Types';
 import Profile from './components/Profile';
@@ -23,6 +24,8 @@ import Login from './components/Auth/Login';
 import StudioCountdown from './components/StudioCountdown';
 import studioTheme from './studioTheme';
 import './App.css';
+
+require('./Logger');
 
 injectTapEventPlugin();
 
@@ -49,6 +52,11 @@ const UserIsAuthenticated = UserAuthWrapper({
 })
 
 class App extends React.Component {
+
+	componentDidMount() {
+		window.gapi.client.load('drive', 'v2', null);
+	}
+
 	render() {
 		return (
 			<Provider store={store}>
@@ -64,6 +72,7 @@ class App extends React.Component {
 								<Route path="/profile" component={UserIsAuthenticated(Profile)} />
 								<Route path="/login" component={Login} />
 								<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />
+								<Route path="/sandbox" component={Sandbox} />
 							</div>
 						</Router>
 					</div>

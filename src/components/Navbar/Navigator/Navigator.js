@@ -71,6 +71,7 @@ class Navigator extends React.Component {
 					onFailure={this.responseGoogle}
 					redirectUri="http://localhost:3000/login"
 					className="navbar-link"
+					scope={configuration.SCOPES}
 					hostedDomain="telecomnancy.net"
 					prompt="select_account"
 				/>
