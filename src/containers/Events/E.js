@@ -1,5 +1,6 @@
 import React from 'react';
-import Overlay from '../List/Overlay';
+import { Overlay } from '../../components/List';
+
 
 class E extends React.Component {
 

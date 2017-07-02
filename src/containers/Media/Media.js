@@ -1,16 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Cover from '../Cover';
-import Layout from '../Layout';
+import { push } from 'react-router-redux'
+import { Cover, Layout } from '../Layout';
 import MediaToolbar from './MediaToolbar';
-import StudioList from '../List/StudioList';
-import Item from '../List/Item';
+import StudioList from '../../components/List/StudioList';
+import Item from '../../components/List/Item';
+import Lightbox from '../../components/Lightbox';
 import M from './M';
 import { addMedia, fetchMedia } from '../../actions/mediaActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
-import { push } from 'react-router-redux'
-import Lightbox from '../Lightbox';
 import mock from './mock-media';
 
 
@@ -52,7 +51,7 @@ class Media extends React.Component {
 					loading={this.props.loading}
 					fetchMoreData={this.loadMoreMedia}
 				>
-					{this.props.mediaList.map((medium, index) =>
+					{this.props.media.map((medium, index) =>
 						<Item
 							square={this.props.squareView}
 							data={{medium, index}}
@@ -73,10 +72,10 @@ function mapStateToProps(state) {
 	return {
 		lightbox: state.lightbox,
 		squareView: state.ui.squareView,
-		mediaList: state.mediaList.processedMedia,
-		index: state.mediaList.index,
-		loading: state.mediaList.loading,
-		typeSorting: state.mediaList.sortBy,
+		media: state.media.processedMedia,
+		index: state.media.index,
+		loading: state.media.loading,
+		typeSorting: state.media.sortBy,
 	}
 }
 

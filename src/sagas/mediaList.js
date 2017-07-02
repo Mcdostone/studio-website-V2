@@ -12,7 +12,7 @@ import {
 const googleDriveApi = new GoogleDriveApi(window.gapi);
 
 
-const request = () => {
+function* request() {
 	return fetch('https://jsonplaceholder.typicode.com/photos')
 	.then(function(response) {
 		return response.json();

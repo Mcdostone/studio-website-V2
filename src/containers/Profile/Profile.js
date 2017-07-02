@@ -2,8 +2,8 @@ import React from 'react';
 import Avatar from 'material-ui/Avatar';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Layout from '../Layout';
-import Cover from '../Cover';
+import { Cover, Layout } from '../Layout';
+
 
 class Profile extends React.Component {
 

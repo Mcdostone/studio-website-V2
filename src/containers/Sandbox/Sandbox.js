@@ -3,11 +3,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { bindActionCreators } from 'redux';
 import { fetchMedia } from '../../actions/mediaActions';
 import { connect } from 'react-redux';
-import StudioList from '../List/StudioList';
-import Item from '../List/Item';
+import { StudioList, Item } from '../../components/List';
 import M from '../Media/M';
-import Layout from '../Layout';
-import Cover from '../Cover';
+import { Cover, Layout } from '../Layout';
 
 
 class Sandbox extends React.Component {

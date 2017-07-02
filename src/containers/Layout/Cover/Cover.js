@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DashboardIconMenu from '../shared/DashboardIconMenu';
+import DashboardIconMenu from '../../../components/shared/DashboardIconMenu';
 import './Cover.css';
 
 

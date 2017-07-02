@@ -76,9 +76,9 @@ class MediaToolbar extends React.Component {
 function mapStateToProps(state) {
 	return {
 		squareView: state.ui.squareView,
-		typeSorting: state.mediaList.sortBy,
-		filter: state.mediaList.filterBy,
-		filters: state.mediaList.filters,
+		typeSorting: state.media.sortBy,
+		filter: state.media.filterBy,
+		filters: state.media.filters,
 	}
 }
 

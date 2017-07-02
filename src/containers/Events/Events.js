@@ -1,8 +1,6 @@
 import React from 'react';
-import Cover from '../Cover';
-import Layout from '../Layout';
-import StudioList from '../List/StudioList';
-import Item from '../List/Item';
+import { Layout, Cover } from '../Layout';
+import { StudioList, Item } from '../../components/List';
 import E from './E';
 
 

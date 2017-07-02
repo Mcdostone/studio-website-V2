@@ -26,13 +26,19 @@ function* buildMediumFromGoogleDrive(medium) {
 	}
 }
 
+function buildMediumFromWeb(medium) {
+	return buildMedium(medium.src, medium.type, medium.from, medium.likes);
+}
+
 function* createMediaFromFirebase(mediaData) {
 	const mediaArray = Object.keys(mediaData).map(key => mediaData[key]);
 	return yield mediaArray.map(medium => {
-		if(medium.from === 'drive') {
-			return call(buildMediumFromGoogleDrive, medium);
+		switch(medium.from.toLowerCase().trim()) {
+			case 'drive':
+				return call(buildMediumFromGoogleDrive, medium);
+			default:
+			return buildMediumFromWeb(medium);
 		}
-		return null;
 	})
 }
 
@@ -49,7 +55,6 @@ function* fetchMedia(action) {
 function* mediaSagas() {
 	yield takeLatest(MEDIA_FETCH, fetchMedia);
 }
-
 
 export default mediaSagas;
 

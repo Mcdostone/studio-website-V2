@@ -2,7 +2,8 @@ import React from 'react';
 import FavoriteAction from 'material-ui/svg-icons/action/favorite';
 import IconButton from 'material-ui/IconButton';
 import PlayArrow from 'material-ui/svg-icons/av/play-arrow';
-import Overlay from '../List/Overlay';
+import { Overlay } from '../../components/List';
+
 
 class M extends React.Component {
 

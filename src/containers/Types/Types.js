@@ -1,8 +1,6 @@
 import React from 'react';
-import Cover from '../Cover';
-import Layout from '../Layout';
-import Item from '../List/Item';
-import StudioList from '../List/StudioList';
+import { Cover, Layout } from '../Layout';
+import { StudioList, Item } from '../../components/List';
 import T from './T';
 
 class Types extends React.Component {
