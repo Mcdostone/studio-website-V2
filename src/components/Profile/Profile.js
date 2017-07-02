@@ -12,7 +12,7 @@ class Profile extends React.Component {
 			<Cover>
 				<Avatar
 					size={150}
-					src={this.props.auth.user.profile.imageUrl}
+					src={this.props.auth.user.profile.picture}
         />
 				<p className="cover-name">{this.props.auth.user.profile.name}</p>
 

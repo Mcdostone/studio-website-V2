@@ -3,15 +3,12 @@ import { Router, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
-import { createBrowserHistory } from 'history';
-import { syncHistoryWithStore, routerMiddleware, routerActions } from 'react-router-redux';
+import { syncHistoryWithStore, routerActions } from 'react-router-redux';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 
-import mediaListSagas from './sagas/mediaList';
-import reducers from './reducers';
+import store from './store';
+import { history } from './history';
 
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -24,24 +21,10 @@ import Login from './components/Auth/Login';
 import StudioCountdown from './components/StudioCountdown';
 import studioTheme from './studioTheme';
 import './App.css';
-
 require('./Logger');
 
 injectTapEventPlugin();
-
-
-const sagaMiddleware = createSagaMiddleware();
-const history = createBrowserHistory();
-const routingMiddleware = routerMiddleware(history);
-const store = createStore(
-	reducers,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-	applyMiddleware(sagaMiddleware, routingMiddleware)
-);
-
 syncHistoryWithStore(history, store);
-sagaMiddleware.run(mediaListSagas);
-
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth.user,
@@ -54,7 +37,7 @@ const UserIsAuthenticated = UserAuthWrapper({
 class App extends React.Component {
 
 	componentDidMount() {
-		window.gapi.client.load('drive', 'v2', null);
+	//	window.gapi.client.load('drive', 'v2', null);
 	}
 
 	render() {

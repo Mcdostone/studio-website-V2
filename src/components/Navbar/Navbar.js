@@ -16,7 +16,9 @@ class Navbar extends React.Component {
 	render() {
 		let menu = undefined;
 
-		if(this.props.auth.user !== null)
+		//if(this.props.auth.user !== null)
+		//if(null)
+
 			menu =
 				<div style={{ display: 'flex' }}>
 					<Link className="navbar-link" to="/media">
@@ -58,7 +60,6 @@ class Navbar extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		auth: state.auth,
 		drawerOpened: state.ui.drawerOpened,
 		searchOpened: state.ui.searchOpened,
 	}

@@ -4,14 +4,13 @@ import { withRouter } from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { userLogin, userLogout } from '../../../actions/authActions'
+import { requestLogin, requestLogout } from '../../../actions/authActions'
 import { openSearch } from '../../../actions/uiActions'
 import Menu from 'material-ui/Menu';
 import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
-import GoogleLogin from 'react-google-login';
 import IconSearch from '../icons/IconSearch';
-import configuration from '../../../configuration';
+
 
 class Navigator extends React.Component {
 
@@ -45,7 +44,7 @@ class Navigator extends React.Component {
 
 		handleRequestLogout() {
 		this.handleRequestClose();
-		this.props.logout();
+		this.props.requestLogout();
 	}
 
 	responseGoogle(response) {
@@ -61,27 +60,15 @@ class Navigator extends React.Component {
 
 	render() {
 		let content = undefined;
-		if(this.props.auth.user === null) {
-			content =
-				<GoogleLogin
-					tag="a"
-					clientId={configuration.CLIENT_ID_GOOGLE_OAUTH}
-					buttonText="Login"
-					onSuccess={this.responseGoogle}
-					onFailure={this.responseGoogle}
-					redirectUri="http://localhost:3000/login"
-					className="navbar-link"
-					scope={configuration.SCOPES}
-					hostedDomain="telecomnancy.net"
-					prompt="select_account"
-				/>
+		if(!this.props.auth.authentificated) {
+			content = <a className="navbar-link" onClick={this.props.requestLogin}>Login</a>
 		}
 		else {
 			content =
 			<div style={{ display: 'flex' }}>
 				<IconSearch className="navbar-link" onTouchTap={this.props.openSearch} />
 				<div onClick={this.handleRequestOpen} className="navbar-link">
-					<Avatar src={this.props.auth.user.profile.imageUrl} style={{ marginRight: '5px' }} />
+					<Avatar src={this.props.auth.user.profile.picture} style={{ marginRight: '5px' }} />
 					{this.props.auth.user.profile.name}
 				</div>
 				<Popover
@@ -113,14 +100,14 @@ Navigator.propTypes = {
 
 function mapStateToProps(state) {
 	return {
-		auth: state.auth
+		auth: state.auth,
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-    login: userLogin,
-		logout: userLogout,
+		requestLogin,
+		requestLogout,
 		openSearch,
   }, dispatch);
 }

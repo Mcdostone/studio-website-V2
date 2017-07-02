@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT } from '../actions/authActions';
+import { LOGIN, LOGOUT } from '../actions/authActions';
 
 
 const initialState = {
@@ -8,13 +8,13 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch(action.type) {
-		case USER_LOGIN:
+		case LOGIN:
 			return Object.assign({}, state, {
         user: action.payload,
 				authentificated: true
       });
 
-		case USER_LOGOUT:
+		case LOGOUT:
 			return Object.assign({}, state, initialState);
 
 		default:

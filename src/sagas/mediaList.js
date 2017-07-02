@@ -8,11 +8,9 @@ import {
 	ADD_MEDIA,
 	ADD_DRIVE_MEDIUM,
 	MEDIA_LOADING } from '../actions/mediaListActions';
-import 'isomorphic-fetch';
-require('es6-promise').polyfill()
 
 
-const googleDriveApi = new GoogleDriveApi(window.gapi, window.logger);
+const googleDriveApi = new GoogleDriveApi(window.gapi, logger);
 
 
 const request = () => {
@@ -27,9 +25,7 @@ const request = () => {
 }
 
 function* fetchMedia(action) {
-	// yield delay(3000);
 	yield put({type: MEDIA_LOADING});
-
 	try {
 		let data = yield call(request);
 		// yield delay(5000);
