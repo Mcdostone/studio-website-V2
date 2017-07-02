@@ -21,7 +21,7 @@ class M extends React.Component {
 		let src = this.props.medium.src;
 		let contentOverlay = <span>
 			<FavoriteAction style={{ marginRight: 5 }} color="white" />
-			<p>{this.props.medium.likes}</p>
+			<p>{this.props.medium.countLikes()}</p>
 		</span>
 
 		if(this.props.medium.type === 'video') {

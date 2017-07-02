@@ -1,46 +1,28 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { bindActionCreators } from 'redux';
-import { fetchMedia } from '../../actions/mediaActions';
 import { connect } from 'react-redux';
-import { StudioList, Item } from '../../components/List';
-import M from '../Media/M';
 import { Cover, Layout } from '../Layout';
-
+import { fetchCover } from '../../actions/coverActions';
 
 class Sandbox extends React.Component {
 
+	componentDidMount() {
+		this.props.fetchCover('media');
+	}
+
 	render() {
 		const cover = (
-			<Cover title="Sandbox" />
+			<Cover title="Sandbox" url={this.props.cover} />
 		);
 
 		const container = (
 			<div>
-
-				<RaisedButton
-				label="hit firebase DB"
-				onTouchTap={this.props.fetchMedia} />
-
-				<StudioList
-						gutter={16}
-						monitorImagesLoaded={true}
-						appear={{border: '2px solid red'}}
-						loading={this.props.loading}
-						fetchMoreData={this.loadMoreMedia}
-					>
-						{this.props.mediaList.map((medium, index) =>
-							<Item
-								square={this.props.squareView}
-								data={{medium, index}}
-								key={medium.src}
-								onClick={this.showMedium}
-							>
-								<M medium={medium} />
-							</Item>
-						)}
-					</StudioList>
-				</div>
+  			<RaisedButton label="save Event" onTouchTap={() => this.props.fetchCover('media')} />
+				<pre>
+					{this.props.cover}
+				</pre>
+			</div>
 		);
 
 		return (
@@ -52,13 +34,14 @@ class Sandbox extends React.Component {
 function mapStateToProps(state) {
 	return {
 		auth: state.auth,
+		cover: state.cover.media,
 		mediaList: state.media.processedMedia,
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		fetchMedia,
+		fetchCover,
 	}, dispatch);
 }
 

@@ -4,7 +4,7 @@ export default {
 		authDomain: 'stdio-4d434.firebaseapp.com',
 		databaseURL: 'https://stdio-4d434.firebaseio.com',
 		projectId: 'stdio-4d434',
-		storageBucket: '',
+		storageBucket: 'stdio-4d434.appspot.com',
 		messagingSenderId: '813777068579'
 	},
 	FIREBASE_AUTH_CONFIG: {

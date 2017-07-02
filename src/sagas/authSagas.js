@@ -1,6 +1,5 @@
 import { LOGIN, REQUEST_LOGIN, REQUEST_LOGOUT, LOGOUT } from '../actions/authActions';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import logger from '../Logger';
 import firebase from 'firebase';
 import { firebaseStudio } from '../fire'
 import config from '../configuration';
@@ -9,7 +8,6 @@ import config from '../configuration';
 const authProvider = new firebase.auth.GoogleAuthProvider();
 authProvider.setCustomParameters(config.FIREBASE_AUTH_CONFIG);
 config.FIREBASE_AUTH_CONFIG.scopes.map(s => authProvider.addScope(s));
-
 
 function signInWithPopup() {
 	return firebaseStudio.auth().signInWithPopup(authProvider)
@@ -47,7 +45,6 @@ function* requestLogout() {
 }
 
 function* authSagas() {
-	logger.debug('authSagas init');
 	yield takeLatest(REQUEST_LOGIN, requestLogin);
 	yield takeLatest(REQUEST_LOGOUT, requestLogout);
 }

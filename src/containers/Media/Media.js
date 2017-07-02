@@ -10,6 +10,7 @@ import Lightbox from '../../components/Lightbox';
 import M from './M';
 import { addMedia, fetchMedia } from '../../actions/mediaActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
+import { fetchCover } from '../../actions/coverActions';
 import mock from './mock-media';
 
 
@@ -26,6 +27,7 @@ class Media extends React.Component {
 	}
 
 	componentDidMount() {
+		this.props.fetchCover('media');
 		this.props.addMedia(mock);
 	}
 
@@ -38,7 +40,7 @@ class Media extends React.Component {
 	}
 
 	render() {
-		const cover = <Cover title="Media" />;
+		const cover = <Cover title="Media" url={this.props.cover} />;
 
 		const container = (
 			<div>
@@ -74,6 +76,7 @@ function mapStateToProps(state) {
 		squareView: state.ui.squareView,
 		media: state.media.processedMedia,
 		index: state.media.index,
+		cover: state.cover.media,
 		loading: state.media.loading,
 		typeSorting: state.media.sortBy,
 	}
@@ -85,6 +88,7 @@ function mapDispatchToProps(dispatch) {
 		openMediumInLightbox: showMedium,
 		closeLightbox,
 		push,
+		fetchCover,
 		fetchMedia,
   }, dispatch);
 }

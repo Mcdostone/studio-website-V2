@@ -1,27 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Layout, Cover } from '../Layout';
 import { StudioList, Item } from '../../components/List';
+import { fetchEvents, addEvents } from '../../actions/eventsActions';
+import { fetchCover } from '../../actions/coverActions';
 import E from './E';
-
+import mock from './mock-events';
 
 class Events extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			events: [
-				{
-					name: 'WEI 2015',
-					cover: 'https://pbs.twimg.com/profile_images/839643754126417920/6trsFcTQ.jpg',
-					date: '08/01/2015',
-				},
-				{
-					name: 'Gala 2015',
-					cover: 'https://cdn.pixabay.com/photo/2015/02/18/11/50/mountain-landscape-640617_960_720.jpg',
-					date: '08/05/2016',
-				},
-			],
-		};
+	componentDidMount() {
+		this.props.fetchEvents();
+		this.props.addEvents(mock);
 	}
 
 	render() {
@@ -31,7 +22,7 @@ class Events extends React.Component {
 				gutter={5}
 				className="studio-list-space"
 			>
-				{this.state.events.map(event => <Item square key={event.name}><E event={event} /></Item>)}
+				{this.props.events.map(event => <Item square key={event.id}><E event={event} /></Item>)}
 			</StudioList>
 		);
 
@@ -41,4 +32,19 @@ class Events extends React.Component {
 	}
 }
 
-export default Events;
+function mapStateToProps(state) {
+	return {
+		events: state.events,
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+		fetchCover,
+		fetchEvents,
+		addEvents,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Events);
+

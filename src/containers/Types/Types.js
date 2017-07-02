@@ -32,7 +32,7 @@ class Types extends React.Component {
 				className="studio-list-space"
 				gutter={5}
 			>
-				{this.state.types.map(type => <Item square><T type={type} key={type} /></Item>)}
+				{this.state.types.map(type => <Item square  key={type.name}><T type={type} /></Item>)}
 			</StudioList>
 		);
 		return (<Layout cover={cover} container={container} />);

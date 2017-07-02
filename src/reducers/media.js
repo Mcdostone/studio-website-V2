@@ -1,3 +1,4 @@
+import { getUniqueDataset, getUniqueDatasetById } from '../utils';
 import { MEDIA_ADD,
 	SORT_BY,
 	FILTER_BY,
@@ -9,6 +10,7 @@ import { MEDIA_ADD,
 	MEDIA_FETCH_SUCCESS,
 	} from '../actions/mediaActions';
 
+
 const initialState = {
 		sortBy: SORT_LAST_ADDED,
 		filterBy: 0,
@@ -19,11 +21,6 @@ const initialState = {
 		filters: ['All'],
 };
 
-function getUniqueDataset(dataset, transformer) {
-	const tranformedDataset = dataset.map(el => transformer(el));
-	return [...new Set(tranformedDataset)];
-}
-
 function getProcessedMedia(media, filter, sort) {
 	let copy = [...media];
 
@@ -33,7 +30,7 @@ function getProcessedMedia(media, filter, sort) {
 
 	switch(sort) {
 		case SORT_LIKES:
-			return copy.sort((a, b) => (b.likes > a.likes) ? 1 : ((a.likes > b.likes) ? -1 : 0));
+			return copy.sort((a, b) => (b.countLikes() > a.countLikes()) ? 1 : ((a.countLikes() > b.countLikes()) ? -1 : 0));
 		case SORT_LAST_ADDED:
 			return copy;
 		case SORT_POPULARITY:;
@@ -58,10 +55,10 @@ export default function (state = initialState, action) {
 			});
 
 		case MEDIA_ADD:
-			const newMedia = [...new Set([...state.media, ...action.payload])];
+			const newMedia = getUniqueDatasetById([...state.media, ...action.payload]);
 			return Object.assign({}, state, {
 				media: newMedia,
-				filters: getUniqueDataset([...state.filters, ...action.payload.map(p => p.type)], (el) => { return el.toLowerCase().trim()})
+				filters: getUniqueDataset([...state.filters, ...action.payload.map(p => p.type)], (el) => el.toLowerCase().trim())
 				.map((v) => v.charAt(0).toUpperCase() + v.slice(1))
 				.sort(),
 				processedMedia: getProcessedMedia(newMedia, state.filters[state.filterBy], state.sortBy),
