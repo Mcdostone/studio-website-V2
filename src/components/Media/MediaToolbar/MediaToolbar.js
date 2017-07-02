@@ -12,7 +12,7 @@ import { SORT_LAST_ADDED,
 	SORT_POPULARITY,
 	SORT_LIKES,
 	sortBy,
-	filterBy } from '../../../actions/mediaListActions';
+	filterBy } from '../../../actions/mediaActions';
 
 import './MediaToolbar.css';
 

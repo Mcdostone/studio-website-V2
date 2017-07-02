@@ -1,4 +1,4 @@
-import { ADD_MEDIA,
+import { MEDIA_ADD,
 	SORT_BY,
 	FILTER_BY,
 	MEDIA_LOADING,
@@ -7,7 +7,7 @@ import { ADD_MEDIA,
 	SORT_LIKES,
 	MEDIA_FETCH_FAILURE,
 	MEDIA_FETCH_SUCCESS,
-	} from '../actions/mediaListActions';
+	} from '../actions/mediaActions';
 
 const initialState = {
 		sortBy: SORT_LAST_ADDED,
@@ -57,7 +57,7 @@ export default function (state = initialState, action) {
 				processedMedia: getProcessedMedia(state.media, state.filters[action.payload], state.sortBy)
 			});
 
-		case ADD_MEDIA:
+		case MEDIA_ADD:
 			const newMedia = [...new Set([...state.media, ...action.payload])];
 			return Object.assign({}, state, {
 				media: newMedia,

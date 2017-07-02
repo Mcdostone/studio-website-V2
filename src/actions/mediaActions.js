@@ -1,12 +1,12 @@
 export const SORT_LAST_ADDED = 1;
 export const SORT_POPULARITY = 2;
 export const SORT_LIKES = 3;
-export const ADD_MEDIA = 'ADD_MEDIA';
-export const ADD_DRIVE_MEDIUM = 'ADD_DRIVE_MEDIUM';
 export const SORT_BY = 'SORT_BY';
 export const FILTER_BY = 'FILTER_BY';
+export const MEDIA_ADD = 'MEDIA_ADD';
 export const MEDIA_LOADING = 'MEDIA_LOADING';
 export const MEDIA_FETCH = 'MEDIA_FETCH';
+export const MEDIA_FETCH_FROM_GOOGLE_DRIVE = 'MEDIA_FETCH_FROM_GOOGLE_DRIVE';
 export const MEDIA_FETCH_SUCCESS = 'MEDIA_FETCH_SUCCESS';
 export const MEDIA_FETCH_FAILURE = 'MEDIA_FETCH_FAILURE';
 
@@ -22,22 +22,22 @@ export const filterBy = (typeFilter) => ({
 });
 
 export const addMedia = (media) => ({
-    type: ADD_MEDIA,
+    type: MEDIA_ADD,
 		payload: media,
-});
-
-export const addDriveMedium = (mediumId) => ({
-    type: ADD_DRIVE_MEDIUM,
-		payload: mediumId,
 });
 
 export const loadMedia = () => ({
     type: MEDIA_LOADING,
 });
 
-export const fetchMedia = (index) => ({
+export const fetchMedia = (index = 0) => ({
     type: MEDIA_FETCH,
 		payload: index,
+});
+
+export const fetchFromGoogleDrive = (fileId) => ({
+    type: MEDIA_FETCH_FROM_GOOGLE_DRIVE,
+		payload: fileId,
 });
 
 export const fetchMediaSuccess = () => ({

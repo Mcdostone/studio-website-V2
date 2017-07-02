@@ -1,11 +1,11 @@
 import authSagas from './auth';
-import mediaListSagas from './mediaList';
+import mediaSagas from './media';
 import { all, fork } from 'redux-saga/effects';
 
  function* sagas() {
   yield all([
     authSagas,
-    mediaListSagas,
+		mediaSagas,
   ].map(fork))
 }
 

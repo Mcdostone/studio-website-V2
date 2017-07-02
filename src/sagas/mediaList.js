@@ -5,12 +5,11 @@ import {
 	MEDIA_FETCH,
 	MEDIA_FETCH_SUCCESS,
 	MEDIA_FETCH_FAILURE,
-	ADD_MEDIA,
-	ADD_DRIVE_MEDIUM,
-	MEDIA_LOADING } from '../actions/mediaListActions';
+	MEDIA_ADD,
+	MEDIA_LOADING } from '../actions/mediaActions';
 
 
-const googleDriveApi = new GoogleDriveApi(window.gapi, logger);
+const googleDriveApi = new GoogleDriveApi(window.gapi);
 
 
 const request = () => {
@@ -49,6 +48,7 @@ function* fetchDriveMedium(action) {
 		const state = yield select();
 		logger.react('authentificated: ' + state.auth.authentificated);
 		if(state.auth.authentificated === true) {
+			googleDriveApi.setAccessToken(state.auth.user.credentials.accessToken);
 			const medium = yield call(googleDriveApi.getFile, action.payload);
 			const newMedium = {
 				id: medium.id,
@@ -62,7 +62,6 @@ function* fetchDriveMedium(action) {
 
 function* mediaListSaga() {
 	yield takeLatest(MEDIA_FETCH, fetchMedia);
-	yield takeEvery(ADD_DRIVE_MEDIUM, fetchDriveMedium);
 }
 
 export default mediaListSaga;

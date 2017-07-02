@@ -1,10 +1,7 @@
-import logger from '../Logger';
-
 export default class GoogleDriveApi {
 
 	constructor(gapi) {
 		this.gapi = gapi;
-		logger.debug('GoogleDriveApi constructed');
 		this.getFile = this.getFile.bind(this);
 	}
 

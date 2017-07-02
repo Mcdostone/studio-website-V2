@@ -7,7 +7,7 @@ import MediaToolbar from './MediaToolbar';
 import StudioList from '../List/StudioList';
 import Item from '../List/Item';
 import M from './M';
-import { addMedia, fetchMedia } from '../../actions/mediaListActions';
+import { addMedia, fetchMedia } from '../../actions/mediaActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
 import { push } from 'react-router-redux'
 import Lightbox from '../Lightbox';
