@@ -22,7 +22,6 @@ syncHistoryWithStore(history, store);
 class App extends React.Component {
 
 	componentDidMount() {
-//		window.gapi.client.load('drive', 'v2', null);
 	}
 
 	render() {

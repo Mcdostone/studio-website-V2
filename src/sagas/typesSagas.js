@@ -1,9 +1,9 @@
-import { call, takeLatest, put, select, all } from 'redux-saga/effects';
+/*import { call, takeLatest, put, select, all } from 'redux-saga/effects';
 import firebase from 'firebase';
 import { Event } from '../core';
 import logger from '../Logger';
-import { FETCH_EVENTS, ADD_EVENTS } from '../actions/eventsActions';
-import { requestCover } from './coverSagas';
+import { FETCH_TYPES, ADD_TYPES } from '../actions/typesActions';
+//import { requestCover } from './coverSagas';
 
 
 function buildEvent(id, name, date, cover = '') {
@@ -25,18 +25,19 @@ function* fetchAll(action) {
 		if(state.auth.authentificated === false) {
 			throw new Error('You should be connected');
 		}
-		const snapshot = yield call(() => firebase.database().ref().child('events').once('value'));
+		const snapshot = yield call(() => firebase.database().ref().child('types').once('value'));
 		const eventsData = snapshot.val();
-		const newEvents = yield all(Object.keys(eventsData).map(id => call(fetchCoverEventAndBuild, id, eventsData[id])));
-		yield put({type: ADD_EVENTS, payload: newEvents});
+	//	const newEvents = yield all(Object.keys(eventsData).map(id => call(fetchCoverEventAndBuild, id, eventsData[id])));
+		yield put({type: ADD_TYPES, payload: newEvents});
 	} catch(err) {
 		logger.react(err);
 	}
 }
 
 function* mediaSagas() {
-	yield takeLatest(FETCH_EVENTS, fetchAll);
+	yield takeLatest(FETCH_TYPES, fetchAll);
 }
 
 export default mediaSagas;
 
+*/

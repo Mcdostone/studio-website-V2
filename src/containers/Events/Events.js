@@ -3,16 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Layout, Cover } from '../Layout';
 import { StudioList, Item } from '../../components/List';
-import { fetchEvents, addEvents } from '../../actions/eventsActions';
 import { fetchCover } from '../../actions/coverActions';
 import E from './E';
-import mock from './mock-events';
 
 class Events extends React.Component {
 
 	componentDidMount() {
-		this.props.fetchEvents();
-		this.props.addEvents(mock);
 	}
 
 	render() {
@@ -35,14 +31,13 @@ class Events extends React.Component {
 function mapStateToProps(state) {
 	return {
 		events: state.events,
+		cover: state.covers.current
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		fetchCover,
-		fetchEvents,
-		addEvents,
   }, dispatch);
 }
 

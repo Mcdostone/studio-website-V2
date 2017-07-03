@@ -1,23 +1,27 @@
-import { COVER_FETCH, COVER_ADD } from '../actions/coverActions';
-import { call, put, takeLatest } from 'redux-saga/effects';
-import firebase from 'firebase';
+import { COVER_FETCH, COVER_ADD, COVER_SET_CURRENT } from '../actions/coverActions';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
+import RestFirebaseStorage from './RestFirebaseStorage';
 
+const storage = new RestFirebaseStorage();
 
-export function requestCover(coverName) {
-		return firebase.storage().ref().child(`covers/${coverName}`).getDownloadURL();
-}
+function* getCover(action) {
+	const state = yield select();
+	const id = action.payload.id;
+	if(id && state.covers[id] === undefined) {
+		try {
+			const url = yield call(storage.get, 'covers', action.payload.id.toLowerCase());
+			yield put({type: COVER_ADD, payload: {page: action.payload.id, url}});
+			if(action.payload.erase === true)
+				yield put({type: COVER_SET_CURRENT, payload: action.payload.id});
+		} catch(err) {
+			yield put({type: COVER_ADD, payload: {page: action.payload.id, url: undefined}});
+		}
 
-function* fetchCover(action) {
-	try {
-		const url = yield call(requestCover, action.payload);
-		yield put({type: COVER_ADD, payload: {page: action.payload, url}});
-	} catch(err) {
-		console.log(err);
 	}
 }
 
 function* coverSagas() {
-	yield takeLatest(COVER_FETCH, fetchCover);
+	yield takeLatest(COVER_FETCH, getCover);
 }
 
 export default coverSagas;

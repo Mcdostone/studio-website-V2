@@ -76,7 +76,7 @@ function mapStateToProps(state) {
 		squareView: state.ui.squareView,
 		media: state.media.processedMedia,
 		index: state.media.index,
-		cover: state.cover.media,
+		cover: state.covers.media,
 		loading: state.media.loading,
 		typeSorting: state.media.sortBy,
 	}

@@ -1,6 +1,7 @@
 .item-content {
 	display: inline-block;
 	float: left;
+	width: 100%;
 	position: relative;
 }
 
@@ -20,4 +21,54 @@
 	bottom: 0;
 	right: 0;
 	float: left;
+}
+
+
+.overlay {
+	opacity: 0;
+	position: absolute;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	z-index: 999;
+	left: 0;
+	color: white;
+	background: rgba(0,0,0, 0.5);
+}
+
+.overlay:hover {
+	opacity: 1;
+}
+
+.overlay span {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 5px;
+	flex-direction: row;
+	align-content: center;
+}
+
+.overlay span p {
+	margin: 0;
+  align-self: center;
+}
+
+.overlay span.name {
+	font-size: 1.6em;
+	font-weight: 100;
+}
+
+.overlay span.date {
+	font-style: italic;
+}
+
+
+.thumbnail {
+	width: 100%;
+	height: 100%;
 }

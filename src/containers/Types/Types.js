@@ -1,30 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchTypes, addTypes } from '../../actions/typesActions';
+import { fetchCover } from '../../actions/coverActions';
 import { Cover, Layout } from '../Layout';
 import { StudioList, Item } from '../../components/List';
 import T from './T';
+import mocks from './mock-types';
 
 class Types extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			types: [
-				{
-					name: 'Photos',
-					cover: 'https://lh3.googleusercontent.com/LvEBY7FdC6YHX9Nd0kckgy4wKICpom4ED15WxnyFtd93xwWEjPkaxVDtn_FJlJn0Tw=w300',
-				},
-				{
-					name: 'Videos',
-					cover: 'http://www.guidingtech.com/assets/postimages/2015/02/camera-roll.jpg',
-				},
-				{
-					name: 'Posters',
-					cover: 'https://www.xerox.com/sites/default/files/50-posters-48.jpg',
-				}
-			],
-		};
-
+		this.props.addTypes(mocks);
 	}
+
 	render() {
 		const cover = <Cover title="Types" />;
 		const container = (
@@ -32,11 +22,25 @@ class Types extends React.Component {
 				className="studio-list-space"
 				gutter={5}
 			>
-				{this.state.types.map(type => <Item square  key={type.name}><T type={type} /></Item>)}
+				{this.props.types.map(type => <Item square  key={type.name}><T type={type} /></Item>)}
 			</StudioList>
 		);
 		return (<Layout cover={cover} container={container} />);
 	}
 }
 
-export default Types;
+function mapStateToProps(state) {
+	return {
+		types: state.types,
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+		fetchCover,
+		fetchTypes,
+		addTypes,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Types);

@@ -1,12 +1,13 @@
 export const COVER_FETCH = 'COVER_FETCH';
 export const COVER_ADD = 'COVER_ADD';
+export const COVER_SET_CURRENT = 'COVER_SET_CURRENT';
 
-export const fetchCover = (page) => ({
+export const fetchCover = (id, erase = true) => ({
     type: COVER_FETCH,
-		payload: page,
+		payload: {id, erase}
 });
 
-export const addCover = (page, url) => ({
+export const addCover = (id, url) => ({
     type: COVER_ADD,
-		payload: {page, url},
+		payload: {id, url},
 });

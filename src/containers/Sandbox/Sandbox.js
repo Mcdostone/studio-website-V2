@@ -1,49 +1,34 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Cover, Layout } from '../Layout';
-import { fetchCover } from '../../actions/coverActions';
+import Test2 from '../Layout/Test2';
+import E from '../Events/E';
+import { StudioList, Item } from '../../components/List'
+
 
 class Sandbox extends React.Component {
 
-	componentDidMount() {
-		this.props.fetchCover('media');
-	}
-
 	render() {
-		const cover = (
-			<Cover title="Sandbox" url={this.props.cover} />
-		);
-
 		const container = (
-			<div>
-  			<RaisedButton label="save Event" onTouchTap={() => this.props.fetchCover('media')} />
-				<pre>
-					{this.props.cover}
-				</pre>
-			</div>
+			<StudioList>
+				{this.props.events.map(event =>
+					<Item square key={event.id}><E event={event} /></Item>
+				)}
+			</StudioList>
 		);
 
 		return (
-			<Layout cover={cover} container={container} />
-		)
+			<Test2 name="Events">
+				{container}
+			</Test2>
+		);
 	}
+
 }
 
 function mapStateToProps(state) {
 	return {
-		auth: state.auth,
-		cover: state.cover.media,
-		mediaList: state.media.processedMedia,
+		events: state.events,
 	}
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		fetchCover,
-	}, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sandbox);
-
+export default connect(mapStateToProps, null)(Sandbox);

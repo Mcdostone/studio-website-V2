@@ -48,8 +48,6 @@ class StudioList extends React.Component {
 			</div>
 		);
 	}
-				//	{this.props.loading ? <Loading /> : null}
-
 }
 
 export default StudioList;

@@ -1,3 +1,5 @@
+import defaultCover from './assets/default-cover.jpg';
+
 export default {
 	FIREBASE_CONFIG: {
 		apiKey: 'AIzaSyCMsbyrvksMD_-vBXmbEIVeF17LTnBjBRk',
@@ -11,5 +13,8 @@ export default {
 		scopes: ['email', 'profile', 'https://www.googleapis.com/auth/drive.readonly'],
 		hd: 'telecomnancy.net',
 		prompt: 'select_account',
+	},
+	UI: {
+		DEFAULT_COVER: defaultCover
 	}
 }

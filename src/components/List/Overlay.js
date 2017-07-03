@@ -1,11 +1,12 @@
 import React from 'react';
 
+
 class Overlay extends React.Component {
 	render() {
 		return (
-			<div className="item-overlay">
+				<div className="overlay">
 					{this.props.children}
-			</div>
+				</div>
 		);
 	}
 }
