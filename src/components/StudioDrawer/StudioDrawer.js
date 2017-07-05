@@ -42,6 +42,18 @@ class StudioDrawer extends React.Component {
 						Events
 					</MenuItem>
 				</Link>
+				<Link to="/events/test">
+					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+						Events/test
+					</MenuItem>
+				</Link>
+				<Link to="/events/test2">
+					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+						Events/test2
+					</MenuItem>
+				</Link>
+
+
 				<Link to="/types">
 					<MenuItem onTouchTap={this.props.onToggleDrawer}>
 						Types

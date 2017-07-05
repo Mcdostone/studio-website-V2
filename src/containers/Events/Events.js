@@ -1,29 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Layout, Cover } from '../Layout';
-import { StudioList, Item } from '../../components/List';
-import { fetchCover } from '../../actions/coverActions';
-import E from './E';
+import { Layout } from '../Layout';
+// import { StudioList, Item } from '../../components/List';
+import { setCover, setTitle } from '../../actions/coverActions';
+// import E from './E';
 
 class Events extends React.Component {
 
 	componentDidMount() {
+		this.props.setCover('events');
+		this.props.setTitle('Events');
 	}
 
 	render() {
-		const cover = <Cover title="Events" />;
-		const container = (
+		/*const container = (
 			<StudioList
 				gutter={5}
 				className="studio-list-space"
 			>
-				{this.props.events.map(event => <Item square key={event.id}><E event={event} /></Item>)}
+				{Object.keys(this.props.events).map(id => <Item square key={id}><E event={this.props.events[id]} /></Item>)}
 			</StudioList>
 		);
-
+*/
 		return (
-			<Layout cover={cover} container={container} />
+			<Layout cover={this.props.cover} title={this.props.title}/>
 		);
 	}
 }
@@ -31,13 +32,15 @@ class Events extends React.Component {
 function mapStateToProps(state) {
 	return {
 		events: state.events,
-		cover: state.covers.current
+		cover: state.covers.current,
+		title: state.covers.title
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		fetchCover,
+		setCover,
+		setTitle,
   }, dispatch);
 }
 

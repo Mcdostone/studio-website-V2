@@ -7,16 +7,23 @@ class ProgressiveImg extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			visible: false,
 			placeholderClassNames: 'progressive-img progressive-img-visible',
 			srcClassNames: 'progressive-img'
 		}
 	}
 
+	componentDidMount() {
+		console.log('here');
+	}
+
 	handleImageLoaded(e) {
-		this.setState({
-			placeholderClassNames: this.state.srcClassNames,
-			srcClassNames: this.state.placeholderClassNames
-		});
+		if(!this.state.visible)
+			this.setState({
+				visible: true,
+				placeholderClassNames: this.state.srcClassNames,
+				srcClassNames: this.state.placeholderClassNames
+			});
 	}
 
 	render() {

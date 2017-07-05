@@ -7,6 +7,7 @@ import store from './store';
 import { history } from './history';
 import Navbar from './components/Navbar';
 import Home from './containers/Home';
+import Event from './containers/Events/Event';
 import Media from './containers/Media';
 import Sandbox from './containers/Sandbox';
 import Events from './containers/Events';
@@ -33,7 +34,8 @@ class App extends React.Component {
 							<Navbar />
 							<Route exact path="/" component={Home} />
 							<Route path="/media" component={Media} />
-							<Route path="/events" component={Events} />
+							<Route exact path="/events" component={Events} />
+							<Route path="/events/:eventId" component={Event} />
 							<Route path="/types" component={Types} />
 							<Route path="/profile" component={IsAuthentificated(Profile)} />
 							<Route path="/login" component={Login} />

@@ -1,8 +1,11 @@
-import { COVER_ADD, COVER_SET_CURRENT } from '../actions/coverActions';
+import {
+	COVER_ADD,
+	COVER_SET_TITLE, COVER_NEW } from '../actions/coverActions';
 import config from '../configuration';
 
 const initialState = {
-	current: null,
+	current: undefined,
+	title: undefined
 };
 
 export default function (state = initialState, action) {
@@ -12,7 +15,11 @@ export default function (state = initialState, action) {
 			newState[action.payload.page] = action.payload.url ? action.payload.url : config.UI.DEFAULT_COVER;
 			return Object.assign({}, state, newState);
 
-		case COVER_SET_CURRENT:
+		case COVER_SET_TITLE:
+			return Object.assign({}, state, {title: action.payload});
+
+		case COVER_NEW:
+		console.log(action);
 			return Object.assign({}, state, {current: state[action.payload]});
 
 		default:

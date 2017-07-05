@@ -1,6 +1,15 @@
 export const FETCH = 'FETCH';
 
-export const fetch = (resource, param) => ({
+export const OBJECT = 'OBJECT';
+export const LIST = 'LIST';
+
+export const fetchAll = (resource, param) => ({
     type: FETCH,
-		payload: { resource, param }
+		payload: { resource, param , dataType: LIST}
 });
+
+export const fetchOne = (resource, param) => ({
+    type: FETCH,
+		payload: { resource, param, dataType: OBJECT}
+});
+

@@ -1,17 +1,33 @@
 import { call, takeEvery, put } from 'redux-saga/effects';
-import { FETCH } from '../actions/fetchActions';
+import {
+	FETCH,
+//	LIST,
+	OBJECT,
+} from '../actions/fetchActions';
 import RestFirebaseDatabase from './RestFirebaseDatabase';
-
+import logger from '../Logger'
 
 const restFirebaseDatabase = new RestFirebaseDatabase();
 
-function* fetchData(action) {
-	const response = yield call(restFirebaseDatabase.get, action.payload.resource.toLowerCase(), action.payload.param);
-	yield put({type: `${action.payload.resource.toUpperCase()}_ADD`, payload: response.val()});
+
+export function* fetch(promise, action) {
+	const {resource, param, dataType} = action.payload;
+	logger.react(`GET ${dataType} /${resource}/${param} from firebase` );
+	try {
+		const response = yield call(promise, resource.toLowerCase(), param);
+		const data = dataType === OBJECT ? [response.val()] : response.val();
+		yield put({type: `${resource.toUpperCase()}_ADD`, payload: data});
+	} catch(err) {
+		console.log(err);
+	}
+}
+
+function* fetchFromDatabase(action) {
+	return yield call(fetch, restFirebaseDatabase.get, action);
 }
 
 function* fetchSaga() {
-	yield takeEvery(FETCH, fetchData);
+	yield takeEvery(FETCH, fetchFromDatabase);
 }
 
 export default fetchSaga;
