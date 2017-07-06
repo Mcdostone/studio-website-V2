@@ -81,6 +81,7 @@
 	font-weight: 300;
 	font-size: 5em;
 	font-style: normal;
+	text-transform: capitalize;
 }
 
 .cover-name {

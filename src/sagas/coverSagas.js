@@ -10,7 +10,8 @@ function* getCover(action) {
 	const id = action.payload;
 	if(state.covers[id] === undefined) {
 		try {
-			logger.react(`GET covers/${id} from storage` );
+				logger.react(`[FIREBASE-ST] GET OBJECT /covers/${id}`);
+
 			const url = yield call(storage.get, 'covers', id.toLowerCase());
 			yield put({type: COVER_ADD, payload: {page: id, url}});
 			return url;
@@ -22,7 +23,6 @@ function* getCover(action) {
 }
 
 function* setCover(action) {
-	console.log(action);
 	const state = yield select();
 	const id = action.payload;
 	if(state.covers[id] === undefined) {

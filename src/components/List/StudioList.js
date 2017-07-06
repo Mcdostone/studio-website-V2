@@ -37,8 +37,8 @@ class StudioList extends React.Component {
 					className={this.props.className}
 					columnWidth={this.state.width}
 					gutterHeight={this.props.gutter}
-					monitorImagesLoaded={true}
 					gutterWidth={this.props.gutter}
+					monitorImagesLoaded={true}
 				>
 					{this.props.children}
 				</StackGrid>

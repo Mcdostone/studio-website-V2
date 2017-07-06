@@ -1,5 +1,4 @@
 export const FETCH = 'FETCH';
-
 export const OBJECT = 'OBJECT';
 export const LIST = 'LIST';
 
@@ -13,3 +12,7 @@ export const fetchOne = (resource, param) => ({
 		payload: { resource, param, dataType: OBJECT}
 });
 
+export const fetchWithRefs = (resource, param, refs) => ({
+    type: FETCH,
+		payload: { resource, param, dataType: OBJECT, refs}
+});

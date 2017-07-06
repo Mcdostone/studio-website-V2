@@ -41,17 +41,9 @@ class Studio extends React.Component {
 		const container = (
 			<div>
 				<Lightbox />
-				<StudioList
-					gutter={16}
-					monitorImagesLoaded={true}
-					loading={this.props.loading}
-				>
+				<StudioList gutter={16}>
 					{this.props.media.map((medium, index) =>
-						<Item
-							square={this.props.squareView}
-							data={{medium, index}}
-							key={medium.src}
-							onClick={this.showMedium}
+						<Item square={this.props.squareView} key={medium.src}
 						>
 							<M medium={medium} />
 						</Item>

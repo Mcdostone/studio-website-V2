@@ -1,9 +1,10 @@
 import { call, takeLatest, put, select } from 'redux-saga/effects';
 import { Medium } from '../core';
 import { MEDIA_FETCH, MEDIA_ADD } from '../actions/mediaActions';
-import firebase from 'firebase';
 import logger from '../Logger';
+import restFirebaseDatabase from './RestFirebaseDatabase';
 import GoogleDriveApi from './GoogleDriveApi';
+
 
 const googleDriveApi = new GoogleDriveApi(window.gapi);
 
@@ -13,25 +14,23 @@ function buildMedium(id, src, type, from, likes = []) {
 
 function* buildMediumFromGoogleDrive(medium) {
 	const state = yield select();
+	logger.react(`GET ${medium.id} from google drive`);
 	googleDriveApi.setAccessToken(state.auth.user.credentials.accessToken);
-	const data = yield call(googleDriveApi.getFile, medium.src);
-	return buildMedium(medium.src, data.thumbnailLink, medium.type, medium.from, medium.likes);
+	const data = yield call(googleDriveApi.getFile, medium.id);
+	return buildMedium(medium.id, data.thumbnailLink.split('=')[0], medium.type, medium.from, medium.likes);
 }
 
 function buildMediumFromWeb(medium) {
 	return buildMedium(medium.src, medium.type, medium.from, medium.likes);
 }
 
-function* createMediaFromFirebase(mediaData) {
-	const mediaArray = Object.keys(mediaData).map(key => mediaData[key]);
-	return yield mediaArray.map(medium => {
-		switch(medium.from.toLowerCase().trim()) {
-			case 'drive':
-				return call(buildMediumFromGoogleDrive, medium);
-			default:
-			return buildMediumFromWeb(medium);
-		}
-	})
+function* createMediumFromFirebase(medium) {
+	switch(medium.from.toLowerCase().trim()) {
+		case 'drive':
+			return yield call(buildMediumFromGoogleDrive, medium);
+		default:
+		return buildMediumFromWeb(medium);
+	}
 }
 
 function* fetchMedia(action) {
@@ -40,9 +39,9 @@ function* fetchMedia(action) {
 		if(state.auth.authentificated === false) {
 			throw new Error('You should be connected to use google drive API');
 		}
-		const snapshot = yield call(() => firebase.database().ref().child('media').once('value'));
-		const newMedia = yield call(createMediaFromFirebase, snapshot.val());
-		yield put({type: MEDIA_ADD, payload: newMedia});
+		const snapshot = yield call(restFirebaseDatabase.get, action.payload.resource, action.payload.param);
+		const newMedium = yield call(createMediumFromFirebase, snapshot.val());
+		yield put({type: MEDIA_ADD, payload: [newMedium]});
 	} catch(err) {
 		logger.react(err);
 	}

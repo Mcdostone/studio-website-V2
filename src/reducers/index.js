@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import ui from './ui';
 import lightbox from './lightbox';
-import media from './media';
+import media from './mediaReducers';
 import auth from './auth';
-import types from './types';
+// import types from './types';
 import covers from './coverReducers';
 import events from './eventReducers';
 
@@ -16,7 +16,7 @@ const studioApp = combineReducers({
 		media,
 		events,
 		covers,
-		types,
+		// types,
 		routing: routerReducer,
 })
 

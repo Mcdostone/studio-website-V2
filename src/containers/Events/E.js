@@ -1,27 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Overlay } from '../../components/List';
-import { Cover } from '../Layout';
+import Thumbnail from '../../components/Thumbnail';
+import itemWrapper from '../../components/List/Item';
 
 class E extends React.Component {
 
 	render() {
 		return (
-			<div className="item-content">
-				<Cover name={this.props.event.id} className="thumbnail" />
-				<Overlay>
-					<span className="name">{this.props.event.name}</span>
-					<span className="date">{this.props.event.date}</span>
-				</Overlay>
-			</div>
+			<Thumbnail square src="http://lorempicsum.com/futurama/350/200/1">
+				<span className="title">{this.props.event.name}</span>
+				<span className="subtitle">{this.props.event.getDate()}</span>
+			</Thumbnail>
 		);
 	}
+
 }
 
-function mapStateToProps(state) {
-	return {
-		covers: state.covers,
-	}
-}
-
-export default connect(mapStateToProps, null)(E);
+export default itemWrapper(E);

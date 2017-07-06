@@ -5,7 +5,7 @@ import coverSagas from './coverSagas';
 import fetchSaga from './fetchSaga';
 
 
- function* sagas() {
+export default function* sagas() {
   yield all([
     authSagas,
 		mediaSagas,
@@ -13,5 +13,3 @@ import fetchSaga from './fetchSaga';
 		fetchSaga,
   ].map(fork))
 }
-
-export default sagas;

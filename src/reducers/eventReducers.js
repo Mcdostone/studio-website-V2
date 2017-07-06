@@ -1,10 +1,7 @@
 import { EVENTS_ADD } from '../actions/eventActions';
 import { Event } from '../core';
 
-
-const initialState = {
-	DEFAULT: buildEvent(undefined, '', '')
-}
+const initialState = {}
 
 function buildEvent(id, name, date, media = {}) {
 	return new Event(id, name, date, Object.keys(media));

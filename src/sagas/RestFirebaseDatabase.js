@@ -1,7 +1,7 @@
 import RestFirebase from './RestFirebase';
 
 
-export default class RestFirebaseDatabase extends RestFirebase {
+class RestFirebaseDatabase extends RestFirebase {
 
 	constructor() {
 		super();
@@ -14,3 +14,5 @@ export default class RestFirebaseDatabase extends RestFirebase {
 	}
 
 }
+
+export default new RestFirebaseDatabase();

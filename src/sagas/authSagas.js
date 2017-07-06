@@ -10,11 +10,7 @@ authProvider.setCustomParameters(config.FIREBASE_AUTH_CONFIG);
 config.FIREBASE_AUTH_CONFIG.scopes.map(s => authProvider.addScope(s));
 
 function signInWithPopup() {
-	return firebaseStudio.auth().signInWithPopup(authProvider)
-	.then((res) => res)
-	.catch(ex => {
-		throw new Error('fucked up')
-	});
+	return firebaseStudio.auth().signInWithPopup(authProvider);
 }
 
 function logout() {

@@ -19,7 +19,6 @@ export default function (state = initialState, action) {
 			return Object.assign({}, state, {title: action.payload});
 
 		case COVER_NEW:
-		console.log(action);
 			return Object.assign({}, state, {current: state[action.payload]});
 
 		default:

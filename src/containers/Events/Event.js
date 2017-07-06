@@ -1,7 +1,8 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchOne } from '../../actions/fetchActions';
+import { defaultEvent } from '../../core';
+import { fetchWithRefs } from '../../actions/fetchActions';
 import Studio from '../Studio'
 
 
@@ -9,18 +10,22 @@ class Event extends React.Component {
 
 	componentDidMount() {
 		const eventId = this.props.match.params.eventId;
-		this.props.fetchOne('events', eventId);
+		this.fetchEvent(eventId);
 	}
 
 	getEvent(id) {
-		return this.props.events[id] !== undefined ? this.props.events[id] : this.props.events.DEFAULT;
+		return this.props.events[id] !== undefined ? this.props.events[id] : defaultEvent;
+	}
+
+	fetchEvent(eventId) {
+		this.props.fetchWithRefs('events', eventId, 'media');
 	}
 
 	componentWillReceiveProps(nextProps) {
 		const oldId = this.props.match.params.eventId;
 		const newId = nextProps.match.params.eventId;
 		if(oldId !== newId) {
-			this.props.fetchOne('events', newId);
+			this.fetchEvent(newId);
 			return true;
 		}
 		return false;
@@ -36,7 +41,6 @@ class Event extends React.Component {
 
 }
 
-
 function mapStateToProps(state) {
 	return {
 		events: state.events,
@@ -46,7 +50,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		fetchOne,
+		fetchWithRefs,
   }, dispatch);
 }
 

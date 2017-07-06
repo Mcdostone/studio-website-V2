@@ -2,12 +2,12 @@ import { getUniqueDataset, getUniqueDatasetById } from '../utils';
 import { MEDIA_ADD,
 	SORT_BY,
 	FILTER_BY,
-	MEDIA_LOADING,
 	SORT_LAST_ADDED,
 	SORT_POPULARITY,
 	SORT_LIKES,
+	/*MEDIA_LOADING,
 	MEDIA_FETCH_FAILURE,
-	MEDIA_FETCH_SUCCESS,
+	MEDIA_FETCH_SUCCESS,*/
 	} from '../actions/mediaActions';
 
 
@@ -64,16 +64,6 @@ export default function (state = initialState, action) {
 				processedMedia: getProcessedMedia(newMedia, state.filters[state.filterBy], state.sortBy),
 				index: state.index + action.payload.length,
       });
-
-		case MEDIA_FETCH_SUCCESS:
-			return Object.assign({}, state, {loading: false});
-
-		case MEDIA_FETCH_FAILURE:
-			return Object.assign({}, state, {loading: false});
-
-		case MEDIA_LOADING:
-			return Object.assign({}, state, {loading: true});
-
 		default:
 			return state;
 			// eslint-disable-next-line

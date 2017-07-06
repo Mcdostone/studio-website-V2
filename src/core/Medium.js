@@ -12,4 +12,10 @@ export default class Medium {
 		return this.likes.length;
 	}
 
+	getThumbnail(size = 220) {
+		if(this.from === 'drive')
+			return this.src + '=s' + size;
+		return this.src;
+	}
+
 }

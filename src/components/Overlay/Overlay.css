@@ -1,0 +1,37 @@
+.overlay, .overlay-content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	color: white;
+}
+
+.overlay-content {
+	opacity: 0;
+	background: rgba(0,0,0, 0.5);
+}
+
+.overlay-content:hover {
+	opacity: 1;
+}
+
+.overlay .title, .overlay .subtitle {
+	font-weight: 100;
+}
+
+.overlay .title {
+	font-size: 2em;
+}
+
+.overlay .subtitle {
+	font-style: italic;
+	font-weight: 100;
+	font-size: 1em;;
+}
