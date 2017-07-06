@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import { Layout } from '../Layout';
 import StudioList from '../../components/List/StudioList';
 import { fetchAll } from '../../actions/fetchActions';
@@ -19,7 +20,9 @@ class Events extends React.Component {
 		return (
 			<StudioList gutter={16} className="studio-list-space">
 				{Object.keys(this.props.dataSource).map(key =>
-					<E key={key} square event={this.props.dataSource[key]}/>
+					<Link key={key} to={`events/${key}`}>
+						<E square event={this.props.dataSource[key]}/>
+					</Link>
 				)}
 			</StudioList>
 		)

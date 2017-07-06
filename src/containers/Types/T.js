@@ -1,19 +1,19 @@
 import React from 'react';
-import { Overlay } from '../../components/List';
-
+import Thumbnail from '../../components/Thumbnail';
+import itemWrapper from '../../components/List/Item';
 
 class T extends React.Component {
 
 	render() {
+
 		return (
-			<div className="item-content">
-				<img src={this.props.type.cover} alt="" />
-				<Overlay>
-					<span className="name">{this.props.type.name}</span>
-				</Overlay>
-			</div>
+			<Thumbnail square src="http://lorempicsum.com/futurama/350/200/1">
+				<span className="title">{this.props.type.name}</span>
+				<span className="subtitle">{this.props.type.countMedia()}</span>
+			</Thumbnail>
 		);
 	}
+
 }
 
-export default T;
+export default itemWrapper(T);

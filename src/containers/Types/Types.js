@@ -1,45 +1,56 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchTypes, addTypes } from '../../actions/typesActions';
-import { fetchCover } from '../../actions/coverActions';
-import { Cover, Layout } from '../Layout';
-import { StudioList, Item } from '../../components/List';
+import { Link } from 'react-router-dom';
+import { Layout } from '../Layout';
+import StudioList from '../../components/List/StudioList';
+import { fetchAll } from '../../actions/fetchActions';
+import { setCover, setTitle } from '../../actions/coverActions';
 import T from './T';
-import mocks from './mock-types';
 
 class Types extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.props.addTypes(mocks);
+	componentDidMount() {
+		this.props.setCover('types');
+		this.props.setTitle('types');
+		this.props.fetchAll('types');
+	}
+
+	getContainer() {
+		return (
+			<StudioList gutter={16} className="studio-list-space">
+				{Object.keys(this.props.dataSource).map(key =>
+					<Link key={key} to={`types/${key}`}>
+						<T square type={this.props.dataSource[key]}/>
+					</Link>
+				)}
+			</StudioList>
+		)
 	}
 
 	render() {
-		const cover = <Cover title="Types" />;
-		const container = (
-			<StudioList
-				className="studio-list-space"
-				gutter={5}
-			>
-				{this.props.types.map(type => <Item square  key={type.name}><T type={type} /></Item>)}
-			</StudioList>
+		return (
+			<Layout cover={this.props.cover} title={this.props.title}>
+				{this.getContainer()}
+			</Layout>
 		);
-		return (<Layout cover={cover} container={container} />);
 	}
 }
 
 function mapStateToProps(state) {
 	return {
-		types: state.types,
+		media: state.media.processedMedia,
+		dataSource: state.types,
+		cover: state.covers.current,
+		title: state.covers.title
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		fetchCover,
-		fetchTypes,
-		addTypes,
+		setCover,
+		setTitle,
+		fetchAll,
   }, dispatch);
 }
 

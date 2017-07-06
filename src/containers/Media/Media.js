@@ -1,96 +1,57 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { push } from 'react-router-redux'
-import { Cover, Layout } from '../Layout';
-import MediaToolbar from './MediaToolbar';
-import StudioList from '../../components/List/StudioList';
-import Item from '../../components/List/Item';
-import Lightbox from '../../components/Lightbox';
-import M from './M';
-import { addMedia, fetchMedia } from '../../actions/mediaActions';
-import { showMedium, closeLightbox } from '../../actions/lightboxActions';
-import { fetchCover } from '../../actions/coverActions';
-import mock from './mock-media';
+import { fetchWithRefs } from '../../actions/fetchActions';
+import Studio from '../../containers/Studio';
 
+export default function mediaWrapper(resource) {
 
-class Media extends React.Component {
+	const MediaContainer = class extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.showMedium = this.showMedium.bind(this);
-		this.loadMoreMedia = this.loadMoreMedia.bind(this);
+		componentDidMount() {
+			const id = this.props.match.params.id;
+			this.fetchData(id);
+		}
+
+		getData() {
+			const id = this.props.match.params.id;
+			return this.props.dataSource[id] !== undefined ? this.props.dataSource[id] : undefined;
+		}
+
+		fetchData(id) {
+			this.props.fetchWithRefs(resource, id, 'media');
+		}
+
+		componentWillReceiveProps(nextProps) {
+			const oldId = this.props.match.params.id;
+			const newId = nextProps.match.params.id;
+			if(oldId !== newId) {
+				this.fetchData(newId);
+				return true;
+			}
+			return false;
+		}
+
+		render() {
+			const id = this.props.match.params.id;
+			const data = this.getData(id);
+			return <Studio title={data ? data.name : ''} id={id} media={this.props.media} />
+		}
+
 	}
 
-	componentWillUnmount() {
-		this.props.closeLightbox();
+	function mapStateToProps(state) {
+		return {
+			dataSource: state[resource],
+			media: state.media.processedMedia,
+		}
 	}
 
-	componentDidMount() {
-		this.props.fetchCover('media');
-		this.props.addMedia(mock);
+	function mapDispatchToProps(dispatch) {
+		return bindActionCreators({
+			fetchWithRefs,
+		}, dispatch);
 	}
 
-	loadMoreMedia() {
-		this.props.fetchMedia(this.props.index);
-	}
-
-	showMedium(mediumData) {
-		this.props.openMediumInLightbox(mediumData);
-	}
-
-	render() {
-		const cover = <Cover title="Media" url={this.props.cover} />;
-
-		const container = (
-			<div>
-				<Lightbox />
-				<MediaToolbar />
-				<StudioList
-					gutter={16}
-					monitorImagesLoaded={true}
-					appear={{border: '2px solid red'}}
-					loading={this.props.loading}
-					fetchMoreData={this.loadMoreMedia}
-				>
-					{this.props.media.map((medium, index) =>
-						<Item
-							square={this.props.squareView}
-							data={{medium, index}}
-							key={medium.src}
-							onClick={this.showMedium}
-						>
-							<M medium={medium} />
-						</Item>
-					)}
-				</StudioList>
-			</div>
-		);
-		return (<Layout cover={cover} container={container} />);
-	}
+	return connect(mapStateToProps, mapDispatchToProps)(MediaContainer);
 }
-
-function mapStateToProps(state) {
-	return {
-		lightbox: state.lightbox,
-		squareView: state.ui.squareView,
-		media: state.media.processedMedia,
-		index: state.media.index,
-		cover: state.covers.media,
-		loading: state.media.loading,
-		typeSorting: state.media.sortBy,
-	}
-}
-
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		addMedia,
-		openMediumInLightbox: showMedium,
-		closeLightbox,
-		push,
-		fetchCover,
-		fetchMedia,
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Media);

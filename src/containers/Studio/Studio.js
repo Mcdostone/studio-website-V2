@@ -6,13 +6,11 @@ import { push } from 'react-router-redux'
 import { Layout } from '../Layout';
 import MediaToolbar from './StudioToolbar';
 import StudioList from '../../components/List/StudioList';
-import Item from '../../components/List/Item';
 import Lightbox from '../../components/Lightbox';
 import M from './M';
 import { addMedia, fetchMedia } from '../../actions/mediaActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
 import { setCover } from '../../actions/coverActions';
-
 
 class Studio extends React.Component {
 
@@ -43,20 +41,18 @@ class Studio extends React.Component {
 				<Lightbox />
 				<StudioList gutter={16}>
 					{this.props.media.map((medium, index) =>
-						<Item square={this.props.squareView} key={medium.src}
-						>
-							<M medium={medium} />
-						</Item>
+						<M square medium={medium} key={medium.id} />
 					)}
 				</StudioList>
 			</div>
 		);
+
 		return (
 			<Layout cover={this.props.cover} title={this.props.title}>
 				<MediaToolbar />
 				{container}
 			</Layout>
-			);
+		)
 	}
 }
 

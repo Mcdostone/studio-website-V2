@@ -1,4 +1,4 @@
-import { getUniqueDataset, getUniqueDatasetById } from '../utils';
+import { getUniqueDatasetById, getUniqueDataset} from '../utils';
 import { MEDIA_ADD,
 	SORT_BY,
 	FILTER_BY,
@@ -56,6 +56,7 @@ export default function (state = initialState, action) {
 
 		case MEDIA_ADD:
 			const newMedia = getUniqueDatasetById([...state.media, ...action.payload]);
+
 			return Object.assign({}, state, {
 				media: newMedia,
 				filters: getUniqueDataset([...state.filters, ...action.payload.map(p => p.type)], (el) => el.toLowerCase().trim())

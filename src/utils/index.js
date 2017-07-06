@@ -9,10 +9,16 @@ export function getUniqueDataset(dataset, getterProperty) {
 	});
 }
 
-export function getUniqueDatasetById(dataset) {
-	return getUniqueDataset(dataset, d => d.id);
+export function buildUniqueDatasetById(dataset, build) {
+	return dataset.reduce((newDataset, d, index) => {
+		newDataset[d.id] = build(d);
+		return newDataset;
+	}, {});
 }
 
-export function objectsToArray(objects) {
-	return Object.keys(objects).map(key => objects[key]);
+export function getUniqueDatasetById(dataset) {
+	return dataset.reduce((newDataset, d, index) => {
+		newDataset[d.id] = d;
+		return newDataset;
+	}, {});
 }

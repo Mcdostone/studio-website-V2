@@ -1,12 +1,11 @@
-export const FETCH_TYPES = 'FETCH_TYPES';
-export const ADD_TYPES = 'ADD_TYPES';
-
-
-export const fetchTypes = () => ({
-    type: FETCH_TYPES,
-});
+export const TYPES_ADD = 'TYPES_ADD';
+export const TYPES_FETCH = 'TYPES_FETCH';
 
 export const addTypes = (types) => ({
-    type: ADD_TYPES,
+    type: TYPES_ADD,
 		payload: types,
+});
+
+export const fetchTypes = () => ({
+    type: TYPES_FETCH,
 });

@@ -1,4 +1,4 @@
-import { call, takeLatest, put, select } from 'redux-saga/effects';
+import { call, takeEvery, put, select } from 'redux-saga/effects';
 import { Medium } from '../core';
 import { MEDIA_FETCH, MEDIA_ADD } from '../actions/mediaActions';
 import logger from '../Logger';
@@ -21,7 +21,7 @@ function* buildMediumFromGoogleDrive(medium) {
 }
 
 function buildMediumFromWeb(medium) {
-	return buildMedium(medium.src, medium.type, medium.from, medium.likes);
+	return buildMedium(medium.id, medium.id, medium.type, medium.from, medium.likes);
 }
 
 function* createMediumFromFirebase(medium) {
@@ -48,7 +48,7 @@ function* fetchMedia(action) {
 }
 
 function* mediaSagas() {
-	yield takeLatest(MEDIA_FETCH, fetchMedia);
+	yield takeEvery(MEDIA_FETCH, fetchMedia);
 }
 
 export default mediaSagas;

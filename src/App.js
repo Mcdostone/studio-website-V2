@@ -7,8 +7,7 @@ import store from './store';
 import { history } from './history';
 import Navbar from './components/Navbar';
 import Home from './containers/Home';
-import Event from './containers/Events/Event';
-import Media from './containers/Media';
+import mediaWrapper from './containers/Media';
 import Sandbox from './containers/Sandbox';
 import Events from './containers/Events';
 import Types from './containers/Types';
@@ -23,7 +22,7 @@ syncHistoryWithStore(history, store);
 class App extends React.Component {
 
 	componentDidMount() {
-//		window.gapi.client.load('drive', 'v2', null);
+		window.gapi.client.load('drive', 'v2', null);
 	}
 
 	render() {
@@ -34,10 +33,10 @@ class App extends React.Component {
 						<div>
 							<Navbar />
 							<Route exact path="/" component={Home} />
-							<Route path="/media" component={Media} />
 							<Route exact path="/events" component={Events} />
-							<Route path="/events/:eventId" component={Event} />
-							<Route path="/types" component={Types} />
+							<Route exact path="/types" component={Types} />
+							<Route path="/events/:id" component={mediaWrapper('events')} />
+							<Route path="/types/:id" component={mediaWrapper('types')} />
 							<Route path="/profile" component={IsAuthentificated(Profile)} />
 							<Route path="/login" component={Login} />
 							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />

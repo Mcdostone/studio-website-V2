@@ -7,8 +7,8 @@ class Logger {
 		bragi.log('DEBUG:' + this.getTimestamp(), msg, obj);
 	}
 
-	info (group, msg, obj = '') {
-		bragi.log(group + ':'  + this.getTimestamp(), msg, obj);
+	info(msg, obj = '') {
+		bragi.log('INFO:'  + this.getTimestamp(), msg, obj);
 	}
 
 	react(msg, obj = '') {

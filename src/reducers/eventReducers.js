@@ -1,19 +1,17 @@
 import { EVENTS_ADD } from '../actions/eventActions';
 import { Event } from '../core';
+import { buildUniqueDatasetById } from '../utils';
 
 const initialState = {}
 
-function buildEvent(id, name, date, media = {}) {
-	return new Event(id, name, date, Object.keys(media));
+function buildEvent(e) {
+	return new Event(e.id, e.name, e.date, Object.keys(e.media));
 }
 
 export default function (state = initialState, action) {
 	switch(action.type) {
 		case EVENTS_ADD:
-			const events = action.payload.reduce((newEvents, e, index) => {
-				newEvents[e.id] = buildEvent(e.id, e.name, e.date, e.media);
-		    return newEvents;
-			}, {});
+			const events = buildUniqueDatasetById(action.payload, buildEvent);
 			return Object.assign({}, state, events);
 
 		default:

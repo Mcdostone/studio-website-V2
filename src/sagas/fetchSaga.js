@@ -1,4 +1,4 @@
-import { select, call, takeEvery, put } from 'redux-saga/effects';
+import { all, select, call, takeEvery, put } from 'redux-saga/effects';
 import restFirebaseDatabase from './RestFirebaseDatabase';
 import logger from '../Logger';
 import {
@@ -36,20 +36,29 @@ export function* fetch(action) {
 			const response = yield call(promise, resource.toLowerCase(), param);
 			const result = buildResult(response, action.payload.dataType);
 			yield put({type: `${resource.toUpperCase()}_ADD`, payload: result});
-			if(refs && result[refs]) {
-				yield Object.keys(result[refs]).map(r =>
-					put({type: `${refs.toUpperCase()}_${FETCH}`, payload: {dataType: OBJECT, resource: refs, param: r}})
-				);
-			}
+			yield fetchReferences(resource, param, refs);
 		} catch(err) {
 			console.log(err);
 		}
 	}
 	else {
 		logger.debug(`[FIREBASE-DB] SKIP /${resource}${param === undefined ? '' : `/${param}`}, already fetched`);
+		yield fetchReferences(resource, param, refs);
 	}
 
 }
+
+function* fetchReferences(resource, param, refs) {
+	if(refs) {
+		logger.info(`[FIREBASE-DB] GET /${resource}${param === undefined ? '' : `/${param}`}/${refs}`);
+		const state = yield select();
+		const data = state[resource][param];
+		yield all(data[refs].map(r =>
+			put({type: `${refs.toUpperCase()}_${FETCH}`, payload: {dataType: OBJECT, resource: refs, param: r}})
+		));
+	}
+}
+
 
 export default function* fetchSaga() {
 	yield takeEvery(FETCH, fetch);
