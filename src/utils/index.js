@@ -1,4 +1,4 @@
-export function getUniqueDataset(dataset, getterProperty) {
+/*export function getUniqueDataset(dataset, getterProperty) {
 	let flags = {}
 	return dataset.filter(entry => {
     if (flags[getterProperty(entry)]) {
@@ -7,7 +7,7 @@ export function getUniqueDataset(dataset, getterProperty) {
     flags[getterProperty(entry)] = true;
     return true;
 	});
-}
+}*/
 
 export function buildUniqueDatasetById(dataset, build) {
 	return dataset.reduce((newDataset, d, index) => {
@@ -21,4 +21,17 @@ export function getUniqueDatasetById(dataset) {
 		newDataset[d.id] = d;
 		return newDataset;
 	}, {});
+}
+
+export function getUniquePropertyFromDataset(property, dataset) {
+	const res =  Object.keys(dataset).reduce((newDataset, d) => {
+		const prop = dataset[d][property].toLowerCase();
+		newDataset[prop] = true;
+		return newDataset;
+	}, {});
+	return Object.keys(res);
+}
+
+export function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

@@ -9,7 +9,6 @@ import {
 
 const initialState = {
 		drawerOpened: false,
-		squareView: true,
 		searchOpened: false,
 };
 
@@ -28,16 +27,6 @@ export default function (state = initialState, action) {
 		case DRAWER_TOGGLE:
 			return Object.assign({}, state, {
         drawerOpened: !state.drawerOpened,
-      });
-
-		case ACTIVE_MASONRY_VIEW:
-			return Object.assign({}, state, {
-        squareView: false,
-      });
-
-		case ACTIVE_SQUARE_VIEW:
-			return Object.assign({}, state, {
-        squareView: true,
       });
 
 		case SEARCH_OPEN:

@@ -23,7 +23,7 @@ syncHistoryWithStore(history, store);
 class App extends React.Component {
 
 	componentDidMount() {
-		window.gapi.client.load('drive', 'v2');
+		// window.gapi.client.load('drive', 'v2');
 	}
 
 	render() {
@@ -38,7 +38,9 @@ class App extends React.Component {
 							<Route exact path="/types" component={Types} />
 							<Route path="/events/:id" component={mediaWrapper('events')} />
 							<Route path="/types/:id" component={mediaWrapper('types')} />
-							<Route path="/profile" component={IsAuthentificated(Profile)} />
+							{/*<Route path="/profile" component={IsAuthentificated(Profile)} />*/}
+							<Route path="/profile" component={Profile} />
+
 							<Route path="/login" component={Login} />
 							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />
 							<Route path="/sandbox" component={Sandbox} />

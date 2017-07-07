@@ -24,6 +24,12 @@
 	margin-right: 0;
 }
 
+
+.studio-list, .studio-list-space {
+	display: block;
+	margin-bottom: 64px;
+}
+
 .studio-list-space {
 	margin-top: 56px;
 }
@@ -35,8 +41,4 @@
 	z-index: 192;
 	left: 50%;
 	transform: translate(-50%, 0);
-}
-
-.studio-list {
-	margin-bottom: 64px;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { bindActionCreators } from 'redux';
@@ -8,14 +9,9 @@ import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import { grey500 } from 'material-ui/styles/colors';
 import IconViewModule from './icons/IconViewModule';
 import IconViewQuilt from './icons/IconViewQuilt';
-import { SORT_LAST_ADDED,
-	SORT_POPULARITY,
-	SORT_LIKES,
-	sortBy,
-	filterBy } from '../../../actions/mediaActions';
+import { capitalizeFirstLetter } from '../../../utils';
 
-import './MediaToolbar.css';
-
+import './StudioToolbar.css';
 
 class StudioToolbar extends React.Component {
 
@@ -26,11 +22,11 @@ class StudioToolbar extends React.Component {
 	}
 
 	handleOnSortByChange(event, index, value) {
-		this.props.sortBy(value);
+		this.props.onSetSorting(index);
 	}
 
 	handleOnFilterByChange(event, index, value) {
-		this.props.filterBy(value);
+		this.props.onSetFilter(index);
 	}
 
 	render() {
@@ -39,32 +35,33 @@ class StudioToolbar extends React.Component {
 
 				<ToolbarGroup className="dropdown">
 					<DropDownMenu
-						labelStyle={{ color: grey500, paddingLeft: 0 }}
+						labelStyle={{ color: grey500 }}
 						onChange={this.handleOnSortByChange}
-						value={this.props.typeSorting}
+						value={this.props.activeSorting}
 					>
-						<MenuItem  value={SORT_LAST_ADDED} primaryText="Last added" />
-						<MenuItem value={SORT_POPULARITY} primaryText="Most popular" />
-						<MenuItem value={SORT_LIKES} primaryText="Most liked" />
+						{Object.keys(this.props.sortingTypes).map((key, index) =>
+							<MenuItem value={index} key={this.props.sortingTypes[key]}
+							primaryText={capitalizeFirstLetter(this.props.sortingTypes[key])} />
+						)}
 					</DropDownMenu>
 
 					<DropDownMenu
-						value={this.props.filter}
+						value={this.props.activeFilter}
 						onChange={this.handleOnFilterByChange}
 						labelStyle={{ color: grey500 }}
 					>
 						{this.props.filters.map((filter, index) =>
-							<MenuItem value={index} key={filter} primaryText={filter} />
+							<MenuItem value={index} key={filter} primaryText={capitalizeFirstLetter(filter)} />
 						)}
 					</DropDownMenu>
 				</ToolbarGroup>
 
 				<ToolbarGroup className="view-mode">
-					<IconViewModule active={this.props.squareView} onTouchTap={this.props.activeSquareView} />
+					<IconViewModule active={this.props.squareView} onTouchTap={() => this.props.onSetSquareView(true)} />
 					<IconViewQuilt
 						active={!this.props.squareView}
 						style={{marginRight: -12}}
-						onTouchTap={this.props.activeMasonryView}
+						onTouchTap={() => this.props.onSetSquareView(false)}
 					/>
 				</ToolbarGroup>
 
@@ -73,22 +70,18 @@ class StudioToolbar extends React.Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		squareView: state.ui.squareView,
-		typeSorting: state.media.sortBy,
-		filter: state.media.filterBy,
-		filters: state.media.filters,
-	}
+StudioToolbar.propTypes = {
+	onSetSquareView: PropTypes.func.isRequired,
+	filters: PropTypes.array,
+	activeFilter: PropTypes.number.isRequired,
+	onSetFilter: PropTypes.func.isRequired,
+	sortingTypes: PropTypes.object,
+	activeSorting: PropTypes.number.isRequired,
+	onSetSorting: PropTypes.func.isRequired,
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		activeSquareView: squareView,
-		activeMasonryView: masonryView,
-		sortBy,
-		filterBy,
-	}, dispatch);
+StudioToolbar.defaultProps = {
+	filters: []
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudioToolbar);
+export default StudioToolbar;

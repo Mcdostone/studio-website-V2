@@ -9,6 +9,7 @@ import { MEDIA_ADD,
 	MEDIA_FETCH_SUCCESS,*/
 	} from '../actions/mediaActions';
 
+import mock from '../containers/Media/mock-media';
 
 const initialState = {
 		/*sortBy: SORT_LAST_ADDED,

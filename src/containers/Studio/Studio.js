@@ -9,55 +9,104 @@ import Lightbox from '../../components/Lightbox';
 import M from './M';
 import { fetchMedia } from '../../actions/mediaActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
-import { setCover } from '../../actions/coverActions';
+import { getUniquePropertyFromDataset } from '../../utils';
+
+const SORT_LAST_ADDED = 0;
+const SORT_POPULARITY = 1;
+const SORT_LIKES = 2;
 
 class Studio extends React.Component {
 
-	componentWillUnmount() {
-		this.props.closeLightbox();
-		this.props.setCover(null);
-	}x
-
-	componentDidMount() {
-		this.props.setCover(this.props.id);
+	constructor(props) {
+		super(props);
+		this.state = {
+			squareView: true,
+			filter: 0,
+			sorting: 0,
+		};
+		this.setSquareView = this.setSquareView.bind(this);
+		this.setFilter = this.setFilter.bind(this);
+		this.setSorting = this.setSorting.bind(this);
+		//this.getProcessedMedia = this.getProcessedMedia.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if(this.props.Id !== nextProps.id) {
-			this.props.setCover(nextProps.id);
-			return true;
-		}
-		return false;
+	componentWillUnmount() {
+		this.props.closeLightbox();
+	}
+
+	/*getProcessedMedia(media, filter, sort) {
+		let copy = [...media];
+
+	if(filter.toLowerCase() !== 'all' ) {
+		copy = media.filter(medium => medium.type.toLowerCase().trim() === filter.toLowerCase().trim());
+	}
+
+	switch(sort) {
+		case SORT_LIKES:
+			return copy.sort((a, b) => (b.countLikes() > a.countLikes()) ? 1 : ((a.countLikes() > b.countLikes()) ? -1 : 0));
+		case SORT_LAST_ADDED:
+			return copy;
+		case SORT_POPULARITY:;
+			return copy;
+		default:
+			return copy;
+	}
+}*/
+
+	getFilters() {
+		return ['all', ...getUniquePropertyFromDataset('type', this.props.media)];
+	}
+
+	getSortingTypes() {
+		let sort = {}
+		sort[SORT_LAST_ADDED] = 'Last added';
+		sort[SORT_POPULARITY] = 'Most popular';
+		sort[SORT_LIKES] = 'Most liked';
+		return sort;
 	}
 
 	showMedium(mediumData) {
 		this.props.openMediumInLightbox(mediumData);
 	}
 
+	setSquareView(active) {
+		this.setState({squareView: active});
+	}
+
+	setFilter(newFilterIndex) {
+		this.setState({filter: newFilterIndex});
+	}
+
+	setSorting(newSortingIndex) {
+		this.setState({sorting: newSortingIndex});
+	}
+
 	render() {
-		const container = (
+		const filters = this.getFilters();
+
+		return (
 			<div>
 				<Lightbox />
+				<MediaToolbar
+					squareView={this.state.squareView}
+					onSetSquareView={this.setSquareView}
+					onSetFilter={this.setFilter}
+					activeFilter={this.state.filter}
+					filters={filters}
+					activeSorting={this.state.sorting}
+					sortingTypes={this.getSortingTypes()}
+					onSetSorting={this.setSorting}/>
 				<StudioList gutter={16}>
 					{Object.keys(this.props.media).map((id, index) =>
-						<M square medium={this.props.media[id]} key={id} />
+						<M square={this.state.squareView} medium={this.props.media[id]} key={id} />
 					)}
 				</StudioList>
 			</div>
 		);
-
-		return (
-			<Layout cover={this.props.cover} title={this.props.title}>
-				<MediaToolbar />
-				{container}
-			</Layout>
-		)
 	}
 }
 
 Studio.propTypes = {
-	cover: PropTypes.string,
-	title: PropTypes.string,
 	media: PropTypes.object,
 };
 
@@ -67,12 +116,6 @@ Studio.defaultProps = {
 
 function mapStateToProps(state, props) {
 	return {
-		//lightbox: state.lightbox,
-		squareView: state.ui.squareView,
-		index: state.media.index,
-		cover: state.covers.current,
-		loading: state.media.loading,
-		typeSorting: state.media.sortBy,
 		...props,
 	}
 }
@@ -81,7 +124,6 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		openMediumInLightbox: showMedium,
 		closeLightbox,
-		setCover,
 		fetchMedia,
   }, dispatch);
 }

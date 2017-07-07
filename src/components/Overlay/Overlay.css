@@ -1,4 +1,19 @@
-.overlay, .overlay-content {
+.overlay {
+	/*position: absolute;*/
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	color: white;
+}
+
+.overlay-content {
 	position: absolute;
 	top: 0;
 	left: 0;

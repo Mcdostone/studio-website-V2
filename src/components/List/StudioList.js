@@ -44,7 +44,7 @@ class StudioList extends React.Component {
 				</StackGrid>
 				<EventListener target="window" style={{display: 'none'}} onResize={this.handleResize} />
 				<Waypoint onEnter={this.handleOnEnter} />
-				<Loading />
+				{/*<Loading />*/}
 			</div>
 		);
 	}

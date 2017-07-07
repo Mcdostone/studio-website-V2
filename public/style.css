@@ -105,3 +105,11 @@ body {
 a, a:visited {
 	color: inherit;
 }
+
+.item.square .overlay {
+	position: absolute;
+}
+
+.big-title {
+	font-weight: 100;
+}
