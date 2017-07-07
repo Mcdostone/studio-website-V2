@@ -39,7 +39,5 @@ const mock = [
 	},
 ]
 
-let res = {};;
-const media = mock.map(el => res[el.id] =new Medium(el.id, el.src, el.type, 'web', el.likes));
-
-export default res;
+let res = {};
+export default mock.map(el => res[el.id] =new Medium(el.id, el.src, el.type, 'web', el.likes));;

@@ -8,7 +8,7 @@ import store from './store';
 import { history } from './history';
 import Navbar from './components/Navbar';
 import Home from './containers/Home';
-import mediaWrapper from './containers/Media';
+import mediaWrapper from './containers/wrappers/mediaWrapper';
 import Sandbox from './containers/Sandbox';
 import Events from './containers/Events';
 import Types from './containers/Types';
@@ -38,8 +38,8 @@ class App extends React.Component {
 							<Route exact path="/types" component={Types} />
 							<Route path="/events/:id" component={mediaWrapper('events')} />
 							<Route path="/types/:id" component={mediaWrapper('types')} />
-							{/*<Route path="/profile" component={IsAuthentificated(Profile)} />*/}
-							<Route path="/profile" component={Profile} />
+							<Route path="/profile" component={IsAuthentificated(Profile)} />
+							<Route ext path="/profile/:id" component={IsAuthentificated(mediaWrapper('users', Profile))} />
 
 							<Route path="/login" component={Login} />
 							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />

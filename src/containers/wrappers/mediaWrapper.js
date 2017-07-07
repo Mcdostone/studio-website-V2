@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWithRefs } from '../../actions/fetchActions';
-import Studio from '../../containers/Studio';
 
 export default function mediaWrapper(resource, WrappedComponent) {
 
@@ -34,7 +33,7 @@ export default function mediaWrapper(resource, WrappedComponent) {
 
 		render() {
 			const id = this.props.match.params.id;
-			const data = this.getData(id);
+			//const data = this.getData(id);
 			const media = this.props.media.media;
 			return <WrappedComponent {...this.props} id={id} media={media} />
 		}

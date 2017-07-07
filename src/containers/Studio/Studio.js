@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Layout } from '../Layout';
 import MediaToolbar from './StudioToolbar';
 import StudioList from '../../components/List/StudioList';
 import Lightbox from '../../components/Lightbox';
@@ -27,31 +26,29 @@ class Studio extends React.Component {
 		this.setSquareView = this.setSquareView.bind(this);
 		this.setFilter = this.setFilter.bind(this);
 		this.setSorting = this.setSorting.bind(this);
-		//this.getProcessedMedia = this.getProcessedMedia.bind(this);
+		this.getProcessedMedia = this.getProcessedMedia.bind(this);
 	}
 
 	componentWillUnmount() {
 		this.props.closeLightbox();
 	}
 
-	/*getProcessedMedia(media, filter, sort) {
-		let copy = [...media];
-
-	if(filter.toLowerCase() !== 'all' ) {
-		copy = media.filter(medium => medium.type.toLowerCase().trim() === filter.toLowerCase().trim());
+	getProcessedMedia(filters) {
+		let arrayMedia = Object.values(this.props.media);
+		const filter = filters[this.state.filter];
+		if(filter.toLowerCase() !== 'all' ) {
+			arrayMedia = arrayMedia.filter(medium => medium.type.toLowerCase().trim() === filter.toLowerCase().trim());
+		}
+		switch(this.state.sorting) {
+			case SORT_LIKES:
+				return arrayMedia.sort((a, b) => (b.countLikes() > a.countLikes()) ? 1 : ((a.countLikes() > b.countLikes()) ? -1 : 0));
+			case SORT_LAST_ADDED:
+			case SORT_POPULARITY:;
+			return arrayMedia;
+			default:
+			return arrayMedia;
+		}
 	}
-
-	switch(sort) {
-		case SORT_LIKES:
-			return copy.sort((a, b) => (b.countLikes() > a.countLikes()) ? 1 : ((a.countLikes() > b.countLikes()) ? -1 : 0));
-		case SORT_LAST_ADDED:
-			return copy;
-		case SORT_POPULARITY:;
-			return copy;
-		default:
-			return copy;
-	}
-}*/
 
 	getFilters() {
 		return ['all', ...getUniquePropertyFromDataset('type', this.props.media)];
@@ -83,6 +80,7 @@ class Studio extends React.Component {
 
 	render() {
 		const filters = this.getFilters();
+		const processedMedia = this.getProcessedMedia(filters);
 
 		return (
 			<div>
@@ -97,8 +95,8 @@ class Studio extends React.Component {
 					sortingTypes={this.getSortingTypes()}
 					onSetSorting={this.setSorting}/>
 				<StudioList gutter={16}>
-					{Object.keys(this.props.media).map((id, index) =>
-						<M square={this.state.squareView} medium={this.props.media[id]} key={id} />
+					{processedMedia.map(m =>
+						<M square={this.state.squareView} medium={m} key={m.id} />
 					)}
 				</StudioList>
 			</div>

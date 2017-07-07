@@ -7,6 +7,7 @@ import auth from './auth';
 import types from './typesReducers';
 import covers from './coverReducers';
 import events from './eventReducers';
+import users from './userReducers';
 
 
 const studioApp = combineReducers({
@@ -17,6 +18,7 @@ const studioApp = combineReducers({
 		events,
 		covers,
 		types,
+		users,
 		routing: routerReducer,
 })
 

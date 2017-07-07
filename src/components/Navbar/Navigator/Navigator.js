@@ -36,7 +36,7 @@ class Navigator extends React.Component {
 
 	handleRequestProfile() {
 		this.handleRequestClose();
-		this.props.history.push('/profile');
+		this.props.history.push(`/profile/${this.props.auth.user.id}`);
 	}
 
 		handleRequestLogout() {
@@ -64,8 +64,8 @@ class Navigator extends React.Component {
 			content =
 			<div style={{ display: 'flex' }}>
 				<div onClick={this.handleRequestOpen} className="navbar-link">
-					<Avatar src={this.props.auth.user.profile.picture} style={{ marginRight: '5px' }} />
-					{this.props.auth.user.profile.name}
+					<Avatar src={this.props.auth.user.picture} style={{ marginRight: '5px' }} />
+					{this.props.auth.user.name}
 				</div>
 				<Popover
 					open={this.state.userMenuOpened}

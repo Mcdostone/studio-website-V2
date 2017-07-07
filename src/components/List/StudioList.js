@@ -2,7 +2,7 @@ import React from 'react';
 import StackGrid from 'react-stack-grid';
 import EventListener from 'react-event-listener';
 import Waypoint from 'react-waypoint';
-import Loading from './Loading';
+// import Loading from './Loading';
 import './StudioList.css';
 
 class StudioList extends React.Component {

@@ -2,8 +2,8 @@ import { LOGIN, REQUEST_LOGIN, REQUEST_LOGOUT, LOGOUT } from '../actions/authAct
 import { call, put, takeLatest } from 'redux-saga/effects';
 import firebase from 'firebase';
 import { firebaseStudio } from '../fire'
+import restFirebaseDatabase from './RestFirebaseDatabase';
 import config from '../configuration';
-
 
 const authProvider = new firebase.auth.GoogleAuthProvider();
 authProvider.setCustomParameters(config.FIREBASE_AUTH_CONFIG);
@@ -20,15 +20,16 @@ function logout() {
 	});
 }
 
-
 function* requestLogin() {
 	try {
 		const authData = yield call(signInWithPopup);
 		const user  = Object.assign({},
-			{profile: authData.additionalUserInfo.profile},
+			{...authData.additionalUserInfo.profile, updatedAt: Date.now()},
 			{credentials: authData.credential}
 		);
+		console.log(user);
 		yield put({type: LOGIN, payload: user});
+		restFirebaseDatabase.post('users', user.id, user);
   }
 	catch(error) {
 		console.log(error);
