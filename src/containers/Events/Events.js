@@ -39,7 +39,7 @@ class Events extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		media: state.media.processedMedia,
+		media: state.media,
 		dataSource: state.events,
 		cover: state.covers.current,
 		title: state.covers.title

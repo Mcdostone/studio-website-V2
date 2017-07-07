@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toggleDrawer, openSearch, closeSearch } from '../../actions/uiActions'
 import StudioDrawer from '../StudioDrawer';
-import Search from './Search';
 import logo from '../../assets/logo.png';
 import Navigator from './Navigator';
 import IconMore from './icons/IconMore';
@@ -45,7 +44,6 @@ class Navbar extends React.Component {
 					<Navigator onSearchTap={this.toggleSearch} />
 				</AppBar>
 
-				{ this.props.searchOpened ? <Search /> : null }
 				<StudioDrawer
 					open={this.props.drawerOpened}
 					onToggleDrawer={this.props.toggleDrawer}

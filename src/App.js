@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
+import asyncLoad from 'react-async-loader';
 import IsAuthentificated from './IsAuthentificated';
 import store from './store';
 import { history } from './history';
@@ -22,7 +23,7 @@ syncHistoryWithStore(history, store);
 class App extends React.Component {
 
 	componentDidMount() {
-		window.gapi.client.load('drive', 'v2', null);
+		window.gapi.client.load('drive', 'v2');
 	}
 
 	render() {
@@ -49,4 +50,16 @@ class App extends React.Component {
 	}
 }
 
-export default App;
+
+function mapScriptsToProps(ownProps) {
+  return {
+    drive: {
+			key: 'gapi',
+			globalPath: 'window.gapi',
+      url: 'https://apis.google.com/js/client.js',
+      jsonp: true
+    }
+  };
+}
+
+export default asyncLoad(mapScriptsToProps)(App);;

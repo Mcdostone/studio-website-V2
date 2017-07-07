@@ -1,26 +1,27 @@
-import { getUniqueDatasetById, getUniqueDataset} from '../utils';
 import { MEDIA_ADD,
-	SORT_BY,
+/*	SORT_BY,
 	FILTER_BY,
 	SORT_LAST_ADDED,
 	SORT_POPULARITY,
 	SORT_LIKES,
-	/*MEDIA_LOADING,
+	MEDIA_LOADING,
 	MEDIA_FETCH_FAILURE,
 	MEDIA_FETCH_SUCCESS,*/
 	} from '../actions/mediaActions';
 
 
 const initialState = {
-		sortBy: SORT_LAST_ADDED,
-		filterBy: 0,
-		media: [],
-		index: 0,
+		/*sortBy: SORT_LAST_ADDED,
+		filterBy: 0,*/
+		media: {},
+		/*index: 0,
 		loading: false,
-		processedMedia: [],
+		processedMedia: [],*/
 		filters: ['All'],
 };
 
+
+/* Move maybe into a specific state
 function getProcessedMedia(media, filter, sort) {
 	let copy = [...media];
 
@@ -39,10 +40,10 @@ function getProcessedMedia(media, filter, sort) {
 			return copy;
 	}
 }
-
+*/
 export default function (state = initialState, action) {
 	switch(action.type) {
-		case SORT_BY:
+	/*	case SORT_BY:
 			return Object.assign({}, state, {
 				sortBy: action.payload,
 				processedMedia: getProcessedMedia(state.media, state.filters[state.filterBy], action.payload)
@@ -53,17 +54,13 @@ export default function (state = initialState, action) {
 				filterBy: action.payload,
 				processedMedia: getProcessedMedia(state.media, state.filters[action.payload], state.sortBy)
 			});
-
+*/
 		case MEDIA_ADD:
-			const newMedia = getUniqueDatasetById([...state.media, ...action.payload]);
-
+			const newMedium = {};
+			newMedium[action.payload.id] = action.payload;
+			const newMedia = Object.assign({}, state.media, newMedium);
 			return Object.assign({}, state, {
 				media: newMedia,
-				filters: getUniqueDataset([...state.filters, ...action.payload.map(p => p.type)], (el) => el.toLowerCase().trim())
-				.map((v) => v.charAt(0).toUpperCase() + v.slice(1))
-				.sort(),
-				processedMedia: getProcessedMedia(newMedia, state.filters[state.filterBy], state.sortBy),
-				index: state.index + action.payload.length,
       });
 		default:
 			return state;

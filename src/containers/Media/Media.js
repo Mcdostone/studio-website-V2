@@ -35,7 +35,8 @@ export default function mediaWrapper(resource) {
 		render() {
 			const id = this.props.match.params.id;
 			const data = this.getData(id);
-			return <Studio title={data ? data.name : ''} id={id} media={this.props.media} />
+			const media = this.props.media.media;
+			return <Studio title={data ? data.name : ''} id={id} media={media} />
 		}
 
 	}
@@ -43,7 +44,7 @@ export default function mediaWrapper(resource) {
 	function mapStateToProps(state) {
 		return {
 			dataSource: state[resource],
-			media: state.media.processedMedia,
+			media: state.media,
 		}
 	}
 

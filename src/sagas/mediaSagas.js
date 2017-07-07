@@ -41,9 +41,9 @@ function* fetchMedia(action) {
 		}
 		const snapshot = yield call(restFirebaseDatabase.get, action.payload.resource, action.payload.param);
 		const newMedium = yield call(createMediumFromFirebase, snapshot.val());
-		yield put({type: MEDIA_ADD, payload: [newMedium]});
+		yield put({type: MEDIA_ADD, payload: newMedium});
 	} catch(err) {
-		logger.react(err);
+		logger.error(err);
 	}
 }
 

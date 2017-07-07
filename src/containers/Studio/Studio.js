@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { push } from 'react-router-redux'
 import { Layout } from '../Layout';
 import MediaToolbar from './StudioToolbar';
 import StudioList from '../../components/List/StudioList';
 import Lightbox from '../../components/Lightbox';
 import M from './M';
-import { addMedia, fetchMedia } from '../../actions/mediaActions';
+import { fetchMedia } from '../../actions/mediaActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
 import { setCover } from '../../actions/coverActions';
 
@@ -40,8 +39,8 @@ class Studio extends React.Component {
 			<div>
 				<Lightbox />
 				<StudioList gutter={16}>
-					{this.props.media.map((medium, index) =>
-						<M square medium={medium} key={medium.id} />
+					{Object.keys(this.props.media).map((id, index) =>
+						<M square medium={this.props.media[id]} key={id} />
 					)}
 				</StudioList>
 			</div>
@@ -59,14 +58,17 @@ class Studio extends React.Component {
 Studio.propTypes = {
 	cover: PropTypes.string,
 	title: PropTypes.string,
-	media: PropTypes.array.isRequired,
+	media: PropTypes.object,
+};
+
+Studio.defaultProps = {
+	media: {},
 };
 
 function mapStateToProps(state, props) {
 	return {
 		//lightbox: state.lightbox,
 		squareView: state.ui.squareView,
-		// media: state.media.processedMedia,
 		index: state.media.index,
 		cover: state.covers.current,
 		loading: state.media.loading,
@@ -77,10 +79,8 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		addMedia,
 		openMediumInLightbox: showMedium,
 		closeLightbox,
-		push,
 		setCover,
 		fetchMedia,
   }, dispatch);

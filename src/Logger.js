@@ -3,27 +3,31 @@ import loglevel from 'loglevel';
 
 class Logger {
 
+	info(msg, obj = '') {
+			this.log('INFO', msg, obj);
+	}
+
 	debug(msg, obj = '') {
 		bragi.log('DEBUG:' + this.getTimestamp(), msg, obj);
 	}
 
-	info(msg, obj = '') {
-		bragi.log('INFO:'  + this.getTimestamp(), msg, obj);
+	log(group, msg, obj = '') {
+		bragi.log(group.toUpperCase() + ':'  + this.getTimestamp(), msg, obj);
 	}
 
 	react(msg, obj = '') {
-    this.info('REACT', msg, obj);
+    this.log('REACT', msg, obj);
   }
 
-	trace (msg, obj = '') {
+	trace(msg, obj = '') {
 		loglevel.trace(this.prefix('TRACE') + msg, obj);
 	}
 
-	warn (msg, obj = '') {
+	warn(msg, obj = '') {
 		loglevel.warn(this.prefix('WARN') + msg, obj);
 	}
 
-	error (msg, obj = '') {
+	error(msg, obj = '') {
 		loglevel.error(this.prefix('ERROR') + msg, obj);
 	}
 

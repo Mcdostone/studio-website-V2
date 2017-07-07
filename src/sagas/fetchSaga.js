@@ -38,11 +38,10 @@ export function* fetch(action) {
 			yield put({type: `${resource.toUpperCase()}_ADD`, payload: result});
 			yield fetchReferences(resource, param, refs);
 		} catch(err) {
-			console.log(err);
+			logger.error(err);
 		}
 	}
 	else {
-		logger.debug(`[FIREBASE-DB] SKIP /${resource}${param === undefined ? '' : `/${param}`}, already fetched`);
 		yield fetchReferences(resource, param, refs);
 	}
 
