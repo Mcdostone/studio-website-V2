@@ -23,7 +23,6 @@ function buildResult(response, dataType) {
 function exist(action, state) {
 	const {resource, param, dataType} = action.payload;
 	return dataType === OBJECT && state[resource][param] !== undefined;
-	// || dataType === LIST && state[resource].length === 0
 }
 
 export function* fetch(action) {

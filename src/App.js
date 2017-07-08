@@ -12,6 +12,7 @@ import mediaWrapper from './containers/wrappers/mediaWrapper';
 import resourceWrapper from './containers/wrappers/resourceWrapper';
 import Sandbox from './containers/Sandbox';
 import Events from './containers/Events';
+import Media from './containers/Media';
 import Types from './containers/Types';
 import Profile from './containers/Profile';
 import Login from './components/Auth/Login';
@@ -36,6 +37,7 @@ class App extends React.Component {
 						<div>
 							<Navbar />
 							<Route exact path="/" component={Home} />
+							<Route exact path="/media" component={resourceWrapper('media', Media)} />
 							<Route exact path="/events" component={resourceWrapper('events', Events)} />
 							<Route exact path="/types" component={resourceWrapper('types', Types)} />
 							<Route path="/events/:id" component={mediaWrapper('events')} />

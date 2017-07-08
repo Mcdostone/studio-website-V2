@@ -4,6 +4,7 @@ export const SORT_LIKES = 3;
 export const SORT_BY = 'SORT_BY';
 export const FILTER_BY = 'FILTER_BY';
 export const MEDIA_ADD = 'MEDIA_ADD';
+export const MEDIA_ADD_LIST = 'MEDIA_ADD_LIST';
 export const MEDIA_LOADING = 'MEDIA_LOADING';
 export const MEDIA_FETCH = 'MEDIA_FETCH';
 export const MEDIA_FETCH_FROM_GOOGLE_DRIVE = 'MEDIA_FETCH_FROM_GOOGLE_DRIVE';

@@ -1,58 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchWithRefs } from '../../actions/fetchActions';
-import Studio from '../../containers/Studio';
+import PropTypes from 'prop-types';
+import Studio from '../Studio'
 
-export default function mediaWrapper(resource) {
+class Media extends React.Component {
 
-	const MediaContainer = class extends React.Component {
-
-		componentDidMount() {
-			const id = this.props.match.params.id;
-			this.fetchData(id);
-		}
-
-		getData() {
-			const id = this.props.match.params.id;
-			return this.props.dataSource[id] !== undefined ? this.props.dataSource[id] : undefined;
-		}
-
-		fetchData(id) {
-			this.props.fetchWithRefs(resource, id, 'media');
-		}
-
-		componentWillReceiveProps(nextProps) {
-			const oldId = this.props.match.params.id;
-			const newId = nextProps.match.params.id;
-			if(oldId !== newId) {
-				this.fetchData(newId);
-				return true;
-			}
-			return false;
-		}
-
-		render() {
-			const id = this.props.match.params.id;
-			const data = this.getData(id);
-			const media = this.props.media.media;
-			return <Studio title={data ? data.name : ''} id={id} media={media} />
-		}
-
+	render() {
+		console.log(this.props.dataSource);
+		return (
+			<Studio media={this.props.dataSource} />
+		);
 	}
-
-	function mapStateToProps(state) {
-		return {
-			dataSource: state[resource],
-			media: state.media,
-		}
-	}
-
-	function mapDispatchToProps(dispatch) {
-		return bindActionCreators({
-			fetchWithRefs,
-		}, dispatch);
-	}
-
-	return connect(mapStateToProps, mapDispatchToProps)(MediaContainer);
 }
+
+Media.propTypes = {
+	dataSource: PropTypes.object,
+}
+
+Media.defaultProps = {
+	dataSource: {},
+}
+
+export default Media;

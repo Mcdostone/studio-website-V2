@@ -4,9 +4,58 @@ import Drawer from 'material-ui/Drawer';
 import { Link } from 'react-router-dom';
 import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
+import { authWrapper } from '../../containers/wrappers';
 
 class StudioDrawer extends React.Component {
 	render() {
+		let authentificated = undefined;
+		if(this.props.auth.authentificated === true) {
+			 authentificated = (
+			<div>
+				<Divider />
+				<Link to="/media">
+					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+						Media
+					</MenuItem>
+				</Link>
+				<Link to="/events">
+					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+						Events
+					</MenuItem>
+				</Link>
+				<Link to="/types">
+					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+						Types
+					</MenuItem>
+				</Link>
+				<Divider />
+				<Link to={`/profile/${this.props.auth.user.id}`}>
+					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+						Your profile
+					</MenuItem>
+				</Link>
+				<Link to="/sandbox">
+					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+						Sandbox
+					</MenuItem>
+				</Link>
+				<Link to="/logout">
+					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+						Logout
+					</MenuItem>
+				</Link>
+			</div>);
+		}
+		else {
+			authentificated = (
+				<Link to="/login">
+					<MenuItem onTouchTap={this.props.requestLogin}>
+						Login
+					</MenuItem>
+				</Link>
+			);
+		}
+
 		return (
 			<Drawer
 				docked={false}
@@ -29,55 +78,8 @@ class StudioDrawer extends React.Component {
 						Works
 					</MenuItem>
 				</Link>
-
 				<Divider />
-
-				<Link to="/media">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Media
-					</MenuItem>
-				</Link>
-				<Link to="/events">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Events
-					</MenuItem>
-				</Link>
-				<Link to="/events/test">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Events/test
-					</MenuItem>
-				</Link>
-				<Link to="/events/test2">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Events/test2
-					</MenuItem>
-				</Link>
-
-
-				<Link to="/types">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Types
-					</MenuItem>
-				</Link>
-
-				<Divider />
-				<Link to="/profile">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Your profile
-					</MenuItem>
-				</Link>
-				<Link to="/sandbox">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Sandbox
-					</MenuItem>
-				</Link>
-
-				<Link to="/logout">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Logout
-					</MenuItem>
-				</Link>
-
+				{authentificated}
 			</Drawer>
 		);
 	}
@@ -86,10 +88,13 @@ class StudioDrawer extends React.Component {
 StudioDrawer.propTypes = {
 	open: PropTypes.bool,
 	onToggleDrawer: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired,
+	requestLogin: PropTypes.func.isRequired,
+	requestLogout: PropTypes.func.isRequired
 };
 
 StudioDrawer.defaultProps = {
 	open: false,
 };
 
-export default StudioDrawer;
+export default authWrapper(StudioDrawer);

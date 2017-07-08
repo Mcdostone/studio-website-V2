@@ -8,8 +8,8 @@ import GoogleDriveApi from './GoogleDriveApi';
 
 const googleDriveApi = new GoogleDriveApi(window.gapi);
 
-function buildMedium(id, src, type, from, likes = []) {
-	return new Medium(id, src, type, from, likes);
+function buildMedium(medium, src) {
+	return new Medium(medium.id, src, medium.from, medium.likes, medium.events, medium.types);
 }
 
 function* buildMediumFromGoogleDrive(medium) {
@@ -17,11 +17,7 @@ function* buildMediumFromGoogleDrive(medium) {
 	logger.react(`GET ${medium.id} from google drive`);
 	googleDriveApi.setAccessToken(state.auth.user.credentials.accessToken);
 	const data = yield call(googleDriveApi.getFile, medium.id);
-	return buildMedium(medium.id, data.thumbnailLink.split('=')[0], medium.type, medium.from, medium.likes);
-}
-
-function buildMediumFromWeb(medium) {
-	return buildMedium(medium.id, medium.id, medium.type, medium.from, medium.likes);
+	return buildMedium(medium, data.thumbnailLink.split('=')[0]);
 }
 
 function* createMediumFromFirebase(medium) {
@@ -29,7 +25,7 @@ function* createMediumFromFirebase(medium) {
 		case 'drive':
 			return yield call(buildMediumFromGoogleDrive, medium);
 		default:
-		return buildMediumFromWeb(medium);
+		return buildMedium(medium, medium.src);
 	}
 }
 

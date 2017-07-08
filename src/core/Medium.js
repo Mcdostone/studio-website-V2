@@ -1,11 +1,12 @@
 export default class Medium {
 
-	constructor(id, src, type, from = 'drive', likes = []) {
+	constructor(id, src, comeFrom, likes, event, type) {
 		this.id = id;
 		this.src = src.trim();
-		this.type = type.toLowerCase().trim();
-		this.from = from.toLowerCase().trim();
-		this.likes = likes;
+		this.from = comeFrom.toLowerCase().trim();
+		this.likes = likes === undefined ? [] : likes;
+		this.events = event;
+		this.types = type;
 	}
 
 	countLikes() {

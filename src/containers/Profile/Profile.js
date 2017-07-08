@@ -18,7 +18,7 @@ class Profile extends React.Component {
 					</div>
 				</Cover>
 				<div className="container">
-					<h1 className="big-title">What you liked</h1>
+					<h1 className="big-title">Your likes</h1>
 					<Studio media={this.props.media}></Studio>
 				</div>
 			</div>

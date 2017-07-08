@@ -5,6 +5,7 @@ import { fetchWithRefs } from '../../actions/fetchActions';
 import Studio from '../Studio';
 import { Layout } from '../Layout';
 
+
 export default function studioWrapper(resource) {
 
 	const wrapper = class extends React.Component {
@@ -30,5 +31,5 @@ export default function studioWrapper(resource) {
 		}, dispatch);
 	}
 
-	return connect(mapStateToProps, mapDispatchToProps)(studioWrapper);
+	return connect(mapStateToProps, mapDispatchToProps)(wrapper);
 }

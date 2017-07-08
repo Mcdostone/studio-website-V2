@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { requestLogin, requestLogout } from '../../../actions/authActions'
 import Menu from 'material-ui/Menu';
 import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
+import { authWrapper } from '../../../containers/wrappers';
+
 
 class Navigator extends React.Component {
 
@@ -15,10 +14,8 @@ class Navigator extends React.Component {
 		super(props);
 		this.state = { userMenuOpened: false };
 		this.handleRequestClose = this.handleRequestClose.bind(this);
-		this.handleRequestOpen = this.handleRequestOpen.bind(this);
 		this.handleRequestProfile = this.handleRequestProfile.bind(this);
-		this.handleRequestLogout = this.handleRequestLogout.bind(this);
-		this.responseGoogle = this.responseGoogle.bind(this);
+		this.handleRequestOpen = this.handleRequestOpen.bind(this);
 	}
 
 	handleRequestClose() {
@@ -37,22 +34,6 @@ class Navigator extends React.Component {
 	handleRequestProfile() {
 		this.handleRequestClose();
 		this.props.history.push(`/profile/${this.props.auth.user.id}`);
-	}
-
-		handleRequestLogout() {
-		this.handleRequestClose();
-		this.props.requestLogout();
-	}
-
-	responseGoogle(response) {
-		if(!response.error) {
-			const user = {
-				accessToken: response.accessToken,
-				tokenId: response.tokenId,
-				profile: response.profileObj,
-			}
-			this.props.login(user);
-		}
 	}
 
 	render() {
@@ -76,7 +57,7 @@ class Navigator extends React.Component {
 				>
 					<Menu width={this.state.widthMenu}>
 						<MenuItem primaryText="Profile" onTouchTap={this.handleRequestProfile} />
-						<MenuItem primaryText="Logout" onTouchTap={this.handleRequestLogout} />
+						<MenuItem primaryText="Logout" onTouchTap={this.props.requestLogout} />
 					</Menu>
 				</Popover>
 			</div>
@@ -92,19 +73,8 @@ class Navigator extends React.Component {
 
 Navigator.propTypes = {
 	history: PropTypes.object.isRequired,
-};
-
-function mapStateToProps(state) {
-	return {
-		auth: state.auth,
-	}
+	requestLogout: PropTypes.func.isRequired,
+	requestLogin: PropTypes.func.isRequired
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		requestLogin,
-		requestLogout,
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navigator));
+export default withRouter(authWrapper(Navigator));

@@ -6,7 +6,13 @@ import { buildUniqueDatasetById } from '../utils';
 const initialState = {}
 
 function buildUser(user) {
-	return new User(user.id, user.given_name, user.family_name, user.name, user.picture, user.updatedAt, user.media);
+	return new User(user.id,
+	user.given_name,
+	user.family_name,
+	user.name,
+	user.picture,
+	user.updatedAt,
+	Object.keys(user.media));
 }
 
 export default function (state = initialState, action) {

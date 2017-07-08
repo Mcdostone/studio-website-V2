@@ -8,7 +8,7 @@ import Lightbox from '../../components/Lightbox';
 import M from './M';
 import { fetchMedia } from '../../actions/mediaActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
-import { getUniquePropertyFromDataset } from '../../utils';
+
 
 const SORT_LAST_ADDED = 0;
 const SORT_POPULARITY = 1;
@@ -51,7 +51,8 @@ class Studio extends React.Component {
 	}
 
 	getFilters() {
-		return ['all', ...getUniquePropertyFromDataset('type', this.props.media)];
+		// return ['all', ...getUniquePropertyFromDataset('type', this.props.media)];
+		return ['all'];
 	}
 
 	getSortingTypes() {

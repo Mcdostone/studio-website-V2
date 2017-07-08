@@ -10,23 +10,24 @@ import Navigator from './Navigator';
 import IconMore from './icons/IconMore';
 import './Navbar.css';
 
+
 class Navbar extends React.Component {
 
 	render() {
 		let menu = undefined;
-
-			menu =
-				<div id="navbar-menu">
-					<Link className="navbar-link" to="/media">
-						Media
-					</Link>
-					<Link className="navbar-link" to="/events">
-						Events
-					</Link>
-					<Link className="navbar-link" to="/types">
-						Types
-					</Link>
+		menu = (
+			<div id="navbar-menu">
+				<Link className="navbar-link" to="/media">
+					Media
+				</Link>
+				<Link className="navbar-link" to="/events">
+					Events
+				</Link>
+				<Link className="navbar-link" to="/types">
+					Types
+				</Link>
 			</div>
+		);
 		return (
 			<div>
 				<AppBar
@@ -41,9 +42,8 @@ class Navbar extends React.Component {
 						<img src={logo} alt="" />
 					</Link>
 					{menu}
-					<Navigator onSearchTap={this.toggleSearch} />
+					<Navigator />
 				</AppBar>
-
 				<StudioDrawer
 					open={this.props.drawerOpened}
 					onToggleDrawer={this.props.toggleDrawer}
@@ -57,6 +57,7 @@ function mapStateToProps(state) {
 	return {
 		drawerOpened: state.ui.drawerOpened,
 		searchOpened: state.ui.searchOpened,
+		auth: state.auth,
 	}
 }
 
