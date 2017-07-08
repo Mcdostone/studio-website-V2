@@ -7,7 +7,7 @@ export default class User {
 		this.fullname = fullname;
 		this.picture = picture;
 		this.updatedAt = new Date(updatedAt);
-		this.media = this.media;
+		this.media = media;
 	}
 
 }

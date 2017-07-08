@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Cover } from '../Layout';
 import Studio from '../Studio';
-import mock from '../Media/mock-media';
 
 class Profile extends React.Component {
 
@@ -20,7 +19,7 @@ class Profile extends React.Component {
 				</Cover>
 				<div className="container">
 					<h1 className="big-title">What you liked</h1>
-					<Studio media={mock}></Studio>
+					<Studio media={this.props.media}></Studio>
 				</div>
 			</div>
 		);
@@ -28,7 +27,7 @@ class Profile extends React.Component {
 }
 
 Profile.propTypes = {
-	media: PropTypes.object,
+	media: PropTypes.object.isRequired,
 };
 
 Profile.defaultProps = {

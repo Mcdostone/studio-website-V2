@@ -27,7 +27,6 @@ function* requestLogin() {
 			{...authData.additionalUserInfo.profile, updatedAt: Date.now()},
 			{credentials: authData.credential}
 		);
-		console.log(user);
 		yield put({type: LOGIN, payload: user});
 		restFirebaseDatabase.post('users', user.id, user);
   }

@@ -1,22 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Layout } from '../Layout';
 import StudioList from '../../components/List/StudioList';
-import { fetchAll } from '../../actions/fetchActions';
-import { setCover, setTitle } from '../../actions/coverActions';
 import E from './E';
 
 class Events extends React.Component {
 
-	componentDidMount() {
-		this.props.setCover('events');
-		this.props.setTitle('events');
-		this.props.fetchAll('events');
-	}
-
-	getContainer() {
+	render() {
 		return (
 			<StudioList gutter={16} className="studio-list-space">
 				{Object.keys(this.props.dataSource).map(key =>
@@ -25,33 +15,16 @@ class Events extends React.Component {
 					</Link>
 				)}
 			</StudioList>
-		)
-	}
-
-	render() {
-		return (
-			<Layout cover={this.props.cover} title={this.props.title}>
-				{this.getContainer()}
-			</Layout>
 		);
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		media: state.media,
-		dataSource: state.events,
-		cover: state.covers.current,
-		title: state.covers.title
-	}
+Events.propTypes = {
+	dataSource: PropTypes.object,
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		setCover,
-		setTitle,
-		fetchAll,
-  }, dispatch);
+Events.defaultProps = {
+	dataSource: {},
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Events);
+export default Events;

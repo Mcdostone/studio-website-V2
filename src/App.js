@@ -9,12 +9,14 @@ import { history } from './history';
 import Navbar from './components/Navbar';
 import Home from './containers/Home';
 import mediaWrapper from './containers/wrappers/mediaWrapper';
+import resourceWrapper from './containers/wrappers/resourceWrapper';
 import Sandbox from './containers/Sandbox';
 import Events from './containers/Events';
 import Types from './containers/Types';
 import Profile from './containers/Profile';
 import Login from './components/Auth/Login';
 import StudioCountdown from './containers/StudioCountdown';
+
 import './App.css';
 
 
@@ -23,7 +25,7 @@ syncHistoryWithStore(history, store);
 class App extends React.Component {
 
 	componentDidMount() {
-		// window.gapi.client.load('drive', 'v2');
+			window.gapi.client.load('drive', 'v2');
 	}
 
 	render() {
@@ -34,13 +36,11 @@ class App extends React.Component {
 						<div>
 							<Navbar />
 							<Route exact path="/" component={Home} />
-							<Route exact path="/events" component={Events} />
-							<Route exact path="/types" component={Types} />
+							<Route exact path="/events" component={resourceWrapper('events', Events)} />
+							<Route exact path="/types" component={resourceWrapper('types', Types)} />
 							<Route path="/events/:id" component={mediaWrapper('events')} />
 							<Route path="/types/:id" component={mediaWrapper('types')} />
-							<Route path="/profile" component={IsAuthentificated(Profile)} />
-							<Route ext path="/profile/:id" component={IsAuthentificated(mediaWrapper('users', Profile))} />
-
+							<Route path="/profile/:id" component={IsAuthentificated(mediaWrapper('users', Profile))} />
 							<Route path="/login" component={Login} />
 							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />
 							<Route path="/sandbox" component={Sandbox} />

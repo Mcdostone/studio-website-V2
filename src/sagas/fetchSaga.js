@@ -52,9 +52,11 @@ function* fetchReferences(resource, param, refs) {
 		logger.info(`[FIREBASE-DB] GET /${resource}${param === undefined ? '' : `/${param}`}/${refs}`);
 		const state = yield select();
 		const data = state[resource][param];
-		yield all(data[refs].map(r =>
-			put({type: `${refs.toUpperCase()}_${FETCH}`, payload: {dataType: OBJECT, resource: refs, param: r}})
-		));
+		if(data[refs] !== undefined) {
+			yield all(data[refs].map(r =>
+				put({type: `${refs.toUpperCase()}_${FETCH}`, payload: {dataType: OBJECT, resource: refs, param: r}})
+			));
+		}
 	}
 }
 

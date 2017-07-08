@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWithRefs } from '../../actions/fetchActions';
+import { LayoutMedia } from '../Layout';
 
-export default function mediaWrapper(resource, WrappedComponent) {
+export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 
 	const MediaContainer = class extends React.Component {
 
@@ -31,11 +32,13 @@ export default function mediaWrapper(resource, WrappedComponent) {
 			return false;
 		}
 
+		getMediaByresourceId(id) {
+		}
+
 		render() {
 			const id = this.props.match.params.id;
-			//const data = this.getData(id);
-			const media = this.props.media.media;
-			return <WrappedComponent {...this.props} id={id} media={media} />
+			const title = this.props.dataSource[id] ? this.props.dataSource[id].name : '';
+			return <WrappedComponent {...this.props} title={title} id={id} media={this.props.media} />
 		}
 
 	}

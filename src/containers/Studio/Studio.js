@@ -81,7 +81,6 @@ class Studio extends React.Component {
 	render() {
 		const filters = this.getFilters();
 		const processedMedia = this.getProcessedMedia(filters);
-
 		return (
 			<div>
 				<Lightbox />
@@ -100,7 +99,7 @@ class Studio extends React.Component {
 					)}
 				</StudioList>
 			</div>
-		);
+		)
 	}
 }
 

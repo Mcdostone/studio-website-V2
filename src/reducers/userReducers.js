@@ -1,5 +1,7 @@
 import { USERS_ADD } from '../actions/userActions';
 import { User } from '../core';
+import { buildUniqueDatasetById } from '../utils';
+
 
 const initialState = {}
 
@@ -10,10 +12,8 @@ function buildUser(user) {
 export default function (state = initialState, action) {
 	switch(action.type) {
 		case USERS_ADD:
-			console.log(buildUser(action.payload));
-			/*const types = buildUniqueDatasetById(action.payload, buildType);
-			return Object.assign({}, state, types);*/
-			return state;
+			const newUsers = buildUniqueDatasetById(action.payload, buildUser);
+			return Object.assign({}, state, newUsers);
 		default:
 			return state;
 			// eslint-disable-next-line
