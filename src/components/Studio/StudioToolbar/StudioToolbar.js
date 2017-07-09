@@ -10,6 +10,7 @@ import { capitalizeFirstLetter } from '../../../utils';
 
 import './StudioToolbar.css';
 
+
 class StudioToolbar extends React.Component {
 
 	constructor(props) {

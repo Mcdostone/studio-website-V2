@@ -1,9 +1,8 @@
 import React from 'react';
 import FavoriteAction from 'material-ui/svg-icons/action/favorite';
-// import IconButton from 'material-ui/IconButton';
-// import PlayArrow from 'material-ui/svg-icons/av/play-arrow';
-import Thumbnail from '../../components/Thumbnail';
-import itemWrapper from '../../components/List/Item';
+import Thumbnail from '../Thumbnail';
+import itemWrapper from '../List/Item';
+
 
 class M extends React.Component {
 

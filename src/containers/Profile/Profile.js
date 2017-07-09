@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Cover } from '../Layout';
-import Studio from '../Studio';
+import Studio from '../../components/Studio';
 
 class Profile extends React.Component {
 

@@ -5,7 +5,7 @@ import Avatar from 'material-ui/Avatar';
 import Menu from 'material-ui/Menu';
 import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
-import { authWrapper } from '../../../containers/wrappers';
+import { authWrapper } from '../../../wrappers';
 
 
 class Navigator extends React.Component {

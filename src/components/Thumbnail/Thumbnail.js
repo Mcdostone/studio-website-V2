@@ -1,5 +1,6 @@
 import React from 'react';
-import overlayedComponent from '../../components/Overlay';
+import overlayWrapper from '../../wrappers/overlayWrapper/overlayWrapper';
+
 
 class Thumbnail extends React.Component {
 
@@ -18,4 +19,4 @@ class Thumbnail extends React.Component {
 	}
 }
 
-export default overlayedComponent(Thumbnail);
+export default overlayWrapper(Thumbnail);

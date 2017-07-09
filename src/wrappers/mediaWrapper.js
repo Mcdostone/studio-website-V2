@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchWithRefs } from '../../actions/fetchActions';
-import { LayoutMedia } from '../Layout';
+import { fetchWithRefs } from '../actions/fetchActions';
+import { LayoutMedia } from '../containers/Layout';
 
 export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 

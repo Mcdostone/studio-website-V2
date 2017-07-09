@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Cover from './Cover';
-import Studio from '../Studio';
+import Studio from '../../components/Studio';
 import './Layout.css';
 
 class LayoutMedia extends React.Component {

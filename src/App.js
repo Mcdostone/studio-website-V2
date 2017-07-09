@@ -8,13 +8,11 @@ import store from './store';
 import { history } from './history';
 import Navbar from './components/Navbar';
 import Home from './containers/Home';
-import mediaWrapper from './containers/wrappers/mediaWrapper';
-import resourceWrapper from './containers/wrappers/resourceWrapper';
+import { mediaWrapper, resourceWrapper } from './wrappers';
 import Events from './containers/Events';
 import Media from './containers/Media';
 import Types from './containers/Types';
 import Profile from './containers/Profile';
-import Login from './components/Auth/Login';
 import StudioCountdown from './containers/StudioCountdown';
 import './App.css';
 
@@ -24,7 +22,7 @@ syncHistoryWithStore(history, store);
 class App extends React.Component {
 
 	componentDidMount() {
-			window.gapi.client.load('drive', 'v2');
+		// window.gapi.client.load('drive', 'v2');
 	}
 
 	render() {
@@ -41,7 +39,6 @@ class App extends React.Component {
 							<Route path="/events/:id" component={mediaWrapper('events')} />
 							<Route path="/types/:id" component={mediaWrapper('types')} />
 							<Route path="/profile/:id" component={IsAuthentificated(mediaWrapper('users', Profile))} />
-							<Route path="/login" component={Login} />
 							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />
 						</div>
 					</Router>

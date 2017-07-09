@@ -1,7 +1,8 @@
 import React from 'react';
-import './Overlay.css';
+import './overlayWrapper.css';
 
-export default function overlayedComponent(WrappedComponent) {
+
+export default function overlayWrapper(WrappedComponent) {
 
 	return class Overlay extends React.Component {
 		render() {

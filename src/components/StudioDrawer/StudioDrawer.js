@@ -4,7 +4,7 @@ import Drawer from 'material-ui/Drawer';
 import { Link } from 'react-router-dom';
 import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
-import { authWrapper } from '../../containers/wrappers';
+import { authWrapper } from '../../wrappers';
 
 class StudioDrawer extends React.Component {
 	render() {

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { fetchAllMedia } from '../../actions/mediaActions';
 import { setCover, setTitle } from '../../actions/coverActions';
 import { Layout } from '../Layout';
-import Studio from '../Studio';
+import Studio from '../../components/Studio';
 
 
 class Media extends React.Component {
