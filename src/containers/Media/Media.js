@@ -1,23 +1,42 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Studio from '../Studio'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchAllMedia } from '../../actions/mediaActions';
+import { setCover, setTitle } from '../../actions/coverActions';
+import { Layout } from '../Layout';
+import Studio from '../Studio';
+
 
 class Media extends React.Component {
 
+	componentDidMount() {
+		this.props.setCover('media');
+		this.props.setTitle('media');
+		this.props.fetchAllMedia();
+	}
+
 	render() {
-		console.log(this.props.dataSource);
 		return (
-			<Studio media={this.props.dataSource} />
+			<Layout cover={this.props.cover} title={'media'}>
+				<Studio media={this.props.dataSource} />
+			</Layout>
 		);
 	}
 }
 
-Media.propTypes = {
-	dataSource: PropTypes.object,
+function mapStateToProps(state) {
+	return {
+		dataSource: state.media,
+		cover: state.covers.media,
+	}
 }
 
-Media.defaultProps = {
-	dataSource: {},
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+		setTitle,
+		setCover,
+		fetchAllMedia,
+	}, dispatch);
 }
 
-export default Media;
+export default connect(mapStateToProps, mapDispatchToProps)(Media);

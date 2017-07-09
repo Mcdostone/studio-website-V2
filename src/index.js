@@ -10,8 +10,8 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 require('es6-promise').polyfill()
 
-injectTapEventPlugin();
 
+injectTapEventPlugin();
 
 const Studio = (props) => {
 	return (

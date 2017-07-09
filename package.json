@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aor-firebase-client": "0.0.2",
     "bragi-browser": "0.0.12",
     "es6-promise": "^4.1.0",
     "firebase": "^4.1.3",

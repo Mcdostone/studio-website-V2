@@ -1,6 +1,6 @@
-import { call, takeEvery, put, select } from 'redux-saga/effects';
+import { all, call, takeEvery, put, select } from 'redux-saga/effects';
 import { Medium } from '../core';
-import { MEDIA_FETCH, MEDIA_ADD } from '../actions/mediaActions';
+import { MEDIA_FETCH, MEDIA_ADD, MEDIA_FETCH_ALL } from '../actions/mediaActions';
 import logger from '../Logger';
 import restFirebaseDatabase from './RestFirebaseDatabase';
 import GoogleDriveApi from './GoogleDriveApi';
@@ -14,6 +14,9 @@ function buildMedium(medium, src) {
 
 function* buildMediumFromGoogleDrive(medium) {
 	const state = yield select();
+	if(state.auth.authentificated === false) {
+		throw new Error('You should be connected to use google drive API');
+	}
 	logger.react(`GET ${medium.id} from google drive`);
 	googleDriveApi.setAccessToken(state.auth.user.credentials.accessToken);
 	const data = yield call(googleDriveApi.getFile, medium.id);
@@ -23,11 +26,14 @@ function* buildMediumFromGoogleDrive(medium) {
 function* createMediumFromFirebase(medium) {
 	switch(medium.from.toLowerCase().trim()) {
 		case 'drive':
-			return yield call(buildMediumFromGoogleDrive, medium);
+			const newMedium = yield call(buildMediumFromGoogleDrive, medium);
+			yield put({type: MEDIA_ADD, payload: newMedium});
+			break;
 		default:
-		return buildMedium(medium, medium.src);
+			yield put({type: MEDIA_ADD, payload: buildMedium(medium, medium.src)});
 	}
 }
+
 
 function* fetchMedia(action) {
 	const state = yield select();
@@ -36,15 +42,23 @@ function* fetchMedia(action) {
 			throw new Error('You should be connected to use google drive API');
 		}
 		const snapshot = yield call(restFirebaseDatabase.get, action.payload.resource, action.payload.param);
-		const newMedium = yield call(createMediumFromFirebase, snapshot.val());
-		yield put({type: MEDIA_ADD, payload: newMedium});
-	} catch(err) {
+		yield call(createMediumFromFirebase, snapshot.val());
+} catch(err) {
 		logger.error(err);
 	}
 }
 
+function* fetchAll() {
+	const snapshot = yield call(restFirebaseDatabase.get, 'media');
+	const data = snapshot.val();
+	yield all(Object.keys(data).map(idMedium => {
+		return call(createMediumFromFirebase, data[idMedium]);
+	}));
+}
+
 function* mediaSagas() {
 	yield takeEvery(MEDIA_FETCH, fetchMedia);
+	yield takeEvery(MEDIA_FETCH_ALL, fetchAll);
 }
 
 export default mediaSagas;
