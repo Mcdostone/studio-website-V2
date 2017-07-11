@@ -1,5 +1,6 @@
 import React from 'react';
-import './Item.css';
+import './itemWrapper.css';
+
 
 export default function itemWrapper(WrappedComponent) {
 

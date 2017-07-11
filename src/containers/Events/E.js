@@ -1,6 +1,6 @@
 import React from 'react';
 import Thumbnail from '../../components/Thumbnail';
-import itemWrapper from '../../components/List/Item';
+import { itemWrapper } from '../../wrappers';
 
 class E extends React.Component {
 

@@ -11,7 +11,7 @@ import Home from './containers/Home';
 import { mediaWrapper, resourceWrapper } from './wrappers';
 import Events from './containers/Events';
 import Media from './containers/Media';
-import Types from './containers/Types';
+// import Types from './containers/Types';
 import Profile from './containers/Profile';
 import StudioCountdown from './containers/StudioCountdown';
 import './App.css';
@@ -22,7 +22,7 @@ syncHistoryWithStore(history, store);
 class App extends React.Component {
 
 	componentDidMount() {
-		// window.gapi.client.load('drive', 'v2');
+		window.gapi.client.load('drive', 'v2');
 	}
 
 	render() {
@@ -35,9 +35,11 @@ class App extends React.Component {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/media" component={Media} />
 							<Route exact path="/events" component={resourceWrapper('events', Events)} />
-							<Route exact path="/types" component={resourceWrapper('types', Types)} />
-							<Route path="/events/:id" component={mediaWrapper('events')} />
+							{/*<Route exact path="/types" component={resourceWrapper('types', Types)} />
 							<Route path="/types/:id" component={mediaWrapper('types')} />
+							*/}
+
+							<Route path="/events/:id" component={mediaWrapper('events')} />
 							<Route path="/profile/:id" component={IsAuthentificated(mediaWrapper('users', Profile))} />
 							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />
 						</div>

@@ -23,11 +23,6 @@ class StudioDrawer extends React.Component {
 						Events
 					</MenuItem>
 				</Link>
-				<Link to="/types">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Types
-					</MenuItem>
-				</Link>
 				<Divider />
 				<Link to={`/profile/${this.props.auth.user.id}`}>
 					<MenuItem onTouchTap={this.props.onToggleDrawer}>

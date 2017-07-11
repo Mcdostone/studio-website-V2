@@ -23,9 +23,6 @@ class Navbar extends React.Component {
 				<Link className="navbar-link" to="/events">
 					Events
 				</Link>
-				<Link className="navbar-link" to="/types">
-					Types
-				</Link>
 			</div>
 		);
 		return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import FavoriteAction from 'material-ui/svg-icons/action/favorite';
 import Thumbnail from '../Thumbnail';
-import itemWrapper from '../List/Item';
+import itemWrapper from '../../wrappers/itemWrapper/itemWrapper';
 
 
 class M extends React.Component {

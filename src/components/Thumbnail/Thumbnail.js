@@ -12,6 +12,7 @@ class Thumbnail extends React.Component {
 			height: '100%',
 		}
 	}
+
 	render() {
 		return (
 			<img style={this.getStyles()} src={this.props.src} alt=""/>
