@@ -1,5 +1,5 @@
 import { all, call, takeEvery, put, select } from 'redux-saga/effects';
-import { Medium } from '../core';
+import { Medium, Exif } from '../core';
 import { MEDIA_FETCH, MEDIA_ADD, MEDIA_FETCH_ALL } from '../actions/mediaActions';
 import logger from '../Logger';
 import restFirebaseDatabase from './RestFirebaseDatabase';
@@ -8,8 +8,21 @@ import GoogleDriveApi from './GoogleDriveApi';
 
 const googleDriveApi = new GoogleDriveApi(window.gapi);
 
-function buildMedium(medium, src) {
-	return new Medium(medium.id, src, medium.from, medium.likes, medium.events, medium.types);
+function buildMedium(medium, src, exif = new Exif()) {
+	return new Medium(medium.id, src, medium.from, medium.likes, medium.events, medium.types, exif);
+}
+
+function buildExifFromGoogleDrive(driveData) {
+	const exif =  new Exif();
+	const exifData = driveData.imageMediaMetadata;
+	if(exifData) {
+		exif.addMetadata('camera', exifData.cameraModel);
+		exif.addMetadata('lens', exifData.lens);
+		exif.addMetadata('exposure', exifData.exposureTime);
+		exif.addMetadata('aperture', exifData.aperture);
+		exif.addMetadata('iso', exifData.isoSpeed);
+	}
+	return exif;
 }
 
 function* buildMediumFromGoogleDrive(medium) {
@@ -17,7 +30,7 @@ function* buildMediumFromGoogleDrive(medium) {
 	logger.react(`GET ${medium.id} from google drive`);
 	googleDriveApi.setAccessToken(state.auth.user.credentials.accessToken);
 	const data = yield call(googleDriveApi.getFile, medium.id);
-	return buildMedium(medium, data.thumbnailLink.split('=')[0]);
+	return buildMedium(medium, data.thumbnailLink.split('=')[0], buildExifFromGoogleDrive(data))
 }
 
 function* createMediumFromFirebase(medium) {

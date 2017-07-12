@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cameraIso from '../../assets/camera-iso.svg';
 import cameraExposure from '../../assets/camera-exposure.svg';
 import cameraTimer from '../../assets/camera-timer.svg';
@@ -7,35 +8,47 @@ import camera from '../../assets/camera.svg';
 
 class ExifInfos extends React.Component {
 
+	getContainer() {
+		return (
+			<div className="lightbox-infos-exif">
+				<div className="exif-cell exif-icon">
+					<img alt="" src={camera}></img>
+				</div>
+				<span className="exif-cell">{this.props.exif.camera}</span>
+
+				<div className="exif-cell exif-icon">
+					<img alt="" src={cameraLens}></img>
+				</div>
+				<span className="exif-cell">{this.props.exif.lens}</span>
+
+				<div className="exif-cell exif-icon">
+					<img alt="" src={cameraExposure}></img>
+				</div>
+				<span className="exif-cell">{this.props.exif.aperture}</span>
+
+				<div className="exif-cell exif-icon">
+					<img alt="" src={cameraTimer}></img>
+				</div>
+				<span className="exif-cell">{this.props.exif.exposure}</span>
+
+				<div className="exif-cell exif-icon">
+					<img alt="" src={cameraIso}></img>
+				</div>
+				<span className="exif-cell">{this.props.exif.iso}</span>
+			</div>
+		);
+	}
+
 	render() {
-		return <div className="lightbox-infos-exif">
-			<div className="exif-cell exif-icon">
-				<img alt="" src={camera}></img>
-			</div>
-			<span className="exif-cell">Canon 6D</span>
+		return (
+			this.props.exif.containsMetadata() ? this.getContainer() : null
+		);
+	}
 
-			<div className="exif-cell exif-icon">
-				<img alt="" src={cameraLens}></img>
-			</div>
-			<span className="exif-cell">EF 50mm f/1.8 II</span>
+}
 
-			<div className="exif-cell exif-icon">
-				<img alt="" src={cameraExposure}></img>
-			</div>
-			<span className="exif-cell">f/4.9</span>
-
-			<div className="exif-cell exif-icon">
-				<img alt="" src={cameraTimer}></img>
-			</div>
-			<span className="exif-cell">1/200</span>
-
-			<div className="exif-cell exif-icon">
-				<img alt="" src={cameraIso}></img>
-			</div>
-			<span className="exif-cell">400</span>
-		</div>
-	};
-
+ExifInfos.propTypes = {
+	exif : PropTypes.object.isRequired
 }
 
 export default ExifInfos;

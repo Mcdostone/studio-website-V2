@@ -13,8 +13,7 @@ export default function (state = initialState, action, root) {
 	switch(action.type) {
 		case SHOW_MEDIUM:
 			return Object.assign({}, state, {
-				medium: action.payload.medium,
-				index: action.payload.index,
+				medium: action.payload,
 				lightboxOpened: true,
       });
 

@@ -39,27 +39,31 @@ class LightboxViewer extends React.Component {
 				this.props.closeLightbox();
 				break;
 			case 37:
-				this.handlePreviousMedium();
+				// this.handlePreviousMedium();
 				break;
 			case 39:
-				this.handleNextMedium();
+				// this.handleNextMedium();
 				break;
 			default:
 		}
 	}
 
 	generateMedium(medium) {
-		let elem = null
-		switch(medium.type) {
-			case 'picture':
-				elem = <Picture className="lightbox-medium" src={medium.src} />
-				break;
-			case 'video':
-				elem = <Video className="lightbox-medium" src={medium.src} />
-				break;
-			default:
-				elem = <Picture className="lightbox-medium" src={medium.src} />
-		};
+		let elem = null;
+		if(medium.type === undefined)
+			elem = <Picture className="lightbox-medium" src={medium.src} />
+		else {
+			switch(medium.type) {
+				case 'picture':
+					elem = <Picture className="lightbox-medium" src={medium.src} />
+					break;
+				case 'video':
+					elem = <Video className="lightbox-medium" src={medium.src} />
+					break;
+				default:
+					elem = <Picture className="lightbox-medium" src={medium.src} />
+			};
+		}
 
 		return (
 			<div className="lightbox-container-medium">

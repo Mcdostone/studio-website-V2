@@ -81,6 +81,7 @@
 
 
 .lightbox-infos-container {
+	width: 100%;
 	box-sizing: border-box;
 	padding: 24px;
 }
@@ -168,7 +169,8 @@
 
 .exif-cell {
 	display: flex;
-	align-items: center;
+	overflow: hidden;
+	flex-wrap: nowrap;
 	flex: 2 2 calc(50%);
 	height: 28px;
 	color: var(--grey);

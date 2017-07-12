@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -71,7 +72,7 @@ class LightboxInfos extends React.Component {
 				{adminButton}
 				<LikeButton likes={this.props.medium.countLikes()} />
 				<Divider style={styleDivider} />
-				<ExifInfos />
+				<ExifInfos exif={this.props.medium.exif} />
 				<Divider style={styleDivider} />
 				<TextField
 					ref="textField"
@@ -93,5 +94,9 @@ class LightboxInfos extends React.Component {
 		)
 	}
 }
+
+LightboxInfos.propTypes = {
+	medium: PropTypes.object.isRequired,
+};
 
 export default LightboxInfos;

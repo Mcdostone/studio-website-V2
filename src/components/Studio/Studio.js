@@ -82,6 +82,7 @@ class Studio extends React.Component {
 	render() {
 		const filters = this.getFilters();
 		const processedMedia = this.getProcessedMedia(filters);
+		console.log(processedMedia);
 		return (
 			<div>
 				<Lightbox />
@@ -96,7 +97,9 @@ class Studio extends React.Component {
 					onSetSorting={this.setSorting}/>
 				<StudioList gutter={16}>
 					{processedMedia.map(m =>
-						<M square={this.state.squareView} medium={m} key={m.id} />
+						<div key={m.id} onClick={() => this.showMedium(m)}>
+							<M square={this.state.squareView} medium={m} />
+						</div>
 					)}
 				</StudioList>
 			</div>
