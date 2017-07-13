@@ -34,6 +34,7 @@ function* buildMediumFromGoogleDrive(medium) {
 }
 
 function* createMediumFromFirebase(medium) {
+	console.log(medium);
 	const state = yield select();
 	switch(medium.from.toLowerCase().trim()) {
 		case 'drive':
@@ -53,6 +54,7 @@ function* createMediumFromFirebase(medium) {
 
 
 function* fetchMedia(action) {
+	console.log(action);
 	const snapshot = yield call(restFirebaseDatabase.get, action.payload.resource, action.payload.param);
 	yield call(createMediumFromFirebase, snapshot.val());
 }

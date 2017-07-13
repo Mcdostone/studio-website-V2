@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWithRefs } from '../actions/fetchActions';
+import { setCover } from '../actions/coverActions';
 import { LayoutMedia } from '../containers/Layout';
+
 
 export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 
@@ -11,6 +13,7 @@ export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 		componentDidMount() {
 			const id = this.props.match.params.id;
 			this.fetchData(id);
+			this.props.setCover(id);
 		}
 
 		getData() {
@@ -57,12 +60,14 @@ export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 		return {
 			dataSource: state[resource],
 			media: state.media,
+			cover: state.covers.current,
 		}
 	}
 
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
 			fetchWithRefs,
+			setCover,
 		}, dispatch);
 	}
 

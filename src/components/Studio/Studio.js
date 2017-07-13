@@ -82,7 +82,6 @@ class Studio extends React.Component {
 	render() {
 		const filters = this.getFilters();
 		const processedMedia = this.getProcessedMedia(filters);
-		console.log(processedMedia);
 		return (
 			<div>
 				<Lightbox />

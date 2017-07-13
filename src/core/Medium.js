@@ -1,6 +1,3 @@
-import Exif from './Exif';
-
-
 export default class Medium {
 
 	constructor(id, src, comeFrom, likes, event, type, exif) {

@@ -26,7 +26,7 @@ class Image extends React.Component {
 		return (
 			<Anime
 				opacity={[0, 1]}
-				duration={3000}
+				duration={2000}
 				autoplay={this.state.loaded}
 			>
 				<img src={this.props.src} onLoad={this.imageLoaded} className="image" alt=""/>

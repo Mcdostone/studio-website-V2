@@ -3,6 +3,7 @@ import restFirebaseDatabase from './RestFirebaseDatabase';
 import logger from '../Logger';
 import {
 	FETCH,
+	FETCH_REFS,
 	LIST,
 	OBJECT,
 } from '../actions/fetchActions';
@@ -27,7 +28,7 @@ function exist(action, state) {
 
 export function* fetch(action) {
 	const promise = restFirebaseDatabase.get;
-	const {resource, param, dataType, refs} = action.payload;
+	const {resource, param, dataType} = action.payload;
 	const state = yield select();
 	if(!exist(action, state)) {
 		logger.react(`[FIREBASE-DB] GET ${dataType} /${resource}${param === undefined ? '' : `/${param}`}`);
@@ -35,31 +36,33 @@ export function* fetch(action) {
 			const response = yield call(promise, resource.toLowerCase(), param);
 			const result = buildResult(response, action.payload.dataType);
 			yield put({type: `${resource.toUpperCase()}_ADD`, payload: result});
-			yield fetchReferences(resource, param, refs);
 		} catch(err) {
 			logger.error(err);
 		}
 	}
-	else {
-		yield fetchReferences(resource, param, refs);
-	}
 
 }
 
-function* fetchReferences(resource, param, refs) {
-	if(refs) {
+function* fetchReferences(action) {
+	const state = yield select();
+	const {resource, param, refs} = action.payload;
+	let dataSource = state[resource][param];
+	if(dataSource === undefined) {
 		logger.info(`[FIREBASE-DB] GET /${resource}${param === undefined ? '' : `/${param}`}/${refs}`);
-		const state = yield select();
-		const data = state[resource][param];
-		if(data[refs] !== undefined) {
-			yield all(data[refs].map(r =>
+		const response = yield call(restFirebaseDatabase.get, resource.toLowerCase(), param);
+		dataSource = response.val();
+		const result = buildResult(response, action.payload.dataType);
+		yield put({type: `${resource.toUpperCase()}_ADD`, payload: result});
+	}
+	if(dataSource[refs] !== undefined) {
+			yield all(dataSource[refs].map(r =>
 				put({type: `${refs.toUpperCase()}_${FETCH}`, payload: {dataType: OBJECT, resource: refs, param: r}})
 			));
 		}
-	}
 }
 
 
 export default function* fetchSaga() {
 	yield takeEvery(FETCH, fetch);
+	yield takeEvery(FETCH_REFS, fetchReferences);
 }
