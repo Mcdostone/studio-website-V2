@@ -30,24 +30,29 @@ function* buildMediumFromGoogleDrive(medium) {
 	logger.react(`GET ${medium.id} from google drive`);
 	googleDriveApi.setAccessToken(state.auth.user.credentials.accessToken);
 	const data = yield call(googleDriveApi.getFile, medium.id);
-	return buildMedium(medium, data.thumbnailLink.split('=')[0], buildExifFromGoogleDrive(data))
+	if(data !== undefined) {
+			return buildMedium(medium, data.thumbnailLink.split('=')[0], buildExifFromGoogleDrive(data));
+	}
+	return undefined;
 }
 
 function* createMediumFromFirebase(medium) {
-	const state = yield select();
-	switch(medium.from.toLowerCase().trim()) {
-		case 'drive':
-			if(state.auth.authentificated === true) {
-				const newMedium = yield call(buildMediumFromGoogleDrive, medium);
-				yield put({type: MEDIA_ADD, payload: newMedium});
-			}
-			else {
-				logger.error('You should be connected to use google drive API');
-			}
-
-			break;
-		default:
-			yield put({type: MEDIA_ADD, payload: buildMedium(medium, medium.src)});
+	if(medium !== undefined && medium !== null) {
+		const state = yield select();
+		console.log(medium);
+		switch(medium.from.toLowerCase().trim()) {
+			case 'drive':
+				if(state.auth.authentificated === true) {
+					const newMedium = yield call(buildMediumFromGoogleDrive, medium);
+					yield put({type: MEDIA_ADD, payload: newMedium});
+				}
+				else {
+					logger.error('You should be connected to use google drive API');
+				}
+				break;
+			default:
+				yield put({type: MEDIA_ADD, payload: buildMedium(medium, medium.src)});
+		}
 	}
 }
 

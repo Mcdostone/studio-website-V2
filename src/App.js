@@ -7,6 +7,7 @@ import IsAuthentificated from './IsAuthentificated';
 import store from './store';
 import { history } from './history';
 import Navbar from './components/Navbar';
+import StudioDrawer from './components/StudioDrawer';
 import Home from './containers/Home';
 import { mediaWrapper, resourceWrapper } from './wrappers';
 import Events from './containers/Events';
@@ -31,6 +32,7 @@ class App extends React.Component {
 					<Router history={history}>
 						<div>
 							<Navbar />
+							<StudioDrawer />
 							<Route exact path="/" component={Home} />
 							<Route exact path="/media" component={Media} />
 							<Route exact path="/events" component={resourceWrapper('events', Events)} />

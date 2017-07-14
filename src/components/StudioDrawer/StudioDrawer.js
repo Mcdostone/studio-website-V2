@@ -1,12 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Drawer from 'material-ui/Drawer';
 import { Link } from 'react-router-dom';
 import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
+import { toggleDrawer } from '../../actions/uiActions'
 import { authWrapper } from '../../wrappers';
 
+
 class StudioDrawer extends React.Component {
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return this.props.auth.authentificated !== nextProps.auth.authentificated ||
+			this.props.open !== nextProps.open
+		;
+	}
+
 	render() {
 		let authentificated = undefined;
 		if(this.props.auth.authentificated === true) {
@@ -35,7 +46,7 @@ class StudioDrawer extends React.Component {
 					</MenuItem>
 				</Link>
 				<Link to="/logout">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+					<MenuItem onTouchTap={this.props.requestLogout}>
 						Logout
 					</MenuItem>
 				</Link>
@@ -80,6 +91,18 @@ class StudioDrawer extends React.Component {
 	}
 }
 
+function mapStateToProps(state) {
+	return {
+		open: state.ui.drawerOpened,
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+    onToggleDrawer: toggleDrawer,
+  }, dispatch);
+}
+
 StudioDrawer.propTypes = {
 	open: PropTypes.bool,
 	onToggleDrawer: PropTypes.func.isRequired,
@@ -92,4 +115,4 @@ StudioDrawer.defaultProps = {
 	open: false,
 };
 
-export default authWrapper(StudioDrawer);
+export default connect(mapStateToProps, mapDispatchToProps)(authWrapper(StudioDrawer));

@@ -2,6 +2,7 @@ export const COVER_FETCH = 'COVER_FETCH';
 export const COVER_ADD = 'COVER_ADD';
 export const COVER_SET_CURRENT = 'COVER_SET_CURRENT';
 export const COVER_SET_TITLE = 'COVER_SET_TITLE';
+export const COVER_RESET = 'COVER_RESET';
 export const COVER_NEW = 'COVER_NEW';
 
 
@@ -23,4 +24,8 @@ export const setCover = (id) => ({
 export const setTitle = (title) => ({
     type: COVER_SET_TITLE,
 		payload: title,
+});
+
+export const resetCover = () => ({
+    type: COVER_RESET
 });

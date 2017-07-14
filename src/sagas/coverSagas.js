@@ -1,4 +1,4 @@
-import { COVER_FETCH, COVER_ADD, COVER_SET_CURRENT, COVER_NEW } from '../actions/coverActions';
+import { COVER_FETCH, COVER_ADD, COVER_SET_CURRENT, COVER_RESET, COVER_NEW } from '../actions/coverActions';
 import { call, put, takeLatest, select } from 'redux-saga/effects';
 import RestFirebaseStorage from './RestFirebaseStorage';
 import logger from '../Logger'
@@ -23,6 +23,7 @@ function* getCover(action) {
 }
 
 function* setCover(action) {
+	yield put({type: COVER_RESET});
 	const state = yield select();
 	const id = action.payload;
 	if(state.covers[id] === undefined) {

@@ -20,7 +20,6 @@ class RestFirebaseDatabase extends RestFirebase {
 
 	post(resource, param, dataObject) {
 		const path = this.buildPath(resource, param);
-		//console.log(path, dataObject);
 		this.firebase.database().ref(path).update(dataObject);
 	}
 

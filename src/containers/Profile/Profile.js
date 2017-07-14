@@ -11,7 +11,7 @@ class Profile extends React.Component {
 	render() {
 		return (
 			<div className="layout-studio">
-				<Cover className="cover" src={this.props.cover} >
+				<Cover className="cover" title="profile" src={this.props.cover} >
 					<div>
 						<Avatar size={150} src={this.props.auth.user.picture} />
 						<p style={{marginBottom: 0}} className="cover-name">{this.props.auth.user.name}</p>

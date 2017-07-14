@@ -1,5 +1,5 @@
 import {
-	COVER_ADD,
+	COVER_ADD, COVER_RESET,
 	COVER_SET_TITLE, COVER_NEW } from '../actions/coverActions';
 import config from '../configuration';
 
@@ -21,7 +21,10 @@ export default function (state = initialState, action) {
 		case COVER_NEW:
 			return Object.assign({}, state, {current: state[action.payload]});
 
-		default:
+		case COVER_RESET:
+			return Object.assign({}, state, {current: undefined});
+
+			default:
 			return state;
 	}
 }

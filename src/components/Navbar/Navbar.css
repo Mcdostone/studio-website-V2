@@ -67,11 +67,24 @@
 	display: flex;
 }
 
-
-
 @media screen and (max-width: 640px) {
   #navbar-menu {
 		display: none;
 	}
 }
 
+.navigator .navbar-link {
+	overflow: hidden;
+}
+
+.navigator .navbar-link g {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	-webkit-backface-visibility: hidden;
+}
+
+#navigator-username {
+	white-space: nowrap;
+	overflow-x: hidden;
+}

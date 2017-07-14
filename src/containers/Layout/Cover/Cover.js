@@ -9,20 +9,20 @@ import './Cover.css';
 class Cover extends React.Component {
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return (this.props.title !== nextProps.title) ||
-		(this.props.src !== nextProps.src)
+		return ((this.props.src === undefined) && (nextProps.src !== undefined)) || (this.props.src !== nextProps.src)
+		|| (this.props.title !== nextProps.title);
 	}
 
 	render() {
 		const settings = (
 			<DashboardIconMenu
-				style={{ zIndex: 2000, position: 'absolute', right: 100, bottom: 0 }}
+				style={{ zIndex: 1000, position: 'absolute', right: 100, bottom: 0 }}
 			/>
 		);
 
 		return (
 			<div className={this.props.className}>
-				{this.props.src !== undefined &&
+				{this.props.src !== undefined && this.props.title !== undefined &&
 				<div>
 					<Image className="cover-image" src={this.props.src} alt="" />
 					<div className="cover-content">
@@ -45,8 +45,15 @@ class Cover extends React.Component {
 }
 
 Cover.propTypes = {
-	title: PropTypes.string,
+	title: PropTypes.string.isRequired,
 	src: PropTypes.string.isRequired,
 };
+
+Cover.defaultProps = {
+	title: undefined,
+	src: undefined,
+}
+
+
 
 export default Cover;

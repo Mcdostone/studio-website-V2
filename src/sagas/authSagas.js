@@ -1,4 +1,5 @@
 import { LOGIN, REQUEST_LOGIN, REQUEST_LOGOUT, LOGOUT } from '../actions/authActions';
+import { DRAWER_CLOSE } from '../actions/uiActions';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import firebase from 'firebase';
 import { firebaseStudio } from '../fire'
@@ -32,6 +33,7 @@ function* requestLogin() {
 			authentificated: true
 		};
 		yield put({type: LOGIN, payload: userData});
+		yield put({type: DRAWER_CLOSE});
 		restFirebaseDatabase.post('users', user.id, user);
   }
 	catch(error) {
@@ -42,6 +44,7 @@ function* requestLogin() {
 function* requestLogout() {
 	yield call(logout);
 	yield put({type: LOGOUT});
+	yield put({type: DRAWER_CLOSE});
 }
 
 function* authSagas() {

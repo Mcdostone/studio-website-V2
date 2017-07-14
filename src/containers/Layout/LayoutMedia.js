@@ -9,7 +9,7 @@ class LayoutMedia extends React.Component {
 	render() {
 		return (
 			<div className="Layout-studio">
-				<Cover className="cover" src={this.props.cover}>
+				<Cover className="cover" title={this.props.title} src={this.props.cover}>
 					<h2 className="cover-title">{this.props.title}</h2>
 				</Cover>
 				<div className="container">

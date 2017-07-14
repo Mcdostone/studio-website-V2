@@ -1,3 +1,6 @@
+import logger from '../Logger';
+
+
 export default class GoogleDriveApi {
 
 	constructor(gapi) {
@@ -10,10 +13,16 @@ export default class GoogleDriveApi {
 	}
 
 	getFile(fileId) {
-		return this.gapi.client.drive.files.get({fileId})
-		.then((response) => {return response.result})
-		.then((result) => {return result},
-		(err) => console.log(err));
+		if(this.gapi.client.drive !== undefined) {
+			return this.gapi.client.drive.files.get({fileId})
+				.then((response) => {return response.result})
+				.then((result) => {return result},
+				(err) => console.log(err));
+		}
+			else {
+				logger.error('google drive API cannot be loaded !');
+			}
+		return undefined;
 	}
 
 }

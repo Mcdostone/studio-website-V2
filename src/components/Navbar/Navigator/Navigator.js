@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import Avatar from 'material-ui/Avatar';
 import Menu from 'material-ui/Menu';
 import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
+import UserMenu from './UserMenu';
 import { authWrapper } from '../../../wrappers';
 import config from '../../../configuration';
 
@@ -58,10 +58,7 @@ class Navigator extends React.Component {
 		else {
 			content =
 			<div style={{ display: 'flex' }}>
-				<div onClick={this.handleRequestOpen} className="navbar-link">
-					<Avatar src={this.props.auth.user.picture} style={{ marginRight: '5px' }} />
-					{this.props.auth.user.name}
-				</div>
+			<UserMenu auth={this.props.auth} handleRequestOpen={this.handleRequestOpen} />
 				<Popover
 					open={this.state.userMenuOpened}
 					anchorEl={this.state.anchorEl}

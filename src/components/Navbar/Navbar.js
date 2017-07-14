@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toggleDrawer, openSearch, closeSearch } from '../../actions/uiActions'
-import StudioDrawer from '../StudioDrawer';
 import Logo from '../Logo';
 import Navigator from './Navigator';
 import IconMore from './icons/IconMore';
@@ -13,6 +12,10 @@ import './Navbar.css';
 
 
 class Navbar extends React.Component {
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return this.props.auth.authentificated !== nextProps.auth.authentificated;
+	}
 
 	render() {
 		let menu = undefined;
@@ -47,10 +50,7 @@ class Navbar extends React.Component {
 					{ this.props.auth.authentificated && menu }
 					<Navigator />
 				</AppBar>
-				<StudioDrawer
-					open={this.props.drawerOpened}
-					onToggleDrawer={this.props.toggleDrawer}
-				/>
+
 			</div>
 		);
 	}
