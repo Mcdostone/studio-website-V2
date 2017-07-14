@@ -14,6 +14,7 @@ import Events from './containers/Events';
 import Media from './containers/Media';
 import Profile from './containers/Profile';
 import StudioCountdown from './containers/StudioCountdown';
+import Admin from './containers/Admin';
 import './App.css';
 
 
@@ -36,11 +37,8 @@ class App extends React.Component {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/media" component={Media} />
 							<Route exact path="/events" component={resourceWrapper('events', Events)} />
-							{/*<Route exact path="/types" component={resourceWrapper('types', Types)} />
-							<Route path="/types/:id" component={mediaWrapper('types')} />
-							*/}
-
 							<Route path="/events/:id" component={mediaWrapper('events')} />
+							<Route path="/admin" component={Admin} />
 							<Route path="/profile/:id" component={IsAuthentificated(mediaWrapper('users', Profile))} />
 							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />
 						</div>

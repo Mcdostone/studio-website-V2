@@ -18,6 +18,7 @@ class Navigator extends React.Component {
 		this.handleRequestProfile = this.handleRequestProfile.bind(this);
 		this.handleRequestOpen = this.handleRequestOpen.bind(this);
 		this.handleRequestLogout = this.handleRequestLogout.bind(this);
+		this.handleRequestAdmin = this.handleRequestAdmin.bind(this);
 	}
 
 	componentDidMount() {
@@ -29,6 +30,11 @@ class Navigator extends React.Component {
 
 	handleRequestClose() {
 		this.setState({ userMenuOpened: false });
+	}
+
+	handleRequestAdmin() {
+		this.handleRequestClose();
+		this.props.history.push('/admin');
 	}
 
 	handleRequestOpen(event) {
@@ -68,6 +74,7 @@ class Navigator extends React.Component {
 				>
 					<Menu width={this.state.widthMenu}>
 						<MenuItem primaryText="Profile" onTouchTap={this.handleRequestProfile} />
+						<MenuItem primaryText="Admin" onTouchTap={this.handleRequestAdmin} />
 						<MenuItem primaryText="Logout" onTouchTap={this.handleRequestLogout} />
 					</Menu>
 				</Popover>

@@ -39,7 +39,6 @@ function* buildMediumFromGoogleDrive(medium) {
 function* createMediumFromFirebase(medium) {
 	if(medium !== undefined && medium !== null) {
 		const state = yield select();
-		console.log(medium);
 		switch(medium.from.toLowerCase().trim()) {
 			case 'drive':
 				if(state.auth.authentificated === true) {
