@@ -14,7 +14,9 @@ export default {
 		hd: 'telecomnancy.net',
 		prompt: 'select_account',
 	},
-	UI: {
-		DEFAULT_COVER: defaultCover
+	APP: {
+		DEFAULT_COVER: defaultCover,
+		LOCAL_STORAGE_KEY: 'tn.net:studio'
 	}
+
 }

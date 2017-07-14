@@ -1,0 +1,15 @@
+#big-circle{
+	fill: none !important;
+	stroke: white !important;
+	stroke-width: 12;
+}
+
+#tiny-circle {
+	stroke: white !important;
+	stroke-width: 6;
+}
+
+
+#rabbit {
+	fill: #212121 !important;
+}

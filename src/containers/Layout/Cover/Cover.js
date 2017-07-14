@@ -46,7 +46,7 @@ class Cover extends React.Component {
 
 Cover.propTypes = {
 	title: PropTypes.string,
-	src: PropTypes.string,
+	src: PropTypes.string.isRequired,
 };
 
 export default Cover;

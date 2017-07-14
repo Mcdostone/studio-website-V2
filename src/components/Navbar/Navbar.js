@@ -1,11 +1,12 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
+import Anime from 'react-anime';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toggleDrawer, openSearch, closeSearch } from '../../actions/uiActions'
 import StudioDrawer from '../StudioDrawer';
-import logo from '../../assets/logo.png';
+import Logo from '../Logo';
 import Navigator from './Navigator';
 import IconMore from './icons/IconMore';
 import './Navbar.css';
@@ -17,12 +18,18 @@ class Navbar extends React.Component {
 		let menu = undefined;
 		menu = (
 			<div id="navbar-menu">
-				<Link className="navbar-link" to="/media">
-					Media
-				</Link>
-				<Link className="navbar-link" to="/events">
-					Events
-				</Link>
+				<Anime delay={(e, i) => i  * 500 + 500} duration={3000} opacity={[0, 1]}>
+					<div>
+						<Link className="navbar-link" to="/media">
+							Media
+						</Link>
+					</div>
+					<div>
+						<Link className="navbar-link" to="/events">
+							Events
+						</Link>
+					</div>
+				</Anime>
 			</div>
 		);
 		return (
@@ -34,11 +41,10 @@ class Navbar extends React.Component {
 					showMenuIconButton={false}
 				>
 					<IconMore style={{ margin: '0 8px 0 0', width: '60px', height: '60px' }} onTouchTap={this.props.toggleDrawer} />
-
 					<Link className="navbar-link" id="navbar-logo" to="/">
-						<img src={logo} alt="" />
+						<Logo />
 					</Link>
-					{menu}
+					{ this.props.auth.authentificated && menu }
 					<Navigator />
 				</AppBar>
 				<StudioDrawer

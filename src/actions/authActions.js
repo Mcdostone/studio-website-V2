@@ -4,15 +4,15 @@ export const REQUEST_LOGOUT = 'REQUEST_LOGOUT';
 export const LOGOUT = 'LOGOUT';
 
 export const requestLogin = () => ({
-    type: REQUEST_LOGIN,
+		type: REQUEST_LOGIN,
 });
 
 export const requestLogout = () => ({
-    type: REQUEST_LOGOUT,
+		type: REQUEST_LOGOUT,
 });
 
 export const login = (user) => ({
-    type: LOGIN,
+		type: LOGIN,
 		payload: user,
 });
 

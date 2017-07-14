@@ -38,7 +38,7 @@ export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 		getMediaByresourceId(id) {
 			const filteredMedia = {}
 			try {
-				this.props.dataSource[id].media.map(idMedium => {
+				Object.keys(this.props.dataSource[id].media).map(idMedium => {
 					if(this.props.media[idMedium] !== undefined)
 						filteredMedia[idMedium] = this.props.media[idMedium]
 					return undefined;

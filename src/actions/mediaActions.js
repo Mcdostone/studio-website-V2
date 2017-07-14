@@ -13,9 +13,9 @@ export const addMedia = (media) => ({
 		payload: media,
 });
 
-export const fetchMedia = (index = 0) => ({
+export const fetchMedia = (id) => ({
     type: MEDIA_FETCH,
-		payload: index,
+		payload: id,
 });
 
 export const fetchAllMedia = () =>  ({

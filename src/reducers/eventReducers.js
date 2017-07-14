@@ -5,7 +5,7 @@ import { buildUniqueDatasetById } from '../utils';
 const initialState = {}
 
 function buildEvent(e) {
-	return new Event(e.id, e.name, e.date, Object.keys(e.media));
+	return new Event(e.id, e.name, e.date, e.media);
 }
 
 export default function (state = initialState, action) {

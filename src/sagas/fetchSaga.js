@@ -47,6 +47,10 @@ function* fetchReferences(action) {
 	const state = yield select();
 	const {resource, param, refs} = action.payload;
 	let dataSource = state[resource][param];
+	if(state.auth.authentificated === false) {
+		logger.error(`You have to be connected !`);
+		return;
+	}
 	if(dataSource === undefined) {
 		logger.info(`[FIREBASE-DB] GET /${resource}${param === undefined ? '' : `/${param}`}/${refs}`);
 		const response = yield call(restFirebaseDatabase.get, resource.toLowerCase(), param);
@@ -55,7 +59,7 @@ function* fetchReferences(action) {
 		yield put({type: `${resource.toUpperCase()}_ADD`, payload: result});
 	}
 	if(dataSource[refs] !== undefined) {
-			yield all(dataSource[refs].map(r =>
+			yield all(Object.keys(dataSource[refs]).map(r =>
 				put({type: `${refs.toUpperCase()}_${FETCH}`, payload: {dataType: OBJECT, resource: refs, param: r}})
 			));
 		}

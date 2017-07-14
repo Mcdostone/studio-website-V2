@@ -6,6 +6,7 @@ import Menu from 'material-ui/Menu';
 import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
 import { authWrapper } from '../../../wrappers';
+import config from '../../../configuration';
 
 
 class Navigator extends React.Component {
@@ -16,6 +17,14 @@ class Navigator extends React.Component {
 		this.handleRequestClose = this.handleRequestClose.bind(this);
 		this.handleRequestProfile = this.handleRequestProfile.bind(this);
 		this.handleRequestOpen = this.handleRequestOpen.bind(this);
+		this.handleRequestLogout = this.handleRequestLogout.bind(this);
+	}
+
+	componentDidMount() {
+		const userData = JSON.parse(sessionStorage.getItem(config.APP.LOCAL_STORAGE_KEY));
+		if(userData && userData.authentificated) {
+			this.props.login(userData);
+		}
 	}
 
 	handleRequestClose() {
@@ -34,6 +43,11 @@ class Navigator extends React.Component {
 	handleRequestProfile() {
 		this.handleRequestClose();
 		this.props.history.push(`/profile/${this.props.auth.user.id}`);
+	}
+
+	handleRequestLogout() {
+		this.handleRequestClose();
+		this.props.requestLogout();
 	}
 
 	render() {
@@ -57,7 +71,7 @@ class Navigator extends React.Component {
 				>
 					<Menu width={this.state.widthMenu}>
 						<MenuItem primaryText="Profile" onTouchTap={this.handleRequestProfile} />
-						<MenuItem primaryText="Logout" onTouchTap={this.props.requestLogout} />
+						<MenuItem primaryText="Logout" onTouchTap={this.handleRequestLogout} />
 					</Menu>
 				</Popover>
 			</div>

@@ -11,7 +11,6 @@ import Home from './containers/Home';
 import { mediaWrapper, resourceWrapper } from './wrappers';
 import Events from './containers/Events';
 import Media from './containers/Media';
-// import Types from './containers/Types';
 import Profile from './containers/Profile';
 import StudioCountdown from './containers/StudioCountdown';
 import './App.css';
@@ -22,7 +21,7 @@ syncHistoryWithStore(history, store);
 class App extends React.Component {
 
 	componentDidMount() {
-		window.gapi.client.load('drive', 'v2');
+		//window.gapi.client.load('drive', 'v2');
 	}
 
 	render() {
@@ -49,7 +48,6 @@ class App extends React.Component {
 		);
 	}
 }
-
 
 function mapScriptsToProps(ownProps) {
   return {

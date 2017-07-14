@@ -7,6 +7,11 @@
 	height: 60px;
 }
 
+.navbar g {
+	height: 100%;
+	width: 100%;
+}
+
 .navbar .navbar-link {
 	height: 100%;
 	display: flex;
@@ -28,10 +33,19 @@
 	padding: 10px 40px;
 }
 
-#navbar-logo img {
+#navbar-logo svg {
 	height: 100%;
 	box-sizing: border-box;
 	width: auto;
+}
+#navbar-logo svg * {
+	fill: white;
+}
+
+#navbar-logo svg #rabbit {
+	fill: none;
+	stroke: white;
+	stroke-width: 10;
 }
 
 .navbar a, .navbar a:visited {
@@ -49,9 +63,11 @@
 	cursor: text;
 }
 
-#navbar-menu {
+#navbar-menu, #navbar-menu g {
 	display: flex;
 }
+
+
 
 @media screen and (max-width: 640px) {
   #navbar-menu {
