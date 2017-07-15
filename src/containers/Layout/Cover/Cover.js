@@ -9,8 +9,7 @@ import './Cover.css';
 class Cover extends React.Component {
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return ((this.props.src === undefined) && (nextProps.src !== undefined)) || (this.props.src !== nextProps.src)
-		|| (this.props.title !== nextProps.title);
+		return ((this.props.src === undefined) && (nextProps.src !== undefined)) || (this.props.src !== nextProps.src);
 	}
 
 	render() {
@@ -38,7 +37,7 @@ class Cover extends React.Component {
 					</Anime>
 					</div>
 				</div>}
-				{settings}
+				{this.props.admin && settings}
 			</div>
 		);
 	}
@@ -47,11 +46,13 @@ class Cover extends React.Component {
 Cover.propTypes = {
 	title: PropTypes.string,
 	src: PropTypes.string,
+	admin: PropTypes.bool,
 };
 
 Cover.defaultProps = {
 	title: undefined,
 	src: undefined,
+	admin: false,
 }
 
 
