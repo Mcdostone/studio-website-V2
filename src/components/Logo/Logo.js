@@ -28,7 +28,6 @@ class Logo extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		// return this.props.auth.authentificated !== nextProps.auth.auth;
 		return false;
 	}
 
