@@ -29,7 +29,7 @@ class Image extends React.Component {
 				duration={2000}
 				autoplay={this.state.loaded}
 			>
-				<img src={this.props.src} onLoad={this.imageLoaded} className="image" alt=""/>
+				<img src={this.props.src} onLoad={this.imageLoaded} className={this.props.className} alt=""/>
 			</Anime>
 		)
 	}

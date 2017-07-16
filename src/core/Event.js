@@ -1,3 +1,6 @@
+import moment from 'moment';
+
+
 export default class Event {
 
 	constructor(id, name, date, media = {}) {
@@ -15,7 +18,7 @@ export default class Event {
 	}
 
 	getDate() {
-		return this.date;
+		return moment(this.date, 'DD/MM/YYYY').format('DD/MM/YYYY');
 	}
 
 }

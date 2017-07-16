@@ -1,5 +1,5 @@
 import { COVER_FETCH, COVER_ADD, COVER_SET_CURRENT, COVER_RESET, COVER_NEW } from '../actions/coverActions';
-import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery, select } from 'redux-saga/effects';
 import RestFirebaseStorage from './RestFirebaseStorage';
 import logger from '../Logger'
 
@@ -33,7 +33,7 @@ function* setCover(action) {
 }
 
 function* coverSagas() {
-	yield takeLatest(COVER_FETCH, getCover);
+	yield takeEvery(COVER_FETCH, getCover);
 	yield takeLatest(COVER_SET_CURRENT, setCover);
 }
 

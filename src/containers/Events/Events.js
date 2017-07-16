@@ -9,9 +9,9 @@ class Events extends React.Component {
 	render() {
 		return (
 			<StudioList gutter={16} className="studio-list-space">
-				{Object.keys(this.props.dataSource).map(key =>
-					<Link key={key} to={`events/${key}`}>
-						<E square event={this.props.dataSource[key]}/>
+				{Object.keys(this.props.dataSource).map(id =>
+					<Link key={id} to={`events/${id}`}>
+						<E square id={id} event={this.props.dataSource[id]}/>
 					</Link>
 				)}
 			</StudioList>

@@ -9,7 +9,10 @@ import './Cover.css';
 class Cover extends React.Component {
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return ((this.props.src === undefined) && (nextProps.src !== undefined)) || (this.props.src !== nextProps.src);
+		const r = ((this.props.src === undefined) && (nextProps.src !== undefined)) || (this.props.src !== nextProps.src)
+		|| (this.props.title !== nextProps.title);
+		console.log(r);
+		return r;
 	}
 
 	render() {
@@ -21,7 +24,7 @@ class Cover extends React.Component {
 
 		return (
 			<div className={this.props.className}>
-				{this.props.src !== undefined && this.props.title !== undefined &&
+				{this.props.src !== undefined &&
 				<div>
 					<Image className="cover-image" src={this.props.src} alt="" />
 					<div className="cover-content">
