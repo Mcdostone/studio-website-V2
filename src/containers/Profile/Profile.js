@@ -2,7 +2,6 @@ import React from 'react';
 import Avatar from 'material-ui/Avatar';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Cover } from '../Layout';
 import Studio from '../../components/Studio';
 
@@ -40,9 +39,4 @@ function mapStateToProps(state) {
 	}
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, null)(Profile);

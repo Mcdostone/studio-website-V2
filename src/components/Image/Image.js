@@ -1,6 +1,5 @@
 import React from 'react';
 import Anime from 'react-anime';
-import './Image.css';
 
 
 class Image extends React.Component {
