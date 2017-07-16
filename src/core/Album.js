@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 
-export default class Event {
+export default class Album {
 
 	constructor(id, name, date, media = {}) {
 		this.id = id;

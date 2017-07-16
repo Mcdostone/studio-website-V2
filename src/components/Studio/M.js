@@ -1,6 +1,6 @@
 import React from 'react';
 import FavoriteAction from 'material-ui/svg-icons/action/favorite';
-import Thumbnail from '../Thumbnail';
+import { Thumbnail } from '../Thumbnail';
 import itemWrapper from '../../wrappers/itemWrapper/itemWrapper';
 
 

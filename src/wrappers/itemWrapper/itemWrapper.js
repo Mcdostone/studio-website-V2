@@ -9,7 +9,7 @@ export default function itemWrapper(WrappedComponent) {
 			const classNames = this.props.square ? 'item square' : 'item';
 			return (
 				<div className={classNames}>
-					<WrappedComponent style={{background: 'red'}} {...this.props} />
+					<WrappedComponent {...this.props} />
 				</div>
 			);
 		}

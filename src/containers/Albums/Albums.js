@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import StudioList from '../../components/List/StudioList';
-import E from './E';
+import A from './A';
 
-class Events extends React.Component {
+class Albums extends React.Component {
 
 	render() {
 		return (
 			<StudioList gutter={16} className="studio-list-space">
 				{Object.keys(this.props.dataSource).map(id =>
-					<Link key={id} to={`events/${id}`}>
-						<E square id={id} event={this.props.dataSource[id]}/>
+					<Link key={id} to={`albums/${id}`}>
+						<A square id={id} album={this.props.dataSource[id]}/>
 					</Link>
 				)}
 			</StudioList>
@@ -19,12 +19,12 @@ class Events extends React.Component {
 	}
 }
 
-Events.propTypes = {
+Albums.propTypes = {
 	dataSource: PropTypes.object,
 }
 
-Events.defaultProps = {
+Albums.defaultProps = {
 	dataSource: {},
 }
 
-export default Events;
+export default Albums;

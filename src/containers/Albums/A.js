@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Thumbnail from '../../components/Thumbnail';
+import { OverlayedThumbnail } from '../../components/Thumbnail';
 import { fetchCover } from '../../actions/coverActions';
 import { itemWrapper } from '../../wrappers';
 
-class E extends React.Component {
+class A extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchCover(this.props.id);
@@ -15,18 +15,18 @@ class E extends React.Component {
 	render() {
 		const src = this.props.covers[this.props.id];
 		return (
-			<Thumbnail square src={src}>
-				<span className="title">{this.props.event.name}</span>
-				<span className="subtitle">{this.props.event.getDate()}</span>
-			</Thumbnail>
+			<OverlayedThumbnail activeOverlay src={src}>
+				<span className="title">{this.props.album.title}</span>
+				<span className="subtitle">{this.props.album.getDate()}</span>
+			</OverlayedThumbnail>
 		);
 	}
 
 }
 
-E.propTypes = {
+A.propTypes = {
 	id: PropTypes.string.isRequired,
-	event: PropTypes.object.isRequired,
+	album: PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {
@@ -41,4 +41,4 @@ function mapDispatchToProps(dispatch) {
 	}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(itemWrapper(E));
+export default connect(mapStateToProps, mapDispatchToProps)(itemWrapper(A));

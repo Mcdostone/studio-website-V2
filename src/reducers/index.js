@@ -4,7 +4,6 @@ import ui from './ui';
 import lightbox from './lightbox';
 import media from './mediaReducers';
 import auth from './authReducers';
-import types from './typesReducers';
 import covers from './coverReducers';
 import events from './eventReducers';
 import users from './userReducers';
@@ -17,7 +16,6 @@ const studioApp = combineReducers({
 		media,
 		events,
 		covers,
-		types,
 		users,
 		routing: routerReducer,
 })

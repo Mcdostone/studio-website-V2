@@ -1,9 +1,9 @@
 import React from 'react';
-import overlayWrapper from '../../wrappers/overlayWrapper/overlayWrapper';
+import PropTypes from 'prop-types';
 import Image from '../Image';
 
 
-class Thumbnail extends React.Component {
+class SimpleThumbnail extends React.Component {
 
 	render() {
 		return (
@@ -14,4 +14,8 @@ class Thumbnail extends React.Component {
 	}
 }
 
-export default overlayWrapper(Thumbnail);
+SimpleThumbnail.propTypes = {
+	src: PropTypes.string.isRequired,
+};
+
+export default SimpleThumbnail;

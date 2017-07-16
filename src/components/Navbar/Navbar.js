@@ -28,8 +28,8 @@ class Navbar extends React.Component {
 						</Link>
 					</div>
 					<div>
-						<Link className="navbar-link" to="/events">
-							Events
+						<Link className="navbar-link" to="/albums">
+							Albums
 						</Link>
 					</div>
 				</Anime>

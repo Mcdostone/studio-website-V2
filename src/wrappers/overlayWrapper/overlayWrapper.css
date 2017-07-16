@@ -26,11 +26,16 @@
 	width: 100%;
 	z-index: 999;
 	color: white;
-}
-
-.overlay-content {
 	opacity: 0;
 	background: rgba(0,0,0, 0.5);
+}
+
+.overlay-content.visible {
+	opacity: 1;
+}
+
+.overlay-content.visible:hover {
+	opacity: 0;
 }
 
 .overlay-content:hover {

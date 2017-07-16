@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 import StudioDrawer from './components/StudioDrawer';
 import Home from './containers/Home';
 import { mediaWrapper, resourceWrapper } from './wrappers';
-import Events from './containers/Events';
+import Albums from './containers/Albums';
 import Media from './containers/Media';
 import Profile from './containers/Profile';
 import StudioCountdown from './containers/StudioCountdown';
@@ -36,8 +36,8 @@ class App extends React.Component {
 							<StudioDrawer />
 							<Route exact path="/" component={Home} />
 							<Route exact path="/media" component={Media} />
-							<Route exact path="/events" component={resourceWrapper('events', Events)} />
-							<Route path="/events/:id" component={mediaWrapper('events')} />
+							<Route exact path="/albums" component={resourceWrapper('albums', Albums)} />
+							<Route path="/albums/:id" component={mediaWrapper('albums')} />
 							<Route path="/admin" component={Admin} />
 							<Route path="/profile/:id" component={IsAuthentificated(mediaWrapper('users', Profile))} />
 							<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />

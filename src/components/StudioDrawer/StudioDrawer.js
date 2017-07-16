@@ -29,9 +29,9 @@ class StudioDrawer extends React.Component {
 						Media
 					</MenuItem>
 				</Link>
-				<Link to="/events">
+				<Link to="/albums">
 					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Events
+						Albums
 					</MenuItem>
 				</Link>
 				<Divider />
