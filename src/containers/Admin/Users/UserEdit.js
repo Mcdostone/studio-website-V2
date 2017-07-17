@@ -1,31 +1,44 @@
 import React from 'react';
+import moment from 'moment';
 import Avatar from 'material-ui/Avatar';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Cover } from '../../Layout';
+import Divider from 'material-ui/Divider';
+import FlatButton from 'material-ui/RaisedButton';
 import Toggle from 'material-ui/Toggle';
 import { testWrapper } from '../../../wrappers';
+import {Card, CardActions, CardText} from 'material-ui/Card';
+
 
 class UserEdit extends React.Component {
 
 	render() {
-		return (
-			<div>
-				<Cover className="cover" src="user" title="user">
-					<div>
-						<Avatar size={150} src={this.props.data ? this.props.data.picture: ''} />
-						<p style={{marginBottom: 0}} className="cover-name">{this.props.data !== undefined ? this.props.data.getFullName() : ''}</p>
+		const user = this.props.data;
+		return user !== undefined ?
+				<Card className="admin-container">
+					<div className="admin-user-header">
+						<Avatar size={150} src={this.props.data.picture} />
+						<div className="admin-user-info">
+						{this.props.data !== undefined &&
+						<div>
+							<p>{this.props.data.getFullName()}</p>
+							<p>{this.props.data.email}</p>
+							<p>{this.props.data.id}</p>
+							<p>Connected {moment(user.updatedAt).fromNow()}</p>
+						</div>
+						}
+						</div>
 					</div>
-				</Cover>
-				<div className="admin-form">
-					<div className="form-input form-toggle">
-						<Toggle label="Ban user ?" />
-					</div>
-					<div className="form-input">
-						<RaisedButton label="Save" />
-					</div>
-				</div>
-			</div>
-		)
+					<Divider />
+					<CardText>
+						<div className="form-input form-toggle">
+							<Toggle label="Ban user ?" />
+						</div>
+					</CardText>
+					<CardActions>
+						<FlatButton label="Back" />
+						<FlatButton label="Save" />
+					</CardActions>
+				</Card>
+				: null;
 	}
 }
 

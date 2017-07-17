@@ -30,8 +30,9 @@ class App extends React.Component {
 		return (
 			<Provider store={store}>
 				<div className="studio-app">
+
 					<Router history={history}>
-						<div>
+						<div style={{width: '100%'}}>
 							<Navbar />
 							<StudioDrawer />
 							<Route exact path="/" component={Home} />

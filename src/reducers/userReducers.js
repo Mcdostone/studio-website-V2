@@ -9,6 +9,7 @@ function buildUser(user) {
 	return new User(user.id,
 	user.given_name,
 	user.family_name,
+	user.email,
 	user.picture,
 	user.updatedAt,
 	user.banned || false,

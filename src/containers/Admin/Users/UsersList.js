@@ -1,5 +1,7 @@
 import React from 'react';
 import moment from 'moment';
+import {Card, CardTitle} from 'material-ui/Card';
+
 import { Link } from 'react-router-dom';
 import {
 	Table,
@@ -16,8 +18,12 @@ class UsersList extends React.Component {
 
 	render() {
 		const users = this.props.dataSource || {}
+		const countUsers = Object.keys(users).length;
 		return (
-			<div className="admin-container">
+			<Card className="admin-container">
+				<CardTitle title="List of users"
+				subtitle={countUsers < 2 ?countUsers + ' user' : countUsers + ' users'}
+				expandable={false} />
 				<Table selectable={false}>
 
 					<TableHeader
@@ -49,7 +55,7 @@ class UsersList extends React.Component {
 						)}
 					</TableBody>
 				</Table>
-			</div>
+			</Card>
 		);
 	}
 }

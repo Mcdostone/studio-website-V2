@@ -10,12 +10,7 @@ class Cover extends React.Component {
 
 	shouldComponentUpdate(nextProps, nextState) {
 		return ((this.props.src === undefined) && (nextProps.src !== undefined)) || (this.props.src !== nextProps.src)
-		|| (this.props.title !== nextProps.title) || nextProps.title !== undefined;
-	}
-
-	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
-		return true;
+		|| (this.props.title !== nextProps.title);
 	}
 
 	render() {

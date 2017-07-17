@@ -14,6 +14,7 @@
     "material-ui": "^0.18.1",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
+    "random-material-color": "^1.0.3",
     "react": "^15.5.4",
     "react-anime": "^0.3.4",
     "react-async-loader": "^0.1.2",

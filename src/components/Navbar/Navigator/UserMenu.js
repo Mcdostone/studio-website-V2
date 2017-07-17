@@ -13,7 +13,7 @@ export default class UserMenu extends React.Component {
 	render() {
 		return (
 			<div onClick={this.props.handleRequestOpen} className="navbar-link">
-				<Anime elasticity={0} scale={[0, 1]} rotate={['-90deg', '0']} delay={500} duration={700} >
+				<Anime elasticity={0} scale={[0, 1]} rotate={['-90deg', '0']} delay={500} duration={1300} easing="easeInOutQuint" >
 					<div>
 						<Avatar src={this.props.auth.user.picture}  style={{ marginRight: '5px', backfaceVisibility: 'hidden' }}/>
 					</div>

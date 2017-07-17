@@ -1,6 +1,19 @@
+:root {
+	--usersColor: #FFC107;
+	--borderSize: 3px;
+}
+
+.admin-app {
+	width: 100%;
+}
+
 .admin-container {
-	padding: 0 10%;
+	width: 64%;
+	border-left: var(--borderSize) solid var(--usersColor);
+	position: relative;
+	margin: auto;
 	margin-top: 32px;
+	padding-bottom: 8px;
 }
 
 .admin-form {
@@ -16,3 +29,29 @@
 .form-input {
 	margin: 32px 0;
 }
+
+.admin-user-header {
+	display: flex;
+	padding-left: 8px;
+	box-sizing: border-box;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: row;
+}
+
+.admin-user-info {
+	padding-left: 16px;
+}
+
+.admin-user-info p {
+	font-weight: 300;
+	padding-left: 32px;
+	font-style: italic;
+}
+
+.admin-user-info p:first-child {
+	font-weight: 300;
+	font-size: 2em;
+	margin-bottom: 4px;
+}
+

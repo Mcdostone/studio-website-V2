@@ -1,9 +1,10 @@
 export default class User {
 
-	constructor(id, givenName, familyName, picture, updatedAt, banned, media = []) {
+	constructor(id, givenName, familyName, email, picture, updatedAt, banned, media = []) {
 		this.id = id;
 		this.givenName = givenName;
 		this.familyName = familyName;
+		this.email = email;
 		this.picture = picture;
 		this.updatedAt = new Date(updatedAt);
 		this.banned = banned;

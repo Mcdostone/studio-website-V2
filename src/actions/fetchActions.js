@@ -3,9 +3,9 @@ export const FETCH_REFS = 'FETCH_REFS';
 export const OBJECT = 'OBJECT';
 export const LIST = 'LIST';
 
-export const fetchAll = (resource, param) => ({
+export const fetchAll = (resource) => ({
     type: FETCH,
-		payload: { resource, param , dataType: LIST}
+		payload: { resource, dataType: LIST}
 });
 
 export const fetchOne = (resource, param) => ({

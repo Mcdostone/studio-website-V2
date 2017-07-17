@@ -1,11 +1,19 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+	font-family: sans-serif;
+}
+
+#root {
+	height: 100%;
 }
 
 * {
 	font-family: 'Roboto', sans-serif;
+}
+
+.studio-app {
+	height: 100%;
 }
 
 

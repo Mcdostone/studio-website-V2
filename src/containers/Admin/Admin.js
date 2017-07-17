@@ -4,12 +4,25 @@ import Dashboard from './Dashboard';
 import { UsersList, UserEdit } from './Users';
 import './Admin.css';
 
-const Admin = (props) => (
-	<Switch>
-		<Route exact path="/admin" component={Dashboard} />
-		<Route exact path="/admin/users" component={UsersList} />
-		<Route path="/admin/users/:id" component={UserEdit} />
-	</Switch>
-	);
+class Admin extends React.Component {
+
+	componentDidMount() {
+		document.body.style.background = '#EEEEEE';
+	}
+
+	componentWillUnmount() {
+		document.body.style.background = '';
+	}
+
+	render() {
+		return <div className="admin-app">
+			<Switch>
+				<Route exact path="/admin" component={Dashboard} />
+				<Route exact path="/admin/users" component={UsersList} />
+				<Route path="/admin/users/:id" component={UserEdit} />
+			</Switch>
+		</div>
+	}
+};
 
 export default Admin;
