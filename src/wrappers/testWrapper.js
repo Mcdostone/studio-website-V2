@@ -2,11 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchOne } from '../actions/fetchActions';
+import { update } from '../actions/crudActions';
 
 
 export default function testWrapper(resource, WrappedComponent) {
 
 	const testContainer = class extends React.Component {
+
+		constructor(props) {
+			super(props);
+			this.update = this.update.bind(this);
+		}
 
 		componentDidMount() {
 			const id = this.props.match.params.id;
@@ -17,9 +23,13 @@ export default function testWrapper(resource, WrappedComponent) {
 			this.props.fetchOne(resource, id);
 		}
 
+		update(user) {
+			this.props.update(resource, user)
+		}
+
 		render() {
 			const id = this.props.match.params.id;
-			return <WrappedComponent data={this.props.dataSource[id]} />
+			return <WrappedComponent {...this.props} update={this.update} data={this.props.dataSource[id]} />
 		}
 
 	}
@@ -33,6 +43,7 @@ export default function testWrapper(resource, WrappedComponent) {
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
 			fetchOne,
+			update
 		}, dispatch);
 	}
 

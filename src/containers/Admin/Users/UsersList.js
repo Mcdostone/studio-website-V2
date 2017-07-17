@@ -20,7 +20,7 @@ class UsersList extends React.Component {
 		const users = this.props.dataSource || {}
 		const countUsers = Object.keys(users).length;
 		return (
-			<Card className="admin-container">
+			<Card className="admin-container users-container">
 				<CardTitle title="List of users"
 				subtitle={countUsers < 2 ?countUsers + ' user' : countUsers + ' users'}
 				expandable={false} />

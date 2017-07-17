@@ -3,9 +3,9 @@ import moment from 'moment';
 
 export default class Album {
 
-	constructor(id, name, date, media = {}) {
+	constructor(id, title, date, media = {}) {
 		this.id = id;
-		this.name = name;
+		this.title = title;
 		this.date = date;
 		this.media = media;
 	}

@@ -1,45 +1,119 @@
 import React from 'react';
 import moment from 'moment';
+import { withRouter } from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
-import Divider from 'material-ui/Divider';
+import { Cover } from '../../Layout';
 import FlatButton from 'material-ui/RaisedButton';
+import ActionDelete from 'material-ui/svg-icons/action/delete-forever';
 import Toggle from 'material-ui/Toggle';
 import { testWrapper } from '../../../wrappers';
-import {Card, CardActions, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardText, CardTitle } from 'material-ui/Card';
+import {
+	Table,
+	TableBody,
+	TableHeader,
+	TableHeaderColumn,
+	TableRow,
+	TableRowColumn,
+} from 'material-ui/Table';
 
 
 class UserEdit extends React.Component {
 
-	render() {
-		const user = this.props.data;
-		return user !== undefined ?
-				<Card className="admin-container">
-					<div className="admin-user-header">
-						<Avatar size={150} src={this.props.data.picture} />
-						<div className="admin-user-info">
-						{this.props.data !== undefined &&
-						<div>
-							<p>{this.props.data.getFullName()}</p>
-							<p>{this.props.data.email}</p>
-							<p>{this.props.data.id}</p>
-							<p>Connected {moment(user.updatedAt).fromNow()}</p>
+	constructor(props) {
+		super(props);
+		this.state = {data: undefined};
+		this.toggleBan = this.toggleBan.bind(this);
+		this.applyChanges = this.applyChanges.bind(this);
+	}
+
+	toggleBan() {
+		const userUpdated = this.state.data;
+		userUpdated.banned = !userUpdated.banned
+		this.setState({data: userUpdated});
+	}
+
+	componentDidMount() {
+		this.setState({data: this.props.data});
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({data: nextProps.data});
+		return this.props.data !== nextProps.data;
+	}
+
+	applyChanges() {
+		this.props.update(this.state.data);
+		this.props.history.goBack();
+	}
+
+	getContainer() {
+		const user = this.state.data;
+
+		const likes = {};
+		return (
+				<Card className="admin-container users-container">
+					<Cover className="cover" title="lol" src="http://www.groupesida.ch/filrouge/san-francisco-news-summer-code-camp.jpg">
+						<div className="admin-user-header">
+							<Avatar size={150} src={user.picture} />
+							<div className="admin-user-info">
+								<p>{user.getFullName()}</p>
+								<p>{user.email}</p>
+								<p>{user.id}</p>
+								<p>Connected {moment(user.updatedAt).fromNow()}</p>
+							</div>
 						</div>
-						}
-						</div>
-					</div>
-					<Divider />
+					</Cover>
+
+					<CardTitle title="Account"
+					expandable={false} />
 					<CardText>
-						<div className="form-input form-toggle">
-							<Toggle label="Ban user ?" />
+						<div>
+							<Toggle onTouchTap={this.toggleBan} toggled={user.banned} label="Ban user ?" />
 						</div>
 					</CardText>
+
+					<CardTitle title={`Tags of ${user.givenName}`}
+					subtitle="X tags"
+					expandable={false} />
+					<CardText>
+						<Table selectable={false}>
+							<TableHeader
+								displaySelectAll={false}
+      		  		adjustForCheckbox={false}
+							>
+	      				<TableRow selectable={false}>
+									<TableHeaderColumn>ID</TableHeaderColumn>
+									<TableHeaderColumn>tag</TableHeaderColumn>
+									<TableHeaderColumn>Medium</TableHeaderColumn>
+									<TableHeaderColumn></TableHeaderColumn>
+      					</TableRow>
+    					</TableHeader>
+    					<TableBody displayRowCheckbox={false}>
+							{Object.keys(likes).map(l =>
+								<TableRow>
+									<TableRowColumn></TableRowColumn>
+									<TableRowColumn></TableRowColumn>
+									<TableRowColumn></TableRowColumn>
+									<TableRowColumn><FlatButton icon={<ActionDelete  color={'#FFC107'} />} /></TableRowColumn>
+								</TableRow>
+							)}
+
+							</TableBody>
+						</Table>
+					</CardText>
+
 					<CardActions>
-						<FlatButton label="Back" />
-						<FlatButton label="Save" />
+						<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />
+						<FlatButton label="Save" onTouchTap={this.applyChanges}/>
 					</CardActions>
 				</Card>
-				: null;
+		);
+	}
+
+	render() {
+		return this.state.data !== undefined ? this.getContainer() : null;
 	}
 }
 
-export default testWrapper('users', UserEdit);
+export default withRouter(testWrapper('users', UserEdit));

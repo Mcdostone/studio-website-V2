@@ -6,6 +6,7 @@ class RestFirebaseDatabase extends RestFirebase {
 		super();
 		this.get = this.get.bind(this);
 		this.post = this.post.bind(this);
+		this.put = this.put.bind(this);
 		this.buildPath = this.buildPath.bind(this);
 	}
 
@@ -18,9 +19,15 @@ class RestFirebaseDatabase extends RestFirebase {
 		return this.firebase.database().ref().child(path).once('value');
 	}
 
+	put(resource, data) {
+		return this.firebase.database().ref(resource + '/' + data.id).update(data)
+	}
+
 	post(resource, param, dataObject) {
 		const path = this.buildPath(resource, param);
-		this.firebase.database().ref(path).update(dataObject);
+		this.firebase.database().ref(path).update(dataObject)
+		.then(response => ({ response }))
+    .catch(error => ({ error }));
 	}
 
 }

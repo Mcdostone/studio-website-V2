@@ -1,19 +1,32 @@
 :root {
 	--usersColor: #FFC107;
 	--borderSize: 3px;
+	--albumsColor: #2196F3;
 }
 
 .admin-app {
 	width: 100%;
 }
 
-.admin-container {
+.users-color {
+	background: var(--usersColor);
+}
+
+.admin-container  {
 	width: 64%;
-	border-left: var(--borderSize) solid var(--usersColor);
+	border-left: var(--borderSize) solid black;
 	position: relative;
 	margin: auto;
 	margin-top: 32px;
 	padding-bottom: 8px;
+}
+
+.users-container {
+	border-left: var(--borderSize) solid var(--usersColor);
+}
+
+.albums-container {
+	border-color: var(--albumsColor);
 }
 
 .admin-form {
@@ -32,7 +45,6 @@
 
 .admin-user-header {
 	display: flex;
-	padding-left: 8px;
 	box-sizing: border-box;
 	justify-content: flex-start;
 	align-items: center;
@@ -40,16 +52,24 @@
 }
 
 .admin-user-info {
+	width: 100%;
 	padding-left: 16px;
+	text-align: left;
 }
 
 .admin-user-info p {
+	display: block;
 	font-weight: 300;
+	color: rgb(170,170,170);
+	display: inline;
+	font-size: 13px;
 	padding-left: 32px;
 	font-style: italic;
 }
 
 .admin-user-info p:first-child {
+	display: block;
+	color: white;
 	font-weight: 300;
 	font-size: 2em;
 	margin-bottom: 4px;

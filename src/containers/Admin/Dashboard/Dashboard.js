@@ -10,6 +10,9 @@ class Dashboard extends React.Component {
 				<Link to="/admin/users">
 				Users
 				</Link>
+				<Link to="/admin/albums">
+				Albums
+				</Link>
 			</div>
 		)
 	}

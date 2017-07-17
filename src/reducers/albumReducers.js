@@ -5,7 +5,7 @@ import { buildUniqueDatasetById } from '../utils';
 const initialState = {}
 
 function buildAlbum(e) {
-	return new Album(e.id, e.name, e.date, e.media);
+	return new Album(e.id, e.title, e.date, e.media);
 }
 
 export default function (state = initialState, action) {
