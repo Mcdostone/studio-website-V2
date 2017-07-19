@@ -15,7 +15,7 @@ function buildResult(response, dataType) {
 		case LIST:
 			return Object.keys(res).map(r => res[r]);
 		case OBJECT:
-			return [res];
+			return res !== undefined ? [res] : [];
 		default:
 		return res;
 	}

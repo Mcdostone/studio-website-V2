@@ -34,7 +34,7 @@ function* requestLogin() {
 		};
 		yield put({type: LOGIN, payload: userData});
 		yield put({type: DRAWER_CLOSE});
-		restFirebaseDatabase.post('users', user.id, user);
+		restFirebaseDatabase.put('users', user.id, user);
   }
 	catch(error) {
 		console.log(error);

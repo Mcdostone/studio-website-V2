@@ -29,7 +29,8 @@ export default function testWrapper(resource, WrappedComponent) {
 
 		render() {
 			const id = this.props.match.params.id;
-			return <WrappedComponent {...this.props} update={this.update} data={this.props.dataSource[id]} />
+			const data = this.props.create ? this.props.default : this.props.dataSource[id]
+			return <WrappedComponent {...this.props} update={this.update} data={data} />
 		}
 
 	}

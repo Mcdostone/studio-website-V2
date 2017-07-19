@@ -20,14 +20,26 @@ class RestFirebaseDatabase extends RestFirebase {
 	}
 
 	put(resource, data) {
-		return this.firebase.database().ref(resource + '/' + data.id).update(data)
+		data.updatedAt = new Date();
+		return new Promise((resolve, reject) => {
+			this.firebase.database().ref(resource + '/' + data.id).update(data)
+			.then(() => resolve({ response: data }))
+			.catch(reject);
+		});
 	}
 
-	post(resource, param, dataObject) {
-		const path = this.buildPath(resource, param);
-		this.firebase.database().ref(path).update(dataObject)
-		.then(response => ({ response }))
-    .catch(error => ({ error }));
+	post(resource, dataObject) {
+		const key = this.firebase.database().ref().child(resource).push().key;
+		dataObject.id = key;
+		const timestamp = new Date();
+		dataObject.createdAt = timestamp;
+		// Why I can't write: dataObject.updatedAt = dataObject.createdAt -> return null
+		dataObject.updatedAt = timestamp;
+		return new Promise((resolve, reject) => {
+			this.firebase.database().ref(this.buildPath(resource, key)).update(dataObject)
+			.then(() => resolve({ responsee: dataObject }))
+			.catch(reject)
+		});
 	}
 
 }

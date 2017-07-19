@@ -1,3 +1,6 @@
+import moment from 'moment';
+
+
 export function buildUniqueDatasetById(dataset, build) {
 	return dataset.reduce((newDataset, d, index) => {
 		newDataset[d.id] = build(d);
@@ -23,4 +26,9 @@ export function getUniquePropertyFromDataset(property, dataset) {
 
 export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+export function formatDate(date, format) {
+	return date === null ? null : moment.utc(date).local().format(format);
 }

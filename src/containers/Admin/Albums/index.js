@@ -1,4 +1,4 @@
 import AlbumsList from './AlbumsList';
-import AlbumEdit from './AlbumEdit';
+import AlbumForm from './AlbumForm';
 
-export { AlbumsList, AlbumEdit };
+export { AlbumsList, AlbumForm };

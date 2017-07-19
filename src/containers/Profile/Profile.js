@@ -2,7 +2,7 @@ import React from 'react';
 import Avatar from 'material-ui/Avatar';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Cover } from '../Layout';
+import { SimpleCover } from '../../components/Cover';
 import Studio from '../../components/Studio';
 
 class Profile extends React.Component {
@@ -10,12 +10,12 @@ class Profile extends React.Component {
 	render() {
 		return (
 			<div className="layout-studio">
-				<Cover className="cover" title="profile" src={this.props.cover} >
+				<SimpleCover className="cover" title="profile" src={this.props.cover} >
 					<div>
 						<Avatar size={150} src={this.props.auth.user.picture} />
 						<p style={{marginBottom: 0}} className="cover-name">{this.props.auth.user.name}</p>
 					</div>
-				</Cover>
+				</SimpleCover>
 				<div className="container">
 					<h1 className="big-title">Your likes</h1>
 					<Studio media={this.props.media}></Studio>

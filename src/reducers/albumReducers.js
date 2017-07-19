@@ -5,7 +5,10 @@ import { buildUniqueDatasetById } from '../utils';
 const initialState = {}
 
 function buildAlbum(e) {
-	return new Album(e.id, e.title, e.date, e.media);
+	const album = new Album(e.id, e.title, e.date, e.media);
+	album.createdAt = e.created_at;
+	album.updatedAt = e.updated_at;
+	return album;
 }
 
 export default function (state = initialState, action) {

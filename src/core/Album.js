@@ -1,9 +1,10 @@
 import moment from 'moment';
+import Timestampable from './Timestampable';
 
+export default class Album extends Timestampable {
 
-export default class Album {
-
-	constructor(id, title, date, media = {}) {
+	constructor(id, title, date = new Date(), media = {}) {
+		super();
 		this.id = id;
 		this.title = title;
 		this.date = date;

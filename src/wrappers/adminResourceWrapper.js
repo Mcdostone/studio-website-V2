@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchAll } from '../actions/fetchActions';
@@ -13,7 +14,7 @@ export default function adminResourceWrapper(resource, WrappedComponent) {
 		}
 
 		render() {
-			return <WrappedComponent dataSource={this.props.dataSource} />
+			return <WrappedComponent {...this.props} dataSource={this.props.dataSource} />
 		}
 
 	}
@@ -30,5 +31,5 @@ export default function adminResourceWrapper(resource, WrappedComponent) {
 		}, dispatch);
 	}
 
-	return connect(mapStateToProps, mapDispatchToProps)(adminResourceContainer);
+	return connect(mapStateToProps, mapDispatchToProps)(withRouter(adminResourceContainer));
 }

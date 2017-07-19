@@ -1,9 +1,9 @@
 @font-face {
 	font-family: 'Moonlights on the Beach';
-	src: 	url('../../../assets/MoonlightsontheBeach.eot');
-	src: 	url('../../../assets/MoonlightsontheBeach.eot?#iefix') format('embedded-opentype'),
-				url('../../../assets/MoonlightsontheBeach.woff') format('woff'),
-				url('../../../assets/MoonlightsontheBeach.ttf') format('truetype');
+	src: 	url('../../assets/MoonlightsontheBeach.eot');
+	src: 	url('../../assets/MoonlightsontheBeach.eot?#iefix') format('embedded-opentype'),
+				url('../../assets/MoonlightsontheBeach.woff') format('woff'),
+				url('../../assets/MoonlightsontheBeach.ttf') format('truetype');
 	font-weight: 300;
 	font-style: normal;
 }

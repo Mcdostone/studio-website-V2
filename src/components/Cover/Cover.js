@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Anime from 'react-anime';
-import DashboardIconMenu from '../../../components/shared/DashboardIconMenu';
-import Image from '../../../components/Image'
+import DashboardIconMenu from '../shared/DashboardIconMenu';
+import Image from '../Image';
 import './Cover.css';
 
 
@@ -26,16 +25,7 @@ class Cover extends React.Component {
 				<div>
 					<Image className="cover-image" src={this.props.src} alt="" />
 					<div className="cover-content">
-					<Anime
-						opacity={[0, 1]}
-						translateY={['-0.2rem', '0rem']}
-  					scale={[0.97, 1]}
-						duration={250}
-						direction="forwards"
-						easing="easeInOutQuad"
-						elasticity={250}>
 						{this.props.children}
-					</Anime>
 					</div>
 				</div>}
 				{this.props.admin && settings}
@@ -55,7 +45,5 @@ Cover.defaultProps = {
 	src: undefined,
 	admin: false,
 }
-
-
 
 export default Cover;
