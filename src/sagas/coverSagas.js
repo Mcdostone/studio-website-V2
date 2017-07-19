@@ -1,9 +1,20 @@
-import { COVER_FETCH, COVER_ADD, COVER_SET_CURRENT, COVER_RESET, COVER_NEW } from '../actions/coverActions';
+import {
+	COVER_FETCH,
+	COVER_ADD,
+	COVER_SET_CURRENT,
+	COVER_RESET,
+	COVER_NEW,
+	COVER_CREATE } from '../actions/coverActions';
 import { call, put, takeLatest, takeEvery, select } from 'redux-saga/effects';
 import RestFirebaseStorage from './RestFirebaseStorage';
 import logger from '../Logger'
 
 const storage = new RestFirebaseStorage();
+
+
+function* createCover(action) {
+	//const url = yield call(storage.post, 'covers',action.payload.id);
+}
 
 function* getCover(action) {
 	const state = yield select();
@@ -34,6 +45,7 @@ function* setCover(action) {
 
 function* coverSagas() {
 	yield takeEvery(COVER_FETCH, getCover);
+	yield takeEvery(COVER_CREATE, createCover);
 	yield takeLatest(COVER_SET_CURRENT, setCover);
 }
 

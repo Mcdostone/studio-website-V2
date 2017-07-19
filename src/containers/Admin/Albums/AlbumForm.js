@@ -25,8 +25,7 @@ class AlbumForm extends React.Component {
 	}
 
 	componentDidMount() {
-		this.setState({data: this.props.data
-		});
+		this.setState({data: this.props.data});
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -35,7 +34,9 @@ class AlbumForm extends React.Component {
 	}
 
 	applyChanges() {
-		this.props.save(this.state.data);
+		const data = this.state.data;
+		data.cover = this.state.cover;
+		this.props.save(data);
 		this.props.history.goBack();
 	}
 

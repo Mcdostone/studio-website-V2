@@ -19,7 +19,7 @@ export default class UserMenu extends React.Component {
 					</div>
 				</Anime>
 				<Anime elasticity={0} easing="easeOutExpo" translateX={['50px', '0']} opacity={[0, 1]} delay={600} duration={900} >
-					<span id="navigator-username">{this.props.auth.user.name}</span>
+					<span id="navigator-username">{this.props.auth.user.getFullName()}</span>
 				</Anime>
 			</div>
 		);

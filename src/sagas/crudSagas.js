@@ -1,4 +1,5 @@
 import { CRUD_UPDATE, CRUD_CREATE, CRUD_DELETE } from '../actions/crudActions';
+import { COVER_CREATE } from '../actions/coverActions';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import restFirebaseDatabase from './RestFirebaseDatabase';
 
@@ -6,8 +7,13 @@ import restFirebaseDatabase from './RestFirebaseDatabase';
 function* create(action) {
 	const { resource, data } = action.payload;
 	try {
+		data.cover = null;
 		const dataCreated = yield call(restFirebaseDatabase.post, resource.toLowerCase(), data);
+
 		yield put({type: `${resource.toUpperCase()}_ADD`, payload: [dataCreated.response]});
+		if(data.cover !== undefined) {
+			yield put({type: COVER_CREATE, payload: {id: dataCreated.id, cover: data.cover}});
+		}
   } catch (e) {
 		console.log(e);
 	}

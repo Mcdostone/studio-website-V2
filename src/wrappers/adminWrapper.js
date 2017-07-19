@@ -26,7 +26,6 @@ export default function adminWrapper(resource, WrappedComponent) {
 		}
 
 		save(data) {
-			console.log(data);
 			data.id === undefined ? this.props.create(resource, data) : this.props.update(resource, data);
 		}
 

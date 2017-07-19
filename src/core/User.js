@@ -1,12 +1,15 @@
-export default class User {
+import Timestampable from './Timestampable';
 
-	constructor(id, givenName, familyName, email, picture, updatedAt, banned, media = []) {
+
+export default class User extends Timestampable {
+
+	constructor(id, givenName, familyName, email, picture, banned, media = []) {
+		super();
 		this.id = id;
 		this.givenName = givenName;
 		this.familyName = familyName;
 		this.email = email;
 		this.picture = picture;
-		this.updatedAt = new Date(updatedAt);
 		this.banned = banned;
 		this.media = media;
 	}

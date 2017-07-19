@@ -6,7 +6,6 @@ import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
 import UserMenu from './UserMenu';
 import { authWrapper } from '../../../wrappers';
-import config from '../../../configuration';
 
 
 class Navigator extends React.Component {
@@ -22,10 +21,7 @@ class Navigator extends React.Component {
 	}
 
 	componentDidMount() {
-		const userData = JSON.parse(sessionStorage.getItem(config.APP.LOCAL_STORAGE_KEY));
-		if(userData && userData.authentificated) {
-			this.props.login(userData);
-		}
+		this.props.requestLoginFromStorage();
 	}
 
 	handleRequestClose() {
@@ -92,7 +88,8 @@ class Navigator extends React.Component {
 Navigator.propTypes = {
 	history: PropTypes.object.isRequired,
 	requestLogout: PropTypes.func.isRequired,
-	requestLogin: PropTypes.func.isRequired
+	requestLogin: PropTypes.func.isRequired,
+	requestLoginFromStorage: PropTypes.func.isRequired,
 }
 
 export default withRouter(authWrapper(Navigator));

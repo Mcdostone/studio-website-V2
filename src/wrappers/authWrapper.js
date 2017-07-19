@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login, requestLogin, requestLogout } from '../actions/authActions';
+import { login, requestLogin, requestLogout, requestLoginFromStorage } from '../actions/authActions';
 
 
 export default function authWrapper(WrappedComponent) {
@@ -13,6 +13,7 @@ export default function authWrapper(WrappedComponent) {
 					{...this.props}
 					requestLogin={this.props.requestLogin}
 					requestLogout={this.props.requestLogout}
+					requestLoginFromStorage={this.props.requestLoginFromStorage}
 					auth={this.props.auth} />
 			);
 		}
@@ -27,6 +28,7 @@ export default function authWrapper(WrappedComponent) {
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
 			requestLogin,
+			requestLoginFromStorage,
 			requestLogout,
 			login
   	}, dispatch);

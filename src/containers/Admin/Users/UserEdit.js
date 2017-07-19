@@ -42,7 +42,7 @@ class UserEdit extends React.Component {
 	}
 
 	applyChanges() {
-		this.props.update(this.state.data);
+		this.props.save(this.state.data);
 		this.props.history.goBack();
 	}
 

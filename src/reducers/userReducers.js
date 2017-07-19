@@ -3,18 +3,20 @@ import { User } from '../core';
 import { buildUniqueDatasetById } from '../utils';
 
 
-const initialState = {}
-
-function buildUser(user) {
-	return new User(user.id,
-	user.given_name,
-	user.family_name,
-	user.email,
-	user.picture,
-	user.updatedAt,
-	user.banned || false,
-	Object.keys(user.media || {}));
+export function buildUser(u) {
+	const user = new User(u.id,
+	u.givenName,
+	u.familyName,
+	u.email,
+	u.picture,
+	u.banned || false,
+	Object.keys(u.media || {}));
+	user.createdAt = u.created_at;
+	user.updatedAt = u.updated_at;
+	return user;
 }
+
+const initialState = {}
 
 export default function (state = initialState, action) {
 	switch(action.type) {
@@ -24,7 +26,6 @@ export default function (state = initialState, action) {
 
 		case USERS_UPDATE:
 			const newUser = {};
-			console.log(action);
 			newUser[action.payload.id] = action.payload;
 			return Object.assign({}, state, newUser);
 
