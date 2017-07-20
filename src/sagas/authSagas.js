@@ -20,7 +20,7 @@ function buildUser(u) {
 	u.family_name,
 	u.email,
 	u.picture,
-	u.banned || false,
+	false,
 	Object.keys(u.media || {}));
 	user.createdAt = u.created_at;
 	user.updatedAt = u.updated_at;
@@ -43,7 +43,9 @@ function* requestLogin() {
 		const authData = yield call(signInWithPopup);
 		const user = buildUser(authData.additionalUserInfo.profile);
 		const userFromFirebase = yield call(restFirebaseDatabase.get, 'users', user.id);
-		user.banned = userFromFirebase.val().banned;
+		if(userFromFirebase.val() !== null) {
+				user.banned = userFromFirebase.val().banned;
+		}
 		const userData = {
 			user,
 			authentificated: true

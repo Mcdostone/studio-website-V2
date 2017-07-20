@@ -14,7 +14,7 @@ export default function adminResourceWrapper(resource, WrappedComponent) {
 		}
 
 		render() {
-			return <WrappedComponent {...this.props} dataSource={this.props.dataSource} />
+			return <WrappedComponent {...this.props} dataSource={this.props.dataSource || {}} />
 		}
 
 	}

@@ -9,7 +9,7 @@ class Timestampable {
 		this.created_at = date === undefined ? null : date;
 	}
 
-	get createAt() {
+	get createdAt() {
 		return this.created_at;
 	}
 

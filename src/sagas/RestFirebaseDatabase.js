@@ -7,6 +7,7 @@ class RestFirebaseDatabase extends RestFirebase {
 		this.get = this.get.bind(this);
 		this.post = this.post.bind(this);
 		this.put = this.put.bind(this);
+		this.delete = this.delete.bind(this);
 		this.buildPath = this.buildPath.bind(this);
 	}
 
@@ -21,7 +22,7 @@ class RestFirebaseDatabase extends RestFirebase {
 
 	put(resource, data) {
 		data.updatedAt = new Date();
-		if(data.createdAt === undefined) {
+		if(data.createdAt === null) {
 			data.createdAt = new Date();
 		}
 
@@ -44,6 +45,10 @@ class RestFirebaseDatabase extends RestFirebase {
 			.then(() => resolve({ responsee: dataObject }))
 			.catch(reject)
 		});
+	}
+
+	delete(resource, id) {
+		return this.firebase.database().ref().child(this.buildPath(resource, id)).remove();
 	}
 
 }

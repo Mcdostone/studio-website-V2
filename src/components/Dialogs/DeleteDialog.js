@@ -3,9 +3,20 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import { red900 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
-
+import { crudWrapper } from '../../wrappers';
 
 class DeleteDialog extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.delete = this.delete.bind(this);
+	}
+
+	delete() {
+		this.props.remove(this.props.resource, this.props.id);
+		this.props.handleClose();
+		this.props.history.goBack();
+	}
 
 	render() {
 		const actions = [
@@ -18,7 +29,7 @@ class DeleteDialog extends React.Component {
         label="Trust me, I'm engineer"
         primary={true}
 				keyboardFocused={true}
-        onTouchTap={this.props.handleConfirm}
+        onTouchTap={this.delete}
       />,
     ];
 
@@ -43,7 +54,8 @@ DeleteDialog.propTypes = {
 	resource: PropTypes.string.isRequired,
 	id: PropTypes.string.isRequired,
 	handleClose: PropTypes.func.isRequired,
-	handleConfirm: PropTypes.func.isRequired,
+	remove: PropTypes.func.isRequired,
+	history: PropTypes.object.isRequired,
 };
 
-export default DeleteDialog;
+export default crudWrapper(DeleteDialog);

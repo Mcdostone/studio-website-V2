@@ -14,7 +14,7 @@ export const update = (resource, data) => ({
 		payload: { resource, data }
 });
 
-export const remove = (resource, data) => ({
+export const remove = (resource, id) => ({
     type: CRUD_DELETE,
-		payload: { resource, data }
+		payload: { resource, id }
 });

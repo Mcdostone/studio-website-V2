@@ -15,16 +15,10 @@ class AdminOptionsMenu extends React.Component {
     	deleteDialog: false,
 		};
 		this.handleCloseDeleteDialog = this.handleCloseDeleteDialog.bind(this);
-		this.handleConfirmDeleteDialog = this.handleConfirmDeleteDialog.bind(this);
 	}
 
 	handleCloseDeleteDialog() {
 		this.setState({deleteDialog: false});
-	}
-
-	handleConfirmDeleteDialog() {
-		this.handleCloseDeleteDialog();
-		console.log('confirm want to delete ' + this.props.id);
 	}
 
 	render() {
@@ -49,7 +43,6 @@ class AdminOptionsMenu extends React.Component {
 				<DeleteDialog {...this.props}
 				open={this.state.deleteDialog}
 				handleClose={this.handleCloseDeleteDialog}
-				handleConfirm={this.handleConfirmDeleteDialog}
 				/>
 			</div>
 

@@ -11,6 +11,8 @@ import {
 
 function buildResult(response, dataType) {
 	const res = response.val();
+	if(res === null)
+		return [];
 	switch(dataType) {
 		case LIST:
 			return Object.keys(res).map(r => res[r]);

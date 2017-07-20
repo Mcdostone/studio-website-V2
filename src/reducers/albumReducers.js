@@ -1,4 +1,4 @@
-import { ALBUMS_ADD } from '../actions/albumActions';
+import { ALBUMS_ADD, ALBUMS_DELETE} from '../actions/albumActions';
 import { Album } from '../core';
 import { buildUniqueDatasetById } from '../utils';
 
@@ -16,6 +16,12 @@ export default function (state = initialState, action) {
 		case ALBUMS_ADD:
 			const albums = buildUniqueDatasetById(action.payload, buildAlbum);
 			return Object.assign({}, state, albums);
+
+		case ALBUMS_DELETE:
+		console.log('here guys', action);
+		const newState = state;
+			delete newState[action.payload];
+			return Object.assign({}, state, newState);
 
 		default:
 			return state;

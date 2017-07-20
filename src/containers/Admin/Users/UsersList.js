@@ -1,7 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
-import {Card, CardTitle} from 'material-ui/Card';
-
 import { Link } from 'react-router-dom';
 import {
 	Table,
@@ -11,53 +10,39 @@ import {
 	TableRow,
 	TableRowColumn,
 } from 'material-ui/Table';
+import { adminListWrapper } from '../../../wrappers';
 
-import { adminResourceWrapper } from '../../../wrappers';
+const UsersList = (props) =>
+	<Table selectable={false}>
+		<TableHeader
+		displaySelectAll={false}
+  	adjustForCheckbox={false} >
+  		<TableRow selectable={false}>
+				<TableHeaderColumn>ID</TableHeaderColumn>
+				<TableHeaderColumn>Family name</TableHeaderColumn>
+				<TableHeaderColumn>Firstname</TableHeaderColumn>
+				<TableHeaderColumn>Authorization</TableHeaderColumn>
+				<TableHeaderColumn>Last login time</TableHeaderColumn>
+				<TableHeaderColumn>banned</TableHeaderColumn>
+  		</TableRow>
+  	</TableHeader>
+		<TableBody displayRowCheckbox={false}>
+			{Object.keys(props.dataSource).map(id => {
+				const link = `/admin/users/${id}`
+				return <TableRow hoverable={true} key={id}>
+						<TableRowColumn><Link to={link}>{id}</Link></TableRowColumn>
+						<TableRowColumn><Link to={link}>{props.dataSource[id].familyName}</Link></TableRowColumn>
+						<TableRowColumn><Link to={link}>{props.dataSource[id].givenName}</Link></TableRowColumn>
+						<TableRowColumn><Link to={link}>{props.dataSource[id].authorization}</Link></TableRowColumn>
+						<TableRowColumn>{moment(props.dataSource[id].updatedAt).fromNow()}</TableRowColumn>
+						<TableRowColumn><Link to={link}>{props.dataSource[id].banned ? 'true' : ''}</Link></TableRowColumn>
+					</TableRow>
+			})}
+		</TableBody>
+	</Table>
 
-class UsersList extends React.Component {
+UsersList.propTypes = {
+	dataSource: PropTypes.object.isRequired
+};
 
-	render() {
-		const users = this.props.dataSource || {}
-		const countUsers = Object.keys(users).length;
-		return (
-			<Card className="admin-container users-container">
-				<CardTitle title="List of users"
-				subtitle={countUsers < 2 ?countUsers + ' user' : countUsers + ' users'}
-				expandable={false} />
-				<Table selectable={false}>
-
-					<TableHeader
-					displaySelectAll={false}
-      	  adjustForCheckbox={false}
-					>
-      			<TableRow selectable={false}>
-							<TableHeaderColumn>ID</TableHeaderColumn>
-							<TableHeaderColumn>Family name</TableHeaderColumn>
-							<TableHeaderColumn>Firstname</TableHeaderColumn>
-							<TableHeaderColumn>Authorization</TableHeaderColumn>
-							<TableHeaderColumn>Last login time</TableHeaderColumn>
-							<TableHeaderColumn>banned</TableHeaderColumn>
-      			</TableRow>
-    			</TableHeader>
-
-    			<TableBody displayRowCheckbox={false}>
-						{Object.keys(users).map(id => {
-							const link = `/admin/users/${id}`
-							return <TableRow hoverable={true} key={id}>
-									<TableRowColumn><Link to={link}>{id}</Link></TableRowColumn>
-									<TableRowColumn><Link to={link}>{users[id].familyName}</Link></TableRowColumn>
-									<TableRowColumn><Link to={link}>{users[id].givenName}</Link></TableRowColumn>
-									<TableRowColumn><Link to={link}>{users[id].authorization}</Link></TableRowColumn>
-									<TableRowColumn>{moment(users[id].updatedAt).fromNow()}</TableRowColumn>
-									<TableRowColumn><Link to={link}>{users[id].banned ? 'true' : ''}</Link></TableRowColumn>
-								</TableRow>
-						}
-						)}
-					</TableBody>
-				</Table>
-			</Card>
-		);
-	}
-}
-
-export default adminResourceWrapper('users', UsersList);
+export default adminListWrapper('users', UsersList);
