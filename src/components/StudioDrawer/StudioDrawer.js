@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { List, ListItem } from 'material-ui/List';
+
 import { bindActionCreators } from 'redux';
 import Drawer from 'material-ui/Drawer';
 import { Link } from 'react-router-dom';
 import Divider from 'material-ui/Divider';
-import MenuItem from 'material-ui/MenuItem';
 import { toggleDrawer } from '../../actions/uiActions'
 import { authWrapper } from '../../wrappers';
 
@@ -14,8 +15,21 @@ class StudioDrawer extends React.Component {
 
 	shouldComponentUpdate(nextProps, nextState) {
 		return this.props.auth.authentificated !== nextProps.auth.authentificated ||
-			this.props.open !== nextProps.open
-		;
+			this.props.open !== nextProps.open;
+	}
+
+	getAdminListItems() {
+		const resources = ['Users', 'Albums', 'Media'];
+		return (
+			<ListItem
+			primaryText="Admin"
+			primaryTogglesNestedList={true}
+			nestedItems={resources.map(r =>
+					<Link key={r} to={`/admin/${r.toLocaleLowerCase()}`}>
+						<ListItem onTouchTap={this.props.onToggleDrawer} key={1} primaryText={r} />
+					</Link>
+			)} />
+		);
 	}
 
 	render() {
@@ -25,39 +39,39 @@ class StudioDrawer extends React.Component {
 			<div>
 				<Divider />
 				<Link to="/media">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+					<ListItem onTouchTap={this.props.onToggleDrawer}>
 						Media
-					</MenuItem>
+					</ListItem>
 				</Link>
 				<Link to="/albums">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+					<ListItem onTouchTap={this.props.onToggleDrawer}>
 						Albums
-					</MenuItem>
+					</ListItem>
 				</Link>
 				<Divider />
 				<Link to={`/profile/${this.props.auth.user.id}`}>
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+					<ListItem onTouchTap={this.props.onToggleDrawer}>
 						Your profile
-					</MenuItem>
+					</ListItem>
 				</Link>
 				<Link to="/sandbox">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
+					<ListItem onTouchTap={this.props.onToggleDrawer}>
 						Sandbox
-					</MenuItem>
+					</ListItem>
 				</Link>
 				<Link to="/logout">
-					<MenuItem onTouchTap={this.props.requestLogout}>
+					<ListItem onTouchTap={this.props.requestLogout}>
 						Logout
-					</MenuItem>
+					</ListItem>
 				</Link>
 			</div>);
 		}
 		else {
 			authentificated = (
 				<Link to="/login">
-					<MenuItem onTouchTap={this.props.requestLogin}>
+					<ListItem onTouchTap={this.props.requestLogin}>
 						Login
-					</MenuItem>
+					</ListItem>
 				</Link>
 			);
 		}
@@ -69,23 +83,26 @@ class StudioDrawer extends React.Component {
 				open={this.props.open}
 				onRequestChange={() => this.props.onToggleDrawer()}
 			>
-				<Link to="/">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Studio
-					</MenuItem>
-				</Link>
-				<Link to="/">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						About
-					</MenuItem>
-				</Link>
-				<Link to="/">
-					<MenuItem onTouchTap={this.props.onToggleDrawer}>
-						Works
-					</MenuItem>
-				</Link>
-				<Divider />
-				{authentificated}
+				<List>
+					<Link to="/">
+						<ListItem onTouchTap={this.props.onToggleDrawer}>
+							Studio
+						</ListItem>
+					</Link>
+					<Link to="/">
+						<ListItem onTouchTap={this.props.onToggleDrawer}>
+							About
+						</ListItem>
+					</Link>
+					<Link to="/">
+						<ListItem onTouchTap={this.props.onToggleDrawer}>
+							Works
+						</ListItem>
+					</Link>
+					{this.getAdminListItems()}
+					<Divider />
+					{authentificated}
+				</List>
 			</Drawer>
 		);
 	}

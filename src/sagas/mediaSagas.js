@@ -28,7 +28,7 @@ function buildExifFromGoogleDrive(driveData) {
 function* buildMediumFromGoogleDrive(medium) {
 	const state = yield select();
 	logger.react(`GET ${medium.id} from google drive`);
-	googleDriveApi.setAccessToken(state.auth.user.credentials.accessToken);
+	googleDriveApi.setAccessToken(state.auth.user.credential.accessToken);
 	const data = yield call(googleDriveApi.getFile, medium.id);
 	if(data !== undefined) {
 			return buildMedium(medium, data.thumbnailLink.split('=')[0], buildExifFromGoogleDrive(data));

@@ -18,7 +18,6 @@ export default function (state = initialState, action) {
 			return Object.assign({}, state, albums);
 
 		case ALBUMS_DELETE:
-		console.log('here guys', action);
 		const newState = state;
 			delete newState[action.payload];
 			return Object.assign({}, state, newState);

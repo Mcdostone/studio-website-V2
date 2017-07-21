@@ -43,4 +43,4 @@ AlbumsList.propTypes = {
 	dataSource: PropTypes.object.isRequired
 };
 
-export default adminListWrapper('albums', AlbumsList);
+export default adminListWrapper(AlbumsList, 'albums');

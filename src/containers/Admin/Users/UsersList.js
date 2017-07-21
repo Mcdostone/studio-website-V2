@@ -45,4 +45,4 @@ UsersList.propTypes = {
 	dataSource: PropTypes.object.isRequired
 };
 
-export default adminListWrapper('users', UsersList);
+export default adminListWrapper(UsersList, 'users');

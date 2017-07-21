@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/RaisedButton';
-import adminResourceWrapper from './adminResourceWrapper';
+import adminResourceWrapper from './adminResourceWrapper'
 
-export default function adminListWrapper(resource, WrappedComponent) {
+
+export default function adminListWrapper(WrappedComponent, resource, fetchAllAction) {
 
 	const AdminList = (props) => {
 		const count = Object.keys(props.dataSource).length;
@@ -23,6 +24,6 @@ export default function adminListWrapper(resource, WrappedComponent) {
 		);
 	}
 
-	return adminResourceWrapper(resource, AdminList);
+	return adminResourceWrapper(AdminList, resource, fetchAllAction);
 
 }

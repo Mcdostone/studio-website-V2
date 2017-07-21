@@ -12,8 +12,6 @@ const authProvider = new firebase.auth.GoogleAuthProvider();
 authProvider.setCustomParameters(config.FIREBASE_AUTH_CONFIG);
 config.FIREBASE_AUTH_CONFIG.scopes.map(s => authProvider.addScope(s));
 
-
-
 function buildUser(u) {
 	const user = new User(u.id,
 	u.given_name,
@@ -22,8 +20,6 @@ function buildUser(u) {
 	u.picture,
 	false,
 	Object.keys(u.media || {}));
-	user.createdAt = u.created_at;
-	user.updatedAt = u.updated_at;
 	return user;
 }
 
@@ -32,27 +28,25 @@ function signInWithPopup() {
 }
 
 function logout() {
-	return firebase.auth().signOut()
-	.catch(function(error) {
-		throw new Error(error);
-	});
+	return firebase.auth().signOut();
 }
 
 function* requestLogin() {
 	try {
 		const authData = yield call(signInWithPopup);
 		const user = buildUser(authData.additionalUserInfo.profile);
-		const userFromFirebase = yield call(restFirebaseDatabase.get, 'users', user.id);
-		if(userFromFirebase.val() !== null) {
-				user.banned = userFromFirebase.val().banned;
+		const data = yield call(restFirebaseDatabase.get, 'users', user.id);
+		const userFirebase = data.val();
+		if(userFirebase !== null) {
+			user.banned = userFirebase.banned;
+			user.createdAt = userFirebase.created_at;
+			user.updatedAt = userFirebase.updated_at;
 		}
-		const userData = {
-			user,
-			authentificated: true
-		};
-		yield put({type: LOGIN, payload: userData});
 		yield put({type: DRAWER_CLOSE});
 		yield put({type: CRUD_UPDATE, payload: {resource: 'users', data: user}});
+		if(userFirebase !== null)
+			user.credential = authData.credential;
+		yield put({type: LOGIN, payload: user});
   }
 	catch(error) {
 		console.log(error);
