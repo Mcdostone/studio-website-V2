@@ -12,7 +12,7 @@ class Media extends React.Component {
 	componentDidMount() {
 		this.props.setCover('media');
 		this.props.setTitle('media');
-		this.props.fetchAllMedia();
+		//this.props.fetchAllMedia();
 	}
 
 	render() {

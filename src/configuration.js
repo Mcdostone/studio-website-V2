@@ -17,6 +17,10 @@ export default {
 	APP: {
 		DEFAULT_COVER: defaultCover,
 		LOCAL_STORAGE_KEY: 'tn.net:studio'
+	},
+	PICKER: {
+		apiKey: 'AIzaSyAyGAloqOaGkZ-d7LWxY5OEetSeoG8c47U',
+		clientId: '813777068579-l3tci9fbs258be3pvdc3micukfvtt08t.apps.googleusercontent.com'
 	}
 
 }

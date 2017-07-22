@@ -1,5 +1,6 @@
 :root {
 	--usersColor: #FFC107;
+	--mediaColor: #F44336;
 	--borderSize: 3px;
 	--albumsColor: #2196F3;
 }
@@ -27,6 +28,10 @@
 
 .albums-container {
 	border-color: var(--albumsColor);
+}
+
+.media-container {
+	border-color: var(--mediaColor);
 }
 
 .admin-form {
