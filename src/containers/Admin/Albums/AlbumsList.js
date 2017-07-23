@@ -32,7 +32,7 @@ const AlbumsList = (props) =>
 						<TableRowColumn><Link to={link}>{id}</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].title}</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{formatDate(props.dataSource[id].date, 'DD/MM/YYYY')}</Link></TableRowColumn>
-						<TableRowColumn>{formatDate(props.dataSource[id].updatedAt, 'DD/MM/YYYY HH:mm')}</TableRowColumn>
+						<TableRowColumn>{formatDate(props.dataSource[id].updatedAt)}</TableRowColumn>
 					</TableRow>
 			}
 			)}

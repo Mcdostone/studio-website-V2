@@ -28,7 +28,11 @@ export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-
-export function formatDate(date, format) {
+export function formatDate(date, format = 'DD/MM/YYYY HH:mm') {
 	return date === null ? null : moment.utc(date).local().format(format);
+}
+
+export function getRandomProperty(obj) {
+	const keys = Object.keys(obj);
+	return keys[Math.floor(keys.length * Math.random())];
 }

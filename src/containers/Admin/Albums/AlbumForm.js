@@ -8,8 +8,6 @@ import AdminCover from '../AdminCover';
 import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardText } from 'material-ui/Card';
 import config from '../../../configuration';
-import { Album } from '../../../core';
-
 
 class AlbumForm extends React.Component {
 
@@ -99,10 +97,9 @@ class AlbumForm extends React.Component {
 	}
 
 	render() {
-		console.log(this.props);
 		return this.state.data !== undefined ? this.getContainer() : null;
 	}
 
 }
 
-export default adminWrapper('albums', AlbumForm);
+export default adminWrapper(AlbumForm, 'albums');

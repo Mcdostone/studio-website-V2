@@ -11,7 +11,7 @@ export default {
 	},
 	FIREBASE_AUTH_CONFIG: {
 		scopes: ['email', 'profile', 'https://www.googleapis.com/auth/drive.readonly'],
-//	hd: 'telecomnancy.net',
+		hd: 'telecomnancy.net',
 		prompt: 'select_account',
 	},
 	APP: {

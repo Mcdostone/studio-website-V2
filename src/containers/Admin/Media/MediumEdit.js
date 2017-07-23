@@ -1,10 +1,11 @@
 import React from 'react';
 import { adminWrapper } from '../../../wrappers';
+import { fetchOneMedium } from '../../../actions/mediaActions';
 import FlatButton from 'material-ui/FlatButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardActions, CardText } from 'material-ui/Card';
-
+import { getRandomProperty } from '../../../utils';
 
 class MediumForm extends React.Component {
 
@@ -14,6 +15,7 @@ class MediumForm extends React.Component {
 			data: undefined,
 		};
 		this.applyChanges = this.applyChanges.bind(this);
+		this.setAlbum = this.setAlbum.bind(this);
 	}
 
 	componentDidMount() {
@@ -26,28 +28,33 @@ class MediumForm extends React.Component {
 		return this.props.data !== nextProps.data;
 	}
 
+	setAlbum(e, key, payload) {
+		const mediumUpdated = this.state.data;
+		mediumUpdated.album = payload;
+		this.setState({data: mediumUpdated});
+	}
+
 	applyChanges() {
+		this.props.save(this.state.data);
 		this.props.history.goBack();
 	}
 
 	getContainer() {
 		const medium = this.state.data;
-
+		const albums = this.props.dataSource['albums'];
 		return (
 			<Card className="admin-container media-container">
-			<img src={medium.getThumbnail()} style={{width: '100%'}} alt=""/>
+			<img src={medium.getThumbnail(600)} style={{width: '100%'}} alt=""/>
 			<CardText>
 				<SelectField
-          floatingLabelText="Frequency"
-          value={this.state.value}
-          onChange={this.handleChange}
-	        >
-          	<MenuItem value={1} primaryText="Never" />
-          	<MenuItem value={2} primaryText="Every Night" />
-          	<MenuItem value={3} primaryText="Weeknights" />
-          	<MenuItem value={4} primaryText="Weekends" />
-          	<MenuItem value={5} primaryText="Weekly" />
-        	</SelectField>
+					floatingLabelText="Album"
+					style={{width: '100%'}}
+					value={this.state.data.album || getRandomProperty(albums)}
+					onChange={this.setAlbum}>
+						{Object.keys(albums).map(idAlbum =>
+							<MenuItem key={idAlbum} value={idAlbum} primaryText={albums[idAlbum].title} />)
+						}
+				</SelectField>
 				</CardText>
 				<CardActions>
 					<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />
@@ -62,4 +69,4 @@ class MediumForm extends React.Component {
 	}
 }
 
-export default adminWrapper('media', MediumForm);
+export default adminWrapper(MediumForm, 'media', fetchOneMedium);

@@ -6,7 +6,7 @@ import { fetchOne, fetchAll } from '../actions/fetchActions';
 import { remove, update, create } from '../actions/crudActions';
 
 
-export default function adminWrapper(resource, WrappedComponent) {
+export default function adminWrapper(WrappedComponent, resource, fetchOneAction = fetchOne) {
 
 	const adminContainer = class extends React.Component {
 
@@ -26,7 +26,6 @@ export default function adminWrapper(resource, WrappedComponent) {
 		}
 
 		save(data) {
-			console.log(data);
 			data.id === undefined ? this.props.create(resource, data) : this.props.update(resource, data);
 		}
 
@@ -47,7 +46,7 @@ export default function adminWrapper(resource, WrappedComponent) {
 
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
-			fetchOne,
+			fetchOne: fetchOneAction,
 			fetchAll,
 			update,
 			create,

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { List, ListItem } from 'material-ui/List';
-
 import { bindActionCreators } from 'redux';
 import Drawer from 'material-ui/Drawer';
 import { Link } from 'react-router-dom';
@@ -13,9 +12,19 @@ import { authWrapper } from '../../wrappers';
 
 class StudioDrawer extends React.Component {
 
+	constructor(props) {
+		super(props);
+		this.adminGoTo = this.adminGoTo.bind(this);
+	}
+
 	shouldComponentUpdate(nextProps, nextState) {
 		return this.props.auth.authentificated !== nextProps.auth.authentificated ||
 			this.props.open !== nextProps.open;
+	}
+
+	adminGoTo(resource) {
+		this.props.onToggleDrawer();
+		this.props.history.push(`/admin/${resource.toLowerCase()}`);
 	}
 
 	getAdminListItems() {
@@ -24,11 +33,11 @@ class StudioDrawer extends React.Component {
 			<ListItem
 			primaryText="Admin"
 			primaryTogglesNestedList={true}
-			nestedItems={resources.map(r =>
-					<Link key={r} to={`/admin/${r.toLocaleLowerCase()}`}>
-						<ListItem onTouchTap={this.props.onToggleDrawer} key={1} primaryText={r} />
-					</Link>
-			)} />
+			nestedItems={[
+				<ListItem onTouchTap={() => this.adminGoTo('')} key={'dashboard'} primaryText="Dashboard" />,
+				...resources.map(r =>
+				<ListItem onTouchTap={() => this.adminGoTo(r)} key={r} primaryText={r} />)
+			]} />
 		);
 	}
 
@@ -75,7 +84,6 @@ class StudioDrawer extends React.Component {
 				</Link>
 			);
 		}
-
 		return (
 			<Drawer
 				docked={false}

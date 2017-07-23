@@ -1,5 +1,4 @@
 import { CRUD_UPDATE, CRUD_CREATE, CRUD_DELETE } from '../actions/crudActions';
-import { COVER_CREATE } from '../actions/coverActions';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import restFirebaseDatabase from './RestFirebaseDatabase';
 

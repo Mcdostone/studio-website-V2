@@ -1,6 +1,6 @@
 import { all, call, takeEvery, put, select } from 'redux-saga/effects';
 import { Medium, Exif } from '../core';
-import { MEDIA_FETCH, MEDIA_ADD, MEDIA_FETCH_ALL } from '../actions/mediaActions';
+import { MEDIA_ADD, MEDIA_FETCH_ALL, MEDIA_FETCH_ONE } from '../actions/mediaActions';
 import logger from '../Logger';
 import restFirebaseDatabase from './RestFirebaseDatabase';
 import GoogleDriveApi from './GoogleDriveApi';
@@ -9,7 +9,7 @@ import GoogleDriveApi from './GoogleDriveApi';
 const googleDriveApi = new GoogleDriveApi(window.gapi);
 
 function buildMedium(medium, src, exif = new Exif()) {
-	return new Medium(medium.id, src, medium.from, medium.likes, medium.events, medium.types, exif);
+	return new Medium(medium.id, src, medium.from, medium.likes, medium.album, medium.types, exif);
 }
 
 function buildExifFromGoogleDrive(driveData) {
@@ -38,16 +38,10 @@ function* buildMediumFromGoogleDrive(medium) {
 
 function* createMediumFromFirebase(medium) {
 	if(medium !== undefined && medium !== null) {
-		const state = yield select();
 		switch(medium.from.toLowerCase().trim()) {
 			case 'drive':
-				if(state.auth.authentificated === true) {
-					const newMedium = yield call(buildMediumFromGoogleDrive, medium);
-					yield put({type: MEDIA_ADD, payload: newMedium});
-				}
-				else {
-					logger.error('You should be connected to use google drive API');
-				}
+				const newMedium = yield call(buildMediumFromGoogleDrive, medium);
+				yield put({type: MEDIA_ADD, payload: newMedium});
 				break;
 			default:
 				yield put({type: MEDIA_ADD, payload: buildMedium(medium, medium.src)});
@@ -55,17 +49,9 @@ function* createMediumFromFirebase(medium) {
 	}
 }
 
-function* fetchMedia(action) {
-	const state = yield select();
-	if(state.auth.authentificated === true) {
-		if(state.media[action.payload.param] === undefined) {
-			const snapshot = yield call(restFirebaseDatabase.get, action.payload.resource, action.payload.param);
-			yield call(createMediumFromFirebase, snapshot.val());
-		}
-	} else {
-		logger.error('You should be connected to navigate on the website');
-	}
-
+function* fetchOne(action) {
+		const snapshot = yield call(restFirebaseDatabase.get, action.payload.resource, action.payload.id);
+		yield call(createMediumFromFirebase, snapshot.val());
 }
 
 function* fetchAll() {
@@ -77,7 +63,7 @@ function* fetchAll() {
 }
 
 function* mediaSagas() {
-	yield takeEvery(MEDIA_FETCH, fetchMedia);
+	yield takeEvery(MEDIA_FETCH_ONE, fetchOne);
 	yield takeEvery(MEDIA_FETCH_ALL, fetchAll);
 }
 

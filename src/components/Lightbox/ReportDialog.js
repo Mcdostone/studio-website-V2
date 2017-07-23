@@ -3,6 +3,9 @@ import { ReportButton } from './icons';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import crudWrapper from '../../wrappers/crudWrapper';
+import authWrapper from '../../wrappers/authWrapper';
+import { Report } from '../../core';
 
 class ReportDialog extends React.Component {
 
@@ -14,6 +17,7 @@ class ReportDialog extends React.Component {
 			textError: undefined,
 		};
 	}
+
   handleOpen = () => {
     this.setState({open: true});
   };
@@ -25,10 +29,12 @@ class ReportDialog extends React.Component {
 	handleSubmit = () => {
 		const lengthMessage = this.state.messageReport.length;
 		if(lengthMessage >= 20 && lengthMessage <= 140) {
-    	this.props.handleReport(this.state.messageReport);
+			this.props.handleReport(this.state.messageReport);
+			this.props.create('reports',
+			new Report(null, this.props.auth.user.id, this.state.messageReport, this.props.medium.id));
 			this.setState({
 				open: false,
-				textError: undefined,
+				textError: null,
 				messageReport: '',
 			});
 		}
@@ -79,4 +85,4 @@ class ReportDialog extends React.Component {
 
 }
 
-export default ReportDialog;
+export default crudWrapper(authWrapper(ReportDialog));

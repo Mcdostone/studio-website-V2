@@ -1,3 +1,7 @@
+:root {
+	--padding-home: 20%;
+}
+
 .home {
 	position: absolute;
 	top: 0;
@@ -8,8 +12,12 @@
 }
 
 .home-section {
-	margin-bottom: 32px;
+	margin:64px 0;
 	box-sizing: border-box;
+}
+
+.home-section:first-child {
+	margin-top: 0;
 }
 
 .home-cover {
@@ -21,7 +29,7 @@
 	padding: 0 20%;
 	margin: 64px 0;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	flex-direction: row;
 	box-sizing: border-box;
 }
@@ -34,8 +42,14 @@
 	box-sizing: border-box;
 }
 
+.home-section-content {
+	padding: 0;
+	padding-bottom: 0;
+}
+
 .section-half .home-section-content {
 	width: 50%;
+	margin: 0;
 	padding: 0;
 }
 
@@ -50,7 +64,7 @@
 
 
 .home-section-content {
-	padding: 16px 20%;
+	padding: 16px var(--padding-home);
 	font-weight: 300;
 	text-align: justify;
 }

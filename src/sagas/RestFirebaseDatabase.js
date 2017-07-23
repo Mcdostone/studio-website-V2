@@ -17,7 +17,7 @@ class RestFirebaseDatabase extends RestFirebase {
 
 	get(resource, param) {
 		const path = this.buildPath(resource, param);
-		return this.firebase.database().ref().child(path).once('value');
+		return this.firebase.database().ref(path).once('value');
 	}
 
 	put(resource, data) {

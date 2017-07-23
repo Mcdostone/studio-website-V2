@@ -115,4 +115,4 @@ class UserEdit extends React.Component {
 	}
 }
 
-export default adminWrapper(UserEdit, 'users');
+export default adminWrapper('users', UserEdit);

@@ -15,7 +15,7 @@ export default function adminListWrapper(WrappedComponent, resource, fetchAllAct
 				expandable={false} />
 
 				<CardActions>
-      		<FlatButton label="Create" onTouchTap={() => props.history.push(`${resource}/create`)} />
+      		{props.creation && <FlatButton label="Create" onTouchTap={() => props.history.push(`${resource}/create`)} />}
 					<FlatButton label="Back" onTouchTap={() => props.history.goBack()} />
     		</CardActions>
 

@@ -24,7 +24,7 @@ class Admin extends React.Component {
 			<Route path="/admin/media/:id" render={() => <MediumEdit/>} />
 			<Route exact path="/admin/users" component={UsersList} />
 			<Route path="/admin/users/:id" component={UserEdit} />
-			<Route exact path="/admin/albums" component={AlbumsList} />
+			<Route exact path="/admin/albums" render={() => <AlbumsList creation />} />
 			<Route path="/admin/albums/:id" render={() => <AlbumForm />} />
 			<Route exact path="/admin/albums/create" render={() => <AlbumForm creation />} />
 		</div>

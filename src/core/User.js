@@ -7,7 +7,7 @@ export default class User extends Timestampable {
 		super();
 		this.id = id;
 		this.givenName = givenName;
-		this.familyName = familyName;
+		this.familyName = familyName.toUpperCase();
 		this.email = email;
 		this.picture = picture;
 		this.banned = banned;

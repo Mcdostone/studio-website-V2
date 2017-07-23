@@ -7,7 +7,7 @@ class FileInputField extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {filename: 'test'};
+		this.state = {filename: ''};
 		this.onChange = this.onChange.bind(this);
 	}
 
