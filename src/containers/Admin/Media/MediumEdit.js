@@ -1,6 +1,8 @@
 import React from 'react';
 import { adminWrapper } from '../../../wrappers';
 import FlatButton from 'material-ui/FlatButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import {Card, CardActions, CardText } from 'material-ui/Card';
 
 
@@ -15,6 +17,7 @@ class MediumForm extends React.Component {
 	}
 
 	componentDidMount() {
+		this.props.fetchAll('albums');
 		this.setState({data: this.props.data});
 	}
 
@@ -32,8 +35,19 @@ class MediumForm extends React.Component {
 
 		return (
 			<Card className="admin-container media-container">
-				<CardText>
-					{JSON.stringify(medium)}
+			<img src={medium.getThumbnail()} style={{width: '100%'}} alt=""/>
+			<CardText>
+				<SelectField
+          floatingLabelText="Frequency"
+          value={this.state.value}
+          onChange={this.handleChange}
+	        >
+          	<MenuItem value={1} primaryText="Never" />
+          	<MenuItem value={2} primaryText="Every Night" />
+          	<MenuItem value={3} primaryText="Weeknights" />
+          	<MenuItem value={4} primaryText="Weekends" />
+          	<MenuItem value={5} primaryText="Weekly" />
+        	</SelectField>
 				</CardText>
 				<CardActions>
 					<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />

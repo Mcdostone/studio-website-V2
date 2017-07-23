@@ -8,6 +8,7 @@ import AdminCover from '../AdminCover';
 import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardText } from 'material-ui/Card';
 import config from '../../../configuration';
+import { Album } from '../../../core';
 
 
 class AlbumForm extends React.Component {
@@ -15,7 +16,7 @@ class AlbumForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: undefined,
+			id: undefined,
 			cover: undefined,
 		};
 		this.updateTitle = this.updateTitle.bind(this);
@@ -35,7 +36,7 @@ class AlbumForm extends React.Component {
 
 	applyChanges() {
 		const data = this.state.data;
-		data.cover = this.state.cover;
+		data.cover = this.state.cover || null;
 		this.props.save(data);
 		this.props.history.goBack();
 	}
@@ -63,7 +64,6 @@ class AlbumForm extends React.Component {
 
 	getContainer() {
 		const album = this.state.data;
-
 		return (
 			<Card className="admin-container albums-container">
 				<AdminCover
@@ -99,8 +99,10 @@ class AlbumForm extends React.Component {
 	}
 
 	render() {
+		console.log(this.props);
 		return this.state.data !== undefined ? this.getContainer() : null;
 	}
+
 }
 
 export default adminWrapper('albums', AlbumForm);

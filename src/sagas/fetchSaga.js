@@ -3,6 +3,7 @@ import restFirebaseDatabase from './RestFirebaseDatabase';
 import logger from '../Logger';
 import {
 	FETCH,
+	FETCH_ONE,
 	FETCH_REFS,
 	LIST,
 	OBJECT,
@@ -42,7 +43,18 @@ export function* fetch(action) {
 			logger.error(err);
 		}
 	}
+}
 
+function* fetchOne(action) {
+	const {resource, id } = action.payload;
+	logger.react(`[FIREBASE-DB] GET /${resource}${id === undefined ? '' : `/${id}`}`);
+	try {
+		const response = yield call(restFirebaseDatabase.get, resource.toLowerCase(), id);
+		const result = buildResult(response, OBJECT);
+		yield put({type: `${resource.toUpperCase()}_ADD`, payload: result});
+	} catch(err) {
+		logger.error(err);
+	}
 }
 
 function* fetchReferences(action) {
@@ -70,5 +82,6 @@ function* fetchReferences(action) {
 
 export default function* fetchSaga() {
 	yield takeEvery(FETCH, fetch);
+	yield takeEvery(FETCH_ONE, fetchOne);
 	yield takeEvery(FETCH_REFS, fetchReferences);
 }

@@ -21,7 +21,7 @@ class FileInputField extends React.Component {
 
 	getStyles() {
 		return {
-			cursor: 'pointer',
+  		cursor: 'pointer',
 			position: 'absolute',
 			top: 0,
 			bottom: 0,

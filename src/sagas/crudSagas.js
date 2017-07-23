@@ -7,13 +7,8 @@ import restFirebaseDatabase from './RestFirebaseDatabase';
 function* create(action) {
 	const { resource, data } = action.payload;
 	try {
-		data.cover = null;
 		const dataCreated = yield call(restFirebaseDatabase.post, resource.toLowerCase(), data);
-
-		yield put({type: `${resource.toUpperCase()}_ADD`, payload: [dataCreated.response]});
-		if(data.cover !== undefined) {
-			yield put({type: COVER_CREATE, payload: {id: dataCreated.id, cover: data.cover}});
-		}
+		yield put({type: `${resource.toUpperCase()}_ADD`, payload: [dataCreated]});
   } catch (e) {
 		console.log(e);
 	}
@@ -40,8 +35,8 @@ function* del(action) {
 }
 
 function* crudSagas() {
-	yield takeEvery(CRUD_UPDATE, update);
 	yield takeEvery(CRUD_CREATE, create);
+	yield takeEvery(CRUD_UPDATE, update);
 	yield takeEvery(CRUD_DELETE, del);
 }
 

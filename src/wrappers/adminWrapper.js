@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { fetchOne } from '../actions/fetchActions';
+import { fetchOne, fetchAll } from '../actions/fetchActions';
 import { remove, update, create } from '../actions/crudActions';
 
 
@@ -26,26 +26,29 @@ export default function adminWrapper(resource, WrappedComponent) {
 		}
 
 		save(data) {
+			console.log(data);
 			data.id === undefined ? this.props.create(resource, data) : this.props.update(resource, data);
 		}
 
 		render() {
-			const data = this.props.creation ? this.props.default : this.props.dataSource[this.props.match.params.id];
+			const data = this.props.creation === true ? this.props.default() : this.props.dataSource[resource][this.props.match.params.id];
 			return <WrappedComponent {...this.props} save={this.save} data={data} />
 		}
 
 	}
 
-	function mapStateToProps(state) {
+	function mapStateToProps(state, ownProps) {
 		return {
-			dataSource: state[resource],
-			default: state.default[resource]
+			dataSource: state,
+			default: state.default[resource],
+			...ownProps,
 		}
 	}
 
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
 			fetchOne,
+			fetchAll,
 			update,
 			create,
 			remove,

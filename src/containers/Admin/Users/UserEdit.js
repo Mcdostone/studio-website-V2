@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import Avatar from 'material-ui/Avatar';
 import { SimpleCover } from '../../../components/Cover';
-import FlatButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete-forever';
 import Toggle from 'material-ui/Toggle';
 import { adminWrapper } from '../../../wrappers';
@@ -94,7 +94,7 @@ class UserEdit extends React.Component {
 									<TableRowColumn></TableRowColumn>
 									<TableRowColumn></TableRowColumn>
 									<TableRowColumn></TableRowColumn>
-									<TableRowColumn><FlatButton icon={<ActionDelete  color={'#FFC107'} />} /></TableRowColumn>
+									<TableRowColumn><RaisedButton icon={<ActionDelete color={'#FFC107'} />} /></TableRowColumn>
 								</TableRow>
 							)}
 
@@ -103,8 +103,8 @@ class UserEdit extends React.Component {
 					</CardText>
 
 					<CardActions>
-						<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />
-						<FlatButton label="Save" onTouchTap={this.applyChanges}/>
+						<RaisedButton label="Back" onTouchTap={() => this.props.history.goBack()} />
+						<RaisedButton label="Save" onTouchTap={this.applyChanges}/>
 					</CardActions>
 				</Card>
 		);
