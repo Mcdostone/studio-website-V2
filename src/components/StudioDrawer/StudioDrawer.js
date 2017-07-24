@@ -28,7 +28,7 @@ class StudioDrawer extends React.Component {
 	}
 
 	getAdminListItems() {
-		const resources = ['Users', 'Albums', 'Media'];
+		const resources = ['Users', 'Albums', 'Media', 'Reports', 'Uploads'];
 		return (
 			<ListItem
 			primaryText="Admin"

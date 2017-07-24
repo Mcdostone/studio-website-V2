@@ -1,0 +1,71 @@
+:root {
+	--widget-height: 76px;
+}
+
+.admin-widget {
+	margin: 8px;
+	flex: 1;
+	height: var(--widget-height);
+}
+
+.widget-container {
+	display: flex;
+	height: 100%;
+	background: transparent;
+	cursor: pointer;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.widget-users {
+	background: var(--usersColor) !important;
+}
+
+.widget-albums {
+	background: var(--albumsColor) !important;
+}
+
+.widget-media {
+	background: var(--mediaColor) !important;
+}
+
+.widget-reports {
+	background: var(--reportsColor) !important;
+}
+
+.widget-uploads {
+	background: var(--uploadsColor) !important;
+}
+
+.widget-value, .widget-measure {
+	color: white;
+	font-size: 2em;
+	font-weight: 300;
+	margin: 0;
+	width: 100%;
+}
+
+.widget-content {
+	display: flex;
+	float: left;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	flex: 1;
+}
+
+.widget-icon {
+	float: left;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: var(--widget-height);
+}
+
+.widget-measure {
+	font-size: 1em;
+}

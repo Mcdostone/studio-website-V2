@@ -13,17 +13,16 @@ import { adminListWrapper } from '../../../wrappers';
 import { formatDate } from '../../../utils';
 
 
-const ReportsList = (props) =>
+const UploadsList = (props) =>
 	<Table selectable={false}>
 		<TableHeader
 		displaySelectAll={false}
   	adjustForCheckbox={false} >
   		<TableRow selectable={false}>
 				<TableHeaderColumn>ID</TableHeaderColumn>
-				<TableHeaderColumn>description</TableHeaderColumn>
-				<TableHeaderColumn>Reported by</TableHeaderColumn>
-				<TableHeaderColumn>medium</TableHeaderColumn>
-				<TableHeaderColumn>createdAt</TableHeaderColumn>
+				<TableHeaderColumn>uploader</TableHeaderColumn>
+				<TableHeaderColumn>Count Media</TableHeaderColumn>
+				<TableHeaderColumn>CreatedAt</TableHeaderColumn>
   		</TableRow>
   	</TableHeader>
 		<TableBody displayRowCheckbox={false}>
@@ -31,17 +30,16 @@ const ReportsList = (props) =>
 				const link = `/admin/reports/${id}`
 				return <TableRow hoverable={true} key={id}>
 						<TableRowColumn><Link to={link}>{id}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].description}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].reportedBy}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].medium}</Link></TableRowColumn>
+						<TableRowColumn><Link to={'#'}>{null}</Link></TableRowColumn>
+						<TableRowColumn><Link to={'#'}>{null}</Link></TableRowColumn>
 						<TableRowColumn>{formatDate(props.dataSource[id].createdAt)}</TableRowColumn>
 					</TableRow>
 			})}
 		</TableBody>
 	</Table>
 
-ReportsList.propTypes = {
+UploadsList.propTypes = {
 	dataSource: PropTypes.object.isRequired
 };
 
-export default adminListWrapper(ReportsList, 'reports');
+export default adminListWrapper(UploadsList, 'uploads');

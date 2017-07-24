@@ -2,10 +2,9 @@ import React from 'react';
 import { adminWrapper } from '../../../wrappers';
 import { fetchOneMedium } from '../../../actions/mediaActions';
 import FlatButton from 'material-ui/FlatButton';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import {Card, CardActions, CardText } from 'material-ui/Card';
-import { getRandomProperty } from '../../../utils';
+import { AlbumSelectField } from '../shared';
+
 
 class MediumForm extends React.Component {
 
@@ -46,15 +45,7 @@ class MediumForm extends React.Component {
 			<Card className="admin-container media-container">
 			<img src={medium.getThumbnail(600)} style={{width: '100%'}} alt=""/>
 			<CardText>
-				<SelectField
-					floatingLabelText="Album"
-					style={{width: '100%'}}
-					value={this.state.data.album || getRandomProperty(albums)}
-					onChange={this.setAlbum}>
-						{Object.keys(albums).map(idAlbum =>
-							<MenuItem key={idAlbum} value={idAlbum} primaryText={albums[idAlbum].title} />)
-						}
-				</SelectField>
+				<AlbumSelectField value={this.state.data.album} albums={albums} onChange={this.setAlbum} />
 				</CardText>
 				<CardActions>
 					<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />
