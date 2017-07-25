@@ -5,6 +5,7 @@ import lightbox from './lightbox';
 import media from './mediaReducers';
 import def from './defaultReducers';
 import auth from './authReducers';
+import uploads from './uploadReducers';
 import covers from './coverReducers';
 import albums from './albumReducers';
 import users from './userReducers';
@@ -19,6 +20,7 @@ const studioApp = combineReducers({
 		albums,
 		covers,
 		users,
+		uploads,
 		routing: routerReducer,
 })
 

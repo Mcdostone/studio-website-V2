@@ -27,11 +27,12 @@ const UploadsList = (props) =>
   	</TableHeader>
 		<TableBody displayRowCheckbox={false}>
 			{Object.keys(props.dataSource).map(id => {
-				const link = `/admin/reports/${id}`
+				const link = `/admin/uploads/${id}`;
+				const linkAuthor = `/admin/users/${props.dataSource[id].author}`;
 				return <TableRow hoverable={true} key={id}>
 						<TableRowColumn><Link to={link}>{id}</Link></TableRowColumn>
-						<TableRowColumn><Link to={'#'}>{null}</Link></TableRowColumn>
-						<TableRowColumn><Link to={'#'}>{null}</Link></TableRowColumn>
+						<TableRowColumn><Link to={linkAuthor}>{props.dataSource[id].author}</Link></TableRowColumn>
+						<TableRowColumn>{props.dataSource[id].countMedia()}</TableRowColumn>
 						<TableRowColumn>{formatDate(props.dataSource[id].createdAt)}</TableRowColumn>
 					</TableRow>
 			})}

@@ -30,7 +30,7 @@ export default function adminWrapper(WrappedComponent, resource, fetchOneAction 
 		}
 
 		render() {
-			const data = this.props.creation === true ? this.props.default() : this.props.dataSource[resource][this.props.match.params.id];
+			const data = this.props.creation === true ? this.props.default[resource]() : this.props.dataSource[resource][this.props.match.params.id];
 			return <WrappedComponent {...this.props} save={this.save} data={data} />
 		}
 
@@ -39,7 +39,7 @@ export default function adminWrapper(WrappedComponent, resource, fetchOneAction 
 	function mapStateToProps(state, ownProps) {
 		return {
 			dataSource: state,
-			default: state.default[resource],
+			default: state.default,
 			...ownProps,
 		}
 	}

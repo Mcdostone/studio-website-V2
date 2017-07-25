@@ -31,7 +31,7 @@ function* buildMediumFromGoogleDrive(medium) {
 	googleDriveApi.setAccessToken(state.auth.user.credential.accessToken);
 	const data = yield call(googleDriveApi.getFile, medium.id);
 	if(data !== undefined) {
-			return buildMedium(medium, data.thumbnailLink.split('=')[0], buildExifFromGoogleDrive(data));
+		return buildMedium(medium, data.thumbnailLink.split('=')[0], buildExifFromGoogleDrive(data));
 	}
 	return undefined;
 }

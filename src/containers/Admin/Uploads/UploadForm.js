@@ -13,36 +13,105 @@ import {Card, CardActions, CardText } from 'material-ui/Card';
 import GooglePicker from '../GooglePicker';
 import config from '../../../configuration';
 import { AlbumSelectField } from '../shared';
+import { getRandomProperty } from '../../../utils';
 
+
+const CustomRowColumn = (props) => {
+	const{children, ...others} = props;
+	return (
+		<TableRowColumn {...others} className='prevent-cell-click'>
+			<div className="prevent-cell-click-wrapper" onClick={e => e.stopPropagation()}>
+				{children}
+			</div>
+		</TableRowColumn>
+	);
+}
 
 class UploadForm extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.handleDataPicked = this.handleDataPicked.bind(this);
+		this.handleRowSelection = this.handleRowSelection.bind(this);
+		this.save = this.save.bind(this);
 		this.state = {
 			media: {},
+			selected: {},
+			mediaByIndex: [],
+			selectedAlbum: undefined,
 		};
 	}
 
 	componentDidMount() {
 		this.props.fetchAll('albums');
+		console.log(this.props.data);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const albums = nextProps.dataSource['albums'];
+		if(albums !== '' && this.state.selectedAlbum === undefined)
+			this.setState({selectedAlbum: getRandomProperty(albums)});
+	}
+
+	handleRowSelection(indexRowsSelected) {
+		const selected = {};
+		if(indexRowsSelected === 'all')
+			Object.keys(this.state.media).map((e, i) => selected[i] = true);
+		else {
+			if(indexRowsSelected !== 'none')
+				indexRowsSelected.map(i => selected[i] = true);
+		}
+		this.setState({selected});
+	}
+
+	changeAlbum(mediumId, albumId) {
+		const newMediaState = this.state.media;
+		newMediaState[mediumId].album = albumId;
+		this.setState({media: newMediaState, mediaByIndex: Object.values(newMediaState)});
+	}
+
+	changeAlbumForSelectedMedia(albumId) {
+		const { media, selected, mediaByIndex } = this.state;
+		Object.keys(selected).map(index => media[mediaByIndex[index].id].album = albumId);
+		this.setState({media: media, mediaByIndex: Object.values(media), selectedAlbum: albumId});
+	}
+
+	save() {
+		const upload = this.props.data;
+		upload.author = this.props.dataSource.auth.user.id;
+		const media = {};
+		Object.keys(this.state.media).map(m => media[m] = true);
+		upload.media = media;
+		this.props.save(upload);
+		this.props.history.goBack();
 	}
 
 	handleDataPicked(data) {
 		switch(data.action) {
 			case 'picked':
-				const newMedia = {};
-				data.docs.map(doc => newMedia[doc.id] = doc);
-				this.setState({media: newMedia});
+				let newMedia = {};
+				data.docs.map(doc => newMedia[doc.id] = this.buildMedium(doc));
+				newMedia = {...this.state.media, ...newMedia};
+				this.setState({media:newMedia, mediaByIndex: Object.values(newMedia)});
 				break;
 			default:
 				return;
 		}
 	}
 
+	buildMedium(driveData) {
+		const createMedium = this.props.default['media'];
+		const newMedium = createMedium();
+		newMedium.id = driveData.id;
+		newMedium.from = 'drive';
+		newMedium.src = driveData.url;
+		newMedium.album = getRandomProperty(this.props.dataSource['albums']);
+		return newMedium;
+	}
+
 	render() {
 		const albums = this.props.dataSource['albums'];
+		const processedMedia = this.state.mediaByIndex;
 		return (
 			<Card className="admin-container media-container">
 				<CardText>
@@ -59,35 +128,50 @@ class UploadForm extends React.Component {
    					<FlatButton label="google drive" />
 					</GooglePicker>
 
-					<Table>
+					<Table
+					multiSelectable
+					onRowSelection={this.handleRowSelection}>
 						<TableHeader>
   						<TableRow>
 								<TableHeaderColumn>ID</TableHeaderColumn>
 								<TableHeaderColumn>Link</TableHeaderColumn>
 								<TableHeaderColumn style={{overflow: 'hidden'}}>
-									<AlbumSelectField albums={albums} underlineStyle={{border: 'none'}} />
+									<AlbumSelectField
+									value={this.state.selectedAlbum}
+									albums={albums}
+									underlineStyle={{border: 'none'}}
+									onChange={(e, k, payload) => this.changeAlbumForSelectedMedia(payload)}
+									/>
 								</TableHeaderColumn>
   						</TableRow>
   					</TableHeader>
-						<TableBody>
-							{Object.keys(this.state.media).map(id =>
-								<TableRow hoverable={true} key={id}>
-									<TableRowColumn>{id}</TableRowColumn>
-									<TableRowColumn><a target="blank" href={this.state.media[id].url}>{this.state.media[id].url}</a></TableRowColumn>
-									<TableRowColumn>
-										<AlbumSelectField disableLabel
+						<TableBody deselectOnClickaway={false}>
+
+							{processedMedia.map((medium, index) => {
+								return <TableRow
+								selected={this.state.selected[index] === true}
+								hoverable={true}
+								key={medium.id}>
+									<CustomRowColumn>{medium.id}</CustomRowColumn>
+									<CustomRowColumn><a target="blank" href={medium.src}>{medium.src}</a></CustomRowColumn>
+									<CustomRowColumn>
+										<AlbumSelectField
+										disableLabel
+										value={medium.album}
 										labelStyle={{height: '100%', top: -2}}
+										onChange={(e, k, payload) => this.changeAlbum(medium.id, payload)}
 										underlineStyle={{border: 'none'}} albums={albums} />
-									</TableRowColumn>
+									</CustomRowColumn>
 								</TableRow>
-							)}
+							})}
+
 						</TableBody>
 					</Table>
 
 				</CardText>
 				<CardActions>
 					<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />
-					<FlatButton label="Save" onTouchTap={this.applyChanges}/>
+					<FlatButton label="Save" onTouchTap={this.save}/>
 				</CardActions>
 			</Card>
 		);
@@ -95,3 +179,7 @@ class UploadForm extends React.Component {
 }
 
 export default adminWrapper(UploadForm, 'uploads');
+
+
+
+

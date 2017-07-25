@@ -40,7 +40,7 @@
 	border-color: var(--reportsColor);
 }
 
-.reports-container {
+.uploads-container {
 	border-color: var(--uploadsColor);
 }
 
@@ -96,4 +96,20 @@
 	padding: 32px 0;
 	width: 80%;
 	margin: auto;
+}
+
+
+.prevent-cell-click {
+	position: relative;
+}
+
+.prevent-cell-click-wrapper {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	padding: 0 24px;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
 }

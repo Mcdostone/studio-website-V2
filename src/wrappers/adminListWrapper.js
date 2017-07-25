@@ -8,6 +8,7 @@ export default function adminListWrapper(WrappedComponent, resource, fetchAllAct
 
 	const AdminList = (props) => {
 		const count = Object.keys(props.dataSource).length;
+		console.log(props.dataSource);
 		return (
 			<Card className={`admin-container ${resource}-container`}>
 				<CardTitle title={`List of ${resource}`}

@@ -23,17 +23,26 @@ syncHistoryWithStore(history, store);
 
 class App extends React.Component {
 
+	constructor(props) {
+		super(props);
+		this.state = {
+			apiLoaded: false
+		};
+	}
+
 	componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
 		if (isScriptLoaded && !this.props.isScriptLoaded) {
 			if (isScriptLoadSucceed) {
-				window.gapi.client.load('drive', 'v2');
+				window.gapi.client.load('drive', 'v2').then(
+					this.setState({apiLoaded: true})
+				);
 			}
 		}
   }
 
 	render() {
-		const { isScriptLoaded, isScriptLoadSucceed } = this.props
-		if (isScriptLoaded && isScriptLoadSucceed) {
+		const { isScriptLoaded, isScriptLoadSucceed} = this.props
+		if (isScriptLoaded && isScriptLoadSucceed && this.state.apiLoaded) {
 			return (
 				<Provider store={store}>
 					<div className="studio-app">

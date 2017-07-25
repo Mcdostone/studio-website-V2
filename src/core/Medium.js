@@ -2,9 +2,9 @@ export default class Medium {
 
 	constructor(id, src, comeFrom, likes, album, type, exif) {
 		this.id = id;
-		this.src = src.trim();
-		this.from = comeFrom.toLowerCase().trim();
-		this.likes = likes === undefined ? [] : likes;
+		this.src = src.trim() || null;
+		this.from = comeFrom.toLowerCase().trim() || null;
+		this.likes = likes === null ? [] : likes;
 		this.album = album;
 		this.types = type || null;
 		this.exif = exif;

@@ -3,6 +3,7 @@ import Album from './Album';
 import User from './User';
 import Exif from './Exif';
 import Report from './Report';
+import Upload from './Upload';
 
 
 export {
@@ -11,4 +12,5 @@ export {
 	User,
 	Exif,
 	Report,
+	Upload,
 };
