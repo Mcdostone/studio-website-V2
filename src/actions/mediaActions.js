@@ -2,6 +2,7 @@ export const SORT_LAST_ADDED = 1;
 export const SORT_POPULARITY = 2;
 export const SORT_LIKES = 3;
 export const MEDIA_ADD = 'MEDIA_ADD';
+export const MEDIA_CREATE = 'MEDIA_CREATE';
 export const MEDIA_ADD_LIST = 'MEDIA_ADD_LIST';
 export const MEDIA_FETCH = 'MEDIA_FETCH';
 export const MEDIA_FETCH_FROM_GOOGLE_DRIVE = 'MEDIA_FETCH_FROM_GOOGLE_DRIVE';
@@ -24,6 +25,11 @@ export const fetchOneMedium = (resource, id) => ({
 		payload: {resource, id},
 })
 
-export const fetchAllMedia = () =>  ({
+export const fetchAllMedia = () => ({
     type: MEDIA_FETCH_ALL,
+});
+
+export const createMedia = (medium) => ({
+		type: MEDIA_CREATE,
+		payload: medium,
 });

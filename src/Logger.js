@@ -17,7 +17,19 @@ class Logger {
 
 	react(msg, obj = '') {
     this.log('REACT', msg, obj);
-  }
+	}
+
+	database(msg, obj = '') {
+		this.firebase('DATABASE', msg, obj);
+	}
+
+	storage(msg, obj = '') {
+		this.firebase('STORAGE', msg, obj);
+	}
+
+	firebase(service, msg, obj = '') {
+		this.log(`FIREBASE:${service}`, msg, obj);
+	}
 
 	trace(msg, obj = '') {
 		loglevel.trace(this.prefix('TRACE') + msg, obj);

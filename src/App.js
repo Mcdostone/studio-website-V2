@@ -26,23 +26,23 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			apiLoaded: false
+			apiLoaded: true
 		};
 	}
 
 	componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
-		if (isScriptLoaded && !this.props.isScriptLoaded) {
+		/*if (isScriptLoaded && !this.props.isScriptLoaded) {
 			if (isScriptLoadSucceed) {
 				window.gapi.client.load('drive', 'v2').then(
 					this.setState({apiLoaded: true})
 				);
 			}
-		}
+		}*/
   }
 
 	render() {
-		const { isScriptLoaded, isScriptLoadSucceed} = this.props
-		if (isScriptLoaded && isScriptLoadSucceed && this.state.apiLoaded) {
+		//const { isScriptLoaded, isScriptLoadSucceed} = this.props
+		//if (isScriptLoaded && isScriptLoadSucceed && this.state.apiLoaded) {
 			return (
 				<Provider store={store}>
 					<div className="studio-app">
@@ -63,9 +63,10 @@ class App extends React.Component {
 				</Provider>
 			);
 		}
-		return null;
-	}
+		//return null;
+	//}
 
 }
 
-export default scriptLoader('https://apis.google.com/js/client.js')(App);
+//export default scriptLoader('https://apis.google.com/js/client.js')(App);
+export default App;

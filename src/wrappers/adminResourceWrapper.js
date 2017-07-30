@@ -11,7 +11,6 @@ export default function adminResourceWrapper(WrappedComponent, resource, fetchAl
 	const adminResourceContainer = class extends React.Component {
 
 		componentDidMount() {
-			console.log()
 			this.props.fetchAll(resource);
 		}
 

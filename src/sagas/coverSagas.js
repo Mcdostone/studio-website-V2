@@ -1,22 +1,13 @@
-import {
-	COVER_FETCH,
-	COVER_ADD,
-	COVER_SET_CURRENT,
-	COVER_RESET,
-	COVER_NEW,
-	COVER_CREATE } from '../actions/coverActions';
-import { call, put, takeLatest, takeEvery, select } from 'redux-saga/effects';
-import RestFirebaseStorage from './RestFirebaseStorage';
-import logger from '../Logger'
-
-const storage = new RestFirebaseStorage();
+import { COVER_CREATE } from '../actions/coverActions';
+import { call, takeEvery } from 'redux-saga/effects';
+import storage from './RestFirebaseStorage';
 
 
 function* createCover(action) {
-	//const url = yield call(storage.post, 'covers',action.payload.id);
+	yield call(storage.post, `covers/${action.payload.id}`, action.payload.data);
 }
 
-function* getCover(action) {
+/*function* getCover(action) {
 	const state = yield select();
 	const id = action.payload;
 	if(state.covers[id] === undefined) {
@@ -31,22 +22,10 @@ function* getCover(action) {
 		}
 	}
 	return undefined;
-}
-
-function* setCover(action) {
-	yield put({type: COVER_RESET});
-	const state = yield select();
-	const id = action.payload;
-	if(state.covers[id] === undefined) {
-		yield call(getCover, action);
-	}
-	yield put({type: COVER_NEW, payload: id});
-}
+}*/
 
 function* coverSagas() {
-	yield takeEvery(COVER_FETCH, getCover);
 	yield takeEvery(COVER_CREATE, createCover);
-	yield takeLatest(COVER_SET_CURRENT, setCover);
 }
 
 export default coverSagas;

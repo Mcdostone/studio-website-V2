@@ -1,13 +1,20 @@
 export const ALBUMS_ADD = 'ALBUMS_ADD';
+export const ALBUMS_CREATE = 'ALBUMS_CREATE';
 export const ALBUMS_FETCH = 'ALBUMS_FETCH';
 export const ALBUMS_DELETE = 'ALBUMS_DELETE';
 
-export const addAlbums = (albums) => ({
-		type: ALBUMS_ADD,
-		payload: albums,
+
+export const createAlbum = (album) => ({
+	type: ALBUMS_CREATE,
+	payload: album,
 });
 
-export const deleteAlbum = (id) => ({
+export const addAlbum = (album) => ({
+	type: ALBUMS_ADD,
+	payload: album,
+});
+
+export const deleteAlbum = (album) => ({
 		type: ALBUMS_DELETE,
-		payload: id,
+		payload: album,
 });

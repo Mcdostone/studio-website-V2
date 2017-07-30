@@ -12,9 +12,9 @@ export const fetchCover = (id) => ({
 		payload: id
 });
 
-export const addCover = (id, url) => ({
+export const addCover = (id, data) => ({
     type: COVER_ADD,
-		payload: {id, url},
+		payload: {id, data},
 });
 
 export const setCover = (id) => ({
@@ -31,7 +31,7 @@ export const resetCover = () => ({
     type: COVER_RESET
 });
 
-export const createCover = (id, cover) => ({
+export const createCover = (id, data) => ({
 		type: COVER_CREATE,
-		payload: {id, cover}
+		payload: {id, data}
 });

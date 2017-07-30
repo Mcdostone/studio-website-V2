@@ -8,6 +8,7 @@ import crudWrapper from './crudWrapper';
 import overlayWrapper from './overlayWrapper/overlayWrapper';
 import adminListWrapper from './adminListWrapper';
 import itemWrapper from './itemWrapper/itemWrapper';
+import adminUploadWrapper from './adminUploadWrapper';
 
 
 export {
@@ -15,6 +16,7 @@ export {
 	mediaWrapper,
 	authWrapper,
 	crudWrapper,
+	adminUploadWrapper,
 	resourceWrapper,
 	overlayWrapper,
 	itemWrapper,

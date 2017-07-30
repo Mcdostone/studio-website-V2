@@ -16,8 +16,7 @@ export default class GoogleDriveApi {
 		if(this.gapi.client.drive !== undefined) {
 			return this.gapi.client.drive.files.get({fileId})
 				.then((response) => {return response.result})
-				.then((result) => {return result},
-				(err) => console.log(err));
+				.then((result) => {return result});
 		}
 			else {
 				logger.error('google drive API cannot be loaded !');

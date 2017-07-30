@@ -86,7 +86,7 @@ class AlbumForm extends React.Component {
 						formatDate={(date) => moment(album.date).format('DD/MM/YYYY')}
 						defaultDate={new Date(album.date)}
 						fullWidth={true} />
-						<FileInputField onChange={this.updateCover}/>
+						<FileInputField label="Choose a cover" onChange={this.updateCover}/>
 				</CardText>
 				<CardActions>
 					<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />

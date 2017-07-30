@@ -9,6 +9,9 @@ import AlertWarning from 'material-ui/svg-icons/alert/warning';
 
 class DashboardStudio extends React.Component {
 
+	componentDidMount() {
+	}
+
 	render() {
 		return <div className="dashboard">
 			<Widget resource='users'>

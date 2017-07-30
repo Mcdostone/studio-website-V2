@@ -4,14 +4,14 @@ export default class Medium {
 		this.id = id;
 		this.src = src.trim() || null;
 		this.from = comeFrom.toLowerCase().trim() || null;
-		this.likes = likes === null ? [] : likes;
+		this.likes = likes || [];
 		this.album = album;
 		this.types = type || null;
 		this.exif = exif;
 	}
 
 	countLikes() {
-		return this.likes.length;
+		return this.likes.length || 0;
 	}
 
 	getThumbnail(size = 220) {

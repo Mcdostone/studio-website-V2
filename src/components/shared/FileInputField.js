@@ -44,7 +44,7 @@ class FileInputField extends React.Component {
 	render() {
 		return (
 			<div style={this.getStylesContainer()}>
-				<RaisedButton style={{marginTop: 12}} label="Choose a cover image" labelPosition="before" containerElement="label">
+				<RaisedButton style={{marginTop: 12}} label={this.props.label || 'Upload a file'} labelPosition="before" containerElement="label">
 					<input type="file" accept="image/*" style={this.getStyles()} onChange={this.onChange} />
 				</RaisedButton>
 				  <TextField

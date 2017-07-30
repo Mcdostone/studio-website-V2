@@ -1,5 +1,5 @@
 import React from 'react';
-import { adminWrapper } from '../../../wrappers';
+import { adminUploadWrapper } from '../../../wrappers';
 import {
 	Table,
 	TableBody,
@@ -44,7 +44,6 @@ class UploadForm extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchAll('albums');
-		console.log(this.props.data);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -79,9 +78,7 @@ class UploadForm extends React.Component {
 	save() {
 		const upload = this.props.data;
 		upload.author = this.props.dataSource.auth.user.id;
-		const media = {};
-		Object.keys(this.state.media).map(m => media[m] = true);
-		upload.media = media;
+		upload.media = this.state.media;
 		this.props.save(upload);
 		this.props.history.goBack();
 	}
@@ -113,7 +110,7 @@ class UploadForm extends React.Component {
 		const albums = this.props.dataSource['albums'];
 		const processedMedia = this.state.mediaByIndex;
 		return (
-			<Card className="admin-container media-container">
+			<Card className="admin-container uploads-container">
 				<CardText>
 
 					<GooglePicker clientId={config.PICKER.clientId}
@@ -178,7 +175,7 @@ class UploadForm extends React.Component {
 	}
 }
 
-export default adminWrapper(UploadForm, 'uploads');
+export default adminUploadWrapper(UploadForm, 'uploads');
 
 
 

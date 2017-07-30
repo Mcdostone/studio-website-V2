@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchWithRefs } from '../actions/fetchActions';
 import Studio from '../components/Studio';
 import { Layout } from '../containers/Layout';
 
@@ -27,7 +26,6 @@ export default function studioWrapper(resource) {
 
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
-			fetchWithRefs,
 		}, dispatch);
 	}
 

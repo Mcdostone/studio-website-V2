@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchWithRefs } from '../actions/fetchActions';
 import { setCover } from '../actions/coverActions';
 import { LayoutMedia } from '../containers/Layout';
 
@@ -66,7 +65,6 @@ export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
-			fetchWithRefs,
 			setCover,
 		}, dispatch);
 	}

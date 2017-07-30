@@ -1,6 +1,6 @@
 import { all, call, takeEvery, put, select } from 'redux-saga/effects';
 import { Medium, Exif } from '../core';
-import { MEDIA_ADD, MEDIA_FETCH_ALL, MEDIA_FETCH_ONE } from '../actions/mediaActions';
+import { MEDIA_ADD, MEDIA_CREATE, MEDIA_FETCH_ALL, MEDIA_FETCH_ONE } from '../actions/mediaActions';
 import logger from '../Logger';
 import restFirebaseDatabase from './RestFirebaseDatabase';
 import GoogleDriveApi from './GoogleDriveApi';
@@ -10,6 +10,10 @@ const googleDriveApi = new GoogleDriveApi(window.gapi);
 
 function buildMedium(medium, src, exif = new Exif()) {
 	return new Medium(medium.id, src, medium.from, medium.likes, medium.album, medium.types, exif);
+}
+
+function *create(action) {
+	const dataCreated = yield call(restFirebaseDatabase.post, 'media', action.payload);
 }
 
 function buildExifFromGoogleDrive(driveData) {
@@ -27,13 +31,18 @@ function buildExifFromGoogleDrive(driveData) {
 
 function* buildMediumFromGoogleDrive(medium) {
 	const state = yield select();
-	logger.react(`GET ${medium.id} from google drive`);
-	googleDriveApi.setAccessToken(state.auth.user.credential.accessToken);
-	const data = yield call(googleDriveApi.getFile, medium.id);
-	if(data !== undefined) {
-		return buildMedium(medium, data.thumbnailLink.split('=')[0], buildExifFromGoogleDrive(data));
+	try {
+		googleDriveApi.setAccessToken(state.auth.user.credential.accessToken);
+		logger.react(`GET ${medium.id} from google drive`);
+		const data = yield call(googleDriveApi.getFile, medium.id);
+		if(data !== undefined) {
+			return buildMedium(medium, data.thumbnailLink.split('=')[0], buildExifFromGoogleDrive(data));
+		}
 	}
-	return undefined;
+	catch(error) {
+		logger.react('test', error);
+	}
+	return null;
 }
 
 function* createMediumFromFirebase(medium) {
@@ -57,14 +66,17 @@ function* fetchOne(action) {
 function* fetchAll() {
 	const snapshot = yield call(restFirebaseDatabase.get, 'media');
 	const data = snapshot.val();
-	yield all(Object.keys(data).map(idMedium => {
-		return call(createMediumFromFirebase, data[idMedium]);
-	}));
+	if(data !== null) {
+		yield all(Object.keys(data).map(idMedium => {
+			return call(createMediumFromFirebase, data[idMedium]);
+		}));
+	}
 }
 
 function* mediaSagas() {
 	yield takeEvery(MEDIA_FETCH_ONE, fetchOne);
 	yield takeEvery(MEDIA_FETCH_ALL, fetchAll);
+	yield takeEvery(MEDIA_CREATE, create);
 }
 
 export default mediaSagas;

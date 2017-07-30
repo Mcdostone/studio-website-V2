@@ -1,33 +1,8 @@
-import { all, select, call, takeEvery, put } from 'redux-saga/effects';
-import restFirebaseDatabase from './RestFirebaseDatabase';
+import { all, call, takeEvery, put } from 'redux-saga/effects';
+import database from './RestFirebaseDatabase';
+import { FETCH_ALL } from '../actions/fetchActions';
 import logger from '../Logger';
-import {
-	FETCH,
-	FETCH_ONE,
-	FETCH_REFS,
-	LIST,
-	OBJECT,
-} from '../actions/fetchActions';
-
-
-function buildResult(response, dataType) {
-	const res = response.val();
-	if(res === null)
-		return [];
-	switch(dataType) {
-		case LIST:
-			return Object.keys(res).map(r => res[r]);
-		case OBJECT:
-			return res !== undefined ? [res] : [];
-		default:
-		return res;
-	}
-}
-
-function exist(action, state) {
-	const {resource, param, dataType} = action.payload;
-	return dataType === OBJECT && state[resource][param] !== undefined;
-}
+/*
 
 export function* fetch(action) {
 	const promise = restFirebaseDatabase.get;
@@ -78,10 +53,23 @@ function* fetchReferences(action) {
 			));
 		}
 }
+*/
 
+export function* fetchAll(action) {
+	const { resource } = action.payload;
+	logger.database(`GET /${resource}`);
+	try {
+		let response = yield call(database.get, resource.toLowerCase(), undefined);
+		response = response.val();
+		yield all(Object.keys(response).map(albumId =>
+			put({type: `${resource.toUpperCase()}_ADD`, payload: response[albumId]})
+		));
+	} catch(err) {
+		logger.error(err);
+	}
+}
 
-export default function* fetchSaga() {
-	yield takeEvery(FETCH, fetch);
-	yield takeEvery(FETCH_ONE, fetchOne);
-	yield takeEvery(FETCH_REFS, fetchReferences);
+export default function* fetchSagas() {
+	yield takeEvery(FETCH_ALL, fetchAll);
+//	yield takeEvery(FETCH_ONE, fetchOne);
 }

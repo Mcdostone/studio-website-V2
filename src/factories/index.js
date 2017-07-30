@@ -1,0 +1,1 @@
+export { buildAlbumFromFirebase } from './AlbumFactory';

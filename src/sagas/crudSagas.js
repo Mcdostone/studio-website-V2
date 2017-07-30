@@ -1,13 +1,14 @@
 import { CRUD_UPDATE, CRUD_CREATE, CRUD_DELETE } from '../actions/crudActions';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import pluralize from 'pluralize';
 import restFirebaseDatabase from './RestFirebaseDatabase';
-
+import logger from '../Logger';
 
 function* create(action) {
 	const { resource, data } = action.payload;
 	try {
-		const dataCreated = yield call(restFirebaseDatabase.post, resource.toLowerCase(), data);
-		yield put({type: `${resource.toUpperCase()}_ADD`, payload: [dataCreated]});
+		logger.info(`CREATE ${pluralize.singular(resource.toLowerCase())}`);
+		yield put({type: `${resource.toUpperCase()}_CREATE`, payload: data});
   } catch (e) {
 		console.log(e);
 	}
