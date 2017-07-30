@@ -1,12 +1,17 @@
-import { ALBUMS_ADD } from '../actions/albumActions';
-import { getUniqueDatasetById } from '../utils';
+import { ALBUMS_ADD, ALBUMS_DELETE } from '../actions/albumActions';
+import { getById } from '../utils';
+import { buildAlbumFromFirebase } from '../factories';
 
 const initialState = {};
 
 export default function (state = initialState, action) {
 	switch(action.type) {
 		case ALBUMS_ADD:
-			return Object.assign({}, state, getUniqueDatasetById(action.payload));
+			return Object.assign({}, state, getById(buildAlbumFromFirebase(action.payload)));
+		case ALBUMS_DELETE:
+			state[action.payload.id] = null;
+			return Object.assign({}, state);
+
 
 		default:
 			return state;

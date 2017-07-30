@@ -2,7 +2,7 @@ import { CRUD_UPDATE, CRUD_CREATE, CRUD_DELETE } from '../actions/crudActions';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import pluralize from 'pluralize';
 import restFirebaseDatabase from './RestFirebaseDatabase';
-import logger from '../Logger';
+	import logger from '../Logger';
 
 function* create(action) {
 	const { resource, data } = action.payload;
@@ -17,18 +17,19 @@ function* create(action) {
 function* update(action) {
 	const { resource, data } = action.payload;
 	try {
-		const dataUpdated = yield call(restFirebaseDatabase.put, resource.toLowerCase(), data);
-		yield put({type: `${resource.toUpperCase()}_UPDATE`, payload: dataUpdated.response});
+		logger.info(`UPDATE ${pluralize.singular(resource.toLowerCase())} ${data.id}`);
+		yield put({type: `${resource.toUpperCase()}_UPDATE`, payload: data});
   } catch (e) {
 		console.log(e);
 	}
 }
 
 function* del(action) {
-	const { resource, id } = action.payload;
+	const { resource, data } = action.payload;
 	try {
-		yield call(restFirebaseDatabase.delete, resource.toLowerCase(), id);
-		yield put({type: `${resource.toUpperCase()}_DELETE`, payload: id});
+		logger.info(`DELETE ${pluralize.singular(resource.toLowerCase())} ${data.id}`);
+		yield call(restFirebaseDatabase.delete, resource.toLowerCase(), data.id);
+		yield put({type: `${resource.toUpperCase()}_DELETE`, payload: data});
   } catch (e) {
 		console.log(e);
 	}

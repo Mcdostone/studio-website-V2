@@ -8,6 +8,13 @@ export function buildUniqueDatasetById(dataset, build) {
 	}, {});
 }
 
+export function getById(object) {
+	const result = {};
+	if(object)
+		result[object.id] = object;
+	return result;
+}
+
 export function getUniqueDatasetById(dataset) {
 	return dataset.reduce((newDataset, d, index) => {
 		newDataset[d.id] = d;

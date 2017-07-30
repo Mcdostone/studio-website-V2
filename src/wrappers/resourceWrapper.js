@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchAll } from '../actions/fetchActions';
-import { setCover, setTitle } from '../actions/coverActions';
 import { Layout } from '../containers/Layout';
 
 export default function resourceWrapper(resource, WrappedComponent) {
@@ -34,8 +33,6 @@ export default function resourceWrapper(resource, WrappedComponent) {
 
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
-			setTitle,
-			setCover,
 			fetchAll,
 		}, dispatch);
 	}

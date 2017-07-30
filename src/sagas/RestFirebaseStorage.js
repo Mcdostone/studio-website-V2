@@ -8,14 +8,13 @@ class RestFirebaseStorage extends RestFirebase {
 		this.post = this.post.bind(this);
 	}
 
-	get(resource, param) {
-		return this.firebase.storage().ref().child(`${resource}/${param}`).getDownloadURL();
+	get(resource, id) {
+		return this.firebase.storage().ref().child(`${resource}/${id}`).getDownloadURL();
 	}
 
 	post(resource, data) {
-		const ref = this.firebase.storage().ref(resource);
 		this.logger.storage(`POST ${resource}`);
-		return ref.putString(data, 'data_url');
+		return this.firebase.storage().ref().child(resource).putString(data, 'data_url');
 	}
 }
 

@@ -1,6 +1,5 @@
 import Timestampable from './Timestampable';
 
-
 export default class User extends Timestampable {
 
 	constructor(id, givenName, familyName, email, picture, banned, media = []) {

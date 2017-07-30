@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
+import pluralize from 'pluralize';
 import FlatButton from 'material-ui/RaisedButton';
 import adminResourceWrapper from './adminResourceWrapper'
 
@@ -11,7 +12,7 @@ export default function adminListWrapper(WrappedComponent, resource, fetchAllAct
 		return (
 			<Card className={`admin-container ${resource}-container`}>
 				<CardTitle title={`List of ${resource}`}
-				subtitle={`${count} ${resource}`}
+				subtitle={`${count} ${count > 1 ? pluralize(resource) : pluralize.singular(resource)}`}
 				expandable={false} />
 
 				<CardActions>

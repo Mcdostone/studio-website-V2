@@ -20,9 +20,9 @@ const AlbumsList = (props) =>
 		>
   		<TableRow selectable={false}>
 				<TableHeaderColumn>ID</TableHeaderColumn>
-				<TableHeaderColumn>title</TableHeaderColumn>
-				<TableHeaderColumn>date</TableHeaderColumn>
-				<TableHeaderColumn>updatedAt</TableHeaderColumn>
+				<TableHeaderColumn>Title</TableHeaderColumn>
+				<TableHeaderColumn>Date</TableHeaderColumn>
+				<TableHeaderColumn>Updated at</TableHeaderColumn>
   		</TableRow>
   	</TableHeader>
   	<TableBody displayRowCheckbox={false}>

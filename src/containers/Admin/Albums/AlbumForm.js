@@ -1,6 +1,9 @@
 import React from 'react';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import TextField from 'material-ui/TextField';
+import { fetchCover } from '../../../actions/coverActions';
 import { adminWrapper } from '../../../wrappers';
 import { FileInputField } from '../../../components/shared';
 import DatePicker from 'material-ui/DatePicker';
@@ -14,8 +17,8 @@ class AlbumForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: undefined,
-			cover: undefined,
+			newCover: undefined,
+			oldCover: undefined,
 		};
 		this.updateTitle = this.updateTitle.bind(this);
 		this.updateDate = this.updateDate.bind(this);
@@ -28,13 +31,19 @@ class AlbumForm extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({data: nextProps.data});
+		if(this.props.data !== nextProps.data)
+			this.props.fetchCover(nextProps.data ? nextProps.data.id : undefined);
+		const coverObject = nextProps.dataSource.covers[this.props.match.params.id];
+		if(this.state.cover === undefined && coverObject)
+			this.setState({ data: nextProps.data, oldCover: coverObject.cover});
+		else
+			this.setState({ data: nextProps.data });
 		return this.props.data !== nextProps.data;
 	}
 
 	applyChanges() {
 		const data = this.state.data;
-		data.cover = this.state.cover || null;
+		data.cover = this.state.newCover || null;
 		this.props.save(data);
 		this.props.history.goBack();
 	}
@@ -55,7 +64,7 @@ class AlbumForm extends React.Component {
 		if(e.target.files.length === 1) {
 			const file = e.target.files[0];
 			const reader = new FileReader();
-	    reader.onloadend = () => this.setState({cover: reader.result});
+	    reader.onloadend = () => this.setState({newCover: reader.result});
 			reader.readAsDataURL(file);
 		}
 	}
@@ -69,7 +78,7 @@ class AlbumForm extends React.Component {
 				id={album.id}
 				className="cover"
 				title={album.title}
-				src={this.state.cover || config.APP.DEFAULT_COVER}>
+				src={this.state.newCover || this.state.oldCover || config.APP.DEFAULT_COVER}>
 					<h2 className="cover-title">{album.title}</h2>
 				</AdminCover>
 				<CardText>
@@ -102,4 +111,16 @@ class AlbumForm extends React.Component {
 
 }
 
-export default adminWrapper(AlbumForm, 'albums');
+function mapStateToProps(state, ownProps) {
+		return {
+			...ownProps,
+		}
+	}
+
+	function mapDispatchToProps(dispatch) {
+		return bindActionCreators({
+			fetchCover
+		}, dispatch);
+	}
+
+export default adminWrapper(connect(mapStateToProps, mapDispatchToProps)(AlbumForm), 'albums');

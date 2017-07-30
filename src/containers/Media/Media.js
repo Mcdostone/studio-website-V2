@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchAllMedia } from '../../actions/mediaActions';
-import { setCover, setTitle } from '../../actions/coverActions';
 import { Layout } from '../Layout';
 import Studio from '../../components/Studio';
 
@@ -33,8 +32,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		setTitle,
-		setCover,
 		fetchAllMedia,
 	}, dispatch);
 }

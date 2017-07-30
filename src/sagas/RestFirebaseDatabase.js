@@ -22,15 +22,17 @@ class RestFirebaseDatabase extends RestFirebase {
 	}
 
 	put(resource, data) {
-		data.updatedAt = new Date();
-		if(data.createdAt === null) {
-			data.createdAt = new Date();
+		if(data.id) {
+			data.updatedAt = new Date();
+			if(data.createdAt === null) {
+				data.createdAt = new Date();
+			}
+			return new Promise((resolve, reject) => {
+				this.firebase.database().ref(resource + '/' + data.id).update(data)
+				.then(() => resolve(data))
+				.catch(reject);
+			});
 		}
-		return new Promise((resolve, reject) => {
-			this.firebase.database().ref(resource + '/' + data.id).update(data)
-			.then(() => resolve({ response: data }))
-			.catch(reject);
-		});
 	}
 
 	generateId(resource) {

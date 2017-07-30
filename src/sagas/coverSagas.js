@@ -1,31 +1,29 @@
-import { COVER_CREATE } from '../actions/coverActions';
-import { call, takeEvery } from 'redux-saga/effects';
+import { COVER_FETCH, COVER_CREATE, COVER_ADD } from '../actions/coverActions';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import storage from './RestFirebaseStorage';
-
+import logger from '../Logger';
 
 function* createCover(action) {
-	yield call(storage.post, `covers/${action.payload.id}`, action.payload.data);
+	if(action.payload.data && action.payload.id) {
+		yield call(storage.post, `covers/${action.payload.id}`, action.payload.data);
+	}
 }
 
-/*function* getCover(action) {
-	const state = yield select();
-	const id = action.payload;
-	if(state.covers[id] === undefined) {
+function* fetchCover(action) {
+	if(action.payload) {
 		try {
-				logger.react(`[FIREBASE-ST] GET OBJECT /covers/${id}`);
-
-			const url = yield call(storage.get, 'covers', id.toLowerCase());
-			yield put({type: COVER_ADD, payload: {page: id, url}});
-			return url;
+			logger.storage(`GET /covers/${action.payload}`);
+			const url = yield call(storage.get, 'covers', action.payload);
+			yield put({type: COVER_ADD, payload: {id: action.payload, cover: url}});
 		} catch(err) {
-			yield put({type: COVER_ADD, payload: {page: id, url: undefined}});
+			logger.error(err);
 		}
 	}
-	return undefined;
-}*/
+}
 
 function* coverSagas() {
 	yield takeEvery(COVER_CREATE, createCover);
+	yield takeEvery(COVER_FETCH, fetchCover);
 }
 
 export default coverSagas;
