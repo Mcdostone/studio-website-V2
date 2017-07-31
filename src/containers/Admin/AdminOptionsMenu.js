@@ -51,7 +51,7 @@ class AdminOptionsMenu extends React.Component {
 }
 
 AdminOptionsMenu.propTypes = {
-	id: PropTypes.string.isRequired,
+	data: PropTypes.object,
 	resource: PropTypes.string.isRequired,
 }
 

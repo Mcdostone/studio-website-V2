@@ -75,9 +75,10 @@ class AlbumForm extends React.Component {
 			<Card className="admin-container albums-container">
 				<AdminCover
 				resource="albums"
-				id={album.id}
+				data={album}
 				className="cover"
 				title={album.title}
+				creation={this.props.creation}
 				src={this.state.newCover || this.state.oldCover || config.APP.DEFAULT_COVER}>
 					<h2 className="cover-title">{album.title}</h2>
 				</AdminCover>

@@ -13,7 +13,7 @@ class DeleteDialog extends React.Component {
 	}
 
 	delete() {
-		this.props.remove(this.props.resource, this.props.id);
+		this.props.remove(this.props.resource, this.props.data);
 		this.props.handleClose();
 		this.props.history.goBack();
 	}
@@ -42,7 +42,7 @@ class DeleteDialog extends React.Component {
 				<span>
 					This action cannot be undone. This will permanently delete the data.
 					If some media are attached to this entity. media will be updated !
-					<p style={{color: red900}}>{`Are you sure to delete ${this.props.resource}#${this.props.id}?`} </p>
+					<p style={{color: red900}}>{`Are you sure to delete ${this.props.resource}#${this.props.data.id}?`} </p>
 				</span>
 			</Dialog>
 		);
@@ -52,7 +52,7 @@ class DeleteDialog extends React.Component {
 
 DeleteDialog.propTypes = {
 	resource: PropTypes.string.isRequired,
-	id: PropTypes.string.isRequired,
+	data: PropTypes.object,
 	handleClose: PropTypes.func.isRequired,
 	remove: PropTypes.func.isRequired,
 	history: PropTypes.object.isRequired,

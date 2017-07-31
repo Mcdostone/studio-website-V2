@@ -8,6 +8,7 @@ import auth from './authReducers';
 import uploads from './uploadReducers';
 import covers from './coverReducers';
 import albums from './albumReducers';
+import notifications from './notificationReducers';
 import users from './userReducers';
 
 
@@ -16,6 +17,7 @@ const studioApp = combineReducers({
 		auth,
 		lightbox,
 		media,
+		notifications,
 		default: def,
 		albums,
 		covers,

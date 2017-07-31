@@ -1,5 +1,5 @@
 import { call, takeEvery, put } from 'redux-saga/effects';
-import { ALBUMS_CREATE, ALBUMS_UPDATE, addAlbum } from '../actions/albumActions';
+import { ALBUMS_CREATE, ALBUMS_UPDATE, addAlbum, ALBUMS_DELETE } from '../actions/albumActions';
 import { createCover } from '../actions/coverActions';
 import database from './RestFirebaseDatabase';
 
@@ -13,9 +13,14 @@ function* create(action) {
 	yield put(createCover(albumCreated.id, cover));
 }
 
+function* remove(action) {
+	yield call(database.delete, resource.toLowerCase(), action.payload.id);
+}
+
 function* albumSagas() {
 	yield takeEvery(ALBUMS_CREATE, create);
 	yield takeEvery(ALBUMS_UPDATE, create);
+	yield takeEvery(ALBUMS_DELETE, remove);
 }
 
 export default albumSagas;

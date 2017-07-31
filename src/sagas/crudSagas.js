@@ -25,10 +25,9 @@ function* update(action) {
 }
 
 function* del(action) {
-	const { resource, data } = action.payload;
+	const { resource, data } = action.payload
 	try {
 		logger.info(`DELETE ${pluralize.singular(resource.toLowerCase())} ${data.id}`);
-		yield call(restFirebaseDatabase.delete, resource.toLowerCase(), data.id);
 		yield put({type: `${resource.toUpperCase()}_DELETE`, payload: data});
   } catch (e) {
 		console.log(e);

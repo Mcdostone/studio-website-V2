@@ -1,11 +1,24 @@
 import { COVER_FETCH, COVER_CREATE, COVER_ADD } from '../actions/coverActions';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { notify } from '../actions/notificationActions';
+import { take, call, put, takeEvery } from 'redux-saga/effects';
+import { buffers, eventChannel } from 'redux-saga';
 import storage from './RestFirebaseStorage';
 import logger from '../Logger';
 
+
+function* uploadProgressChannel(resource, id, data) {
+	return storage.post(`${resource}/${id}`, data);
+}
+
+function* notifyUploadProgress(snapshot) {
+	const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+}
+
 function* createCover(action) {
 	if(action.payload.data && action.payload.id) {
+		yield put(notify(`Uploading new cover...`, 0));
 		yield call(storage.post, `covers/${action.payload.id}`, action.payload.data);
+		yield put(notify(`covers/${action.payload.id} has been uploaded !`));
 	}
 }
 

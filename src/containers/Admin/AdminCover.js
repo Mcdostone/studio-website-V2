@@ -3,19 +3,14 @@ import { Cover } from '../../components/Cover';
 import AdminOptionsMenu from './AdminOptionsMenu';
 
 
-class AdminCover extends React.Component {
-
-	render() {
-		return (
-			<Cover {...this.props}>
-				<div>
-					{this.props.children}
-					{this.props.id && <AdminOptionsMenu {...this.props} />}
-				</div>
-			</Cover>
-		);
-	}
-}
+const AdminCover = (props) => {
+	return <Cover {...props}>
+		<div>
+			{props.children}
+			{props.data && !props.creation && <AdminOptionsMenu {...props} />}
+		</div>
+	</Cover>
+};
 
 AdminCover.propTypes = Cover.propTypes;
 AdminCover.defaultProps = Cover.defaultProps;

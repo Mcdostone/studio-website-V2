@@ -8,10 +8,10 @@ export default function (state = initialState, action) {
 	switch(action.type) {
 		case ALBUMS_ADD:
 			return Object.assign({}, state, getById(buildAlbumFromFirebase(action.payload)));
-		case ALBUMS_DELETE:
-			state[action.payload.id] = null;
-			return Object.assign({}, state);
 
+			case ALBUMS_DELETE:
+			delete state[action.payload.id];
+			return Object.assign({}, state);
 
 		default:
 			return state;
