@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
-import scriptLoader from 'react-async-script-loader'
 import IsAuthentificated from './IsAuthentificated';
 import store from './store';
 import { history } from './history';

@@ -1,8 +1,7 @@
 import { CRUD_UPDATE, CRUD_CREATE, CRUD_DELETE } from '../actions/crudActions';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import pluralize from 'pluralize';
-import restFirebaseDatabase from './RestFirebaseDatabase';
-	import logger from '../Logger';
+import logger from '../Logger';
 
 function* create(action) {
 	const { resource, data } = action.payload;
