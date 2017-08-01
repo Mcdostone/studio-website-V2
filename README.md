@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/Mcdostone/studio-website-V2.svg?branch=master)](https://travis-ci.org/Mcdostone/studio-website-V2)
 
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=studio-website:master)](https://sonarcloud.io/dashboard/index/studio-website:master)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
