@@ -5,12 +5,16 @@ import Theaters from 'material-ui/svg-icons/action/theaters';
 import Backup from 'material-ui/svg-icons/action/backup';
 import Album from 'material-ui/svg-icons/av/album';
 import AlertWarning from 'material-ui/svg-icons/alert/warning';
-
+import { tmpWrapper } from '../../../wrappers';
 
 class DashboardStudio extends React.Component {
 
 	componentDidMount() {
+		this.props.fetchAll('albums');
 	}
+
+	getCount = resource =>
+	Object.keys(this.props.state[resource]).length;
 
 	render() {
 		return <div className="dashboard">
@@ -18,8 +22,8 @@ class DashboardStudio extends React.Component {
 				<Face style={{width: '50%', height: '50%'}} color="white"/>
 			</Widget>
 
-			<Widget resource='albums'>
-				<Album style={{width: '50%', height: '50%'}} color="white"/>
+			<Widget resource='albums' count={this.getCount('albums')} >
+				<Album style={{width: '50%', height: '50%'}} color="white" />
 			</Widget>
 
 			<Widget resource='media'>
@@ -37,4 +41,4 @@ class DashboardStudio extends React.Component {
 	}
 }
 
-export default DashboardStudio;
+export default tmpWrapper(DashboardStudio);

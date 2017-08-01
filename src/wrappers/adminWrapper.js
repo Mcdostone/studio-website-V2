@@ -6,7 +6,7 @@ import { fetchOne, fetchAll } from '../actions/fetchActions';
 import { remove, update, create } from '../actions/crudActions';
 
 
-export default function adminWrapper(WrappedComponent, resource, fetchOneAction = fetchOne) {
+export default function adminWrapper(WrappedComponent, resource = null, fetchOneAction = fetchOne) {
 
 	const adminContainer = class extends React.Component {
 
