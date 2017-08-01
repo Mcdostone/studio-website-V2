@@ -34,7 +34,7 @@ const UsersList = (props) =>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].familyName}</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].givenName}</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].authorization}</Link></TableRowColumn>
-						<TableRowColumn>{moment(props.dataSource[id].updatedAt).fromNow()}</TableRowColumn>
+						<TableRowColumn>{moment(props.dataSource[id].createdAt).fromNow()}</TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].banned ? 'true' : ''}</Link></TableRowColumn>
 					</TableRow>
 			})}

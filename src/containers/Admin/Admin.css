@@ -113,3 +113,11 @@
 	top: 0;
 	bottom: 0;
 }
+
+.google-drive-logo {
+	margin: auto;
+	width: 72px;
+	height: 72px;
+	padding: 16px;
+	cursor: pointer;
+}

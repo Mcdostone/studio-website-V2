@@ -5,20 +5,23 @@ import Theaters from 'material-ui/svg-icons/action/theaters';
 import Backup from 'material-ui/svg-icons/action/backup';
 import Album from 'material-ui/svg-icons/av/album';
 import AlertWarning from 'material-ui/svg-icons/alert/warning';
-import { tmpWrapper } from '../../../wrappers';
+import { crudWrapper } from '../../../wrappers';
 
 class DashboardStudio extends React.Component {
 
 	componentDidMount() {
+		this.props.fetchAll('users');
 		this.props.fetchAll('albums');
 	}
 
-	getCount = resource =>
-	Object.keys(this.props.state[resource]).length;
+	getCount = resource => {
+		const resourceData = this.props.state[resource];
+		return resourceData ? Object.keys(resourceData).length : 0;
+	}
 
 	render() {
 		return <div className="dashboard">
-			<Widget resource='users'>
+			<Widget resource='users' count={this.getCount('users')}>
 				<Face style={{width: '50%', height: '50%'}} color="white"/>
 			</Widget>
 
@@ -26,19 +29,19 @@ class DashboardStudio extends React.Component {
 				<Album style={{width: '50%', height: '50%'}} color="white" />
 			</Widget>
 
-			<Widget resource='media'>
+			<Widget resource='media' count={this.getCount('media')}>
 				<Theaters style={{width: '50%', height: '50%'}} color="white"/>
 			</Widget>
 
-			<Widget resource='uploads'>
+			<Widget resource='uploads' count={this.getCount('uploads')}>
 				<Backup style={{width: '50%', height: '50%'}} color="white"/>
 			</Widget>
 
-			<Widget resource='reports'>
+			<Widget resource='reports' count={this.getCount('reports')}>
 				<AlertWarning style={{width: '50%', height: '50%'}} color="white"/>
 			</Widget>
 		</div>
 	}
 }
 
-export default tmpWrapper(DashboardStudio);
+export default crudWrapper(DashboardStudio);

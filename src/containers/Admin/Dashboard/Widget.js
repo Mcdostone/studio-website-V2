@@ -5,25 +5,42 @@ import Paper from 'material-ui/Paper';
 import pluralize from 'pluralize';
 import './Widget.css';
 
+class Widget extends React.Component {
 
-const Widget = (props) =>
-	<Link to={`/admin/${props.resource}`} className={`admin-widget widget-${props.resource}`}>
-		<Paper className="widget-container" style={{background: 'transparent'}}>
-			<div className="widget-icon">{props.children}</div>
-			<div className="widget-content">
-				<p className="widget-measure">{props.count > 1 ? pluralize(props.resource) : pluralize.singular(props.resource)}</p>
-				<p className="widget-value">{props.count}</p>
-			</div>
-		</Paper>
-	</Link>
+	componentWillReceiveProps(nextProps) {
+		return this.props.count !== nextProps.count;
+	}
 
+	render() {
+		return (
+		<Link to={`/admin/${this.props.resource}`} className={`admin-widget widget-${this.props.resource}`}>
+			<Paper className="widget-container" style={{background: 'transparent'}}>
+				<div className="widget-icon">{this.props.children}</div>
+				<div className="widget-content">
+					<p className="widget-measure">{this.props.count > 1 ? pluralize(this.props.resource) : pluralize.singular(this.props.resource)}</p>
+					<input disabled type="text" className="widget-value" value={this.props.count} />
+				</div>
+			</Paper>
+		</Link>
+		);
+	}
+
+}
+/*
+<Anime
+	value={this.props.count}
+	round={1}
+	easing="easeInOutBack">
+</Anime>
+
+*/
 Widget.propTypes = {
 	count: PropTypes.number,
 	resource: PropTypes.string.isRequired,
 };
 
 Widget.defaultProps = {
-	count: 0
+	count: 0,
 };
 
 export default Widget;

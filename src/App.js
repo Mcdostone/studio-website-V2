@@ -13,10 +13,8 @@ import Albums from './containers/Albums';
 import Media from './containers/Media';
 import Profile from './containers/Profile';
 import StudioCountdown from './containers/StudioCountdown';
-
 import Admin from './containers/Admin';
 import './App.css';
-
 
 syncHistoryWithStore(history, store);
 
@@ -29,7 +27,7 @@ class App extends React.Component {
 		};
 	}
 
-	componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
+	componentWillReceiveProps() {
 		/*window.gapi.client.load('drive', 'v2').then(() =>
 			this.setState({apiLoaded: true})
 		);*/

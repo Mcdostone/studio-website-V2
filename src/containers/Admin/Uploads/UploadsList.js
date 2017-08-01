@@ -20,9 +20,9 @@ const UploadsList = (props) =>
   	adjustForCheckbox={false} >
   		<TableRow selectable={false}>
 				<TableHeaderColumn>ID</TableHeaderColumn>
-				<TableHeaderColumn>uploader</TableHeaderColumn>
+				<TableHeaderColumn>Uploader</TableHeaderColumn>
 				<TableHeaderColumn>Count Media</TableHeaderColumn>
-				<TableHeaderColumn>CreatedAt</TableHeaderColumn>
+				<TableHeaderColumn>Created at</TableHeaderColumn>
   		</TableRow>
   	</TableHeader>
 		<TableBody displayRowCheckbox={false}>

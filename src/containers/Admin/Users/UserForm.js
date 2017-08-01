@@ -17,7 +17,7 @@ import {
 } from 'material-ui/Table';
 
 
-class UserEdit extends React.Component {
+class UserForm extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -59,7 +59,7 @@ class UserEdit extends React.Component {
 								<p>{user.getFullName()}</p>
 								<p>{user.email}</p>
 								<p>{user.id}</p>
-								<p>Connected {moment(user.updatedAt).fromNow()}</p>
+								<p>Connected {moment(user.createdAt).fromNow()}</p>
 							</div>
 						</div>
 					</SimpleCover>
@@ -115,4 +115,4 @@ class UserEdit extends React.Component {
 	}
 }
 
-export default adminWrapper(UserEdit, 'users');
+export default adminWrapper(UserForm, 'users');

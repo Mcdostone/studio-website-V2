@@ -1,27 +1,16 @@
 import { LOGIN, REQUEST_LOGIN, REQUEST_LOGOUT, LOGOUT } from '../actions/authActions';
-import { CRUD_UPDATE } from '../actions/crudActions';
-import { DRAWER_CLOSE } from '../actions/uiActions';
+import { updateUser } from '../actions/userActions';
+import { closeDrawer } from '../actions/uiActions';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import firebase from 'firebase';
+import { buildUserFromFirebaseAuth } from '../factories';
 import { firebaseStudio } from '../fire'
-import { User } from '../core';
 import restFirebaseDatabase from './RestFirebaseDatabase';
 import config from '../configuration';
 
 const authProvider = new firebase.auth.GoogleAuthProvider();
 authProvider.setCustomParameters(config.FIREBASE_AUTH_CONFIG);
 config.FIREBASE_AUTH_CONFIG.scopes.map(s => authProvider.addScope(s));
-
-function buildUser(u) {
-	const user = new User(u.id,
-	u.given_name,
-	u.family_name,
-	u.email,
-	u.picture,
-	false,
-	Object.keys(u.media || {}));
-	return user;
-}
 
 function signInWithPopup() {
 	return firebaseStudio.auth().signInWithPopup(authProvider);
@@ -33,20 +22,19 @@ function logout() {
 
 function* requestLogin() {
 	try {
+		yield put(closeDrawer());
 		const authData = yield call(signInWithPopup);
-		const user = buildUser(authData.additionalUserInfo.profile);
-		const data = yield call(restFirebaseDatabase.get, 'users', user.id);
-		const userFirebase = data.val();
+		const user = buildUserFromFirebaseAuth(authData.additionalUserInfo.profile);
+		let userFirebase = yield call(restFirebaseDatabase.get, 'users', user.id);
+		userFirebase = userFirebase.val();
 		if(userFirebase !== null) {
 			user.banned = userFirebase.banned;
-			user.createdAt = userFirebase.created_at;
+			user.createdAt = new Date();
 			user.updatedAt = userFirebase.updated_at;
 		}
-		yield put({type: DRAWER_CLOSE});
-		yield put({type: CRUD_UPDATE, payload: {resource: 'users', data: user}});
+		yield put(updateUser(user));
 		if(userFirebase !== null)
-			user.credential = authData.credential;
-		yield put({type: LOGIN, payload: user});
+			yield put({type: LOGIN, payload: {user, credential: authData.credential}});
   }
 	catch(error) {
 		console.log(error);
@@ -56,7 +44,7 @@ function* requestLogin() {
 function* requestLogout() {
 	yield call(logout);
 	yield put({type: LOGOUT});
-	yield put({type: DRAWER_CLOSE});
+	yield put(closeDrawer());
 }
 
 function* authSagas() {

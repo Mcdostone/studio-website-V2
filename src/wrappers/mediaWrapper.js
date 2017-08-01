@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { LayoutMedia } from '../containers/Layout';
 
-
 export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 
 	const MediaContainer = class extends React.Component {

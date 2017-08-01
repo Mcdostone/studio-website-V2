@@ -2,29 +2,37 @@ import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import pluralize from 'pluralize';
 import FlatButton from 'material-ui/RaisedButton';
-import adminResourceWrapper from './adminResourceWrapper'
+import crudWrapper from './crudWrapper'
 
+export default function adminListWrapper(WrappedComponent, resource) {
 
-export default function adminListWrapper(WrappedComponent, resource, fetchAllAction) {
+	const AdminList = class extends React.Component {
 
-	const AdminList = (props) => {
-		const count = Object.keys(props.dataSource).length;
-		return (
-			<Card className={`admin-container ${resource}-container`}>
-				<CardTitle title={`List of ${resource}`}
-				subtitle={`${count} ${count > 1 ? pluralize(resource) : pluralize.singular(resource)}`}
-				expandable={false} />
+		componentDidMount() {
+			this.props.fetchAll(resource);
+		}
 
-				<CardActions>
-      		{props.creation && <FlatButton label="Create" onTouchTap={() => props.history.push(`${resource}/create`)} />}
-					<FlatButton label="Back" onTouchTap={() => props.history.goBack()} />
-    		</CardActions>
+		render() {
+			const dataSource = this.props.state[resource];
+			const count = Object.keys(dataSource).length;
+			return (
+				<Card className={`admin-container ${resource}-container`}>
+					<CardTitle title={`List of ${resource}`}
+					subtitle={`${count} ${count > 1 ? pluralize(resource) : pluralize.singular(resource)}`}
+					expandable={false} />
 
-				<WrappedComponent {...props} />
-			</Card>
-		);
+					<CardActions>
+      			{this.props.creation && <FlatButton label="Create" onTouchTap={() => this.props.history.push(`${resource}/create`)} />}
+						<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />
+    			</CardActions>
+
+					<WrappedComponent {...this.props} dataSource={dataSource} />
+				</Card>
+			);
+		}
+
 	}
 
-	return adminResourceWrapper(AdminList, resource, fetchAllAction);
+	return crudWrapper(AdminList);
 
 }

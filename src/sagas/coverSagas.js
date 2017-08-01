@@ -19,7 +19,8 @@ function* fetchCover(action) {
 			const url = yield call(storage.get, 'covers', action.payload);
 			yield put(addCover(action.payload, url));
 		} catch(err) {
-			logger.error(err);
+			if(err.code !== 'storage/object-not-found')
+				logger.error(err);
 		}
 	}
 }

@@ -4,7 +4,8 @@ import authSagas from './authSagas';
 import coverSagas from './coverSagas';
 import fetchSagas from './fetchSagas';
 import crudSagas from './crudSagas';
-// import uploadSagas from './uploadSagas';
+import userSagas from './userSagas';
+import uploadSagas from './uploadSagas';
 import albumSagas from './albumSagas';
 
 
@@ -12,10 +13,11 @@ export default function* sagas() {
   yield all([
     authSagas,
 		crudSagas,
-		coverSagas,
 		fetchSagas,
-		/*mediaSagas,
-		uploadSagas,*/
-		albumSagas
+		coverSagas,
+		userSagas,
+		albumSagas,
+		uploadSagas,
+		/*mediaSagas,*/
   ].map(fork))
 }

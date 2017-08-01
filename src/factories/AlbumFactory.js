@@ -6,3 +6,5 @@ export const buildAlbumFromFirebase = (data) => {
 	album.updatedAt = data.updated_at;
 	return album;
 }
+
+export const buildAlbum = (data) => new Album(undefined, '', new Date(), []);

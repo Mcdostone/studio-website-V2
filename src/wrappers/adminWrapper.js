@@ -1,12 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { fetchOne, fetchAll } from '../actions/fetchActions';
-import { remove, update, create } from '../actions/crudActions';
+import { build } from '../factories';
+import crudWrapper from './crudWrapper';
 
-
-export default function adminWrapper(WrappedComponent, resource = null, fetchOneAction = fetchOne) {
+export default function adminWrapper(WrappedComponent, resource) {
 
 	const adminContainer = class extends React.Component {
 
@@ -30,29 +26,12 @@ export default function adminWrapper(WrappedComponent, resource = null, fetchOne
 		}
 
 		render() {
-			const data = this.props.creation === true ? this.props.default[resource]() : this.props.dataSource[resource][this.props.match.params.id];
+			const data = this.props.creation === true ? build(resource) : this.props.state[resource][this.props.match.params.id];
 			return <WrappedComponent {...this.props} save={this.save} data={data} />
 		}
 
 	}
 
-	function mapStateToProps(state, ownProps) {
-		return {
-			dataSource: state,
-			default: state.default,
-			...ownProps,
-		}
-	}
+	return crudWrapper(adminContainer);
 
-	function mapDispatchToProps(dispatch) {
-		return bindActionCreators({
-			fetchOne: fetchOneAction,
-			fetchAll,
-			update,
-			create,
-			remove,
-		}, dispatch);
-	}
-
-	return connect(mapStateToProps, mapDispatchToProps)(withRouter(adminContainer));
 }

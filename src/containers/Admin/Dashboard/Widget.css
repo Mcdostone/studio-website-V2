@@ -39,8 +39,15 @@
 	background: var(--uploadsColor) !important;
 }
 
+
+input.widget-value {
+	border: none;
+	background: none;
+}
+
 .widget-value, .widget-measure {
 	color: white;
+	cursor: pointer;
 	font-size: 2em;
 	font-weight: 300;
 	margin: 0;

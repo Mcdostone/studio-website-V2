@@ -1,28 +1,14 @@
 import { USERS_ADD, USERS_UPDATE } from '../actions/userActions';
-import { User } from '../core';
-import { buildUniqueDatasetById } from '../utils';
-
-
-export function buildUser(u) {
-	const user = new User(u.id,
-	u.givenName,
-	u.familyName,
-	u.email,
-	u.picture,
-	u.banned || false,
-	Object.keys(u.media || {}));
-	user.createdAt = u.created_at;
-	user.updatedAt = u.updated_at;
-	return user;
-}
+import { getById } from '../utils';
+import { buildUserFromFirebase } from '../factories';
 
 const initialState = {}
 
 export default function (state = initialState, action) {
 	switch(action.type) {
+
 		case USERS_ADD:
-			const newUsers = buildUniqueDatasetById(action.payload, buildUser);
-			return Object.assign({}, state, newUsers);
+			return Object.assign({}, state, getById(buildUserFromFirebase(action.payload)));
 
 		case USERS_UPDATE:
 			const newUser = {};

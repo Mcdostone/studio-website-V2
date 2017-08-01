@@ -1,23 +1,21 @@
-import { UPLOADS_CREATE } from '../actions/uploadActions';
-import { call, put, takeEvery, all } from 'redux-saga/effects';
+import { UPLOADS_CREATE, addUpload } from '../actions/uploadActions';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import database from './RestFirebaseDatabase';
 
+const resource = 'uploads';
+
 function* create(action) {
-	const { resource, data } = action.payload;
-	try {
-		const mediaForSagas = data.media;
-		data.media = Object.keys(data.media).reduce((newDataset, idMedium) => {
-			newDataset[idMedium] = true;
-			return newDataset;
-		}, {});
-		const dataCreated = yield call(database.post, resource.toLowerCase(), data);
-		yield put({type: `${resource.toUpperCase()}_ADD`, payload: [dataCreated]});
-		yield all(Object.keys(mediaForSagas).map(idMedium =>
-			put({type: 'MEDIA_CREATE', payload: mediaForSagas[idMedium]})
-		));
-  } catch (e) {
-		console.log(e);
-	}
+	const upload = action.payload;
+	upload.media = Object.keys(upload.media).reduce((newDataset, idMedium) => {
+		newDataset[idMedium] = true;
+		return newDataset;
+	}, {});
+
+	const uploadCreated = yield call(database.post, resource.toLowerCase(), upload);
+	yield put(addUpload(uploadCreated));
+	/*yield all(Object.keys(mediaForSagas).map(idMedium =>
+		put({type: 'MEDIA_CREATE', payload: mediaForSagas[idMedium]})
+	));*/
 }
 
 function* crudSagas() {

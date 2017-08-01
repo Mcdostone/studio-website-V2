@@ -1,7 +1,7 @@
 import UsersList from './UsersList';
-import UserEdit from './UserEdit';
+import UserForm from './UserForm';
 
 export {
 	UsersList,
-	UserEdit,
+	UserForm,
 };

@@ -6,7 +6,7 @@ import Snackbar from 'material-ui/Snackbar';
 import Dashboard from './Dashboard';
 import { hide } from '../../actions/notificationActions';
 import { MediaList, MediumEdit, MediaCreate } from './Media';
-import { UsersList, UserEdit } from './Users';
+import { UsersList, UserForm } from './Users';
 import { AlbumsList, AlbumForm } from './Albums';
 import { ReportsList } from './Reports';
 import { UploadsList, UploadForm } from './Uploads';
@@ -35,8 +35,8 @@ class Admin extends React.Component {
 			<Route exact path="/admin/uploads" render={() => <UploadsList creation />} />
 			<Route exact path="/admin/uploads/create" render={() => <UploadForm creation />} />
 
-			<Route exact path="/admin/users" component={UsersList} />
-			<Route path="/admin/users/:id" component={UserEdit} />
+			<Route exact path="/admin/users" render={() => <UsersList />} />
+			<Route path="/admin/users/:id" render={() => <UserForm />} />
 
 			<Route exact path="/admin/albums" render={() => <AlbumsList creation />} />
 			<Route path="/admin/albums/:id" render={() => <AlbumForm />} />
