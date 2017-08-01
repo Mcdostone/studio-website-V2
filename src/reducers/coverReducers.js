@@ -1,4 +1,4 @@
-import { COVER_ADD } from '../actions/coverActions';
+import { COVERS_ADD, COVERS_DELETE } from '../actions/coverActions';
 import { buildCoverFromFirebase } from '../factories';
 import { getById } from '../utils';
 
@@ -6,8 +6,12 @@ const initialState = {};
 
 export default function (state = initialState, action) {
   switch(action.type) {
-		case COVER_ADD:
+		case COVERS_ADD:
 			return Object.assign({}, state, getById(buildCoverFromFirebase(action.payload)));
+
+		case COVERS_DELETE:
+			delete state[action.payload];
+			return Object.assign({}, state);
 
 		default:
 			return state;

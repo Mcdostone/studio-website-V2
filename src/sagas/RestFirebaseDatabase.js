@@ -49,6 +49,8 @@ class RestFirebaseDatabase extends RestFirebase {
 
 		this.logger.database(`POST ${path}`);
 
+
+
 		return new Promise((resolve, reject) => {
 			this.firebase.database().ref(path).update(data)
 			.then(() => resolve(data))

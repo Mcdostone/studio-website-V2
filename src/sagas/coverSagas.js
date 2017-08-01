@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { COVER_FETCH, COVER_CREATE, COVER_ADD } from '../actions/coverActions';
+import { COVERS_FETCH, COVERS_CREATE, addCover, COVERS_DELETE } from '../actions/coverActions';
 import { notify } from '../actions/notificationActions';
 import storage from './RestFirebaseStorage';
 import logger from '../Logger';
@@ -17,16 +17,29 @@ function* fetchCover(action) {
 		try {
 			logger.storage(`GET /covers/${action.payload}`);
 			const url = yield call(storage.get, 'covers', action.payload);
-			yield put({type: COVER_ADD, payload: {id: action.payload, cover: url}});
+			yield put(addCover(action.payload, url));
 		} catch(err) {
 			logger.error(err);
 		}
 	}
 }
 
+function* deleteCover(action) {
+	if(action.payload) {
+		try {
+			logger.storage(`DELETE /covers/${action.payload}`);
+			yield call(storage.delete, 'covers', action.payload);
+		} catch(err) {
+			logger.error(err);
+		}
+	}
+}
+
+
 function* coverSagas() {
-	yield takeEvery(COVER_CREATE, createCover);
-	yield takeEvery(COVER_FETCH, fetchCover);
+	yield takeEvery(COVERS_CREATE, createCover);
+	yield takeEvery(COVERS_FETCH, fetchCover);
+	yield takeEvery(COVERS_DELETE, deleteCover);
 }
 
 export default coverSagas;
