@@ -20,21 +20,22 @@ const ReportsList = (props) =>
   	adjustForCheckbox={false} >
   		<TableRow selectable={false}>
 				<TableHeaderColumn>ID</TableHeaderColumn>
-				<TableHeaderColumn>description</TableHeaderColumn>
+				<TableHeaderColumn>Description</TableHeaderColumn>
 				<TableHeaderColumn>Reported by</TableHeaderColumn>
-				<TableHeaderColumn>medium</TableHeaderColumn>
-				<TableHeaderColumn>createdAt</TableHeaderColumn>
+				<TableHeaderColumn>Medium</TableHeaderColumn>
+				<TableHeaderColumn>Created at</TableHeaderColumn>
   		</TableRow>
   	</TableHeader>
 		<TableBody displayRowCheckbox={false}>
-			{Object.keys(props.dataSource).map(id => {
-				const link = `/admin/reports/${id}`
-				return <TableRow hoverable={true} key={id}>
-						<TableRowColumn><Link to={link}>{id}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].description}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].reportedBy}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].medium}</Link></TableRowColumn>
-						<TableRowColumn>{formatDate(props.dataSource[id].createdAt)}</TableRowColumn>
+			{Object.keys(props.dataSource).map(reportId => {
+				const link = `/admin/reports/${reportId}`;
+				const report = props.dataSource[reportId];
+				return <TableRow hoverable={true} key={reportId}>
+						<TableRowColumn><Link to={link}>{reportId}</Link></TableRowColumn>
+						<TableRowColumn><Link to={link}>{report.description}</Link></TableRowColumn>
+						<TableRowColumn><Link to={link}>{report.reportedBy}</Link></TableRowColumn>
+						<TableRowColumn><Link to={link}>{report.medium}</Link></TableRowColumn>
+						<TableRowColumn>{formatDate(report.createdAt)}</TableRowColumn>
 					</TableRow>
 			})}
 		</TableBody>

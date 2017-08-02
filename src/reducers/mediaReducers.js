@@ -1,19 +1,12 @@
-import { MEDIA_ADD, MEDIA_ADD_LIST } from '../actions/mediaActions';
-import { getUniqueDatasetById } from '../utils';
-
+import { MEDIA_ADD } from '../actions/mediaActions';
+import { getById } from '../utils';
 
 const initialState = {};
 
 export default function (state = initialState, action) {
 	switch(action.type) {
 		case MEDIA_ADD:
-			const newState = {};
-			newState[action.payload.id] = action.payload;
-			return Object.assign({}, state, newState);
-
-		case MEDIA_ADD_LIST:
-			const media =  getUniqueDatasetById(action.payload);
-			return Object.assign({}, state, media);
+			return Object.assign({}, state, getById(action.payload));
 
 		default:
 			return state;

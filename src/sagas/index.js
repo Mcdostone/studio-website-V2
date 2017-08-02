@@ -1,6 +1,6 @@
 import { all, fork } from 'redux-saga/effects';
 import authSagas from './authSagas';
-// import mediaSagas from './mediaSagas';
+import mediaSagas from './mediaSagas';
 import coverSagas from './coverSagas';
 import fetchSagas from './fetchSagas';
 import crudSagas from './crudSagas';
@@ -18,6 +18,6 @@ export default function* sagas() {
 		userSagas,
 		albumSagas,
 		uploadSagas,
-		/*mediaSagas,*/
+		mediaSagas,
   ].map(fork))
 }

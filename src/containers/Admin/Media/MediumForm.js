@@ -1,6 +1,6 @@
 import React from 'react';
 import { adminWrapper } from '../../../wrappers';
-import { fetchOneMedium } from '../../../actions/mediaActions';
+import { fetchMedium } from '../../../actions/mediaActions';
 import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardText } from 'material-ui/Card';
 import { AlbumSelectField } from '../shared';
@@ -40,7 +40,7 @@ class MediumForm extends React.Component {
 
 	getContainer() {
 		const medium = this.state.data;
-		const albums = this.props.dataSource['albums'];
+		const albums = this.props.state['albums'];
 		return (
 			<Card className="admin-container media-container">
 			<img src={medium.getThumbnail(600)} style={{width: '100%'}} alt=""/>
@@ -60,4 +60,4 @@ class MediumForm extends React.Component {
 	}
 }
 
-export default adminWrapper(MediumForm, 'media', fetchOneMedium);
+export default adminWrapper(MediumForm, 'media', fetchMedium);

@@ -6,7 +6,6 @@ import MediaToolbar from './StudioToolbar';
 import StudioList from '../List/StudioList';
 import Lightbox from '../Lightbox';
 import M from './M';
-import { fetchMedia } from '../../actions/mediaActions';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
 
 
@@ -124,7 +123,6 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		openMediumInLightbox: showMedium,
 		closeLightbox,
-		fetchMedia,
   }, dispatch);
 }
 

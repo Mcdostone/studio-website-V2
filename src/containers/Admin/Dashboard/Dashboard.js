@@ -12,6 +12,7 @@ class DashboardStudio extends React.Component {
 	componentDidMount() {
 		this.props.fetchAll('users');
 		this.props.fetchAll('albums');
+		this.props.fetchAll('uploads');
 	}
 
 	getCount = resource => {

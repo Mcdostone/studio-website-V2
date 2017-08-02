@@ -3,6 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import IsAuthentificated from './IsAuthentificated';
+import scriptLoader from 'react-async-script-loader';
 import store from './store';
 import { history } from './history';
 import Navbar from './components/Navbar';
@@ -23,18 +24,18 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			apiLoaded: true
+			gapiLoaded: false
 		};
 	}
 
-	componentWillReceiveProps() {
-		/*window.gapi.client.load('drive', 'v2').then(() =>
-			this.setState({apiLoaded: true})
-		);*/
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.isScriptLoaded && !this.props.isScriptLoaded) {
+			window.gapi.client.load('drive', 'v2', () => this.setState({gapiLoaded: true}));
+		}
   }
 
 	render() {
-		if(this.state.apiLoaded) {
+		if(this.state.gapiLoaded) {
 			return (
 				<Provider store={store}>
 					<div className="studio-app">
@@ -59,4 +60,4 @@ class App extends React.Component {
 	}
 }
 
-export default App;
+export default scriptLoader('https://apis.google.com/js/api.js')(App);

@@ -8,9 +8,9 @@ import auth from './authReducers';
 import uploads from './uploadReducers';
 import covers from './coverReducers';
 import albums from './albumReducers';
+import reports from './reportReducers';
 import notifications from './notificationReducers';
 import users from './userReducers';
-
 
 const studioApp = combineReducers({
 		ui,
@@ -21,6 +21,7 @@ const studioApp = combineReducers({
 		default: def,
 		albums,
 		covers,
+		reports,
 		users,
 		uploads,
 		routing: routerReducer,

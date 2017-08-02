@@ -10,7 +10,6 @@ import {
 	TableRowColumn,
 } from 'material-ui/Table';
 import { adminListWrapper } from '../../../wrappers';
-import { fetchAllMedia } from '../../../actions/mediaActions';
 import { formatDate } from '../../../utils';
 
 
@@ -21,17 +20,16 @@ const MediaList = (props) =>
   	adjustForCheckbox={false} >
   		<TableRow selectable={false}>
 				<TableHeaderColumn>ID</TableHeaderColumn>
-				<TableHeaderColumn>uploader</TableHeaderColumn>
-				<TableHeaderColumn>UpdatedAt</TableHeaderColumn>
+				<TableHeaderColumn>Updated at</TableHeaderColumn>
   		</TableRow>
   	</TableHeader>
 		<TableBody displayRowCheckbox={false}>
-			{Object.keys(props.dataSource).map(id => {
-				const link = `/admin/media/${id}`
-				return <TableRow hoverable={true} key={id}>
-						<TableRowColumn><Link to={link}>{id}</Link></TableRowColumn>
-						<TableRowColumn><Link to={'#'}>{null}</Link></TableRowColumn>
-						<TableRowColumn>{formatDate(props.dataSource[id].updatedAt)}</TableRowColumn>
+			{Object.keys(props.dataSource).map(mediumId => {
+				const link = `/admin/media/${mediumId}`
+				const medium = props.dataSource[mediumId];
+				return <TableRow hoverable={true} key={mediumId}>
+						<TableRowColumn><Link to={link}>{mediumId}</Link></TableRowColumn>
+						<TableRowColumn>{formatDate(medium.updatedAt)}</TableRowColumn>
 					</TableRow>
 			})}
 		</TableBody>
@@ -41,4 +39,4 @@ MediaList.propTypes = {
 	dataSource: PropTypes.object.isRequired
 };
 
-export default adminListWrapper(MediaList, 'media', fetchAllMedia);
+export default adminListWrapper(MediaList, 'media');

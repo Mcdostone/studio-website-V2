@@ -1,18 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchAllMedia } from '../../actions/mediaActions';
 import { Layout } from '../Layout';
 import Studio from '../../components/Studio';
 
 
 class Media extends React.Component {
-
-	componentDidMount() {
-		this.props.setCover('media');
-		this.props.setTitle('media');
-		this.props.fetchAllMedia();
-	}
 
 	render() {
 		return (
@@ -23,17 +14,4 @@ class Media extends React.Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		dataSource: state.media,
-		cover: state.covers.media,
-	}
-}
-
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		fetchAllMedia,
-	}, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Media);
+export default Media;

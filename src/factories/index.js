@@ -1,8 +1,12 @@
 import { buildAlbumFromFirebase, buildAlbum } from './albumFactory'
-import  { buildUploadFromFirebase, buildUpload } from './uploadFactory';
+import { buildUploadFromFirebase, buildUpload } from './uploadFactory';
 
 export { buildAlbumFromFirebase, buildUploadFromFirebase };
-export { buildMediumFromDrive } from './mediumFactory';
+export {
+	buildMediumFromDrivePicker,
+	buildMediumFromFirebase,
+	buildMediumFromGoogleDrive
+} from './mediumFactory';
 export { buildCoverFromFirebase } from './coverFactory';
 export { buildUserFromFirebase, buildUserFromFirebaseAuth } from './userFactory';
 

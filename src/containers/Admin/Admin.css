@@ -121,3 +121,10 @@
 	padding: 16px;
 	cursor: pointer;
 }
+
+.google-drive-tab {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}

@@ -2,7 +2,7 @@ export default class Medium {
 
 	constructor(id, src, comeFrom, likes, album, type = null, exif = null) {
 		this.id = id;
-		this.src = src.trim() || null;
+		this.src = src ? src.trim() : null;
 		this.from = comeFrom.toLowerCase().trim() || null;
 		this.likes = likes || [];
 		this.album = album;

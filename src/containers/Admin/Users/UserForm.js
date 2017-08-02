@@ -44,7 +44,7 @@ class UserForm extends React.Component {
 	applyChanges() {
 		this.props.save(this.state.data);
 		this.props.history.goBack();
-	}
+		}
 
 	getContainer() {
 		const user = this.state.data;

@@ -2,7 +2,7 @@ import React from 'react';
 import { build } from '../factories';
 import crudWrapper from './crudWrapper';
 
-export default function adminWrapper(WrappedComponent, resource) {
+export default function adminWrapper(WrappedComponent, resource, fetchOne) {
 
 	const adminContainer = class extends React.Component {
 
@@ -32,6 +32,6 @@ export default function adminWrapper(WrappedComponent, resource) {
 
 	}
 
-	return crudWrapper(adminContainer);
+	return crudWrapper(adminContainer, fetchOne);
 
 }
