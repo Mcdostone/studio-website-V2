@@ -41,7 +41,6 @@ class DeleteDialog extends React.Component {
 				open={this.props.open}>
 				<span>
 					This action cannot be undone. This will permanently delete the data.
-					If some media are attached to this entity. media will be updated !
 					<p style={{color: red900}}>{`Are you sure to delete ${this.props.resource}#${this.props.data.id}?`} </p>
 				</span>
 			</Dialog>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { adminWrapper } from '../../../wrappers';
+import AdminCover from '../AdminCover';
 import { fetchMedium } from '../../../actions/mediaActions';
 import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardText } from 'material-ui/Card';
@@ -18,8 +19,8 @@ class MediumForm extends React.Component {
 	}
 
 	componentDidMount() {
-		this.props.fetchAll('albums');
 		this.setState({data: this.props.data});
+		this.props.fetchAll('albums');
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -41,11 +42,13 @@ class MediumForm extends React.Component {
 	getContainer() {
 		const medium = this.state.data;
 		const albums = this.props.state['albums'];
+		const src = medium.src ? medium.getThumbnail(600): null;
 		return (
 			<Card className="admin-container media-container">
-			<img src={medium.getThumbnail(600)} style={{width: '100%'}} alt=""/>
-			<CardText>
-				<AlbumSelectField value={this.state.data.album} albums={albums} onChange={this.setAlbum} />
+				<AdminCover className="cover" src={src} title="admin" resource="media" data={medium}>
+				</AdminCover>
+				<CardText>
+					<AlbumSelectField value={this.state.data.album} albums={albums} onChange={this.setAlbum} />
 				</CardText>
 				<CardActions>
 					<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />
@@ -56,8 +59,7 @@ class MediumForm extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.data);
-		return this.state.data !== undefined ? this.getContainer() : null;
+		return (this.state.data !== undefined && this.state.src !== null)  ? this.getContainer() : null;
 	}
 }
 

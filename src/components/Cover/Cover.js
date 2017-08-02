@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DashboardIconMenu from '../shared/DashboardIconMenu';
 import Image from '../Image';
 import './Cover.css';
 
@@ -13,12 +12,6 @@ class Cover extends React.Component {
 	}
 
 	render() {
-		const settings = (
-			<DashboardIconMenu
-				style={{ zIndex: 1000, position: 'absolute', right: 100, bottom: 0 }}
-			/>
-		);
-
 		return (
 			<div className={this.props.className}>
 				{this.props.src !== undefined &&
@@ -28,7 +21,6 @@ class Cover extends React.Component {
 						{this.props.children}
 					</div>
 				</div>}
-				{this.props.admin && settings}
 			</div>
 		);
 	}

@@ -2,10 +2,11 @@ import { call, takeEvery, put, select } from 'redux-saga/effects';
 import {
 	addMedium,
 	MEDIA_CREATE,
+	MEDIA_UPDATE,
 	MEDIA_FETCH_ONE } from '../actions/mediaActions';
 import logger from '../Logger';
 import restFirebaseDatabase from './RestFirebaseDatabase';
-import { buildMediumFromFirebase, buildMediumFromGoogleDrive } from '../factories';
+import { buildMediumFromGoogleDrive } from '../factories';
 
 import GoogleDriveApi from './GoogleDriveApi';
 
@@ -66,6 +67,7 @@ function *fetchMedium(action) {
 
 function* mediaSagas() {
 	yield takeEvery(MEDIA_FETCH_ONE, fetchMedium);
+	yield takeEvery(MEDIA_UPDATE, createMedium);
 	yield takeEvery(MEDIA_CREATE, createMedium);
 }
 
