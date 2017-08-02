@@ -1,4 +1,3 @@
-import { buildAlbumFromFirebase, buildAlbum } from './albumFactory'
 import { buildUploadFromFirebase, buildUpload } from './uploadFactory';
 
 export { buildAlbumFromFirebase, buildUploadFromFirebase };

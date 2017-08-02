@@ -56,6 +56,7 @@ class MediumForm extends React.Component {
 	}
 
 	render() {
+		console.log(this.state.data);
 		return this.state.data !== undefined ? this.getContainer() : null;
 	}
 }
