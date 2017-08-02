@@ -1,18 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Cover } from '../../components/Cover';
-import AdminOptionsMenu from './AdminOptionsMenu';
+// import CoverMenu from './CoverMenu';
 
-
-const AdminCover = (props) => {
-	return <Cover {...props}>
-		<div>
-			{props.children}
-			{props.data && !props.creation && <AdminOptionsMenu {...props} />}
-		</div>
+const AdminCover = (props) =>
+	<Cover {...props}>
+		{props.children}
 	</Cover>
-};
 
-AdminCover.propTypes = Cover.propTypes;
-AdminCover.defaultProps = Cover.defaultProps;
+AdminCover.propTypes = {
+	itemsMenu: PropTypes.array,
+}
 
 export default AdminCover;

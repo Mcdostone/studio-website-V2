@@ -1,38 +1,50 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Anime from 'react-anime';
-
 
 class Image extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			loaded: false
-		};
-		this.imageLoaded = this.imageLoaded.bind(this);
+		this.state = { imageLoaded: false };
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return (this.state.loaded === false && nextState.loaded === true) ||
-		(this.props.src !== nextProps.src);
+	shouldComponentUpdate = (nextProps, nextState) => {
+		return this.props.src !== nextProps.src || this.state !== nextState;
 	}
 
-	imageLoaded() {
-		this.setState({loaded: true});
+	componentWillReceiveProps = (nextProps) => {
+		this.setState({imageLoaded: false});
+		return this.props.src !== nextProps.src;
 	}
 
-	render() {
+	imageLoaded = e => {
+		this.setState({imageLoaded : e.target.src === this.props.src});
+	}
+
+	render = _ => {
+		const { duration, ...others } = this.props;
 		return (
 			<Anime
-				opacity={[0, 1]}
-				duration={2000}
-				autoplay={this.state.loaded}
-			>
-				<img src={this.props.src} onLoad={this.imageLoaded} className={this.props.className} alt=""/>
+			opacity={[0, 1]}
+			duration={duration}
+			autoplay={this.state.imageLoaded} >
+				<img {...others} onLoad={this.imageLoaded} alt="" />
 			</Anime>
-		)
+		);
 	}
 
 }
+
+Image.PropTypes = {
+	src: PropTypes.string,
+	style: PropTypes.object,
+	className: PropTypes.string,
+	duration: PropTypes.number,
+};
+
+Image.defaultProps = {
+	duration: 2000,
+};
 
 export default Image;

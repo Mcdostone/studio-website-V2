@@ -10,7 +10,6 @@ import DatePicker from 'material-ui/DatePicker';
 import AdminCover from '../AdminCover';
 import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardText } from 'material-ui/Card';
-import config from '../../../configuration';
 
 class AlbumForm extends React.Component {
 
@@ -89,12 +88,8 @@ class AlbumForm extends React.Component {
 		return (
 			<Card className="admin-container albums-container">
 				<AdminCover
-				resource="albums"
-				data={album}
 				className="cover"
-				title={album.title}
-				creation={this.props.creation}
-				src={this.state.newCover || this.state.oldCover || config.APP.DEFAULT_COVER}>
+				src={this.state.newCover || this.state.oldCover || 'test'}>
 					<h2 className="cover-title">{album.title}</h2>
 				</AdminCover>
 				<CardText>

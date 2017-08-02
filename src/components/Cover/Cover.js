@@ -4,38 +4,44 @@ import Image from '../Image';
 import './Cover.css';
 
 
-class Cover extends React.Component {
+const imageStyles =  {
+	objectFit: 'cover',
+	position: 'relative',
+	display: 'inline-block',
+	height: '100%',
+	width: '100%',
+	background: 'black',
+};
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return ((this.props.src === undefined) && (nextProps.src !== undefined)) || (this.props.src !== nextProps.src)
-		|| (this.props.title !== nextProps.title);
-	}
+const Cover = (props) => {
 
-	render() {
-		return (
-			<div className={this.props.className}>
-				{this.props.src !== undefined &&
-				<div>
-					<Image className="cover-image" src={this.props.src} alt="" />
-					<div className="cover-content">
-						{this.props.children}
-					</div>
-				</div>}
-			</div>
-		);
-	}
+	const overlayStyles = {
+		position: 'absolute',
+		background: props.foregroundColor,
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+	};
+
+	return (
+		<div className={props.className}>
+			<Image style={imageStyles} src={props.src} />
+			<span style={overlayStyles} />
+			{props.children}
+		</div>
+	);
 }
 
 Cover.propTypes = {
-	title: PropTypes.string,
-	src: PropTypes.string,
-	admin: PropTypes.bool,
+	src: PropTypes.string.isRequired,
+	className: PropTypes.string,
+	foregroundColor: PropTypes.string,
 };
 
 Cover.defaultProps = {
-	title: undefined,
-	src: undefined,
-	admin: false,
+	src: null,
+	foregroundColor: 'rgba(0, 0, 0, 0.6)',
 }
 
 export default Cover;

@@ -15,38 +15,10 @@
 
 .cover {
 	display: inline-block;
-	overflow: hidden;
 	position: relative;
 	height: var(--height);
 	width: 100%;
 	background: black;
-}
-
-.progressive-img-container {
-	position: relative;
-	height: 100%;
-	width: 100%;
-}
-
-.cover-image {
-	position: absolute;
-	object-fit: cover;
-	object-fit: cover;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	opacity: 0;
-}
-
-.cover:after {
-	content: '';
-	position: absolute;
-	background: var(--overlay);
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
 }
 
 .cover-content {
