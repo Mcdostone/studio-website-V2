@@ -1,5 +1,5 @@
 import { buildUploadFromFirebase, buildUpload } from './uploadFactory';
-import { buildAlbumFromFirebase, buildAlbum } from './test';
+import { buildAlbumFromFirebase, buildAlbum } from './albumFactory';
 export { buildAlbumFromFirebase, buildUploadFromFirebase };
 export { buildCoverFromFirebase } from './coverFactory';
 export { buildUserFromFirebase, buildUserFromFirebaseAuth } from './userFactory';
