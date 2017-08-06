@@ -32,6 +32,12 @@ class UserForm extends React.Component {
 		this.setState({data: userUpdated});
 	}
 
+	toggleAuthor = () => {
+		const userUpdated = this.state.data;
+		userUpdated.authorization = userUpdated.authorization === 1 ? 0 : 1;
+		this.setState({data: userUpdated});
+	}
+
 	componentDidMount() {
 		this.setState({data: this.props.data});
 	}
@@ -70,6 +76,11 @@ class UserForm extends React.Component {
 						<div>
 							<Toggle onTouchTap={this.toggleBan} toggled={user.banned} label="Ban user ?" />
 						</div>
+
+						<div>
+							<Toggle onTouchTap={this.toggleAuthor} toggled={user.authorization === 1} label="Author ?" />
+						</div>
+
 					</CardText>
 
 					<CardTitle title={`Tags of ${user.givenName}`}

@@ -11,6 +11,7 @@ export default class User extends Timestampable {
 		this.picture = picture;
 		this.banned = banned;
 		this.media = media;
+		this.authorization = 0;
 	}
 
 	getFullName() {

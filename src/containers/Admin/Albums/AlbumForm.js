@@ -33,8 +33,8 @@ class AlbumForm extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(this.props.data !== nextProps.data)
-			this.props.fetchCover(nextProps.data ? nextProps.data.id : undefined);
+		if(nextProps.data)
+			this.props.fetchCover(nextProps.data.id);
 		const coverObject = nextProps.state.covers[this.props.match.params.id];
 		if(this.state.cover === undefined && coverObject)
 			this.setState({ data: nextProps.data, oldCover: coverObject.cover});
