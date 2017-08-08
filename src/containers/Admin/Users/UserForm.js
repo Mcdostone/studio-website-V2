@@ -58,7 +58,9 @@ class UserForm extends React.Component {
 		const likes = {};
 		return (
 				<Card className="admin-container users-container">
-					<SimpleCover className="cover" title="lol" src="http://www.groupesida.ch/filrouge/san-francisco-news-summer-code-camp.jpg">
+					<SimpleCover
+					className="cover"
+					src="http://www.groupesida.ch/filrouge/san-francisco-news-summer-code-camp.jpg">
 						<div className="admin-user-header">
 							<Avatar size={150} src={user.picture} />
 							<div className="admin-user-info">

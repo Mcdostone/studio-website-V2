@@ -37,7 +37,7 @@ class UploadForm extends React.Component {
 			media: {},
 			selected: {},
 			mediaByIndex: [],
-			selectedAlbum: undefined,
+			selectedAlbum: null,
 			slideIndex: 0,
 		};
 	}

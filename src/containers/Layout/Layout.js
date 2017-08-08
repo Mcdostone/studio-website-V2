@@ -9,7 +9,7 @@ class Layout extends React.Component {
 	render() {
 		return (
 			<div className="layout-studio">
-				<SimpleCover className="cover" title={this.props.title} src={this.props.cover}>
+				<SimpleCover className="cover" src={this.props.cover}>
 					<h2 className="cover-title">{this.props.title}</h2>
 				</SimpleCover>
 				<div className="container">

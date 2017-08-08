@@ -31,26 +31,30 @@ class DeleteDialog extends React.Component {
 				keyboardFocused={true}
         onTouchTap={this.delete}
       />,
-    ];
-
-		return (
-			<Dialog
-				title="Are you absolutly sure?"
-				actions={actions}
-				modal={false}
-				open={this.props.open}>
-				<span>
-					This action cannot be undone. This will permanently delete the data.
-					<p style={{color: red900}}>{`Are you sure to delete ${this.props.resource}#${this.props.data.id}?`} </p>
-				</span>
-			</Dialog>
-		);
+		];
+		if(this.props.data) {
+			return (
+				<Dialog
+					title="Are you absolutly sure?"
+					actions={actions}
+					modal={false}
+					open={this.props.open}>
+					<span>
+						This action cannot be undone. This will permanently delete the data.
+						<p style={{color: red900}}>
+							{`Are you sure to delete ${this.props.resource} ${this.props.data.id}?`}
+						</p>
+					</span>
+				</Dialog>
+			);
+		}
+		return null;
 	}
 
 }
 
 DeleteDialog.propTypes = {
-	resource: PropTypes.string.isRequired,
+	resource: PropTypes.string,
 	data: PropTypes.object,
 	handleClose: PropTypes.func.isRequired,
 	remove: PropTypes.func.isRequired,

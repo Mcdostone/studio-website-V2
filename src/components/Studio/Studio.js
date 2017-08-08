@@ -106,17 +106,7 @@ class Studio extends React.Component {
 }
 
 Studio.propTypes = {
-	media: PropTypes.object,
-};
-
-Studio.defaultProps = {
-	media: {},
-};
-
-function mapStateToProps(state, props) {
-	return {
-		...props,
-	}
+	media: PropTypes.object.isRequired
 }
 
 function mapDispatchToProps(dispatch) {
@@ -126,4 +116,4 @@ function mapDispatchToProps(dispatch) {
   }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Studio);
+export default connect(null, mapDispatchToProps)(Studio);

@@ -13,9 +13,9 @@ class A extends React.Component {
 	}
 
 	render() {
-		const src = this.props.covers[this.props.id];
+		const cover = this.props.covers[this.props.id];
 		return (
-			<OverlayedThumbnail activeOverlay src={src}>
+			<OverlayedThumbnail activeOverlay src={cover ? cover.cover : null}>
 				<span className="title">{this.props.album.title}</span>
 				<span className="subtitle">{this.props.album.getDate()}</span>
 			</OverlayedThumbnail>

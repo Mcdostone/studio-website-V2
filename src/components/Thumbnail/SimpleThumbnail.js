@@ -15,7 +15,7 @@ class SimpleThumbnail extends React.Component {
 }
 
 SimpleThumbnail.propTypes = {
-	src: PropTypes.string.isRequired,
+	src: PropTypes.string,
 };
 
 export default SimpleThumbnail;

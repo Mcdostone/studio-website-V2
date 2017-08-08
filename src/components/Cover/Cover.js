@@ -1,36 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Overlay from '../Overlay';
 import Image from '../Image';
 import './Cover.css';
-
 
 const imageStyles =  {
 	objectFit: 'cover',
 	position: 'relative',
+	float: 'left',
 	display: 'inline-block',
 	height: '100%',
 	width: '100%',
 	background: 'black',
 };
 
+const contentStyles = {
+	position: 'absolute',
+	top: 0,
+	left: 0,
+	right: 0,
+	bottom: 0,
+}
+
 const Cover = (props) => {
-	const contentStyles = {
-		position: 'absolute',
-		top: 0,
-		left: 0,
-		right: 0,
-		bottom: 0,
-	}
-
-	const overlayStyles = {
-		background: props.foregroundColor,
-		...contentStyles
-	};
-
 	return (
 		<div className={props.className}>
 			<Image style={imageStyles} src={props.src} />
-			<span style={overlayStyles} />
+			{!props.hideOverlay && <Overlay />}
 			<div style={contentStyles}>
 				{props.children}
 			</div>
@@ -40,13 +36,13 @@ const Cover = (props) => {
 
 Cover.propTypes = {
 	src: PropTypes.string,
+	hideOverlay: PropTypes.bool,
 	className: PropTypes.string,
-	foregroundColor: PropTypes.string,
 };
 
 Cover.defaultProps = {
 	src: null,
-	foregroundColor: 'rgba(0, 0, 0, 0.6)',
+	hideOverlay: false,
 }
 
 export default Cover;

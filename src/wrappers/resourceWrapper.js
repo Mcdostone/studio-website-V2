@@ -9,8 +9,6 @@ export default function resourceWrapper(resource, WrappedComponent) {
 	const resourceContainer = class extends React.Component {
 
 		componentDidMount() {
-			this.props.setCover(resource);
-			this.props.setTitle(resource);
 			this.props.fetchAll(resource);
 		}
 

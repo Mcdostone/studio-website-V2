@@ -14,7 +14,9 @@ export const buildMediumFromGoogleDrive = (firebaseData, driveData) => {
 	const medium = new Medium(
 		firebaseData.id,
 		driveData.thumbnailLink.split('=')[0],
-		firebaseData.from, firebaseData.likes
+		firebaseData.from,
+		firebaseData.likes,
+		firebaseData.album
 	);
 	medium.exif = buildExifFromGoogleDrive(driveData);
 	medium.updatedAt = firebaseData.updatedAt;

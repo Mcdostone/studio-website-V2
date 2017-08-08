@@ -9,6 +9,7 @@ import { FileInputField } from '../../../components/shared';
 import DatePicker from 'material-ui/DatePicker';
 import AdminCover from '../AdminCover';
 import FlatButton from 'material-ui/FlatButton';
+import Studio from '../../../components/Studio';
 import {Card, CardActions, CardText } from 'material-ui/Card';
 
 class AlbumForm extends React.Component {
@@ -33,7 +34,7 @@ class AlbumForm extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.data)
+		if(this.props.data !== nextProps.data && nextProps.data)
 			this.props.fetchCover(nextProps.data.id);
 		const coverObject = nextProps.state.covers[this.props.match.params.id];
 		if(this.state.cover === undefined && coverObject)
@@ -86,10 +87,14 @@ class AlbumForm extends React.Component {
 	getContainer() {
 		const album = this.state.data;
 		return (
+			<div>
+
 			<Card className="admin-container albums-container">
 				<AdminCover
 				className="cover"
-				src={this.state.newCover || this.state.oldCover || 'test'}>
+				data={album}
+				resource='albums'
+				src={this.state.newCover || this.state.oldCover}>
 					<h2 className="cover-title">{album.title}</h2>
 				</AdminCover>
 				<CardText>
@@ -114,6 +119,13 @@ class AlbumForm extends React.Component {
 					<FlatButton label="Save" disabled={!this.state.valid} onTouchTap={this.applyChanges}/>
 				</CardActions>
 			</Card>
+
+			<Card className="admin-container albums-container" style={{marginBottom: 16}}>
+				<CardText>
+					<Studio media={{}} />
+				</CardText>
+			</Card>
+			</div>
 		);
 	}
 

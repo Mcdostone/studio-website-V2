@@ -42,11 +42,15 @@ class MediumForm extends React.Component {
 	getContainer() {
 		const medium = this.state.data;
 		const albums = this.props.state['albums'];
-		const src = medium.src ? medium.getThumbnail(600): null;
+		const src = medium.src ? medium.getThumbnail(600) : null;
 		return (
 			<Card className="admin-container media-container">
-				<AdminCover className="cover" src={src} title="admin" resource="media" data={medium}>
-				</AdminCover>
+				<AdminCover
+				resource="media"
+				data={medium}
+				hideOverlay
+				className="cover"
+				src={src} />
 				<CardText>
 					<AlbumSelectField value={this.state.data.album} albums={albums} onChange={this.setAlbum} />
 				</CardText>

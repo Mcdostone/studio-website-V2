@@ -7,4 +7,4 @@ export const buildAlbumFromFirebase = (data) => {
 	return album;
 }
 
-export const buildAlbum = (data) => new Album(undefined, '', new Date(), []);
+export const buildAlbum = (data) => new Album(undefined, '', new Date(), {});

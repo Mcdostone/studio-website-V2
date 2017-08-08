@@ -60,14 +60,14 @@
 
 .admin-user-header {
 	display: flex;
+	height: 100%;
 	box-sizing: border-box;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 	flex-direction: row;
 }
 
 .admin-user-info {
-	width: 100%;
 	padding-left: 16px;
 	text-align: left;
 }

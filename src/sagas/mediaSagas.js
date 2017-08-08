@@ -3,9 +3,11 @@ import {
 	addMedium,
 	MEDIA_CREATE,
 	MEDIA_UPDATE,
+	MEDIA_DELETE,
 	MEDIA_FETCH_ONE } from '../actions/mediaActions';
+import { updateAlbum } from '../actions/albumActions';
 import logger from '../Logger';
-import restFirebaseDatabase from './RestFirebaseDatabase';
+import database from './RestFirebaseDatabase';
 import { buildMediumFromGoogleDrive } from '../factories';
 
 import GoogleDriveApi from './GoogleDriveApi';
@@ -17,14 +19,32 @@ const resource = 'media';
 function *createMedium(action) {
 	const medium = action.payload;
 	let mediumCreated = null;
+
+	let oldMedium = yield call(database.get, resource, medium.id);
+	oldMedium = oldMedium.val();
+	if(oldMedium) {
+		if(oldMedium.album && !medium.album) {
+			const album = yield select(state => state.albums[oldMedium.album])
+			delete album.media[medium.id];
+			yield put(updateAlbum(album));
+		}
+	}
+
 	switch(medium.from.toUpperCase()) {
 		case 'DRIVE':
 			medium.src = null;
-			mediumCreated = yield call(restFirebaseDatabase.post, resource, medium);
+			mediumCreated = yield call(database.post, resource, medium);
 			break;
 		default:
 		return null;
 	}
+
+	if(mediumCreated.album) {
+		const album = yield select(state => state.albums[mediumCreated.album])
+		album.addMedium(mediumCreated)
+		yield put(updateAlbum(album));
+	}
+
 	yield put(addMedium(mediumCreated));
 }
 
@@ -58,29 +78,42 @@ function* createMediumFromFirebase(medium) {
 function *fetchMedium(action) {
 	const { resource, id } = action.payload;
 	try {
-		const snapshot = yield call(restFirebaseDatabase.get,resource, id);
+		const snapshot = yield call(database.get,resource, id);
 		yield call(createMediumFromFirebase, snapshot.val());
 	} catch(err) {
 		logger.error(err);
 	}
 }
 
+function *deleteMedium(action) {
+	const medium = action.payload;
+	if(medium.album) {
+		const album = yield select(state => state.albums[medium.album]);
+		if(album)
+			delete album.media[medium.id];
+
+		yield put(updateAlbum(album));
+	}
+	yield call(database.delete, resource, medium.id);
+}
+
 function* mediaSagas() {
 	yield takeEvery(MEDIA_FETCH_ONE, fetchMedium);
 	yield takeEvery(MEDIA_UPDATE, createMedium);
 	yield takeEvery(MEDIA_CREATE, createMedium);
+	yield takeEvery(MEDIA_DELETE, deleteMedium);
 }
 
 export default mediaSagas;
 
 /*
 function* fetchOne(action) {
-		const snapshot = yield call(restFirebaseDatabase.get, action.payload.resource, action.payload.id);
+		const snapshot = yield call(database.get, action.payload.resource, action.payload.id);
 		yield call(createMediumFromFirebase, snapshot.val());
 }
 
 function* fetchAll() {
-	const snapshot = yield call(restFirebaseDatabase.get, 'media');
+	const snapshot = yield call(database.get, 'media');
 	const data = snapshot.val();
 	if(data !== null) {
 		yield all(Object.keys(data).map(idMedium => {

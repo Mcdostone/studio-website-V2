@@ -2,19 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import { getRandomProperty } from '../../../utils';
 
 const AlbumSelectField = (props) => {
 	const albums = props.albums;
 	return (
 		<SelectField
+		floatingLabelFixed
 			underlineStyle={props.underlineStyle}
-			floatingLabelText={props.disableLabel ? null : 'Album'}
+			floatingLabelText={props.disableLabel ? null : 'Choose an album'}
 			labelStyle={props.labelStyle}
 			fullWidth
-			value={props.value || getRandomProperty(albums)}
+			value={props.value}
 			onChange={props.onChange}>
-			{Object.keys(albums).map(idAlbum =>
+				<MenuItem value={null} primaryText="" />
+			{
+				Object.keys(albums).map(idAlbum =>
 				<MenuItem key={idAlbum} value={idAlbum} primaryText={albums[idAlbum].title} />)
 			}
 		</SelectField>

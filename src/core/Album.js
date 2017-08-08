@@ -12,14 +12,15 @@ export default class Album extends Timestampable {
 	}
 
 	countMedia() {
-		if(this.media.length >= 1) {
-			return `${this.media.length} ${this.media.length === 1 ? 'medium' : 'media'}`;
-		}
-		return undefined;
+		return Object.keys(this.media).length;
 	}
 
 	getDate() {
 		return moment(this.date, 'DD/MM/YYYY').format('DD/MM/YYYY');
+	}
+
+	addMedium(medium) {
+		this.media[medium.id] = true;
 	}
 
 }

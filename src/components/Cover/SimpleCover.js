@@ -6,6 +6,10 @@ import Cover from './Cover';
 
 class SimpleCover extends React.Component {
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return this.props.children !== nextProps.children;
+	}
+
 	render() {
 		return (
 			<Cover {...this.props}>
@@ -25,15 +29,11 @@ class SimpleCover extends React.Component {
 }
 
 SimpleCover.propTypes = {
-	title: PropTypes.string,
 	src: PropTypes.string,
-	admin: PropTypes.bool,
 };
 
 SimpleCover.defaultProps = {
-	title: undefined,
 	src: undefined,
-	admin: false,
 }
 
 export default SimpleCover;
