@@ -1,7 +1,5 @@
 import React from 'react';
-import moment from 'moment';
-import Avatar from 'material-ui/Avatar';
-import { SimpleCover } from '../../../components/Cover';
+import UserCover from './UserCover';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete-forever';
 import Toggle from 'material-ui/Toggle';
@@ -58,19 +56,11 @@ class UserForm extends React.Component {
 		const likes = {};
 		return (
 				<Card className="admin-container users-container">
-					<SimpleCover
+					<UserCover
 					className="cover"
-					src="http://www.groupesida.ch/filrouge/san-francisco-news-summer-code-camp.jpg">
-						<div className="admin-user-header">
-							<Avatar size={150} src={user.picture} />
-							<div className="admin-user-info">
-								<p>{user.getFullName()}</p>
-								<p>{user.email}</p>
-								<p>{user.id}</p>
-								<p>Connected {moment(user.createdAt).fromNow()}</p>
-							</div>
-						</div>
-					</SimpleCover>
+					src="http://www.groupesida.ch/filrouge/san-francisco-news-summer-code-camp.jpg"
+					user={user}
+					/>
 
 					<CardTitle title="Account"
 					expandable={false} />

@@ -120,11 +120,12 @@ class AlbumForm extends React.Component {
 				</CardActions>
 			</Card>
 
-			<Card className="admin-container albums-container" style={{marginBottom: 16}}>
+			{	<Card className="admin-container albums-container" style={{marginBottom: 16}}>
 				<CardText>
 					<Studio media={{}} />
 				</CardText>
 			</Card>
+			}
 			</div>
 		);
 	}
