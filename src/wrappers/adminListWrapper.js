@@ -4,7 +4,7 @@ import pluralize from 'pluralize';
 import FlatButton from 'material-ui/RaisedButton';
 import crudWrapper from './crudWrapper'
 
-export default function adminListWrapper(WrappedComponent, resource) {
+export default function adminListWrapper(WrappedComponent, resource, fetchAll) {
 
 	const AdminList = class extends React.Component {
 
@@ -33,6 +33,6 @@ export default function adminListWrapper(WrappedComponent, resource) {
 
 	}
 
-	return crudWrapper(AdminList);
+	return crudWrapper(AdminList, {fetchAll});
 
 }

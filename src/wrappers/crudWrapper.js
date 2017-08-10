@@ -5,7 +5,12 @@ import { bindActionCreators } from 'redux';
 import { fetchAll, fetchOne } from '../actions/fetchActions';
 import { remove, update, create } from '../actions/crudActions';
 
-export default function crudWrapper(WrappedComponent, fetchOneAction) {
+const defaultActions = {
+	fetchOne,
+	fetchAll
+};
+
+export default function crudWrapper(WrappedComponent, actions = {}) {
 
 	const crud = (props) => <WrappedComponent {...props} />;
 
@@ -18,8 +23,11 @@ export default function crudWrapper(WrappedComponent, fetchOneAction) {
 
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
-			fetchAll,
-			fetchOne: fetchOneAction ? fetchOneAction : fetchOne,
+			...Object.keys(actions).reduce((actionsSet, a) => {
+				if(actions[a] !== undefined)
+					actionsSet[a] = actions[a];
+				return actionsSet;
+			}, defaultActions),
 			update,
 			create,
 			remove,

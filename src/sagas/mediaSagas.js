@@ -1,19 +1,18 @@
-import { call, takeEvery, put, select } from 'redux-saga/effects';
+import { all, call, takeEvery, put, select } from 'redux-saga/effects';
+import logger from '../Logger';
+import database from './RestFirebaseDatabase';
+import { buildMediumFromGoogleDrive, buildMediumFromFirebase } from '../factories';
+import { updateAlbum } from '../actions/albumActions';
 import {
 	addMedium,
 	MEDIA_CREATE,
 	MEDIA_UPDATE,
+	MEDIA_FETCH_ALL,
 	MEDIA_DELETE,
 	MEDIA_FETCH_ONE } from '../actions/mediaActions';
-import { updateAlbum } from '../actions/albumActions';
-import logger from '../Logger';
-import database from './RestFirebaseDatabase';
-import { buildMediumFromGoogleDrive } from '../factories';
-
 import GoogleDriveApi from './GoogleDriveApi';
 
 const googleDriveApi = new GoogleDriveApi(window.gapi);
-
 const resource = 'media';
 
 function *createMedium(action) {
@@ -70,15 +69,35 @@ function* createMediumFromFirebase(medium) {
 				yield put(addMedium(newMedium));
 				break;
 			default:
-				yield put(addMedium(medium));
+				// yield put(addMedium(medium));
 		}
+	}
+}
+
+function* tmp(medium) {
+	if(medium)
+		yield put(addMedium(buildMediumFromFirebase(medium)));
+}
+
+function *fetchAllMedia(action) {
+	const { resource } = action.payload;
+	try {
+		const snapshot = yield call(database.get, resource);
+		const response = snapshot.val();
+		if(response) {
+			yield all(Object.keys(response).map(idMedium => {
+			 return call(tmp, response[idMedium]);
+			}));
+		}
+	} catch(err) {
+		logger.error(err);
 	}
 }
 
 function *fetchMedium(action) {
 	const { resource, id } = action.payload;
 	try {
-		const snapshot = yield call(database.get,resource, id);
+		const snapshot = yield call(database.get, resource, id);
 		yield call(createMediumFromFirebase, snapshot.val());
 	} catch(err) {
 		logger.error(err);
@@ -99,6 +118,7 @@ function *deleteMedium(action) {
 
 function* mediaSagas() {
 	yield takeEvery(MEDIA_FETCH_ONE, fetchMedium);
+	yield takeEvery(MEDIA_FETCH_ALL, fetchAllMedia);
 	yield takeEvery(MEDIA_UPDATE, createMedium);
 	yield takeEvery(MEDIA_CREATE, createMedium);
 	yield takeEvery(MEDIA_DELETE, deleteMedium);

@@ -8,7 +8,7 @@ class M extends React.Component {
 
 	render() {
 		return (
-			<Thumbnail src={this.props.medium.getThumbnail()}>
+			<Thumbnail src={this.props.medium.getThumbnail ? this.props.medium.getThumbnail() : null}>
 				<span>
 					<FavoriteAction style={{ marginRight: 5 }} color="white" />
 					<p>{this.props.medium.countLikes()}</p>

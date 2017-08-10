@@ -5,8 +5,6 @@ import { Cover } from '../../components/Cover';
 import CoverMenu from './CoverMenu';
 import { DeleteDialog } from '../../components/Dialogs';
 
-
-
 class AdminCover extends React.Component {
 
 	constructor(props) {
@@ -16,26 +14,33 @@ class AdminCover extends React.Component {
 		};
 	}
 
-	render = () => {
+	getMenuCover = () => {
 		const items = [
 			<MenuItem primaryText="Delete ?" key="1" onTouchTap={() => this.setState({deleteDialog: true})} />
 		];
-		return (
-			<Cover {...this.props}>
-				<CoverMenu menuItems={items} />
-				<DeleteDialog
-				{...this.props}
-				handleClose={() => this.setState({deleteDialog: false})}
-				open={this.state.deleteDialog} />
-				{this.props.children}
-			</Cover>
-		);
+		if(this.props.creation === false || !this.props.creation)
+			return (
+				<div>
+					<CoverMenu menuItems={items} />
+					<DeleteDialog
+					{...this.props}
+					handleClose={() => this.setState({deleteDialog: false})}
+					open={this.state.deleteDialog} />
+				</div>
+			);
+		return null;
 	}
 
+	render = () =>
+		<Cover {...this.props}>
+			{this.getMenuCover()}
+			{this.props.children}
+		</Cover>
 }
 
 AdminCover.propTypes = {
 	itemsMenu: PropTypes.array,
+	creation: PropTypes.bool
 }
 
 export default AdminCover;

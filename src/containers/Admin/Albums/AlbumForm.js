@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TextField from 'material-ui/TextField';
 import { fetchCover } from '../../../actions/coverActions';
+import { fetchMedium } from '../../../actions/mediaActions';
 import { adminWrapper } from '../../../wrappers';
 import { FileInputField } from '../../../components/shared';
 import DatePicker from 'material-ui/DatePicker';
@@ -34,8 +35,10 @@ class AlbumForm extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(this.props.data !== nextProps.data && nextProps.data)
+		if(this.props.data !== nextProps.data && nextProps.data && nextProps.data.id) {
 			this.props.fetchCover(nextProps.data.id);
+			Object.keys(nextProps.data.media).map(mediumId => this.props.fetchMedium('media', mediumId));
+		}
 		const coverObject = nextProps.state.covers[this.props.match.params.id];
 		if(this.state.cover === undefined && coverObject)
 			this.setState({ data: nextProps.data, oldCover: coverObject.cover});
@@ -86,14 +89,18 @@ class AlbumForm extends React.Component {
 
 	getContainer() {
 		const album = this.state.data;
+		let media = this.props.state.media;
+		if(media)
+			media = Object.values(media).filter(medium => medium.album === album.id);
+
 		return (
 			<div>
-
 			<Card className="admin-container albums-container">
 				<AdminCover
 				className="cover"
 				data={album}
 				resource='albums'
+				creation={this.props.creation}
 				src={this.state.newCover || this.state.oldCover}>
 					<h2 className="cover-title">{album.title}</h2>
 				</AdminCover>
@@ -120,9 +127,9 @@ class AlbumForm extends React.Component {
 				</CardActions>
 			</Card>
 
-			{	<Card className="admin-container albums-container" style={{marginBottom: 16}}>
+			{	Object.keys(media).length > 0 && <Card className="admin-container albums-container" style={{marginBottom: 16}}>
 				<CardText>
-					<Studio media={{}} />
+					<Studio media={media} />
 				</CardText>
 			</Card>
 			}
@@ -138,7 +145,8 @@ class AlbumForm extends React.Component {
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		fetchCover
+		fetchCover,
+		fetchMedium,
 	}, dispatch);
 }
 

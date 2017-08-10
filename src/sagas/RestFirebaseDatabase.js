@@ -24,9 +24,8 @@ class RestFirebaseDatabase extends RestFirebase {
 	put(resource, data) {
 		if(data.id) {
 			data.updatedAt = new Date();
-			if(data.createdAt === null) {
+			if(data.createdAt === null)
 				data.createdAt = new Date();
-			}
 			return new Promise((resolve, reject) => {
 				this.firebase.database().ref(resource + '/' + data.id).update(data)
 				.then(() => resolve(data))
@@ -48,8 +47,6 @@ class RestFirebaseDatabase extends RestFirebase {
 		data.updatedAt = timestamp;
 
 		this.logger.database(`POST ${path}`);
-
-
 
 		return new Promise((resolve, reject) => {
 			this.firebase.database().ref(path).update(data)

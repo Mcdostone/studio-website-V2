@@ -21,19 +21,19 @@ const UsersList = (props) =>
 				<TableHeaderColumn>ID</TableHeaderColumn>
 				<TableHeaderColumn>Family name</TableHeaderColumn>
 				<TableHeaderColumn>Firstname</TableHeaderColumn>
-				<TableHeaderColumn>Authorization</TableHeaderColumn>
+				<TableHeaderColumn>Role</TableHeaderColumn>
 				<TableHeaderColumn>Last login time</TableHeaderColumn>
 				<TableHeaderColumn>banned</TableHeaderColumn>
   		</TableRow>
   	</TableHeader>
 		<TableBody displayRowCheckbox={false}>
 			{Object.keys(props.dataSource).map(id => {
-				const link = `/admin/users/${id}`
+				const link = `/admin/users/${id}`;
 				return <TableRow hoverable={true} key={id}>
 						<TableRowColumn><Link to={link}>{id}</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].familyName}</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].givenName}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].authorization}</Link></TableRowColumn>
+						<TableRowColumn><Link to={link}>{props.dataSource[id].getRoleName()}</Link></TableRowColumn>
 						<TableRowColumn>{moment(props.dataSource[id].createdAt).fromNow()}</TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].banned ? 'true' : ''}</Link></TableRowColumn>
 					</TableRow>

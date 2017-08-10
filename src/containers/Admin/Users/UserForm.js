@@ -32,7 +32,7 @@ class UserForm extends React.Component {
 
 	toggleAuthor = () => {
 		const userUpdated = this.state.data;
-		userUpdated.authorization = userUpdated.authorization === 1 ? 0 : 1;
+		userUpdated.role = userUpdated.isAuthor() ? 0 : 1;
 		this.setState({data: userUpdated});
 	}
 
@@ -62,18 +62,21 @@ class UserForm extends React.Component {
 					user={user}
 					/>
 
-					<CardTitle title="Account"
-					expandable={false} />
-					<CardText>
+					{!user.isAdmin() &&
 						<div>
-							<Toggle onTouchTap={this.toggleBan} toggled={user.banned} label="Ban user ?" />
-						</div>
+							<CardTitle title="Account"
+							expandable={false} />
 
-						<div>
-							<Toggle onTouchTap={this.toggleAuthor} toggled={user.authorization === 1} label="Author ?" />
+					 		<CardText>
+								<div>
+									<Toggle onTouchTap={this.toggleBan} toggled={user.banned} label="Ban user ?" />
+								</div>
+								<div>
+									<Toggle onTouchTap={this.toggleAuthor} toggled={user.isAuthor()} label="Author ?" />
+								</div>
+							</CardText>
 						</div>
-
-					</CardText>
+					}
 
 					<CardTitle title={`Tags of ${user.givenName}`}
 					subtitle="X tags"

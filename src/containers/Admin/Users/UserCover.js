@@ -21,6 +21,7 @@ class UserCover extends React.Component {
 						<p>{user.getFullName()}</p>
 						<p>{user.email}</p>
 						<p>{user.id}</p>
+						<p>{user.getRoleName()}</p>
 						<p>Connected {moment(user.createdAt).fromNow()}</p>
 					</div>
 				</div>

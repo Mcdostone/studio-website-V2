@@ -26,7 +26,7 @@ class AnimatedImage extends React.Component {
 			opacity={[0, 1]}
 			duration={duration}
 			autoplay={true} >
-				<img src={this.state.image} style={style} alt="" />
+				<img src={this.state.image} style={style} className={this.props.className} alt="" />
 			</Anime>
 		);
 	}

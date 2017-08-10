@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MediaToolbar from './StudioToolbar';
+import StudioToolbar from './StudioToolbar';
 import StudioList from '../List/StudioList';
 import Lightbox from '../Lightbox';
 import M from './M';
@@ -33,19 +33,19 @@ class Studio extends React.Component {
 	}
 
 	getProcessedMedia(filters) {
-		let arrayMedia = Object.values(this.props.media);
+		let media = this.props.media;
 		const filter = filters[this.state.filter];
 		if(filter.toLowerCase() !== 'all' ) {
-			arrayMedia = arrayMedia.filter(medium => medium.type.toLowerCase().trim() === filter.toLowerCase().trim());
+			media = media.filter(medium => medium.type.toLowerCase().trim() === filter.toLowerCase().trim());
 		}
 		switch(this.state.sorting) {
 			case SORT_LIKES:
-				return arrayMedia.sort((a, b) => (b.countLikes() > a.countLikes()) ? 1 : ((a.countLikes() > b.countLikes()) ? -1 : 0));
+				return media.sort((a, b) => (b.countLikes() > a.countLikes()) ? 1 : ((a.countLikes() > b.countLikes()) ? -1 : 0));
 			case SORT_LAST_ADDED:
 			case SORT_POPULARITY:;
-			return arrayMedia;
+			return media;
 			default:
-			return arrayMedia;
+			return media;
 		}
 	}
 
@@ -84,7 +84,7 @@ class Studio extends React.Component {
 		return (
 			<div>
 				<Lightbox />
-				<MediaToolbar
+				<StudioToolbar
 					squareView={this.state.squareView}
 					onSetSquareView={this.setSquareView}
 					onSetFilter={this.setFilter}
@@ -93,7 +93,9 @@ class Studio extends React.Component {
 					activeSorting={this.state.sorting}
 					sortingTypes={this.getSortingTypes()}
 					onSetSorting={this.setSorting}/>
-				<StudioList gutter={16}>
+				<StudioList
+				gutter={16}
+				squareView={this.state.squareView}>
 					{processedMedia.map(m =>
 						<div key={m.id} onClick={() => this.showMedium(m)}>
 							<M square={this.state.squareView} medium={m} />
@@ -106,7 +108,7 @@ class Studio extends React.Component {
 }
 
 Studio.propTypes = {
-	media: PropTypes.object.isRequired
+	media: PropTypes.array.isRequired
 }
 
 function mapDispatchToProps(dispatch) {

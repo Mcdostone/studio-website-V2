@@ -3,7 +3,6 @@ import { build } from '../factories';
 import crudWrapper from './crudWrapper';
 
 export default function adminWrapper(WrappedComponent, resource, fetchOne) {
-
 	const adminContainer = class extends React.Component {
 
 		constructor(props) {
@@ -12,13 +11,8 @@ export default function adminWrapper(WrappedComponent, resource, fetchOne) {
 		}
 
 		componentDidMount() {
-			if(!this.props.creation) {
-				this.fetchData(this.props.match.params.id);
-			}
-		}
-
-		fetchData(id) {
-			this.props.fetchOne(resource, id);
+			if(this.props.creation === false || !this.props.creation)
+				this.props.fetchOne(resource, this.props.match.params.id);
 		}
 
 		save(data) {
@@ -32,6 +26,6 @@ export default function adminWrapper(WrappedComponent, resource, fetchOne) {
 
 	}
 
-	return crudWrapper(adminContainer, fetchOne);
+	return crudWrapper(adminContainer, {fetchOne: fetchOne});
 
 }

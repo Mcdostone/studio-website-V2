@@ -2,6 +2,7 @@ export const MEDIA_ADD = 'MEDIA_ADD';
 export const MEDIA_CREATE = 'MEDIA_CREATE';
 export const MEDIA_UPDATE = 'MEDIA_UPDATE';
 export const MEDIA_FETCH_ONE = 'MEDIA_FETCH_ONE';
+export const MEDIA_FETCH_ALL = 'MEDIA_FETCH_ALL';
 export const MEDIA_DELETE = 'MEDIA_DELETE';
 
 
@@ -30,3 +31,7 @@ export const fetchMedium = (resource, id) => ({
 	payload: {resource, id}
 });
 
+export const fetchAllMedia = (resource = 'media') => ({
+	type: MEDIA_FETCH_ALL,
+	payload: { resource }
+});

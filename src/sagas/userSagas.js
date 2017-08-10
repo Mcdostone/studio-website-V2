@@ -5,12 +5,13 @@ import database from './RestFirebaseDatabase';
 const resource = 'users';
 
 function* create(promise, action) {
-	if(action.payload)
+	if(action.payload) {
 		yield call(promise, resource.toLowerCase(), action.payload);
+	}
 }
 
-function* albumSagas() {
+function* userSagas() {
 	yield takeEvery(USERS_UPDATE, create, database.put);
 }
 
-export default albumSagas;
+export default userSagas;

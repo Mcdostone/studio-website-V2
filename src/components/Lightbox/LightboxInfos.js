@@ -63,7 +63,11 @@ class LightboxInfos extends React.Component {
 
 		const adminButton = (
 			<div className="lightbox-infos-top">
-				<DashboardIconMenu color={grey500} hoverColor={grey900} />
+				<DashboardIconMenu
+				color={grey500}
+				resource="media"
+				data={this.props.medium}
+				hoverColor={grey900} />
 			</div>
 		);
 

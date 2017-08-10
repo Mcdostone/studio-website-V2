@@ -13,27 +13,41 @@ import { adminListWrapper } from '../../../wrappers';
 import { formatDate } from '../../../utils';
 
 
-const MediaList = (props) =>
-	<Table selectable={false}>
-		<TableHeader
-		displaySelectAll={false}
-  	adjustForCheckbox={false} >
-  		<TableRow selectable={false}>
-				<TableHeaderColumn>ID</TableHeaderColumn>
-				<TableHeaderColumn>Updated at</TableHeaderColumn>
-  		</TableRow>
-  	</TableHeader>
-		<TableBody displayRowCheckbox={false}>
-			{Object.keys(props.dataSource).map(mediumId => {
-				const link = `/admin/media/${mediumId}`
-				const medium = props.dataSource[mediumId];
-				return <TableRow hoverable={true} key={mediumId}>
-						<TableRowColumn><Link to={link}>{mediumId}</Link></TableRowColumn>
-						<TableRowColumn>{formatDate(medium.updatedAt)}</TableRowColumn>
-					</TableRow>
-			})}
-		</TableBody>
-	</Table>
+const MediaList = class extends React.Component {
+
+	componentDidMount() {
+		this.props.fetchAll('albums');
+	}
+
+	render() {
+		return (
+			<Table selectable={false}>
+				<TableHeader
+				displaySelectAll={false}
+  			adjustForCheckbox={false} >
+  				<TableRow selectable={false}>
+						<TableHeaderColumn>ID</TableHeaderColumn>
+						<TableHeaderColumn>Album</TableHeaderColumn>
+						<TableHeaderColumn>Updated at</TableHeaderColumn>
+  				</TableRow>
+  			</TableHeader>
+				<TableBody displayRowCheckbox={false}>
+					{Object.keys(this.props.dataSource).map(mediumId => {
+						const link = `/admin/media/${mediumId}`
+						const medium = this.props.dataSource[mediumId];
+						const album = medium.album && this.props.state.albums[medium.album ]? this.props.state.albums[medium.album] : null;
+						return <TableRow hoverable={true} key={mediumId}>
+								<TableRowColumn><Link to={link}>{mediumId}</Link></TableRowColumn>
+								<TableRowColumn>{album && <Link to={`/admin/albums/${album.id}`}>{album.title}</Link>}</TableRowColumn>
+								<TableRowColumn>{formatDate(medium.updatedAt)}</TableRowColumn>
+							</TableRow>
+					})}
+				</TableBody>
+			</Table>
+		);
+	}
+
+}
 
 MediaList.propTypes = {
 	dataSource: PropTypes.object.isRequired

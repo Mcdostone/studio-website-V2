@@ -1,5 +1,9 @@
 import Timestampable from './Timestampable';
 
+export const READER = 0;
+export const AUTHOR = 1;
+export const ADMIN = 2;
+
 export default class User extends Timestampable {
 
 	constructor(id, givenName, familyName, email, picture, banned, media = []) {
@@ -9,13 +13,36 @@ export default class User extends Timestampable {
 		this.familyName = familyName.toUpperCase();
 		this.email = email;
 		this.picture = picture;
-		this.banned = banned;
+		this.banned = banned || false;
 		this.media = media;
-		this.authorization = 0;
+		this.role = 0;
 	}
 
 	getFullName() {
-		return `${this.givenName} ${this.familyName}`;
+		return`${this.givenName} ${this.familyName}`;
+	}
+
+	isAdmin() {
+		return this.role === ADMIN;
+	}
+
+	isAuthor() {
+		return this.role === AUTHOR;
+	}
+
+	isReader() {
+		return this.role === READER;
+	}
+
+	getRoleName() {
+		switch(this.role) {
+			case ADMIN:
+				return 'Admin';
+			case AUTHOR:
+				return 'Author';
+			default:
+				return 'Reader';
+		}
 	}
 
 }

@@ -29,11 +29,14 @@ function* requestLogin() {
 		userFirebase = userFirebase.val();
 		if(userFirebase !== null) {
 			user.banned = userFirebase.banned;
-			user.createdAt = new Date();
 			user.updatedAt = userFirebase.updated_at;
+			user.role = userFirebase.role;
 		}
+		else
+			user.updatedAt = new Date();
+		user.createdAt = new Date();
 		yield put(updateUser(user));
-		if(userFirebase !== null)
+		if(user !== null)
 			yield put({type: LOGIN, payload: {user, credential: authData.credential}});
   }
 	catch(error) {
