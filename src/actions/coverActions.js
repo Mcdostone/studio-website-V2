@@ -1,17 +1,23 @@
 export const COVERS_FETCH = 'COVERS_FETCH';
+export const COVERS_FETCH_ALL = 'COVERS_FETCH_ALL';
 export const COVERS_ADD = 'COVERS_ADD';
 export const COVERS_CREATE = 'COVERS_CREATE';
 export const COVERS_DELETE = 'COVERS_DELETE';
 
 
-export const fetchCover = (id) => ({
-  type: COVERS_FETCH,
-	payload: id
+export const fetchAllCovers = () => ({
+	type: COVERS_FETCH_ALL,
+	payload: {resource: 'covers'}
 });
 
-export const addCover = (id, cover) => ({
+export const fetchCover = (resource, id, coverResource) => ({
+  type: COVERS_FETCH,
+	payload: {resource, id, coverResource}
+});
+
+export const addCover = (id, cover, coverResource) => ({
 	type: COVERS_ADD,
-	payload: {id, cover},
+	payload: {id, cover, coverResource},
 });
 
 export const deleteCover = (id) => ({

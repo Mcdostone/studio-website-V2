@@ -4,6 +4,7 @@ import Face from 'material-ui/svg-icons/action/face';
 import Theaters from 'material-ui/svg-icons/action/theaters';
 import Backup from 'material-ui/svg-icons/action/backup';
 import Album from 'material-ui/svg-icons/av/album';
+import Panorama from 'material-ui/svg-icons/image/panorama';
 import AlertWarning from 'material-ui/svg-icons/alert/warning';
 import { crudWrapper } from '../../../wrappers';
 
@@ -40,6 +41,10 @@ class DashboardStudio extends React.Component {
 
 			<Widget resource='reports' count={this.getCount('reports')}>
 				<AlertWarning style={{width: '50%', height: '50%'}} color="white"/>
+			</Widget>
+
+			<Widget resource='covers' count={this.getCount('covers')}>
+				<Panorama style={{width: '50%', height: '50%'}} color="white"/>
 			</Widget>
 		</div>
 	}

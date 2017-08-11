@@ -30,7 +30,6 @@
 	color: var(--colorLink);
 	justify-content: center;
 	box-sizing: border-box;
-	/*transition: background-color 0.3s ease;*/
 	cursor: pointer;
 }
 
@@ -101,7 +100,7 @@
 	overflow-x: hidden;
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 500px) {
 	.navigator {
 		display: none;
 	}

@@ -40,6 +40,10 @@
 	background: var(--uploadsColor) !important;
 }
 
+.widget-covers {
+	background: var(--coversColor) !important;
+}
+
 
 input.widget-value {
 	border: none;

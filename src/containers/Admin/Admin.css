@@ -5,6 +5,7 @@
 	--albumsColor: #2196F3;
 	--reportsColor: black;
 	--uploadsColor: #4CAF50;
+	--coversColor: #795548;
 }
 
 .admin-app {
@@ -42,6 +43,10 @@
 
 .uploads-container {
 	border-color: var(--uploadsColor);
+}
+
+.covers-container {
+	border-color: var(--coversColor);
 }
 
 .admin-form {

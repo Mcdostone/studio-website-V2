@@ -10,6 +10,7 @@ import { UsersList, UserForm } from './Users';
 import { AlbumsList, AlbumForm } from './Albums';
 import { ReportsList } from './Reports';
 import { UploadsList, UploadForm } from './Uploads';
+import { CoversList, CoverForm } from './Covers';
 import './Admin.css';
 
 class Admin extends React.Component {
@@ -36,6 +37,9 @@ class Admin extends React.Component {
 
 			<Route exact path="/admin/uploads" render={() => <UploadsList creation />} />
 			<Route exact path="/admin/uploads/create" render={() => <UploadForm creation />} />
+
+			<Route exact path="/admin/covers" render={() => <CoversList />} />
+			<Route exact path="/admin/covers/:id" render={() => <CoverForm />} />
 
 			<Route exact path="/admin/users" render={() => <UsersList />} />
 			<Route path="/admin/users/:id" render={() => <UserForm />} />

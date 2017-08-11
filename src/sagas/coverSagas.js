@@ -1,7 +1,14 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { COVERS_FETCH, COVERS_CREATE, addCover, COVERS_DELETE } from '../actions/coverActions';
+	import { all, call, put, takeEvery } from 'redux-saga/effects';
+import {
+	COVERS_FETCH,
+	COVERS_CREATE,
+	addCover,
+	fetchCover,
+	COVERS_DELETE,
+	COVERS_FETCH_ALL } from '../actions/coverActions';
 import { notify } from '../actions/notificationActions';
 import storage from './RestFirebaseStorage';
+import database from './RestFirebaseDatabase';
 import logger from '../Logger';
 
 function* createCover(action) {
@@ -12,17 +19,26 @@ function* createCover(action) {
 	}
 }
 
-function* fetchCover(action) {
+function* fetchCoverSaga(action) {
 	if(action.payload) {
+		const { resource, id, coverResource } = action.payload;
 		try {
-			logger.storage(`GET /covers/${action.payload}`);
-			const url = yield call(storage.get, 'covers', action.payload);
-			yield put(addCover(action.payload, url));
+			logger.storage(`GET /${resource}/${id}`);
+			const url = yield call(storage.get, resource, id);
+			yield put(addCover(id, url, coverResource));
 		} catch(err) {
 			if(err.code !== 'storage/object-not-found')
 				logger.error(err);
 		}
 	}
+}
+
+function* fetchAllCovers(action) {
+	const { resource } = action.payload;
+	yield put(fetchCover(resource, 'media'));
+	const snapshot = yield call(database.get, 'albums');
+	const albums = snapshot.val();
+	yield all(Object.keys(albums).map(idAlbum => put(fetchCover(resource, idAlbum, 'albums'))));
 }
 
 function* deleteCover(action) {
@@ -39,7 +55,8 @@ function* deleteCover(action) {
 
 function* coverSagas() {
 	yield takeEvery(COVERS_CREATE, createCover);
-	yield takeEvery(COVERS_FETCH, fetchCover);
+	yield takeEvery(COVERS_FETCH, fetchCoverSaga);
+	yield takeEvery(COVERS_FETCH_ALL, fetchAllCovers);
 	yield takeEvery(COVERS_DELETE, deleteCover);
 }
 

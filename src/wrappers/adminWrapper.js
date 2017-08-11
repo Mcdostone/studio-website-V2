@@ -26,6 +26,6 @@ export default function adminWrapper(WrappedComponent, resource, fetchOne) {
 
 	}
 
-	return crudWrapper(adminContainer, {fetchOne: fetchOne});
+	return crudWrapper(adminContainer, {fetchOne});
 
 }
