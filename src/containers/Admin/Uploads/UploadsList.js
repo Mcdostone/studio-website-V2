@@ -31,9 +31,9 @@ class UploadsList extends React.Component {
 			displaySelectAll={false}
   		adjustForCheckbox={false} >
   			<TableRow selectable={false}>
-					<TableHeaderColumn>ID</TableHeaderColumn>
-					<TableHeaderColumn>Uploader</TableHeaderColumn>
-					<TableHeaderColumn>Count Media</TableHeaderColumn>
+					<TableHeaderColumn >ID</TableHeaderColumn>
+					<TableHeaderColumn className="remove-small-screen">Uploader</TableHeaderColumn>
+					<TableHeaderColumn className="remove-small-screen">Count Media</TableHeaderColumn>
 					<TableHeaderColumn>Created at</TableHeaderColumn>
   			</TableRow>
   		</TableHeader>
@@ -44,8 +44,8 @@ class UploadsList extends React.Component {
 					const linkAuthor = `/admin/users/${upload.author}`;
 					return <TableRow hoverable={true} key={uploadId}>
 							<TableRowColumn><Link to={link}>{uploadId}</Link></TableRowColumn>
-							<TableRowColumn><Link to={linkAuthor}>{this.getUserName(upload.author)}</Link></TableRowColumn>
-							<TableRowColumn>{upload.countMedia()}</TableRowColumn>
+							<TableRowColumn className="remove-small-screen"><Link to={linkAuthor}>{this.getUserName(upload.author)}</Link></TableRowColumn>
+							<TableRowColumn className="remove-small-screen">{upload.countMedia()}</TableRowColumn>
 							<TableRowColumn>{formatDate(upload.createdAt)}</TableRowColumn>
 						</TableRow>
 				})}

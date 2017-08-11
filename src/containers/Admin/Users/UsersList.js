@@ -18,24 +18,24 @@ const UsersList = (props) =>
 		displaySelectAll={false}
   	adjustForCheckbox={false} >
   		<TableRow selectable={false}>
-				<TableHeaderColumn>ID</TableHeaderColumn>
+				<TableHeaderColumn className="remove-small-screen">ID</TableHeaderColumn>
 				<TableHeaderColumn>Family name</TableHeaderColumn>
 				<TableHeaderColumn>Firstname</TableHeaderColumn>
-				<TableHeaderColumn>Role</TableHeaderColumn>
-				<TableHeaderColumn>Last login time</TableHeaderColumn>
-				<TableHeaderColumn>banned</TableHeaderColumn>
+				<TableHeaderColumn className="remove-small-screen">Role</TableHeaderColumn>
+				<TableHeaderColumn className="remove-small-screen">Last login time</TableHeaderColumn>
+				<TableHeaderColumn className="remove-small-screen">banned</TableHeaderColumn>
   		</TableRow>
   	</TableHeader>
 		<TableBody displayRowCheckbox={false}>
 			{Object.keys(props.dataSource).map(id => {
 				const link = `/admin/users/${id}`;
 				return <TableRow hoverable={true} key={id}>
-						<TableRowColumn><Link to={link}>{id}</Link></TableRowColumn>
+						<TableRowColumn className="remove-small-screen"><Link to={link}>{id}</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].familyName}</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].givenName}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].getRoleName()}</Link></TableRowColumn>
-						<TableRowColumn>{moment(props.dataSource[id].createdAt).fromNow()}</TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].banned ? 'true' : ''}</Link></TableRowColumn>
+						<TableRowColumn className="remove-small-screen"><Link to={link}>{props.dataSource[id].getRoleName()}</Link></TableRowColumn>
+						<TableRowColumn className="remove-small-screen">{moment(props.dataSource[id].createdAt).fromNow()}</TableRowColumn>
+						<TableRowColumn className="remove-small-screen"><Link to={link}>{props.dataSource[id].banned ? 'true' : ''}</Link></TableRowColumn>
 					</TableRow>
 			})}
 		</TableBody>

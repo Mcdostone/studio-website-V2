@@ -36,9 +36,9 @@ class Navbar extends React.Component {
 			</div>
 		);
 		return (
-			<div>
+			<div id={this.props.id}>
 				<AppBar
-					style={{ padding: 0 }}
+					style={{ padding: 0, background: null, boxShadow: null, height: '100%'}}
 					className="navbar"
 					titleStyle={{ flex: '0' }}
 					showMenuIconButton={false}

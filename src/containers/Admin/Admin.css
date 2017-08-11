@@ -97,9 +97,12 @@
 .dashboard {
 	display: flex;
 	flex-direction: row;
-	padding: 32px 0;
-	width: 80%;
+	flex-wrap: wrap;
+	/*padding: 32px 0;*/
+	width: 100%;
 	margin: auto;
+	box-sizing: border-box;
+	padding: 32px 10% 0 10%;
 }
 
 
@@ -133,6 +136,11 @@
 	flex-direction: column;
 }
 
+@media screen and (max-width: 1024px) {
+	.admin-container {
+		width: 92%;
+	}
+}
 
 @media screen and (max-width: 600px) {
 	.admin-user-info {
@@ -162,6 +170,18 @@
 	.admin-user-info p {
 		padding-left: 0;
 		text-align: center;
+	}
+
+	.admin-widget {
+		width: 100%;
+	}
+
+	.dashboard {
+		padding: 8px;
+	}
+
+	.remove-small-screen {
+		display: none;
 	}
 
 }

@@ -1,21 +1,31 @@
 import React from 'react';
 import Anime from 'react-anime';
 import Footer from '../Footer';
+import config from '../../configuration';
 import { SimpleCover } from '../../components/Cover';
 import './Home.css';
 
 
 class Home extends React.Component {
 
+	shouldComponentUpdate() {
+		return false;
+	}
+
 	render() {
 		return (
 			<div className="home">
-				<section className="home-section">
+				<section className="home-section" style={{overflow: 'hidden'}}>
 					<SimpleCover
 					className="cover home-cover"
-					src="https://static-wix-blog.wix.com/blog/wp-content/uploads/2015/05/07104447/photographers-checklist.png"
+					//src="https://static-wix-blog.wix.com/blog/wp-content/uploads/2015/05/07104447/photographers-checklist.png"
+					src={config.APP.DEFAULT_COVER}
 					title="test">
-					<Anime duration={3000} elasticity={0} scale={[.9, 1]} opacity={[0, 1]} delay={1500}>
+					<Anime duration={3000}
+					elasticity={0}
+					scale={[.9, 1]}
+					opacity={[0, 1]}
+					delay={1500}>
 						<h2 className="cover-title home-title">Club studio</h2>
 					</Anime>
 					</SimpleCover>
@@ -55,7 +65,6 @@ class Home extends React.Component {
 
 				<Footer />
 			</div>
-
 		)
 	}
 }

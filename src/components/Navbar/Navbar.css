@@ -1,36 +1,48 @@
 :root {
-  --colorLink: #EEEEEE;
+	--colorLink: #EEEEEE;
 	--background-on-hover: #424242;
+	--height-navbar: 60px;
 }
 
-.navbar {
-	height: 60px;
+#navbar {
+	position: absolute;
+	height: var(--height-navbar);
+	width: 100%;
+	top: 0;
 }
 
-.navbar g {
+#navbar.admin {
+	position: relative;
+	background: rgb(33,33,33);
+	box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 6px;
+}
+
+#navbar g {
 	height: 100%;
 	width: 100%;
 }
 
-.navbar .navbar-link {
+#navbar .navbar-link {
 	height: 100%;
 	display: flex;
 	padding: 20px;
 	align-items: center;
-	color: var(--colorLink);;
+	color: var(--colorLink);
 	justify-content: center;
 	box-sizing: border-box;
-	transition: background-color 0.3s ease;
+	/*transition: background-color 0.3s ease;*/
 	cursor: pointer;
 }
 
-.navbar-link:hover, .navbar-active {
-	transition: background-color 0.2s ease;
-	background: var(--background-on-hover);
+.navbar-link:hover, .navbar-active, #navbar a:hover, .navbar-link:hover #navigator-username{
+	/*transition: background-color 0.2s ease, color 0.2s ease;*/
+	background: var(--colorLink);
+	color: var(--background-on-hover);
 }
 
-#navbar-logo {
-	padding: 10px 40px;
+#navbar #navbar-logo {
+	height: var(--height-navbar);
+	padding: 10px 40px !important;
 }
 
 #navbar-logo svg {
@@ -48,7 +60,7 @@
 	stroke-width: 10;
 }
 
-.navbar a, .navbar a:visited {
+#navbar a, #navbar a:visited {
 	text-decoration: none;
 }
 
@@ -87,4 +99,15 @@
 #navigator-username {
 	white-space: nowrap;
 	overflow-x: hidden;
+}
+
+@media screen and (max-width: 350px) {
+	.navigator {
+		display: none;
+	}
+
+	#navbar #navbar-logo {
+		width: 100%;
+		justify-content: flex-end;
+	}
 }

@@ -20,10 +20,10 @@ const ReportsList = (props) =>
   	adjustForCheckbox={false} >
   		<TableRow selectable={false}>
 				<TableHeaderColumn>ID</TableHeaderColumn>
-				<TableHeaderColumn>Description</TableHeaderColumn>
-				<TableHeaderColumn>Reported by</TableHeaderColumn>
-				<TableHeaderColumn>Medium</TableHeaderColumn>
-				<TableHeaderColumn>Created at</TableHeaderColumn>
+				<TableHeaderColumn className="remove-small-screen">Description</TableHeaderColumn>
+				<TableHeaderColumn className="remove-small-screen">Reported by</TableHeaderColumn>
+				<TableHeaderColumn className="remove-small-screen">Medium</TableHeaderColumn>
+				<TableHeaderColumn className="remove-small-screen">Created at</TableHeaderColumn>
   		</TableRow>
   	</TableHeader>
 		<TableBody displayRowCheckbox={false}>
@@ -32,10 +32,10 @@ const ReportsList = (props) =>
 				const report = props.dataSource[reportId];
 				return <TableRow hoverable={true} key={reportId}>
 						<TableRowColumn><Link to={link}>{reportId}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{report.description}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{report.reportedBy}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{report.medium}</Link></TableRowColumn>
-						<TableRowColumn>{formatDate(report.createdAt)}</TableRowColumn>
+						<TableRowColumn className="remove-small-screen"><Link to={link}>{report.description}</Link></TableRowColumn>
+						<TableRowColumn className="remove-small-screen"><Link to={link}>{report.reportedBy}</Link></TableRowColumn>
+						<TableRowColumn className="remove-small-screen"><Link to={link}>{report.medium}</Link></TableRowColumn>
+						<TableRowColumn className="remove-small-screen">{formatDate(report.createdAt)}</TableRowColumn>
 					</TableRow>
 			})}
 		</TableBody>

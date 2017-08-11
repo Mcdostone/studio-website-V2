@@ -1,6 +1,6 @@
 import React from 'react';
-import Avatar from 'material-ui/Avatar';
 import PropTypes from 'prop-types';
+import Avatar from 'material-ui/Avatar';
 import { connect } from 'react-redux';
 import { SimpleCover } from '../../components/Cover';
 import Studio from '../../components/Studio';
@@ -11,32 +11,30 @@ class Profile extends React.Component {
 		return (
 			<div className="layout-studio">
 				<SimpleCover className="cover" title="profile" src={this.props.cover} >
-					<div>
-						<Avatar size={150} src={this.props.auth.user.picture} />
-						<p style={{marginBottom: 0}} className="cover-name">{this.props.auth.user.getFullName()}</p>
+					<div style={{marginTop: 50, height: '100%'}}>
+						<Avatar size={150} src={this.props.user.picture} />
+						<p style={{marginBottom: 0, color: 'white', textAlign: 'center'}} className="cover-name">
+							{this.props.user.getFullName()}
+						</p>
 					</div>
 				</SimpleCover>
 				<div className="container">
 					<h1 className="big-title">Your likes</h1>
-					<Studio media={this.props.media}></Studio>
+					<Studio />
 				</div>
 			</div>
 		);
 	}
 }
 
-Profile.propTypes = {
-	media: PropTypes.object.isRequired,
-};
-
-Profile.defaultProps = {
-	media: {}
-};
-
 function mapStateToProps(state) {
 	return {
-		auth: state.auth
+		user: state.auth.user
 	}
+}
+
+Profile.propTypes = {
+	user: PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps, null)(Profile);

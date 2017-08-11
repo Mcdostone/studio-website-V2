@@ -28,7 +28,7 @@ const MediaList = class extends React.Component {
   				<TableRow selectable={false}>
 						<TableHeaderColumn>ID</TableHeaderColumn>
 						<TableHeaderColumn>Album</TableHeaderColumn>
-						<TableHeaderColumn>Updated at</TableHeaderColumn>
+						<TableHeaderColumn className="remove-small-screen">Updated at</TableHeaderColumn>
   				</TableRow>
   			</TableHeader>
 				<TableBody displayRowCheckbox={false}>
@@ -39,7 +39,7 @@ const MediaList = class extends React.Component {
 						return <TableRow hoverable={true} key={mediumId}>
 								<TableRowColumn><Link to={link}>{mediumId}</Link></TableRowColumn>
 								<TableRowColumn>{album && <Link to={`/admin/albums/${album.id}`}>{album.title}</Link>}</TableRowColumn>
-								<TableRowColumn>{formatDate(medium.updatedAt)}</TableRowColumn>
+								<TableRowColumn className="remove-small-screen">{formatDate(medium.updatedAt)}</TableRowColumn>
 							</TableRow>
 					})}
 				</TableBody>

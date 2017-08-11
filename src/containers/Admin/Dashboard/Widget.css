@@ -6,6 +6,7 @@
 	margin: 8px;
 	flex: 1;
 	height: var(--widget-height);
+	min-width: 150px;
 }
 
 .widget-container {
@@ -75,4 +76,12 @@ input.widget-value {
 
 .widget-measure {
 	font-size: 1em;
+}
+
+@media screen and (max-width: 400px) {
+
+	.admin-widget {
+		width: 100%;
+	}
+
 }

@@ -32,7 +32,7 @@ class Studio extends React.Component {
 		this.props.closeLightbox();
 	}
 
-	getProcessedMedia(filters) {
+	getProcessedMedia = (filters) => {
 		let media = this.props.media;
 		const filter = filters[this.state.filter];
 		if(filter.toLowerCase() !== 'all' ) {
@@ -116,6 +116,10 @@ function mapDispatchToProps(dispatch) {
 		openMediumInLightbox: showMedium,
 		closeLightbox,
   }, dispatch);
+}
+
+Studio.defaultProps = {
+	media: []
 }
 
 export default connect(null, mapDispatchToProps)(Studio);

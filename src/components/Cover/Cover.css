@@ -9,7 +9,7 @@
 }
 
 :root {
-	--height: 250px;
+	--height: 300px;
 	--overlay: rgba(0,0,0, 0.6);
 }
 
@@ -44,6 +44,7 @@
 .cover-title {
 	position: absolute;
 	top: 0;
+	text-align: center;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -62,6 +63,7 @@
 
 .cover-name {
 	font-size: 1.3em;
+	margin-top: 8px;
 	font-style: italic;
 	font-weight: 100;
 }

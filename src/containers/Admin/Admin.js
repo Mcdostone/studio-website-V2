@@ -16,10 +16,12 @@ class Admin extends React.Component {
 
 	componentDidMount() {
 		document.body.style.background = '#EEEEEE';
+		document.getElementById('navbar').classList.add('admin');
 	}
 
 	componentWillUnmount() {
 		document.body.style.background = '';
+		document.getElementById('navbar').classList.remove('admin');
 	}
 
 	render() {

@@ -9,7 +9,7 @@ import { history } from './history';
 import Navbar from './components/Navbar';
 import StudioDrawer from './components/StudioDrawer';
 import Home from './containers/Home';
-import { mediaWrapper, resourceWrapper } from './wrappers';
+import { mediaWrapper } from './wrappers';
 import Albums from './containers/Albums';
 import Media from './containers/Media';
 import Profile from './containers/Profile';
@@ -24,7 +24,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			gapiLoaded: false
+			gapiLoaded: true
 		};
 	}
 
@@ -41,14 +41,14 @@ class App extends React.Component {
 					<div className="studio-app">
 						<Router history={history}>
 							<div style={{width: '100%'}}>
-								<Navbar />
+								<Navbar id="navbar" />
 								<StudioDrawer />
 								<Route exact path="/" component={Home} />
 								<Route exact path="/media" component={Media} />
-								<Route exact path="/albums" component={resourceWrapper('albums', Albums)} />
+								<Route exact path="/albums" component={Albums} />
 								<Route path="/albums/:id" component={mediaWrapper('albums')} />
 								<Route path="/admin" component={Admin} />
-								<Route path="/profile/:id" component={IsAuthentificated(mediaWrapper('users', Profile))} />
+								<Route path="/profile/:id" component={IsAuthentificated(Profile)} />
 								<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />
 							</div>
 						</Router>
