@@ -1,5 +1,3 @@
-import SimpleCover from './SimpleCover';
-import Cover from './Cover';
-
-
-export { SimpleCover, Cover };
+export { default as SimpleCover } from './SimpleCover';
+export { default as Cover } from './Cover';
+export { default as CoverTitle } from './CoverTitle';

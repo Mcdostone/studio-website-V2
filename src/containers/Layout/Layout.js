@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SimpleCover } from '../../components/Cover';
+import { CoverTitle, SimpleCover } from '../../components/Cover';
 import './Layout.css';
-
 
 class Layout extends React.Component {
 
@@ -15,7 +14,7 @@ class Layout extends React.Component {
 		return (
 			<div className="layout-studio">
 				<SimpleCover className="cover" src={this.props.cover}>
-					<h2 className="cover-title">{this.props.title}</h2>
+					<CoverTitle title={this.props.title} />
 				</SimpleCover>
 				<div className="container">
 					{this.props.children}
