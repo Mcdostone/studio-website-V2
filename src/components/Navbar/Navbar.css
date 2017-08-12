@@ -33,6 +33,11 @@
 	cursor: pointer;
 }
 
+.admin .navbar-link:hover,.admin .navbar-active, #navbar.admin a:hover, .admin .navbar-link:hover #navigator-username{
+	background: var(--background-on-hover);
+	color: var(--colorLink);
+}
+
 .navbar-link:hover, .navbar-active, #navbar a:hover, .navbar-link:hover #navigator-username{
 	/*transition: background-color 0.2s ease, color 0.2s ease;*/
 	background: var(--colorLink);
@@ -49,15 +54,47 @@
 	box-sizing: border-box;
 	width: auto;
 }
-#navbar-logo svg * {
-	fill: white;
+
+#navbar-logo:hover svg * {
+	fill: var(--background-on-hover);
+	stroke:var(--background-on-hover);
+}
+
+#navbar-logo:hover #big-circle {
+	fill: transparent;
+	stroke: var(--background-on-hover);
+}
+
+#navbar-logo:hover #tiny-circle {
+	fill: var(--background-on-hover)
 }
 
 #navbar-logo svg #rabbit {
-	fill: none;
-	stroke: white;
-	stroke-width: 10;
+	fill: black;
 }
+
+.admin #navbar-logo svg *, .admin #navbar-logo #tiny-circle {
+	fill: var(--colorLink);
+}
+
+.admin #navbar-logo #big-circle {
+	stroke: var(--colorLink);
+}
+
+.admin #navbar-logo:hover #rabbit {
+	fill: var(--background-on-hover);
+}
+
+#navbar-logo:hover svg #rabbit {
+	fill: var(--colorLink);
+}
+
+#navbar-logo svg * {
+	fill: white;
+	stroke: white;
+}
+
+
 
 #navbar a, #navbar a:visited {
 	text-decoration: none;

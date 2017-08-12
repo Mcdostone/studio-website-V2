@@ -5,8 +5,8 @@ import { SimpleCover } from '../../../components/Cover';
 
 class UserCover extends React.Component {
 
-	shouldComponentUpdate() {
-		return false;
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextProps.user !== undefined && this.props.user !== nextProps.user;
 	}
 
 	getContainer() {

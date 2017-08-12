@@ -9,7 +9,7 @@ import { itemWrapper } from '../../wrappers';
 class A extends React.Component {
 
 	componentDidMount() {
-		this.props.fetchCover(this.props.id);
+		this.props.fetchCover('covers', this.props.id);
 	}
 
 	render() {

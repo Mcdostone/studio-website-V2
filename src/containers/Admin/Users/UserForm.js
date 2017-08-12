@@ -58,7 +58,6 @@ class UserForm extends React.Component {
 				<Card className="admin-container users-container">
 					<UserCover
 					className="cover"
-					src="http://www.groupesida.ch/filrouge/san-francisco-news-summer-code-camp.jpg"
 					user={user}
 					/>
 

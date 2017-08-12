@@ -25,7 +25,6 @@ export function* fetchAll(action) {
 	try {
 		let response = yield call(database.get, resource.toLowerCase(), undefined);
 		response = response.val();
-
 		if(response) {
 			yield all(Object.keys(response).map(resourceId => {
 				return put({type: `${resource.toUpperCase()}_ADD`, payload: response[resourceId]})

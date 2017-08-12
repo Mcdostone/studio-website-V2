@@ -1,15 +1,16 @@
-#big-circle{
-	fill: none !important;
-	stroke: white !important;
+#navbar-logo #big-circle{
+	fill: transparent;
+	stroke: white;
 	stroke-width: 12;
 }
 
 #tiny-circle {
+	fill: transparent;
 	stroke: white !important;
 	stroke-width: 6;
 }
 
 
 #rabbit {
-	fill: #212121 !important;
+	fill: #212121;
 }

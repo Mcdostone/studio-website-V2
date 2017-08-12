@@ -6,6 +6,11 @@ import './Layout.css';
 
 class Layout extends React.Component {
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return this.props.cover !== nextProps.cover || this.props.title !== nextProps.title
+		|| this.props.children !== nextProps.children;
+	}
+
 	render() {
 		return (
 			<div className="layout-studio">

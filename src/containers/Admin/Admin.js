@@ -5,11 +5,12 @@ import { bindActionCreators } from 'redux';
 import Snackbar from 'material-ui/Snackbar';
 import Dashboard from './Dashboard';
 import { hide } from '../../actions/notificationActions';
+import { adminListWrapper } from '../../wrappers';
 import { MediaList, MediumEdit, MediaCreate } from './Media';
 import { UsersList, UserForm } from './Users';
 import { AlbumsList, AlbumForm } from './Albums';
 import { ReportsList } from './Reports';
-import { UploadsList, UploadForm } from './Uploads';
+import { UploadsList, UploadForm, UploadRecap } from './Uploads';
 import { CoversList, CoverForm } from './Covers';
 import './Admin.css';
 
@@ -29,7 +30,7 @@ class Admin extends React.Component {
 		return <div className="admin-app">
 			<Route exact path="/admin" component={Dashboard} />
 
-			<Route exact path="/admin/media" component={MediaList} />
+			<Route exact path="/admin/media" component={adminListWrapper(MediaList, 'media')} />
 			<Route exact path="/admin/media/create" component={MediaCreate} />
 			<Route path="/admin/media/:id" render={() => <MediumEdit/>} />
 
@@ -37,6 +38,7 @@ class Admin extends React.Component {
 
 			<Route exact path="/admin/uploads" render={() => <UploadsList creation />} />
 			<Route exact path="/admin/uploads/create" render={() => <UploadForm creation />} />
+			<Route exact path="/admin/uploads/:id" render={() => <UploadRecap />} />
 
 			<Route exact path="/admin/covers" render={() => <CoversList />} />
 			<Route exact path="/admin/covers/:id" render={() => <CoverForm />} />

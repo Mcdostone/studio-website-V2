@@ -48,7 +48,6 @@ class UploadForm extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchAll('albums');
-		this.props.fetchAll('media');
 		this.setState({data: this.props.data});
 	}
 

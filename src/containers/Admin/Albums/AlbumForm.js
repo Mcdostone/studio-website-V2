@@ -36,7 +36,7 @@ class AlbumForm extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if(this.props.data !== nextProps.data && nextProps.data && nextProps.data.id) {
-			this.props.fetchCover(nextProps.data.id);
+			this.props.fetchCover('covers', nextProps.data.id, 'albums');
 			Object.keys(nextProps.data.media).map(mediumId => this.props.fetchMedium('media', mediumId));
 		}
 		const coverObject = nextProps.state.covers[this.props.match.params.id];
@@ -89,9 +89,9 @@ class AlbumForm extends React.Component {
 
 	getContainer() {
 		const album = this.state.data;
-		let media = this.props.state.media;
-		if(media)
-			media = Object.values(media).filter(medium => medium.album === album.id);
+		let media = []
+		if(!this.props.creation)
+			media = Object.values(this.props.state.media).filter(medium => medium.album === album.id);
 
 		return (
 			<div>

@@ -9,7 +9,6 @@ import { adminWrapper } from '../../../wrappers';
 import { FileInputField } from '../../../components/shared';
 import AdminCover from '../AdminCover';
 
-
 class CoverForm extends React.Component {
 
 	constructor(props) {
@@ -35,12 +34,12 @@ class CoverForm extends React.Component {
 	}
 
 	applyChanges() {
-/*		const data = this.state.data;
-		if(this.state.valid) {
-			data.cover = this.state.newCover || null;
-			this.props.save(data);
+		const data = this.state.data;
+		if(this.state.newCover) {
+			data.cover = this.state.newCover
+			this.props.save(this.state.data);
 			this.props.history.goBack();
-		}*/
+		}
 	}
 
 	updateCover(e) {

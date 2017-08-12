@@ -16,7 +16,7 @@ export default class Album extends Timestampable {
 	}
 
 	getDate() {
-		return moment(this.date, 'DD/MM/YYYY').format('DD/MM/YYYY');
+		return moment.utc(this.date).local().format('DD/MM/YYYY');
 	}
 
 	addMedium(medium) {

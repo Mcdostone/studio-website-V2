@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import StudioList from '../../components/List/StudioList';
+import { resourceWrapper } from '../../wrappers';
 import A from './A';
 
 const Albums = (props) => {
@@ -24,4 +25,4 @@ Albums.defaultProps = {
 	dataSource: {},
 }
 
-export default Albums;
+export default resourceWrapper(Albums, 'albums');

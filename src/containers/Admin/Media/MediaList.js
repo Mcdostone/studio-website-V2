@@ -9,7 +9,7 @@ import {
 	TableRow,
 	TableRowColumn,
 } from 'material-ui/Table';
-import { adminListWrapper } from '../../../wrappers';
+// import { adminListWrapper } from '../../../wrappers';
 import { formatDate } from '../../../utils';
 
 
@@ -50,7 +50,8 @@ const MediaList = class extends React.Component {
 }
 
 MediaList.propTypes = {
-	dataSource: PropTypes.object.isRequired
+	dataSource: PropTypes.object.isRequired,
+	fetchAll: PropTypes.func.isRequired,
 };
 
-export default adminListWrapper(MediaList, 'media');
+export default MediaList;
