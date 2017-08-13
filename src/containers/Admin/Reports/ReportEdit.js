@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import Avatar from 'material-ui/Avatar';
-import { SimpleCover } from '../../../components/Cover';
+import { Cover } from '../../../components/Cover';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete-forever';
 import Toggle from 'material-ui/Toggle';
@@ -52,7 +52,7 @@ class UserEdit extends React.Component {
 		const likes = {};
 		return (
 				<Card className="admin-container users-container">
-					<SimpleCover className="cover" title="lol" src="http://www.groupesida.ch/filrouge/san-francisco-news-summer-code-camp.jpg">
+					<Cover className="cover" title="lol" src="http://www.groupesida.ch/filrouge/san-francisco-news-summer-code-camp.jpg">
 						<div className="admin-user-header">
 							<Avatar size={150} src={user.picture} />
 							<div className="admin-user-info">
@@ -62,7 +62,7 @@ class UserEdit extends React.Component {
 								<p>Connected {moment(user.updatedAt).fromNow()}</p>
 							</div>
 						</div>
-					</SimpleCover>
+					</Cover>
 
 					<CardTitle title="Account"
 					expandable={false} />

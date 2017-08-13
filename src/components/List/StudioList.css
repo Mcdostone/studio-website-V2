@@ -27,6 +27,7 @@
 
 .studio-list, .studio-list-space {
 	display: block;
+	background: none;
 }
 
 .studio-list-space {

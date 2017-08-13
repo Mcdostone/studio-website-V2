@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CoverContent, SimpleCover } from '../../components/Cover';
+import { CoverContent, Cover } from '../../components/Cover';
 import './Layout.css';
 
 class Layout extends React.Component {
@@ -8,9 +8,11 @@ class Layout extends React.Component {
 	render() {
 		return (
 			<div className="layout-studio">
-				<SimpleCover className="cover" src={this.props.cover}>
-					<CoverContent title={this.props.title} />
-				</SimpleCover>
+				<Cover className="cover" src={this.props.cover}>
+					<CoverContent data={this.props.title}>
+						<h2 className="cover-title">{this.props.title}</h2>
+					</CoverContent>
+				</Cover>
 				<div className="container">
 					{this.props.children}
 				</div>

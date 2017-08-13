@@ -4,8 +4,8 @@ import Anime from 'react-anime';
 
 class CoverContent extends React.Component {
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextProps.title !== this.props.title;
+	shouldComponentUpdate = (nextProps, nextState) => {
+		return nextProps.data !== this.props.data;
 	}
 
 	render() {
@@ -14,12 +14,12 @@ class CoverContent extends React.Component {
 			opacity={[0, 1]}
 			translateY={['-0.2rem', '0rem']}
   		scale={[0.97, 1]}
-			duration={250}
-			delay={1000}
+			duration={this.props.duration}
+			delay={this.props.delay}
 			direction="forwards"
 			easing="easeInOutQuad"
 			elasticity={250}>
-				<h2 className="cover-title">{this.props.title}</h2>
+				{this.props.children}
 			</Anime>
 		);
 	}
@@ -27,11 +27,15 @@ class CoverContent extends React.Component {
 }
 
 CoverContent.propTypes = {
-	title: PropTypes.string
+	children: PropTypes.object.isRequired,
+	data: PropTypes.any.isRequired,
+	delay: PropTypes.number,
+	duration: PropTypes.number,
 };
 
 CoverContent.defaultProps = {
-	title: ''
-};
+	delay: 1000,
+	duration: 250,
+}
 
 export default CoverContent;

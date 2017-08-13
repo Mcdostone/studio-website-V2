@@ -28,7 +28,7 @@ class StudioDrawer extends React.Component {
 	}
 
 	getAdminListItems() {
-		const resources = ['Users', 'Albums', 'Media', 'Reports', 'Uploads'];
+		const resources = ['Users', 'Albums', 'Media', 'Reports', 'Uploads', 'Covers'];
 		return (
 			<ListItem
 			primaryText="Admin"
@@ -68,20 +68,16 @@ class StudioDrawer extends React.Component {
 						Sandbox
 					</ListItem>
 				</Link>
-				<Link to="/logout">
-					<ListItem onTouchTap={this.props.requestLogout}>
-						Logout
-					</ListItem>
-				</Link>
+				<ListItem onTouchTap={this.props.requestLogout}>
+					Logout
+				</ListItem>
 			</div>);
 		}
 		else {
 			authentificated = (
-				<Link to="/login">
-					<ListItem onTouchTap={this.props.requestLogin}>
-						Login
-					</ListItem>
-				</Link>
+				<ListItem onTouchTap={this.props.requestLogin}>
+					Login
+				</ListItem>
 			);
 		}
 		return (

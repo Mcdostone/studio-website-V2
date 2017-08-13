@@ -1,4 +1,4 @@
-	import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeEvery } from 'redux-saga/effects';
 import {
 	COVERS_FETCH,
 	COVERS_CREATE,
@@ -19,7 +19,6 @@ function* createCover(action) {
 		yield put(notify(`covers/${action.payload.id} has been uploaded !`));
 	}
 }
-
 
 function* updateCover(action) {
 	if(action.payload) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import Avatar from 'material-ui/Avatar';
-import { SimpleCover } from '../../../components/Cover';
+import { Cover } from '../../../components/Cover';
 
 class UserCover extends React.Component {
 
@@ -12,7 +12,7 @@ class UserCover extends React.Component {
 	getContainer() {
 		const user = this.props.user;
 		return (
-			<SimpleCover
+			<Cover
 			className="cover"
 			src="http://www.groupesida.ch/filrouge/san-francisco-news-summer-code-camp.jpg">
 				<div className="admin-user-header">
@@ -25,7 +25,7 @@ class UserCover extends React.Component {
 						<p>Connected {moment(user.createdAt).fromNow()}</p>
 					</div>
 				</div>
-			</SimpleCover>
+			</Cover>
 		);
 	}
 

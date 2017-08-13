@@ -6,7 +6,7 @@ class Media extends React.Component {
 
 	render() {
 		return (
-			<Layout cover={this.props.cover} title={'media'}>
+			<Layout cover={this.props.cover} title="media">
 				<Studio media={this.props.dataSource} />
 			</Layout>
 		);
