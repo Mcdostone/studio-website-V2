@@ -104,6 +104,17 @@ function *fetchMedium(action) {
 	}
 }
 
+
+/*function *fetchMedium(action) {
+	const { resource, id } = action.payload;
+	try {
+		const snapshot = yield call(database.get, resource, id);
+		yield put(addMedium(buildMediumFromFirebase(snapshot.val())));
+	} catch(err) {
+		logger.error(err);
+	}
+}*/
+
 function *deleteMedium(action) {
 	const medium = action.payload;
 	if(medium.album) {

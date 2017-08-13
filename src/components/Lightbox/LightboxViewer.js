@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -94,7 +95,7 @@ class LightboxViewer extends React.Component {
 						target="window"
 						onKeyUp={this.handleKeyUp}
 					/>
-					<LightboxToolbar />
+					<LightboxToolbar medium={this.props.medium} />
 					{this.generateMedium(this.props.medium)}
 					<NextIcon
 						onTouchTap={this.handleNextMedium}
@@ -108,6 +109,10 @@ class LightboxViewer extends React.Component {
 		return null;
 	}
 }
+
+LightboxViewer.propTypes = {
+	medium: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
 	return {

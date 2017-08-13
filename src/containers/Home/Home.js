@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../Footer';
 import config from '../../configuration';
-import { Cover, CoverContent } from '../../components/Cover';
+import { Cover, CoverContent } from 'components/Cover';
 import './Home.css';
 
 class Home extends React.Component {
@@ -12,7 +12,7 @@ class Home extends React.Component {
 
 	render() {
 		return (
-			<div className="home">
+			<div>
 				<section className="home-section" style={{overflow: 'hidden'}}>
 					<Cover
 					className="cover home-cover"

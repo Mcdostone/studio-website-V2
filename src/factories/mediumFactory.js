@@ -4,7 +4,7 @@ import { buildExifFromGoogleDrive } from './exifFactory';
 export const buildMediumFromDrivePicker = (data) => new Medium(data.id, data.url, 'drive', [])
 
 export const buildMediumFromFirebase = (data) => {
-	const medium = new Medium(data.id, data.src, data.from, [])
+	const medium = new Medium(data.id, data.src, data.from, [], data.album);
 	medium.updatedAt = data.updatedAt;
 	medium.createdAt = data.createdAt;
 	return medium;

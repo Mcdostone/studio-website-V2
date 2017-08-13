@@ -1,23 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CoverContent, Cover } from '../../components/Cover';
-import Studio from '../../components/Studio';
+import Studio from 'components/Studio';
+import Layout from './Layout';
 import './Layout.css';
 
 class LayoutMedia extends React.Component {
 
 	render() {
 		return (
-			<div className="Layout-studio">
-				<Cover className="cover" src={this.props.cover}>
-					<CoverContent>
-						<h2 className="cover-title">{this.props.title}</h2>
-					</CoverContent>
-				</Cover>
+			<Layout {...this.props} >
 				<div className="container">
 					<Studio media={this.props.media} />
 				</div>
-			</div>
+			</Layout>
 		);
 	}
 

@@ -80,7 +80,7 @@ export default class GooglePicker extends React.Component {
       view.setMimeTypes(this.props.mimeTypes.join(','))
     }
 
-    if (!view) {
+    if(view === null) {
       throw new Error('Can\'t find view by viewId');
     }
 

@@ -34,6 +34,10 @@ export default class User extends Timestampable {
 		return this.role === READER;
 	}
 
+	canAdmin() {
+		return this.isAdmin() || this.isAuthor();
+	}
+
 	getRoleName() {
 		switch(this.role) {
 			case ADMIN:

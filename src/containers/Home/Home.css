@@ -2,12 +2,6 @@
 	--padding-home: 20%;
 }
 
-.home {
-	position: absolute;
-	top: 0;
-	right: 0;
-}
-
 .home-title {
 	font-size: 7em;
 }

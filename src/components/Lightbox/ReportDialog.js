@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ReportButton } from './icons';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -29,9 +30,8 @@ class ReportDialog extends React.Component {
 	handleSubmit = () => {
 		const lengthMessage = this.state.messageReport.length;
 		if(lengthMessage >= 20 && lengthMessage <= 140) {
-			this.props.handleReport(this.state.messageReport);
-			this.props.create('reports',
-			new Report(null, this.props.auth.user.id, this.state.messageReport, this.props.medium.id));
+			const report = new Report(null, this.props.auth.user.id, this.state.messageReport, this.props.medium.id);
+			this.props.create('reports', report);
 			this.setState({
 				open: false,
 				textError: null,
@@ -84,5 +84,9 @@ class ReportDialog extends React.Component {
   }
 
 }
+
+ReportDialog.propTypes = {
+	medium: PropTypes.object.isRequired
+};
 
 export default crudWrapper(authWrapper(ReportDialog));

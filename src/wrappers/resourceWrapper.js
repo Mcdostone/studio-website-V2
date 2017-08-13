@@ -17,7 +17,9 @@ export default function resourceWrapper(WrappedComponent, resource) {
 		render() {
 			return (
 				<Layout cover={this.props.cover ? this.props.cover.cover : null} title={resource}>
-					<WrappedComponent dataSource={this.props.dataSource} />
+					<div className="container">
+						<WrappedComponent dataSource={this.props.dataSource} />
+					</div>
 				</Layout>
 			);
 		}

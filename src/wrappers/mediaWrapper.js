@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { LayoutMedia } from '../containers/Layout';
-import { fetchOne } from '../actions/fetchActions';
-import { fetchCover } from '../actions/coverActions';
+import { LayoutMedia } from 'containers/Layout';
+import { fetchOne } from 'actions/fetchActions';
+import { fetchMedium } from 'actions/mediaActions';
+import { fetchCover } from 'actions/coverActions';
 
 export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 
@@ -17,9 +18,8 @@ export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 
 		componentWillReceiveProps = (nextProps, nextState) => {
 			const id = this.props.match.params.id;
-			if(this.props.dataSource[id] === undefined && nextProps.dataSource[id] !== undefined) {
-				Object.keys(nextProps.dataSource[id].media).map(mediumId => this.props.fetchOne('media', mediumId));
-			}
+			if(this.props.dataSource[id] === undefined && nextProps.dataSource[id] !== undefined)
+				Object.keys(nextProps.dataSource[id].media).map(mediumId => this.props.fetchMedium('media', mediumId));
 		}
 
 		render() {
@@ -27,9 +27,12 @@ export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 			const data = this.props.dataSource[id];
 			const media = Object.values(this.props.media).filter(medium => medium.album === (data ? data.id : null));
 
-			return <WrappedComponent
-			title={data ? data.title : null}
-			cover={this.props.covers[id] ? this.props.covers[id].cover: null} media={media} />
+			return (
+				<WrappedComponent
+				title={data ? data.title : null}
+				cover={this.props.covers[id] ? this.props.covers[id].cover: null}
+				media={media} />
+			);
 		}
 
 	}
@@ -45,6 +48,7 @@ export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 	function mapDispatchToProps(dispatch) {
 		return bindActionCreators({
 			fetchOne,
+			fetchMedium,
 			fetchCover,
 		}, dispatch);
 	}

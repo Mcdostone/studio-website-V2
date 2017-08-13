@@ -24,14 +24,13 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			gapiLoaded: true
+			gapiLoaded: false
 		};
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.isScriptLoaded && !this.props.isScriptLoaded) {
-			//window.gapi.client.load('drive', 'v2', () => this.setState({gapiLoaded: true}));
-		}
+		if (nextProps.isScriptLoaded && !this.props.isScriptLoaded)
+			window.gapi.client.load('drive', 'v2', () => this.setState({gapiLoaded: true}));
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {

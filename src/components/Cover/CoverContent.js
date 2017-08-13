@@ -27,8 +27,7 @@ class CoverContent extends React.Component {
 }
 
 CoverContent.propTypes = {
-	children: PropTypes.object.isRequired,
-	data: PropTypes.any.isRequired,
+	data: PropTypes.any,
 	delay: PropTypes.number,
 	duration: PropTypes.number,
 };

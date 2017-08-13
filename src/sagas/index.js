@@ -5,6 +5,7 @@ import coverSagas from './coverSagas';
 import fetchSagas from './fetchSagas';
 import crudSagas from './crudSagas';
 import userSagas from './userSagas';
+import reportSagas from './reportSagas';
 import uploadSagas from './uploadSagas';
 import albumSagas from './albumSagas';
 
@@ -19,5 +20,6 @@ export default function* sagas() {
 		albumSagas,
 		uploadSagas,
 		mediaSagas,
+		reportSagas,
   ].map(fork))
 }

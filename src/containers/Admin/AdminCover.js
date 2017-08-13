@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MenuItem from 'material-ui/MenuItem';
-import { Cover } from '../../components/Cover';
-import CoverMenu from './CoverMenu';
+import { Cover, CoverMenu } from 'components/Cover';
 import { DeleteDialog } from '../../components/Dialogs';
 
 class AdminCover extends React.Component {
