@@ -3,6 +3,7 @@ import { build } from '../factories';
 import crudWrapper from './crudWrapper';
 
 export default function adminWrapper(WrappedComponent, resource, fetchOne) {
+
 	const adminContainer = class extends React.Component {
 
 		constructor(props) {

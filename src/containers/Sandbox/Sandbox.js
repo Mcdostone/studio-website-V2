@@ -1,16 +1,26 @@
 import React from 'react';
-import { Layout } from '../Layout';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchOne } from '../../actions/fetchActions';
+
 
 class Sandbox extends React.Component {
 
+	componentDidMount = () => {
+		this.props.fetchOne('albums', this.props.match.params.id);
+	}
+
 	render() {
-		return (
-			<Layout title="Sandbox">
-			</Layout>
-		);
+		return null;
 	}
 
 }
 
-export default Sandbox;
-//export default connect(mapStateToProps, mapDispatchToProps)(Sandbox);
+function mapDispatchToProps(dispatch) {
+		return bindActionCreators({
+			fetchOne,
+		}, dispatch);
+	}
+
+
+export default connect(null, mapDispatchToProps)(Sandbox);

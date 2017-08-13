@@ -24,7 +24,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			gapiLoaded: true
+			gapiLoaded: false
 		};
 	}
 
@@ -32,7 +32,11 @@ class App extends React.Component {
 		if (nextProps.isScriptLoaded && !this.props.isScriptLoaded) {
 			window.gapi.client.load('drive', 'v2', () => this.setState({gapiLoaded: true}));
 		}
-  }
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextState.gapiLoaded === true;
+	}
 
 	render() {
 		if(this.state.gapiLoaded) {

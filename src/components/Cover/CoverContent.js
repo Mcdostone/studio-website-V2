@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Anime from 'react-anime';
 
-class CoverTitle extends React.Component {
+class CoverContent extends React.Component {
 
 	shouldComponentUpdate(nextProps, nextState) {
 		return nextProps.title !== this.props.title;
@@ -26,12 +26,12 @@ class CoverTitle extends React.Component {
 
 }
 
-CoverTitle.propTypes = {
+CoverContent.propTypes = {
 	title: PropTypes.string
 };
 
-CoverTitle.defaultProps = {
+CoverContent.defaultProps = {
 	title: ''
 };
 
-export default CoverTitle;
+export default CoverContent;

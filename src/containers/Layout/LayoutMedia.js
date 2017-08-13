@@ -24,7 +24,11 @@ class LayoutMedia extends React.Component {
 LayoutMedia.propTypes = {
 	cover: PropTypes.string,
 	title: PropTypes.string,
-	media: PropTypes.object,
+	media: PropTypes.array,
 };
+
+LayoutMedia.defaultProps = {
+	media: []
+}
 
 export default LayoutMedia;
