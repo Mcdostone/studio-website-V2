@@ -4,7 +4,7 @@ export default class Medium {
 		this.id = id;
 		this.src = src ? src.trim() : null;
 		this.from = comeFrom.toLowerCase().trim() || null;
-		this.likes = likes || [];
+		this.likes = likes || {};
 		this.album = album;
 		this.type = type;
 		this.visible = true;
@@ -13,6 +13,13 @@ export default class Medium {
 
 	countLikes() {
 		return this.likes.length || 0;
+	}
+
+	like(userId) {
+		if(this.likes[userId] === true)
+			delete this.likes[userId];
+		else
+			this.likes[userId] = true;
 	}
 
 	getThumbnail(size = 220) {

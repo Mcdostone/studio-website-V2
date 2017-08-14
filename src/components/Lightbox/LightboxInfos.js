@@ -74,7 +74,7 @@ class LightboxInfos extends React.Component {
 		const container = (
 			<div className="lightbox-infos-container">
 				{adminButton}
-				<LikeButton likes={this.props.medium.countLikes()} />
+				<LikeButton medium={this.props.medium} />
 				<Divider style={styleDivider} />
 				<ExifInfos exif={this.props.medium.exif} />
 				<Divider style={styleDivider} />

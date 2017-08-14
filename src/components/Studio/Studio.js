@@ -62,6 +62,7 @@ class Studio extends React.Component {
 	}
 
 	showMedium(mediumData) {
+		console.log(mediumData);
 		this.props.openMediumInLightbox(mediumData);
 	}
 

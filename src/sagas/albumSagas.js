@@ -1,6 +1,6 @@
 import { call, takeEvery, put, all } from 'redux-saga/effects';
 import { ALBUMS_CREATE, ALBUMS_UPDATE, addAlbum, ALBUMS_DELETE } from '../actions/albumActions';
-import { updateMedia } from '../actions/mediaActions';
+import { updateMedium } from '../actions/mediaActions';
 import { createCover, deleteCover } from '../actions/coverActions';
 import database from './RestFirebaseDatabase';
 
@@ -19,7 +19,7 @@ function* updateAlbumOfMedium(idMedium, album) {
 	let medium = yield call(database.get, 'media', idMedium);
 	medium = medium.val();
 	medium.album = album;
-	yield put(updateMedia(medium));
+	yield put(updateMedium(medium));
 }
 
 function* deleteAlbum(action) {

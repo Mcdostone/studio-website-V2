@@ -4,6 +4,7 @@ export const MEDIA_UPDATE = 'MEDIA_UPDATE';
 export const MEDIA_FETCH_ONE = 'MEDIA_FETCH_ONE';
 export const MEDIA_FETCH_ALL = 'MEDIA_FETCH_ALL';
 export const MEDIA_DELETE = 'MEDIA_DELETE';
+export const MEDIA_LIKE = 'MEDIA_LIKE';
 
 
 export const createMedium = (medium) => ({
@@ -16,7 +17,7 @@ export const addMedium = (medium) => ({
 	payload: medium,
 });
 
-export const updateMedia = (medium) => ({
+export const updateMedium = (medium) => ({
 	type: MEDIA_UPDATE,
 	payload: medium,
 });
@@ -34,4 +35,9 @@ export const fetchMedium = (resource, id) => ({
 export const fetchAllMedia = (resource = 'media') => ({
 	type: MEDIA_FETCH_ALL,
 	payload: { resource }
+});
+
+export const likeMedium = (medium, user) => ({
+	type: MEDIA_LIKE,
+	payload: { medium, user }
 });

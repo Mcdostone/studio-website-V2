@@ -8,7 +8,9 @@ import {
 	MEDIA_CREATE,
 	MEDIA_UPDATE,
 	MEDIA_FETCH_ALL,
+	MEDIA_LIKE,
 	MEDIA_DELETE,
+	updateMedium,
 	MEDIA_FETCH_ONE } from '../actions/mediaActions';
 import GoogleDriveApi from './GoogleDriveApi';
 
@@ -28,6 +30,8 @@ function *createMedium(action) {
 			yield put(updateAlbum(album));
 		}
 	}
+
+
 
 	switch(medium.from.toUpperCase()) {
 		case 'DRIVE':
@@ -104,17 +108,6 @@ function *fetchMedium(action) {
 	}
 }
 
-
-/*function *fetchMedium(action) {
-	const { resource, id } = action.payload;
-	try {
-		const snapshot = yield call(database.get, resource, id);
-		yield put(addMedium(buildMediumFromFirebase(snapshot.val())));
-	} catch(err) {
-		logger.error(err);
-	}
-}*/
-
 function *deleteMedium(action) {
 	const medium = action.payload;
 	if(medium.album) {
@@ -127,28 +120,21 @@ function *deleteMedium(action) {
 	yield call(database.delete, resource, medium.id);
 }
 
+function *likeMedium(action) {
+	const { medium, user } = action.payload;
+	if(user !== undefined) {
+		medium.like(user.id);
+		yield put(updateMedium(medium));
+	}
+}
+
 function* mediaSagas() {
 	yield takeEvery(MEDIA_FETCH_ONE, fetchMedium);
 	yield takeEvery(MEDIA_FETCH_ALL, fetchAllMedia);
 	yield takeEvery(MEDIA_UPDATE, createMedium);
 	yield takeEvery(MEDIA_CREATE, createMedium);
 	yield takeEvery(MEDIA_DELETE, deleteMedium);
+	yield takeEvery(MEDIA_LIKE, likeMedium);
 }
 
 export default mediaSagas;
-
-/*
-function* fetchOne(action) {
-		const snapshot = yield call(database.get, action.payload.resource, action.payload.id);
-		yield call(createMediumFromFirebase, snapshot.val());
-}
-
-function* fetchAll() {
-	const snapshot = yield call(database.get, 'media');
-	const data = snapshot.val();
-	if(data !== null) {
-		yield all(Object.keys(data).map(idMedium => {
-			return call(createMediumFromFirebase, data[idMedium]);
-		}));
-	}
-}*/
