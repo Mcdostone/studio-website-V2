@@ -26,7 +26,6 @@ class AlbumForm extends React.Component {
 		this.updateTitle = this.updateTitle.bind(this);
 		this.updateDate = this.updateDate.bind(this);
 		this.updateCover = this.updateCover.bind(this);
-		this.checkAlbum = this.checkAlbum.bind(this);
 		this.applyChanges = this.applyChanges.bind(this);
 	}
 
@@ -44,32 +43,22 @@ class AlbumForm extends React.Component {
 			this.setState({ data: nextProps.data, oldCover: coverObject.cover});
 		else {
 			if(this.state.data !== nextProps.data && nextProps.data)
-				this.setState({ data: nextProps.data , ...this.checkAlbum(nextProps.data)});
+				this.setState({ data: nextProps.data });
 		}
 		return this.props.data !== nextProps.data;
 	}
 
-	checkAlbum(album) {
-		const validTitle = album.title.length !== 0;
-		return {
-			valid: validTitle,
-			errorTitle: !validTitle,
-		}
-	}
-
 	applyChanges() {
 		const data = this.state.data;
-		if(this.state.valid) {
-			data.cover = this.state.newCover || null;
-			this.props.save(data);
-			this.props.history.goBack();
-		}
+		data.cover = this.state.newCover || null;
+		this.props.save(data);
+		this.props.history.goBack();
 	}
 
 	updateTitle(e) {
 		const album = this.state.data;
 		album.title = e.target.value;
-		this.setState({data: album, ...this.checkAlbum(album)});
+		this.setState({data: album});
 	}
 
 	updateDate(e, newDate) {
@@ -123,7 +112,7 @@ class AlbumForm extends React.Component {
 				</CardText>
 				<CardActions>
 					<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />
-					<FlatButton label="Save" disabled={!this.state.valid} onTouchTap={this.applyChanges}/>
+					<FlatButton label="Save" onTouchTap={this.applyChanges}/>
 				</CardActions>
 			</Card>
 

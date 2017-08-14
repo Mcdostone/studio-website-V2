@@ -14,12 +14,18 @@ export default function mediaWrapper(resource, WrappedComponent = LayoutMedia) {
 			const id = this.props.match.params.id;
 			this.props.fetchOne(resource, id);
 			this.props.fetchCover('covers', id);
+			if(this.props.dataSource[id] !== undefined)
+				this.fetchMedia(Object.keys(this.props.dataSource[id].media));
+		}
+
+		fetchMedia = (mediaList) => {
+			mediaList.map(mediumId => this.props.fetchMedium('media', mediumId));
 		}
 
 		componentWillReceiveProps = (nextProps, nextState) => {
 			const id = this.props.match.params.id;
 			if(this.props.dataSource[id] === undefined && nextProps.dataSource[id] !== undefined)
-				Object.keys(nextProps.dataSource[id].media).map(mediumId => this.props.fetchMedium('media', mediumId));
+				this.fetchMedia(Object.keys(nextProps.dataSource[id].media));
 		}
 
 		render() {

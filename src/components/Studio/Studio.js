@@ -33,11 +33,10 @@ class Studio extends React.Component {
 	}
 
 	getProcessedMedia = (filters) => {
-		let media = this.props.media;
+		let media = this.props.media.filter(medium => medium !== undefined);
 		const filter = filters[this.state.filter];
-		if(filter.toLowerCase() !== 'all' ) {
+		if(filter.toLowerCase() !== 'all' )
 			media = media.filter(medium => medium.type.toLowerCase().trim() === filter.toLowerCase().trim());
-		}
 		switch(this.state.sorting) {
 			case SORT_LIKES:
 				return media.sort((a, b) => (b.countLikes() > a.countLikes()) ? 1 : ((a.countLikes() > b.countLikes()) ? -1 : 0));
@@ -84,7 +83,8 @@ class Studio extends React.Component {
 		return (
 			<div>
 				<Lightbox />
-				<StudioToolbar
+				{this.props.disableToolbar === false &&
+					<StudioToolbar
 					squareView={this.state.squareView}
 					onSetSquareView={this.setSquareView}
 					onSetFilter={this.setFilter}
@@ -93,6 +93,7 @@ class Studio extends React.Component {
 					activeSorting={this.state.sorting}
 					sortingTypes={this.getSortingTypes()}
 					onSetSorting={this.setSorting}/>
+				}
 				<StudioList
 				gutter={16}
 				squareView={this.state.squareView}>
@@ -107,10 +108,6 @@ class Studio extends React.Component {
 	}
 }
 
-Studio.propTypes = {
-	media: PropTypes.array.isRequired
-}
-
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		openMediumInLightbox: showMedium,
@@ -118,8 +115,14 @@ function mapDispatchToProps(dispatch) {
   }, dispatch);
 }
 
+Studio.propTypes = {
+	media: PropTypes.array.isRequired,
+	disableToolbar: PropTypes.bool,
+}
+
 Studio.defaultProps = {
-	media: []
+	media: [],
+	disableToolbar: false,
 }
 
 export default connect(null, mapDispatchToProps)(Studio);

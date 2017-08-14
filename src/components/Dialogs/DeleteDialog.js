@@ -29,7 +29,7 @@ class DeleteDialog extends React.Component {
         label="Trust me, I'm engineer"
         primary={true}
 				keyboardFocused={true}
-        onTouchTap={this.delete}
+        onTouchTap={() => this.props.onAccept ? this.props.onAccept() : this.delete()}
       />,
 		];
 		if(this.props.data) {
@@ -42,7 +42,7 @@ class DeleteDialog extends React.Component {
 					<span>
 						This action cannot be undone. This will permanently delete the data.
 						<p style={{color: red900}}>
-							{`Are you sure to delete ${this.props.resource} ${this.props.data.id}?`}
+							{`Are you sure to delete ${this.props.resource || ''} ${this.props.data.id}?`}
 						</p>
 					</span>
 				</Dialog>
@@ -54,11 +54,13 @@ class DeleteDialog extends React.Component {
 }
 
 DeleteDialog.propTypes = {
-	resource: PropTypes.string,
-	data: PropTypes.object,
+	resource: PropTypes.string.isRequired,
+	data: PropTypes.object.isRequired,
+	open: PropTypes.bool,
 	handleClose: PropTypes.func.isRequired,
 	remove: PropTypes.func.isRequired,
 	history: PropTypes.object.isRequired,
+	onAccept: PropTypes.func,
 };
 
 export default crudWrapper(DeleteDialog);

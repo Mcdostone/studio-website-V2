@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import Avatar from 'material-ui/Avatar';
-import { Cover } from '../../../components/Cover';
+import { Cover } from 'components/Cover';
 
 class UserCover extends React.Component {
 
@@ -34,5 +35,9 @@ class UserCover extends React.Component {
 	}
 
 }
+
+UserCover.propTypes = {
+	user: PropTypes.object
+};
 
 export default UserCover;

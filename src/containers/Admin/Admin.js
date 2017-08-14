@@ -1,15 +1,11 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Snackbar from 'material-ui/Snackbar';
+import { Route, Switch } from 'react-router-dom';
 import Dashboard from './Dashboard';
-import { hide } from '../../actions/notificationActions';
 import { adminListWrapper } from '../../wrappers';
 import { MediaList, MediumEdit, MediaCreate } from './Media';
 import { UsersList, UserForm } from './Users';
 import { AlbumsList, AlbumForm } from './Albums';
-import { ReportsList } from './Reports';
+import { ReportsList, ReportForm } from './Reports';
 import { UploadsList, UploadForm, UploadRecap } from './Uploads';
 import { CoversList, CoverForm } from './Covers';
 import './Admin.css';
@@ -28,6 +24,7 @@ class Admin extends React.Component {
 
 	render() {
 		return <div className="admin-app">
+		<Switch>
 			<Route exact path="/admin" component={Dashboard} />
 
 			<Route exact path="/admin/media" component={adminListWrapper(MediaList, 'media')} />
@@ -35,10 +32,11 @@ class Admin extends React.Component {
 			<Route path="/admin/media/:id" render={() => <MediumEdit/>} />
 
 			<Route exact path="/admin/reports" component={ReportsList} />
+			<Route exact path="/admin/reports/:id" component={ReportForm} />
 
 			<Route exact path="/admin/uploads" render={() => <UploadsList creation />} />
-			<Route exact path="/admin/uploads/create" render={() => <UploadForm creation />} />
-			<Route exact path="/admin/uploads/:id" render={() => <UploadRecap />} />
+			<Route exact path="/admin/uploads/create" render={() => <UploadForm creation={true} />} />
+			<Route path="/admin/uploads/:id" render={() => <UploadRecap />} />
 
 			<Route exact path="/admin/covers" render={() => <CoversList />} />
 			<Route exact path="/admin/covers/:id" render={() => <CoverForm />} />
@@ -49,27 +47,9 @@ class Admin extends React.Component {
 			<Route exact path="/admin/albums" render={() => <AlbumsList creation />} />
 			<Route path="/admin/albums/:id" render={() => <AlbumForm />} />
 			<Route exact path="/admin/albums/create" render={() => <AlbumForm creation />} />
-			<Snackbar
-				open={this.props.notif.open}
-				message={this.props.notif.message}
-				autoHideDuration={this.props.notif.autoHideDuration}
-				onRequestClose={(e) => e !== 'clickaway' ? this.props.hideNotif() : null}
-			/>
+		</Switch>
 		</div>
 	}
 };
 
-function mapStateToProps(state, ownProps) {
-	return {
-		notif: state.notifications,
-		...ownProps,
-	}
-}
-
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		hideNotif: hide,
-	}, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Admin);
+export default Admin;

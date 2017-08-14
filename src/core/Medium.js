@@ -7,6 +7,7 @@ export default class Medium {
 		this.likes = likes || [];
 		this.album = album;
 		this.type = type;
+		this.visible = true;
 		this.exif = exif;
 	}
 

@@ -7,19 +7,13 @@ export const buildMediumFromFirebase = (data) => {
 	const medium = new Medium(data.id, data.src, data.from, [], data.album);
 	medium.updatedAt = data.updatedAt;
 	medium.createdAt = data.createdAt;
+	medium.visible = data.visible;
 	return medium;
 }
 
 export const buildMediumFromGoogleDrive = (firebaseData, driveData) => {
-	const medium = new Medium(
-		firebaseData.id,
-		driveData.thumbnailLink.split('=')[0],
-		firebaseData.from,
-		firebaseData.likes,
-		firebaseData.album
-	);
+	const medium = buildMediumFromFirebase(firebaseData);
+	medium.src = driveData.thumbnailLink.split('=')[0];
 	medium.exif = buildExifFromGoogleDrive(driveData);
-	medium.updatedAt = firebaseData.updatedAt;
-	medium.createdAt = firebaseData.createdAt;
 	return medium;
 }

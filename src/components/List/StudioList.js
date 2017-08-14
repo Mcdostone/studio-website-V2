@@ -18,6 +18,13 @@ class StudioList extends React.Component {
 
 	componentDidMount = () => this.handleResize();
 
+	componentDidUpdate = () => this.updateLayout();
+
+	updateLayout = () => {
+		if(this.grid)
+			this.grid.updateLayout();
+	}
+
 	handleOnEnter = () => {
 		if(this.props.fetchMoreData)
 			this.props.fetchMoreData();
@@ -26,6 +33,7 @@ class StudioList extends React.Component {
 	handleResize = () => {
 		const newWidth = document.body.offsetWidth;
 		this.setState({width: newWidth < 700 ? '33.33%': '25%'});
+		this.updateLayout();
 	}
 
 	render = () =>

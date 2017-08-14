@@ -1,10 +1,11 @@
 import React from 'react';
-import { adminWrapper } from '../../../wrappers';
-import AdminCover from '../AdminCover';
-import { fetchMedium } from '../../../actions/mediaActions';
+import Toggle from 'material-ui/Toggle';
 import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardText } from 'material-ui/Card';
 import { AlbumSelectField } from '../shared';
+import AdminCover from '../AdminCover';
+import { adminWrapper } from 'wrappers';
+import { fetchMedium } from 'actions/mediaActions';
 
 
 class MediumForm extends React.Component {
@@ -39,6 +40,12 @@ class MediumForm extends React.Component {
 		this.props.history.goBack();
 	}
 
+	toggleVisible = () => {
+		const mediumUpdated = this.state.data;
+		mediumUpdated.visible = !mediumUpdated.visible;
+		this.setState({data: mediumUpdated});
+	}
+
 	getContainer() {
 		const medium = this.state.data;
 		const albums = this.props.state['albums'];
@@ -52,6 +59,9 @@ class MediumForm extends React.Component {
 				className="cover"
 				src={src} />
 				<CardText>
+					<div>
+						<Toggle onTouchTap={this.toggleVisible} toggled={medium.visible} label="Visible ?" />
+					</div>
 					<AlbumSelectField value={this.state.data.album} albums={albums} onChange={this.setAlbum} />
 				</CardText>
 				<CardActions>

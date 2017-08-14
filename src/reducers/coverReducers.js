@@ -1,8 +1,11 @@
 import { COVERS_ADD, COVERS_DELETE } from '../actions/coverActions';
-import { buildCoverFromFirebase } from '../factories';
+import { buildCoverFromFirebase, buildCover } from '../factories';
 import { getById } from '../utils';
 
-const initialState = {};
+const initialState = {
+	media: buildCover('media'),
+	albums: buildCover('albums'),
+};
 
 export default function (state = initialState, action) {
   switch(action.type) {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { build } from '../factories';
+import PropTypes from 'prop-types';
 import crudWrapper from './crudWrapper';
 
 export default function adminWrapper(WrappedComponent, resource, fetchOne) {
@@ -12,7 +13,7 @@ export default function adminWrapper(WrappedComponent, resource, fetchOne) {
 		}
 
 		componentDidMount() {
-			if(this.props.creation === false || !this.props.creation)
+			if(this.props.creation === false)
 				this.props.fetchOne(resource, this.props.match.params.id);
 		}
 
@@ -25,6 +26,14 @@ export default function adminWrapper(WrappedComponent, resource, fetchOne) {
 			return <WrappedComponent {...this.props} save={this.save} data={data} />
 		}
 
+	}
+
+	adminContainer.propTypes = {
+		creation: PropTypes.bool
+	}
+
+	adminContainer.defaultProps = {
+		creation: false
 	}
 
 	return crudWrapper(adminContainer, {fetchOne});

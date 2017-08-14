@@ -1,7 +1,7 @@
 import { buildUploadFromFirebase, buildUpload } from './uploadFactory';
 import { buildAlbumFromFirebase, buildAlbum } from './albumFactory';
 export { buildAlbumFromFirebase, buildUploadFromFirebase };
-export { buildCoverFromFirebase } from './coverFactory';
+export { buildCoverFromFirebase, buildCover } from './coverFactory';
 export { buildReportFromFirebase } from './reportFactory';
 export { buildUserFromFirebase, buildUserFromFirebaseAuth } from './userFactory';
 export {

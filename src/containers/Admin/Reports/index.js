@@ -1,7 +1,7 @@
 import ReportsList from './ReportsList';
-import ReportEdit from './ReportEdit';
+import ReportForm from './ReportForm';
 
 export {
 	ReportsList,
-	ReportEdit,
+	ReportForm,
 };
