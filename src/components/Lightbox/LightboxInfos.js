@@ -22,7 +22,6 @@ class LightboxInfos extends React.Component {
 		this.state = {
 			inputTag: '',
 			tagsList: '',
-			tags: ['prout', 'lol', 'cette beubar'],
 			width: 0,
 		};
 		this.onKeyPress = this.onKeyPress.bind(this);
@@ -77,8 +76,6 @@ class LightboxInfos extends React.Component {
 		const tagsOfMedium = Object.values(this.props.tags)
 			.filter(tag => this.props.medium.tags[tag.id]);
 
-		//console.log(this.props.medium, Object.values(this.props.tags));
-
 		const styleDivider = {
 			width: '100%',
 			marginTop: margin,
@@ -118,6 +115,7 @@ class LightboxInfos extends React.Component {
 				<TagsList tags={tagsOfMedium} />
 			</div>
 		);
+		console.log(this.props.medium.likes)
 
 		return (
 			<Paper className="lightbox-infos">
@@ -131,9 +129,10 @@ LightboxInfos.propTypes = {
 	medium: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
 	return {
 		tags: state.tags,
+		ownProps,
 	}
 }
 

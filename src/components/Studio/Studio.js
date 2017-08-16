@@ -22,6 +22,8 @@ class Studio extends React.Component {
 			squareView: true,
 			filter: 0,
 			sorting: 0,
+			open: false,
+			medium: null
 		};
 		this.setSquareView = this.setSquareView.bind(this);
 		this.setFilter = this.setFilter.bind(this);
@@ -64,8 +66,8 @@ class Studio extends React.Component {
 		return sort;
 	}
 
-	showMedium(mediumData) {
-		this.props.openMediumInLightbox(mediumData);
+	showMedium(medium) {
+		this.setState({medium, open: true})
 	}
 
 	setSquareView(active) {
@@ -85,7 +87,9 @@ class Studio extends React.Component {
 		const processedMedia = this.getProcessedMedia(filters);
 		return (
 			<div>
-				<Lightbox />
+				<Lightbox
+				medium={this.state.medium}
+				open={this.state.open} />
 				{this.props.disableToolbar === false &&
 					<StudioToolbar
 					squareView={this.state.squareView}

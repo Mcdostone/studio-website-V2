@@ -33,8 +33,6 @@ function *createMedium(action) {
 		}
 	}
 
-
-
 	switch(medium.from.toUpperCase()) {
 		case 'DRIVE':
 			medium.src = null;

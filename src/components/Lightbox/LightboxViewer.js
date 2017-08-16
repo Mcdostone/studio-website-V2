@@ -74,7 +74,7 @@ class LightboxViewer extends React.Component {
 	}
 
 	render() {
-		if(this.props.open) {
+		if(this.props.medium) {
 			const styles = {
 				icon: {
 					position: 'absolute',
@@ -114,14 +114,6 @@ LightboxViewer.propTypes = {
 	medium: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
-	return {
-		open: state.lightbox.lightboxOpened,
-		medium: state.lightbox.medium,
-		media: state.media.processedMedia
-	}
-}
-
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		closeLightbox,
@@ -130,4 +122,4 @@ function mapDispatchToProps(dispatch) {
   }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LightboxViewer);
+export default connect(null, mapDispatchToProps)(LightboxViewer);

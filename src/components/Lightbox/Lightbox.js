@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AutoLockScrolling from 'material-ui/internal/AutoLockScrolling';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Picture from './Picture';
 import Video from './Video';
 import LightboxViewer from './LightboxViewer';
 import LightboxInfos from './LightboxInfos';
-import { connect } from 'react-redux';
 import './Lightbox.css';
 
 class Lightbox extends React.Component {
@@ -34,7 +34,7 @@ class Lightbox extends React.Component {
 		if(this.props.open) {
 			return (
 				<div className="lightbox">
-					<Scrollbars >
+					<Scrollbars>
 						<div className="lightbox-container">
 							<LightboxViewer medium={this.props.medium} />
 							<LightboxInfos medium={this.props.medium} />
@@ -48,11 +48,9 @@ class Lightbox extends React.Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		open: state.lightbox.lightboxOpened,
-		medium: state.lightbox.medium,
-	}
-}
+Lightbox.propTypes = {
+	medium: PropTypes.object,
+	open: PropTypes.bool,
+};
 
-export default connect(mapStateToProps, null)(Lightbox);
+export default Lightbox;

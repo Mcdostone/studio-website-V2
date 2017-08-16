@@ -37,7 +37,7 @@ LikeButton.propTypes = {
 function mapStateToProps(state, ownProps) {
 		return {
 			auth: state.auth,
-			...ownProps,
+			ownProps,
 		}
 	}
 
