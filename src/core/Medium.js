@@ -1,6 +1,6 @@
 export default class Medium {
 
-	constructor(id, src, comeFrom, likes, album, type = null, exif = null) {
+	constructor(id, src, comeFrom, likes, album, tags, type = null, exif = null) {
 		this.id = id;
 		this.src = src ? src.trim() : null;
 		this.from = comeFrom.toLowerCase().trim() || null;
@@ -9,10 +9,15 @@ export default class Medium {
 		this.type = type;
 		this.visible = true;
 		this.exif = exif;
+		this.tags = tags || {};
 	}
 
 	countLikes() {
 		return this.likes.length || 0;
+	}
+
+	addTag(tagId) {
+		this.tags[tagId] = true;
 	}
 
 	like(userId) {

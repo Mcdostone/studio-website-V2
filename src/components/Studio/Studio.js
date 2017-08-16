@@ -7,6 +7,7 @@ import StudioList from '../List/StudioList';
 import Lightbox from '../Lightbox';
 import M from './M';
 import { showMedium, closeLightbox } from '../../actions/lightboxActions';
+import { fetchAll } from 'actions/fetchActions';
 
 
 const SORT_LAST_ADDED = 0;
@@ -27,6 +28,8 @@ class Studio extends React.Component {
 		this.setSorting = this.setSorting.bind(this);
 		this.getProcessedMedia = this.getProcessedMedia.bind(this);
 	}
+
+	componentDidMount = () => this.props.fetchAll('tags');
 
 	componentWillUnmount() {
 		this.props.closeLightbox();
@@ -62,7 +65,6 @@ class Studio extends React.Component {
 	}
 
 	showMedium(mediumData) {
-		console.log(mediumData);
 		this.props.openMediumInLightbox(mediumData);
 	}
 
@@ -113,6 +115,7 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		openMediumInLightbox: showMedium,
 		closeLightbox,
+		fetchAll,
   }, dispatch);
 }
 

@@ -6,6 +6,7 @@ import { MediaList, MediumEdit, MediaCreate } from './Media';
 import { UsersList, UserForm } from './Users';
 import { AlbumsList, AlbumForm } from './Albums';
 import { ReportsList, ReportForm } from './Reports';
+import { TagsList } from './Tags';
 import { UploadsList, UploadForm, UploadRecap } from './Uploads';
 import { CoversList, CoverForm } from './Covers';
 import './Admin.css';
@@ -47,6 +48,8 @@ class Admin extends React.Component {
 			<Route exact path="/admin/albums" render={() => <AlbumsList creation />} />
 			<Route path="/admin/albums/:id" render={() => <AlbumForm />} />
 			<Route exact path="/admin/albums/create" render={() => <AlbumForm creation />} />
+
+			<Route exact path="/admin/tags" component	={TagsList} />
 		</Switch>
 		</div>
 	}

@@ -6,6 +6,7 @@
 	--reportsColor: black;
 	--uploadsColor: #4CAF50;
 	--coversColor: #795548;
+	--tagsColor: #673AB7;
 }
 
 .admin-app {
@@ -47,6 +48,10 @@
 
 .covers-container {
 	border-color: var(--coversColor);
+}
+
+.tags-container {
+	border-color: var(--tagsColor);
 }
 
 .admin-form {

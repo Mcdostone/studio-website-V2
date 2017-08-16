@@ -7,11 +7,13 @@ import {
 	addMedium,
 	MEDIA_CREATE,
 	MEDIA_UPDATE,
+	MEDIA_TAG,
 	MEDIA_FETCH_ALL,
 	MEDIA_LIKE,
 	MEDIA_DELETE,
 	updateMedium,
 	MEDIA_FETCH_ONE } from '../actions/mediaActions';
+import { addTag } from '../actions/tagActions';
 import GoogleDriveApi from './GoogleDriveApi';
 
 const googleDriveApi = new GoogleDriveApi(window.gapi);
@@ -128,6 +130,22 @@ function *likeMedium(action) {
 	}
 }
 
+function *tagMedium(action) {
+	const { medium, tag } = action.payload;
+	if(tag.id === undefined) {
+		const user = yield select(state => state.auth.user);
+		if(user !== undefined) {
+			tag.author = user.id;
+			const tagCreated = yield call(database.post, 'tags', tag);
+			yield put(addTag(tagCreated));
+			medium.addTag(tagCreated.id);
+		}
+	}
+	else
+		medium.addTag(tag.id);
+	yield put(updateMedium(medium));
+}
+
 function* mediaSagas() {
 	yield takeEvery(MEDIA_FETCH_ONE, fetchMedium);
 	yield takeEvery(MEDIA_FETCH_ALL, fetchAllMedia);
@@ -135,6 +153,7 @@ function* mediaSagas() {
 	yield takeEvery(MEDIA_CREATE, createMedium);
 	yield takeEvery(MEDIA_DELETE, deleteMedium);
 	yield takeEvery(MEDIA_LIKE, likeMedium);
+	yield takeEvery(MEDIA_TAG, tagMedium);
 }
 
 export default mediaSagas;

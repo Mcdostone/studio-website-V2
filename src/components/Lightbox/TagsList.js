@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Chip from 'material-ui/Chip';
-import { spring, TransitionMotion } from 'react-motion';
-
+import Anime from 'react-anime';
 
 class TagsList extends React.Component {
 
@@ -13,26 +13,20 @@ class TagsList extends React.Component {
 	}
 
 	render() {
-  	const styles= this.props.tags.map(tag => ({
-      key: tag,
-      style: {
-				margin: 2,
-				opacity: spring(1),
-			},
-    }));
-
-		return (
-			<TransitionMotion
-				styles={styles}
-				willEnter={this.willEnter}>
-				{interp =>
-						<div className="tags-list">
-						{interp.map((config, i) => <Chip key={config.key} style={config.style}>{config.key}</Chip>)}
-					</div>
-				}
-			</TransitionMotion>
+  	return (
+			<Anime delay={(e, i) => i  * 500 + 500} duration={3000} opacity={[0, 1]}>
+				{this.props.tags.map(tag => <Chip key={tag.id}>{tag.tag}</Chip>)}
+			</Anime>
 		);
 	}
 }
+
+TagsList.propTypes = {
+	tags: PropTypes.array.isRequired
+}
+
+TagsList.defaultProps = {
+	tags: []
+};
 
 export default TagsList;

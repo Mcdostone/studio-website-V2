@@ -13,8 +13,6 @@ class LikeButton extends React.Component {
 	isLiked = () => this.props.medium.likes[this.props.auth.user.id] === true;
 
 	render() {
-		const medium = this.props.medium;
-		console.log(medium);
 		const style = { padding: '0 12px 0 0' };
 		const classes = this.isLiked() ? 'button-like liked' : 'button-like'
 		const icon = this.isLiked() ?

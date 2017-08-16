@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Divider from 'material-ui/Divider';
-import TextField from 'material-ui/TextField';
+import AutoComplete from 'material-ui/AutoComplete';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { grey500, grey900 } from 'material-ui/styles/colors';
 import DashboardIconMenu from '../shared/DashboardIconMenu';
 import TagsList from './TagsList';
+import { build } from 'factories';
 import LikeButton from './LikeButton';
+import { createTag } from 'actions/tagActions';
+import { tagMedium } from 'actions/mediaActions';
 import Paper from 'material-ui/Paper';
 import ExifInfos from './ExifInfos';
 
@@ -16,6 +21,7 @@ class LightboxInfos extends React.Component {
 		super(props);
 		this.state = {
 			inputTag: '',
+			tagsList: '',
 			tags: ['prout', 'lol', 'cette beubar'],
 			width: 0,
 		};
@@ -42,10 +48,19 @@ class LightboxInfos extends React.Component {
 
 	onKeyPress(event) {
 		if (event.charCode === 13 && event.target.value.length > 0) {
-    	event.preventDefault();
-			this.setState({tags: [...new Set([...this.state.tags, event.target.value.trim()])]})
-  		this.setState({inputTag: ''})
-			event.target.blur();
+			const medium = this.props.medium;
+			let tag = null;
+			if(this.state.tagsList.includes(this.state.inputTag)) {
+				const id = Object.keys(this.props.tags).filter(tagId => this.props.tags[tagId].tag === this.state.inputTag);
+				tag = this.props.tags[id];
+			}
+			else {
+				tag = build('tags');
+				tag.tag = this.state.inputTag.trim();
+			}
+			this.props.tagMedium(medium, tag);
+			this.setState({inputTag: ''});
+  		event.target.blur();
 		}
 	}
 
@@ -54,7 +69,16 @@ class LightboxInfos extends React.Component {
 	}
 
 	render() {
+		const tags = Object.keys(this.props.tags)
+			.filter(tagId => this.props.medium.tags[tagId])
+			.map(tagId => this.props.tags[tagId].tag);
 		const margin = 32;
+
+		const tagsOfMedium = Object.values(this.props.tags)
+			.filter(tag => this.props.medium.tags[tag.id]);
+
+		//console.log(this.props.medium, Object.values(this.props.tags));
+
 		const styleDivider = {
 			width: '100%',
 			marginTop: margin,
@@ -78,16 +102,20 @@ class LightboxInfos extends React.Component {
 				<Divider style={styleDivider} />
 				<ExifInfos exif={this.props.medium.exif} />
 				<Divider style={styleDivider} />
-				<TextField
-					ref="textField"
-					onKeyPress={this.onKeyPress}
-					onChange={this.handleOnChange}
-					hintText="Add a tag: loul sass"
-					maxLength="14"
-					fullWidth
-					value={this.state.inputTag}
-				/>
-				<TagsList tags={this.state.tags} />
+				<AutoComplete
+				ref="textField"
+				onKeyPress={this.onKeyPress}
+				onChange={this.handleOnChange}
+				hintText="Add a tag: loul sass"
+				filter={AutoComplete.fuzzyFilter}
+				maxLength="14"
+				onUpdateInput={(inputTag, tagsList) => this.setState({inputTag, tagsList})}
+				maxSearchResults={5}
+				onNewRequest={() => this.refs.textField.focus()}
+				searchText={this.state.inputTag}
+				dataSource={tags} />
+
+				<TagsList tags={tagsOfMedium} />
 			</div>
 		);
 
@@ -103,4 +131,17 @@ LightboxInfos.propTypes = {
 	medium: PropTypes.object.isRequired,
 };
 
-export default LightboxInfos;
+function mapStateToProps(state) {
+	return {
+		tags: state.tags,
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+		createTag,
+		tagMedium,
+	}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LightboxInfos);

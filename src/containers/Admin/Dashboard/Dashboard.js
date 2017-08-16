@@ -2,6 +2,7 @@ import React from 'react';
 import Widget from './Widget';
 import Face from 'material-ui/svg-icons/action/face';
 import Theaters from 'material-ui/svg-icons/action/theaters';
+import Label from 'material-ui/svg-icons/action/label';
 import Backup from 'material-ui/svg-icons/action/backup';
 import Album from 'material-ui/svg-icons/av/album';
 import Panorama from 'material-ui/svg-icons/image/panorama';
@@ -46,6 +47,11 @@ class DashboardStudio extends React.Component {
 			<Widget resource='covers' count={this.getCount('covers')}>
 				<Panorama style={{width: '50%', height: '50%'}} color="white"/>
 			</Widget>
+
+			<Widget resource='tags' count={this.getCount('tags')}>
+				<Label style={{width: '50%', height: '50%'}} color="white"/>
+			</Widget>
+
 		</div>
 	}
 }

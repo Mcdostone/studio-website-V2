@@ -8,6 +8,7 @@ import userSagas from './userSagas';
 import reportSagas from './reportSagas';
 import uploadSagas from './uploadSagas';
 import albumSagas from './albumSagas';
+import tagSagas from './tagSagas';
 
 
 export default function* sagas() {
@@ -21,5 +22,6 @@ export default function* sagas() {
 		uploadSagas,
 		mediaSagas,
 		reportSagas,
+		tagSagas,
   ].map(fork))
 }

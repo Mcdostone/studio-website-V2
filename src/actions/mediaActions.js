@@ -5,6 +5,7 @@ export const MEDIA_FETCH_ONE = 'MEDIA_FETCH_ONE';
 export const MEDIA_FETCH_ALL = 'MEDIA_FETCH_ALL';
 export const MEDIA_DELETE = 'MEDIA_DELETE';
 export const MEDIA_LIKE = 'MEDIA_LIKE';
+export const MEDIA_TAG = 'MEDIA_TAG';
 
 
 export const createMedium = (medium) => ({
@@ -15,6 +16,11 @@ export const createMedium = (medium) => ({
 export const addMedium = (medium) => ({
 	type: MEDIA_ADD,
 	payload: medium,
+});
+
+export const tagMedium = (medium, tag) => ({
+	type: MEDIA_TAG,
+	payload: { medium, tag },
 });
 
 export const updateMedium = (medium) => ({

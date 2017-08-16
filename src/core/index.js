@@ -5,4 +5,5 @@ export { default as Exif } from './Exif';
 export { default as Report } from './Report';
 export { default as Upload } from './Upload'
 export { default as Cover } from './Cover';
+export { default as Tag } from './Tag';
 

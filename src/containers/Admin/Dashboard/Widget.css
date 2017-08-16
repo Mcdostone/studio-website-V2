@@ -44,6 +44,10 @@
 	background: var(--coversColor) !important;
 }
 
+.widget-tags {
+	background: var(--tagsColor) !important;
+}
+
 
 input.widget-value {
 	border: none;

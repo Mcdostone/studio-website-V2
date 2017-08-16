@@ -6,6 +6,7 @@ import media from './mediaReducers';
 import def from './defaultReducers';
 import auth from './authReducers';
 import uploads from './uploadReducers';
+import tags from './tagReducers';
 import covers from './coverReducers';
 import albums from './albumReducers';
 import reports from './reportReducers';
@@ -20,6 +21,7 @@ const studioApp = combineReducers({
 		notifications,
 		default: def,
 		albums,
+		tags,
 		covers,
 		reports,
 		users,

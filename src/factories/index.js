@@ -1,14 +1,16 @@
 import { buildUploadFromFirebase, buildUpload } from './uploadFactory';
 import { buildAlbumFromFirebase, buildAlbum } from './albumFactory';
-export { buildAlbumFromFirebase, buildUploadFromFirebase };
+import { buildTagFromFirebase, buildTag } from './tagFactory';
 export { buildCoverFromFirebase, buildCover } from './coverFactory';
 export { buildReportFromFirebase } from './reportFactory';
 export { buildUserFromFirebase, buildUserFromFirebaseAuth } from './userFactory';
+export { buildMediumFromDrivePicker, buildMediumFromFirebase, buildMediumFromGoogleDrive } from './mediumFactory';
 export {
-	buildMediumFromDrivePicker,
-	buildMediumFromFirebase,
-	buildMediumFromGoogleDrive
-} from './mediumFactory';
+	buildAlbumFromFirebase,
+	buildUploadFromFirebase,
+	buildTagFromFirebase,
+	buildTag
+};
 
 export const build = (resource) => {
 	switch(resource.toUpperCase()) {
@@ -17,6 +19,9 @@ export const build = (resource) => {
 
 		case 'UPLOADS':
 			return buildUpload();
+
+		case 'TAGS':
+			return buildTag();
 
 		default: // eslint-disable-next-line
 	};

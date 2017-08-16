@@ -20,7 +20,7 @@ const UsersList = (props) =>
   		<TableRow selectable={false}>
 				<TableHeaderColumn className="remove-small-screen">ID</TableHeaderColumn>
 				<TableHeaderColumn>Family name</TableHeaderColumn>
-				<TableHeaderColumn>Firstname</TableHeaderColumn>
+				<TableHeaderColumn>First name</TableHeaderColumn>
 				<TableHeaderColumn className="remove-small-screen">Role</TableHeaderColumn>
 				<TableHeaderColumn className="remove-small-screen">Last login time</TableHeaderColumn>
 				<TableHeaderColumn className="remove-small-screen">banned</TableHeaderColumn>
