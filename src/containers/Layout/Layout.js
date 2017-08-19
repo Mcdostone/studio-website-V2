@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Parallax from 'components/Parallax';
 import PropTypes from 'prop-types';
 import MenuItem from 'material-ui/MenuItem';
 import { CoverContent, Cover, CoverMenu } from 'components/Cover';
@@ -29,7 +30,11 @@ class Layout extends React.Component {
 					</CoverContent>
 					{this.getMenuCover()}
 				</Cover>
-					{this.props.children}
+				<Parallax>
+					<div className="container">
+						{this.props.children}
+					</div>
+				</Parallax>
 			</div>
 		);
 	}

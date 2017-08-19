@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Parallax from '../Parallax';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import StudioToolbar from './StudioToolbar';
@@ -119,12 +118,7 @@ class Studio extends React.Component {
 				<Lightbox
 				medium={this.state.medium}
 				open={this.props.open} />
-				{this.props.disableParallax === true && this.getContainer()}
-				{this.props.disableParallax === false &&
-					<Parallax className="container">
-					{this.getContainer()}
-					</Parallax>
-				}
+				{this.getContainer()}
 			</div>
 		)
 	}

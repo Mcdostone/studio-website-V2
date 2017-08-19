@@ -58,7 +58,6 @@ class StudioToolbar extends React.Component {
 					<IconViewModule active={this.props.squareView} onTouchTap={() => this.props.onSetSquareView(true)} />
 					<IconViewQuilt
 						active={!this.props.squareView}
-						style={{marginRight: -12}}
 						onTouchTap={() => this.props.onSetSquareView(false)}
 					/>
 				</ToolbarGroup>

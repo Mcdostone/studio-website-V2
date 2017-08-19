@@ -13,7 +13,7 @@ export default class Medium {
 	}
 
 	countLikes() {
-		return this.likes.length || 0;
+		return Object.keys(this.likes).length || 0;
 	}
 
 	addTag(tagId) {
