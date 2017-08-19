@@ -5,7 +5,12 @@
 	}
 
 	.media-toolbar .dropdown {
-		flex-direction: column;
+		flex-direction: row;
+		justify-content: center !important;
+	}
+
+	.media-toolbar .dropdown * {
+		margin-right: 0 !important;
 	}
 
 	.media-toolbar .view-mode {

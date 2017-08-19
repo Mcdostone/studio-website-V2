@@ -15,10 +15,16 @@
 }
 
 .footer p {
-	margin: 8px;
-	flex: 1;
-	min-width: 200px;
-	text-align: center;
 	color: gray;
 	font-size: 11px;
+	margin: 8px;
+	min-width: 200px;
+	text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+  .footer {
+		height: calc(var(--footer-height) + 50px);
+		flex-direction: column;
+	}
 }

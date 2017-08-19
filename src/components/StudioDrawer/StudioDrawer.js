@@ -103,7 +103,7 @@ class StudioDrawer extends React.Component {
 							Works
 						</ListItem>
 					</Link>
-					{this.getAdminListItems()}
+					{this.props.auth.authentificated && this.props.auth.user.canAdmin() && this.getAdminListItems()}
 					<Divider />
 					{authentificated}
 				</List>

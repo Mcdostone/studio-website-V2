@@ -1,18 +1,9 @@
 import React from 'react';
 import UserCover from './UserCover';
-import RaisedButton from 'material-ui/RaisedButton';
-import ActionDelete from 'material-ui/svg-icons/action/delete-forever';
+import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import { adminWrapper } from '../../../wrappers';
 import {Card, CardActions, CardText, CardTitle } from 'material-ui/Card';
-import {
-	Table,
-	TableBody,
-	TableHeader,
-	TableHeaderColumn,
-	TableRow,
-	TableRowColumn,
-} from 'material-ui/Table';
 
 
 class UserForm extends React.Component {
@@ -52,8 +43,6 @@ class UserForm extends React.Component {
 
 	getContainer() {
 		const user = this.state.data;
-
-		const likes = {};
 		return (
 				<Card className="admin-container users-container">
 					<UserCover
@@ -77,39 +66,9 @@ class UserForm extends React.Component {
 						</div>
 					}
 
-					<CardTitle title={`Tags of ${user.givenName}`}
-					subtitle="X tags"
-					expandable={false} />
-					<CardText>
-						<Table selectable={false}>
-							<TableHeader
-								displaySelectAll={false}
-      		  		adjustForCheckbox={false}
-							>
-	      				<TableRow selectable={false}>
-									<TableHeaderColumn>ID</TableHeaderColumn>
-									<TableHeaderColumn>tag</TableHeaderColumn>
-									<TableHeaderColumn>Medium</TableHeaderColumn>
-									<TableHeaderColumn></TableHeaderColumn>
-      					</TableRow>
-    					</TableHeader>
-    					<TableBody displayRowCheckbox={false}>
-							{Object.keys(likes).map(l =>
-								<TableRow>
-									<TableRowColumn></TableRowColumn>
-									<TableRowColumn></TableRowColumn>
-									<TableRowColumn></TableRowColumn>
-									<TableRowColumn><RaisedButton icon={<ActionDelete color={'#FFC107'} />} /></TableRowColumn>
-								</TableRow>
-							)}
-
-							</TableBody>
-						</Table>
-					</CardText>
-
 					<CardActions>
-						<RaisedButton label="Back" onTouchTap={() => this.props.history.goBack()} />
-						<RaisedButton label="Save" onTouchTap={this.applyChanges}/>
+						<FlatButton label="Back" onTouchTap={() => this.props.history.goBack()} />
+						<FlatButton label="Save" onTouchTap={this.applyChanges}/>
 					</CardActions>
 				</Card>
 		);

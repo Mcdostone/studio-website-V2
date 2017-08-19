@@ -46,8 +46,8 @@ class Admin extends React.Component {
 			<Route path="/admin/users/:id" render={() => <UserForm />} />
 
 			<Route exact path="/admin/albums" render={() => <AlbumsList creation />} />
-			<Route path="/admin/albums/:id" render={() => <AlbumForm />} />
 			<Route exact path="/admin/albums/create" render={() => <AlbumForm creation />} />
+			<Route path="/admin/albums/:id" render={() => <AlbumForm />} />
 
 			<Route exact path="/admin/tags" component	={TagsList} />
 		</Switch>

@@ -9,7 +9,7 @@ class LayoutMedia extends React.Component {
 	render() {
 		return (
 			<Layout {...this.props} >
-				<Studio media={this.props.media} />
+				<Studio style={{marginTop: 16}} media={this.props.media} />
 			</Layout>
 		);
 	}

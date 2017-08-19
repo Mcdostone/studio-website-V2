@@ -11,6 +11,7 @@ class StudioList extends React.Component {
 		super(props);
 		this.state = {
 			width: '33.33%',
+			gutter: 0
 		};
 		this.handleResize = this.handleResize.bind(this);
 		this.handleOnEnter = this.handleOnEnter.bind(this);
@@ -32,7 +33,10 @@ class StudioList extends React.Component {
 
 	handleResize = () => {
 		const newWidth = document.body.offsetWidth;
-		this.setState({width: newWidth < 700 ? '33.33%': '25%'});
+		this.setState({
+			width: newWidth < 700 ? '33.33%': '25%',
+			gutter: newWidth < 700 ? 3 : this.props.gutter
+		})
 		this.updateLayout();
 	}
 
@@ -42,8 +46,8 @@ class StudioList extends React.Component {
 			 	gridRef={grid => this.grid = grid}
 				className={this.props.className}
 				columnWidth={this.state.width}
-				gutterHeight={this.props.gutter}
-				gutterWidth={this.props.gutter}
+				gutterHeight={this.state.gutter}
+				gutterWidth={this.state.gutter}
 				monitorImagesLoaded={true}
 			>
 				{this.props.children}

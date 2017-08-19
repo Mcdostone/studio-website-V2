@@ -21,9 +21,7 @@
 	width: 64%;
 	border-left: var(--borderSize) solid black;
 	position: relative;
-	margin: auto;
-	margin-top: 32px;
-	padding-bottom: 8px;
+	margin: 32px auto;
 }
 
 .users-container {

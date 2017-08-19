@@ -70,7 +70,7 @@ class Navigator extends React.Component {
 				>
 					<Menu width={this.state.widthMenu}>
 						<MenuItem primaryText="Profile" onTouchTap={this.handleRequestProfile} />
-						<MenuItem primaryText="Admin" onTouchTap={this.handleRequestAdmin} />
+						{this.props.auth.user.canAdmin() && <MenuItem primaryText="Admin" onTouchTap={this.handleRequestAdmin} />}
 						<MenuItem primaryText="Logout" onTouchTap={this.handleRequestLogout} />
 					</Menu>
 				</Popover>

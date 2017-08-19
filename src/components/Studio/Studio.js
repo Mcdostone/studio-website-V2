@@ -114,7 +114,7 @@ class Studio extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div style={this.props.style}>
 				<Lightbox
 				medium={this.state.medium}
 				open={this.props.open} />

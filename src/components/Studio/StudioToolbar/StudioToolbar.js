@@ -36,6 +36,8 @@ class StudioToolbar extends React.Component {
 						labelStyle={{ color: grey500 }}
 						onChange={this.handleOnSortByChange}
 						value={this.props.activeSorting}
+						autoWidth={false}
+						style={{width: '100%'}}
 					>
 						{Object.keys(this.props.sortingTypes).map((key, index) =>
 							<MenuItem value={index} key={this.props.sortingTypes[key]}
@@ -47,6 +49,8 @@ class StudioToolbar extends React.Component {
 						value={this.props.activeFilter}
 						onChange={this.handleOnFilterByChange}
 						labelStyle={{ color: grey500 }}
+						autoWidth={false}
+						style={{width: '100%'}}
 					>
 						{this.props.filters.map((filter, index) =>
 							<MenuItem value={index} key={filter} primaryText={capitalizeFirstLetter(filter)} />

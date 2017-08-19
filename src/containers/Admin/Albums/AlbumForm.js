@@ -118,7 +118,7 @@ class AlbumForm extends React.Component {
 
 			{	Object.keys(media).length > 0 && <Card className="admin-container albums-container" style={{marginBottom: 16}}>
 				<CardText>
-					<Studio disableParallax media={media} />
+					<Studio media={media} />
 				</CardText>
 			</Card>
 			}
