@@ -1,11 +1,12 @@
 import { LIGHTBOX_CLOSE,
 	SHOW_MEDIUM,
+	LIGHTBOX_OPEN,
 	LIGHTBOX_NEXT,
 	LIGHTBOX_PREVIOUS, } from '../actions/lightboxActions';
 
 const initialState = {
 		medium: null,
-		lightboxOpened: false,
+		openLightbox: false,
 		index: 0
 };
 
@@ -14,18 +15,21 @@ export default function (state = initialState, action, root) {
 		case SHOW_MEDIUM:
 			return Object.assign({}, state, {
 				medium: action.payload,
-				lightboxOpened: true,
+				openLightbox: true,
       });
 
 		case LIGHTBOX_CLOSE:
 			return Object.assign({}, state, {
-        lightboxOpened: false
-      });
+        openLightbox: false
+			});
+
+		case LIGHTBOX_OPEN:
+			return Object.assign({}, state, {openLightbox: true});
 
 		case LIGHTBOX_NEXT:
 			const newIndex = (state.index + 1) % action.payload.length;
 			return Object.assign({}, state, {
-        lightboxOpened: true,
+        openLightbox: true,
 				medium: action.payload[newIndex],
 				index: newIndex,
       });
@@ -33,7 +37,7 @@ export default function (state = initialState, action, root) {
 		case LIGHTBOX_PREVIOUS:
 			const i = (state.index + action.payload.length - 1) % action.payload.length;
 			return Object.assign({}, state, {
-        lightboxOpened: true,
+        openLightbox: true,
 				medium: action.payload[i],
 				index: i,
       });

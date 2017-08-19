@@ -10,7 +10,19 @@ import { likeMedium } from 'actions/mediaActions';
 
 class LikeButton extends React.Component {
 
-	isLiked = () => this.props.medium.likes[this.props.auth.user.id] === true;
+	constructor(props) {
+		super(props);
+		this.state = {
+			liked: false,
+		};
+	}
+
+	handleLike = () => {
+		this.setState({liked: !this.isLiked()});
+		this.props.likeMedium(this.props.medium, this.props.auth.user);
+	}
+
+	isLiked = () => this.props.medium.likes[this.props.auth.user.id] === true || this.state.liked;
 
 	render() {
 		const style = { padding: '0 12px 0 0' };
@@ -20,7 +32,7 @@ class LikeButton extends React.Component {
 		<FavoriteBorderIcon color={grey500} hoverColor="white" />;
 
 		return <div className={classes} style={style}
-		onClick={() => this.props.likeMedium(this.props.medium, this.props.auth.user)} >
+		onClick={() => this.handleLike()} >
 			<IconButton disableTouchRipple>
 				{icon}
 			</IconButton>

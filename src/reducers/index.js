@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import ui from './ui';
-import lightbox from './lightbox';
+import lightbox from './lightboxReducers';
 import media from './mediaReducers';
 import def from './defaultReducers';
 import auth from './authReducers';

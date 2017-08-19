@@ -69,7 +69,7 @@ class LightboxInfos extends React.Component {
 
 	render() {
 		const tags = Object.keys(this.props.tags)
-			.filter(tagId => this.props.medium.tags[tagId])
+			.filter(tagId => !this.props.medium.tags[tagId] === true)
 			.map(tagId => this.props.tags[tagId].tag);
 		const margin = 32;
 
@@ -106,6 +106,7 @@ class LightboxInfos extends React.Component {
 				hintText="Add a tag: loul sass"
 				filter={AutoComplete.fuzzyFilter}
 				maxLength="14"
+				style={{width: '100%'}}
 				onUpdateInput={(inputTag, tagsList) => this.setState({inputTag, tagsList})}
 				maxSearchResults={5}
 				onNewRequest={() => this.refs.textField.focus()}
@@ -115,7 +116,6 @@ class LightboxInfos extends React.Component {
 				<TagsList tags={tagsOfMedium} />
 			</div>
 		);
-		console.log(this.props.medium.likes)
 
 		return (
 			<Paper className="lightbox-infos">

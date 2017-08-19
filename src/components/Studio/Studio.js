@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Parallax from '../Parallax';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import StudioToolbar from './StudioToolbar';
 import StudioList from '../List/StudioList';
 import Lightbox from '../Lightbox';
 import M from './M';
-import { showMedium, closeLightbox } from '../../actions/lightboxActions';
+import { showMedium, closeLightbox, openLightbox } from '../../actions/lightboxActions';
 import { fetchAll } from 'actions/fetchActions';
 
 
@@ -22,7 +23,6 @@ class Studio extends React.Component {
 			squareView: true,
 			filter: 0,
 			sorting: 0,
-			open: false,
 			medium: null
 		};
 		this.setSquareView = this.setSquareView.bind(this);
@@ -67,7 +67,8 @@ class Studio extends React.Component {
 	}
 
 	showMedium(medium) {
-		this.setState({medium, open: true})
+		this.setState({medium});
+		this.props.openLightbox();
 	}
 
 	setSquareView(active) {
@@ -82,43 +83,66 @@ class Studio extends React.Component {
 		this.setState({sorting: newSortingIndex});
 	}
 
-	render() {
+	getContainer = () => {
 		const filters = this.getFilters();
 		const processedMedia = this.getProcessedMedia(filters);
+		return (
+		<div>
+			{this.props.disableToolbar === false &&
+				<StudioToolbar
+				squareView={this.state.squareView}
+				onSetSquareView={this.setSquareView}
+				onSetFilter={this.setFilter}
+				activeFilter={this.state.filter}
+				filters={filters}
+				activeSorting={this.state.sorting}
+				sortingTypes={this.getSortingTypes()}
+				onSetSorting={this.setSorting}/>
+			}
+			<StudioList
+			gutter={16}
+			squareView={this.state.squareView}>
+				{processedMedia.map(m =>
+					<div key={m.id} onClick={() => this.showMedium(m)}>
+						<M square={this.state.squareView} medium={m} />
+					</div>
+				)}
+			</StudioList>
+		</div>
+		);
+
+	}
+
+	render() {
 		return (
 			<div>
 				<Lightbox
 				medium={this.state.medium}
-				open={this.state.open} />
-				{this.props.disableToolbar === false &&
-					<StudioToolbar
-					squareView={this.state.squareView}
-					onSetSquareView={this.setSquareView}
-					onSetFilter={this.setFilter}
-					activeFilter={this.state.filter}
-					filters={filters}
-					activeSorting={this.state.sorting}
-					sortingTypes={this.getSortingTypes()}
-					onSetSorting={this.setSorting}/>
+				open={this.props.open} />
+				{this.props.disableParallax === true && this.getContainer()}
+				{this.props.disableParallax === false &&
+					<Parallax className="container">
+					{this.getContainer()}
+					</Parallax>
 				}
-				<StudioList
-				gutter={16}
-				squareView={this.state.squareView}>
-					{processedMedia.map(m =>
-						<div key={m.id} onClick={() => this.showMedium(m)}>
-							<M square={this.state.squareView} medium={m} />
-						</div>
-					)}
-				</StudioList>
 			</div>
 		)
 	}
 }
 
+function mapStateToProps(state, ownProps) {
+	return {
+		open: state.lightbox.openLightbox,
+		...ownProps,
+	}
+}
+
+
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		openMediumInLightbox: showMedium,
 		closeLightbox,
+		openLightbox,
 		fetchAll,
   }, dispatch);
 }
@@ -126,11 +150,13 @@ function mapDispatchToProps(dispatch) {
 Studio.propTypes = {
 	media: PropTypes.array.isRequired,
 	disableToolbar: PropTypes.bool,
+	disableParallax: PropTypes.bool
 }
 
 Studio.defaultProps = {
 	media: [],
 	disableToolbar: false,
+	disableParallax: false,
 }
 
-export default connect(null, mapDispatchToProps)(Studio);
+export default connect(mapStateToProps, mapDispatchToProps)(Studio);

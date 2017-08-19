@@ -28,10 +28,12 @@ const TagsList = (props) =>
   	<TableBody displayRowCheckbox={false}>
 			{Object.keys(props.dataSource).map(id => {
 				const link = `/admin/tags/${id}`
+				const userId = props.dataSource[id].author;
+				const user = props.state.users[userId];
 				return <TableRow hoverable={true} key={id}>
 						<TableRowColumn className="remove-small-screen"><Link to={link}>{id}</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{props.dataSource[id].tag}</Link></TableRowColumn>
-						<TableRowColumn><Link to={link}>{props.dataSource[id].author}</Link></TableRowColumn>
+						<TableRowColumn><Link to={link}>{ user ? user.getFullName() : userId }</Link></TableRowColumn>
 						<TableRowColumn><Link to={link}>{formatDate(props.dataSource[id].createdAt)}</Link></TableRowColumn>
 					</TableRow>
 			}

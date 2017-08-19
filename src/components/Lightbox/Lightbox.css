@@ -173,6 +173,7 @@
 	flex-wrap: nowrap;
 	flex: 2 2 calc(50%);
 	height: 28px;
+	text-align: left;
 	color: var(--grey);
 	line-height: 28px;
 	font-style: italic;

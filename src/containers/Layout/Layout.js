@@ -29,7 +29,7 @@ class Layout extends React.Component {
 					</CoverContent>
 					{this.getMenuCover()}
 				</Cover>
-				{this.props.children}
+					{this.props.children}
 			</div>
 		);
 	}
@@ -44,6 +44,7 @@ Layout.propTypes = {
 function mapStateToProps(state) {
 	return {
 		auth: state.auth,
+		open: state.lightbox.openLightbox
 	}
 }
 
