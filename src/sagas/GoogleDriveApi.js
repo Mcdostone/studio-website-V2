@@ -12,6 +12,10 @@ export default class GoogleDriveApi {
 		this.gapi.auth.setToken({access_token: accessToken});
 	}
 
+	getAccessToken() {
+		return this.gapi.auth.getToken();
+	}
+
 	getFile(fileId) {
 		if(this.gapi.client.drive !== undefined) {
 			return this.gapi.client.drive.files.get({fileId})

@@ -1,14 +1,13 @@
-import { all, call, takeEvery, put, select } from 'redux-saga/effects';
+import { call, takeEvery, put, select } from 'redux-saga/effects';
 import logger from '../Logger';
 import database from './RestFirebaseDatabase';
-import { buildMediumFromGoogleDrive, buildMediumFromFirebase } from '../factories';
+import { buildMediumFromGoogleDrive } from '../factories';
 import { updateAlbum } from '../actions/albumActions';
 import {
-	addMedium,
+	addMediumWithSrc,
 	MEDIA_CREATE,
 	MEDIA_UPDATE,
 	MEDIA_TAG,
-	MEDIA_FETCH_ALL,
 	MEDIA_LIKE,
 	MEDIA_DELETE,
 	updateMedium,
@@ -48,20 +47,20 @@ function *createMedium(action) {
 		yield put(updateAlbum(album));
 	}
 
-	yield put(addMedium(mediumCreated));
+	yield put(addMediumWithSrc(mediumCreated));
 }
 
 
 function* fetchFromGoogleDrive(medium) {
-	const state = yield select();
+	const credential = yield select(state => state.auth.credential);
 	try {
-		googleDriveApi.setAccessToken(state.auth.credential.accessToken);
+		googleDriveApi.setAccessToken(credential.accessToken);
 		logger.react(`GET ${medium.id} from google drive`);
 		const data = yield call(googleDriveApi.getFile, medium.id);
 		return buildMediumFromGoogleDrive(medium, data);
 	}
 	catch(error) {
-		logger.react('test', error);
+		logger.error('', error);
 	}
 }
 
@@ -70,7 +69,7 @@ function* createMediumFromFirebase(medium) {
 		switch(medium.from.toLowerCase().trim()) {
 			case 'drive':
 				const newMedium = yield call(fetchFromGoogleDrive, medium);
-				yield put(addMedium(newMedium));
+				yield put(addMediumWithSrc(newMedium));
 				break;
 			default:
 				// yield put(addMedium(medium));
@@ -78,25 +77,20 @@ function* createMediumFromFirebase(medium) {
 	}
 }
 
-function* tmp(medium) {
-	if(medium)
-		yield put(addMedium(buildMediumFromFirebase(medium)));
-}
-
-function *fetchAllMedia(action) {
+/*function *fetchAllMedia(action) {
 	const { resource } = action.payload;
 	try {
 		const snapshot = yield call(database.get, resource);
 		const response = snapshot.val();
 		if(response) {
 			yield all(Object.keys(response).map(idMedium => {
-			 return call(tmp, response[idMedium]);
+			 return put(addMedium(response[idMedium]));
 			}));
 		}
 	} catch(err) {
 		logger.error(err);
 	}
-}
+}*/
 
 function *fetchMedium(action) {
 	const { resource, id } = action.payload;
@@ -146,7 +140,7 @@ function *tagMedium(action) {
 
 function* mediaSagas() {
 	yield takeEvery(MEDIA_FETCH_ONE, fetchMedium);
-	yield takeEvery(MEDIA_FETCH_ALL, fetchAllMedia);
+	// yield takeEvery(MEDIA_FETCH_ALL, fetchAllMedia);
 	yield takeEvery(MEDIA_UPDATE, createMedium);
 	yield takeEvery(MEDIA_CREATE, createMedium);
 	yield takeEvery(MEDIA_DELETE, deleteMedium);

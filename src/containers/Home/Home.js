@@ -18,7 +18,7 @@ class Home extends React.Component {
 					className="cover home-cover"
 					src={config.APP.DEFAULT_COVER}
 					title="test">
-						<CoverContent delay={1000} duration={550}>
+						<CoverContent delay={400} duration={550}>
 							<h2 className="cover-title home-title">Club studio</h2>
 						</CoverContent>
 					</Cover>

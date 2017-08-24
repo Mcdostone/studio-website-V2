@@ -40,15 +40,16 @@ class ExifInfos extends React.Component {
 	}
 
 	render() {
-		return (
-			this.props.exif.containsMetadata() ? this.getContainer() : null
-		);
+		if(this.props.exif)
+			return this.props.exif.containsMetadata() ? this.getContainer() : null
+		else
+			return null;
 	}
 
 }
 
 ExifInfos.propTypes = {
-	exif : PropTypes.object.isRequired
+	exif : PropTypes.object
 }
 
 export default ExifInfos;

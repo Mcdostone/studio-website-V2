@@ -1,7 +1,11 @@
 import { Medium } from '../core';
 import { buildExifFromGoogleDrive } from './exifFactory';
 
-export const buildMediumFromDrivePicker = (data) => new Medium(data.id, data.url, 'drive', [])
+export const buildMediumFromDrivePicker = (data) => {
+	const medium = new Medium(data.id, data.url, 'drive', [])
+	medium.type = data.mimeType.split('/')[0];
+	return medium;
+}
 
 export const buildMediumFromFirebase = (data) => {
 	const medium = new Medium(data.id, data.src, data.from, data.likes, data.album, data.tags);

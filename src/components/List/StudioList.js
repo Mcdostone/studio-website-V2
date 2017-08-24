@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import StackGrid from 'react-stack-grid';
 import EventListener from 'react-event-listener';
-import Waypoint from 'react-waypoint';
 import './StudioList.css';
 
 class StudioList extends React.Component {
@@ -14,7 +13,6 @@ class StudioList extends React.Component {
 			gutter: 0
 		};
 		this.handleResize = this.handleResize.bind(this);
-		this.handleOnEnter = this.handleOnEnter.bind(this);
 	}
 
 	componentDidMount = () => this.handleResize();
@@ -24,11 +22,6 @@ class StudioList extends React.Component {
 	updateLayout = () => {
 		if(this.grid)
 			this.grid.updateLayout();
-	}
-
-	handleOnEnter = () => {
-		if(this.props.fetchMoreData)
-			this.props.fetchMoreData();
 	}
 
 	handleResize = () => {
@@ -53,7 +46,6 @@ class StudioList extends React.Component {
 				{this.props.children}
 			</StackGrid>
 			<EventListener target="window" style={{display: 'none'}} onResize={this.handleResize} />
-			<Waypoint onEnter={this.handleOnEnter} />
 		</div>
 
 }

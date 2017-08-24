@@ -10,8 +10,8 @@ export default {
 		messagingSenderId: '813777068579'
 	},
 	FIREBASE_AUTH_CONFIG: {
-		scopes: ['email', 'profile', 'https://www.googleapis.com/auth/drive.readonly'],
-		//hd: 'telecomnancy.net',
+		scopes: ['email', 'profile', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.readonly'],
+		hd: 'telecomnancy.net',
 		prompt: 'select_account',
 	},
 	APP: {

@@ -24,8 +24,10 @@ export function getUniqueDatasetById(dataset) {
 
 export function getUniquePropertyFromDataset(property, dataset) {
 	const res =  Object.keys(dataset).reduce((newDataset, d) => {
-		const prop = dataset[d][property].toLowerCase();
-		newDataset[prop] = true;
+		if(dataset[d][property]) {
+			const prop = dataset[d][property].toLowerCase();
+			newDataset[prop] = true;
+		}
 		return newDataset;
 	}, {});
 	return Object.keys(res);

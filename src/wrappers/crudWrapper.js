@@ -12,7 +12,9 @@ const defaultActions = {
 
 export default function crudWrapper(WrappedComponent, actions = {}) {
 
-	const crud = (props) => <WrappedComponent {...props} />;
+	const crud = (props) => {
+		return <WrappedComponent {...props} />
+	};
 
 	function mapStateToProps(state, ownProps) {
 		return {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Parallax from 'components/Parallax';
 import PropTypes from 'prop-types';
 import MenuItem from 'material-ui/MenuItem';
 import { CoverContent, Cover, CoverMenu } from 'components/Cover';
@@ -25,16 +24,14 @@ class Layout extends React.Component {
 		return (
 			<div className="layout-studio">
 				<Cover className="cover" src={this.props.cover}>
-					<CoverContent data={this.props.title}>
+					<CoverContent delay={500} data={this.props.title}>
 						<h2 className="cover-title">{this.props.title}</h2>
 					</CoverContent>
 					{this.getMenuCover()}
 				</Cover>
-				<Parallax>
 					<div className="container">
 						{this.props.children}
 					</div>
-				</Parallax>
 			</div>
 		);
 	}

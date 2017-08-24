@@ -9,7 +9,7 @@ export default function adminListWrapper(WrappedComponent, resource, fetchAll) {
 	const AdminList = class extends React.Component {
 
 		componentDidMount() {
-			this.props.fetchAll(resource);
+			// this.props.fetchAll(resource);
 		}
 
 		render() {

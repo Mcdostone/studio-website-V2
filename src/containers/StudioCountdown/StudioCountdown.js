@@ -44,7 +44,7 @@ class StudioCountdown extends React.Component {
 	}
 
 	componentDidMount() {
-		$('#cuming').countdown('2017/07/07 12:0:00', function(event) {
+		$('#cuming').countdown('2017/09/07 1:00:00', function(event) {
 			$(this).html(event.strftime('%-D %!D:jour,jours; %H:%M:%S') + "<br><br>  Studio is coming !");
 		});
 	}

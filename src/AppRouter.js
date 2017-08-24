@@ -11,6 +11,7 @@ import { resourceWrapper, mediaWrapper } from './wrappers';
 import Albums from './containers/Albums';
 import Media from './containers/Media';
 import Profile from './containers/Profile';
+import CGU from './containers/CGU';
 import StudioCountdown from './containers/StudioCountdown';
 import Admin from './containers/Admin';
 import { history } from './history';
@@ -23,12 +24,14 @@ const ConnectedApp = (props) =>
 				<Navbar id="navbar" />
 				<StudioDrawer />
 				<Route exact path="/" component={Home} />
-				<Route exact path="/media" component={userIsAuthenticated(Media)} />
+				<Route exact path="/media" component={userIsAuthenticated(resourceWrapper(Media, 'media'))} />
 				<Route exact path="/albums" component={userIsAuthenticated(resourceWrapper(Albums, 'albums'))} />
 				<Route path="/albums/:id" component={userIsAuthenticated(mediaWrapper('albums'))} />
 				<Route path="/admin" component={adminIsAuthenticated(Admin)} />
 				<Route path="/profile/:id" component={userIsAuthenticated(Profile)} />
 				<Route path="/countdown" render={() => <StudioCountdown videoId="x537Cqg5nEI"/> } />
+
+				<Route path="/cgu" component={CGU} />
 			</div>
 		</Router>
 		<Snackbar

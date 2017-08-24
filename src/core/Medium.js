@@ -27,7 +27,7 @@ export default class Medium {
 			this.likes[userId] = true;
 	}
 
-	getThumbnail(size = 220) {
+	getThumbnail(size = 500) {
 		if(this.from === 'drive')
 			return this.src + '=s' + size;
 		return this.src;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Dashboard from './Dashboard';
-import { adminListWrapper } from '../../wrappers';
 import { MediaList, MediumEdit, MediaCreate } from './Media';
 import { UsersList, UserForm } from './Users';
 import { AlbumsList, AlbumForm } from './Albums';
@@ -28,7 +27,7 @@ class Admin extends React.Component {
 		<Switch>
 			<Route exact path="/admin" component={Dashboard} />
 
-			<Route exact path="/admin/media" component={adminListWrapper(MediaList, 'media')} />
+			<Route exact path="/admin/media" component={MediaList} />
 			<Route exact path="/admin/media/create" component={MediaCreate} />
 			<Route path="/admin/media/:id" render={() => <MediumEdit/>} />
 

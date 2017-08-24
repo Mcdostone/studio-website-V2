@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
+import { authWrapper } from 'wrappers';
 
 
 class Footer extends React.Component {
@@ -7,12 +9,12 @@ class Footer extends React.Component {
 	render() {
 		return (
 			<div className="footer">
-				<p>CGU</p>
+				<Link to="/cgu"><p>CGU</p></Link>
 				<p>studio@telecomnancy.net</p>
-				<p>Suppression de compte</p>
+				{this.props.auth.authentificated  && <p>Suppression de compte</p>}
 			</div>
 		);
 	}
 }
 
-export default Footer;
+export default authWrapper(Footer);

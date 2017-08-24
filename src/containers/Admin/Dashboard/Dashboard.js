@@ -13,8 +13,10 @@ class DashboardStudio extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchAll('users');
+		this.props.fetchAll('media');
 		this.props.fetchAll('albums');
 		this.props.fetchAll('uploads');
+		this.props.fetchAll('reports');
 		this.props.fetchAll('tags');
 	}
 

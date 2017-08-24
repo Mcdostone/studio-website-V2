@@ -9,14 +9,13 @@ import {
 	TableRow,
 	TableRowColumn,
 } from 'material-ui/Table';
-// import { adminListWrapper } from '../../../wrappers';
 import { formatDate } from '../../../utils';
-
+import { adminListWrapper } from 'wrappers';
 
 const MediaList = class extends React.Component {
 
 	componentDidMount() {
-		this.props.fetchAll('albums');
+		// this.props.fetchAll('albums');
 	}
 
 	render() {
@@ -53,7 +52,6 @@ const MediaList = class extends React.Component {
 
 MediaList.propTypes = {
 	dataSource: PropTypes.object.isRequired,
-	fetchAll: PropTypes.func.isRequired,
-};
+}
 
-export default MediaList;
+export default adminListWrapper(MediaList, 'media');

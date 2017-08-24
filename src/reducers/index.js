@@ -3,7 +3,6 @@ import { routerReducer } from 'react-router-redux';
 import ui from './ui';
 import lightbox from './lightboxReducers';
 import media from './mediaReducers';
-import def from './defaultReducers';
 import auth from './authReducers';
 import uploads from './uploadReducers';
 import tags from './tagReducers';
@@ -19,7 +18,6 @@ const studioApp = combineReducers({
 		lightbox,
 		media,
 		notifications,
-		default: def,
 		albums,
 		tags,
 		covers,
