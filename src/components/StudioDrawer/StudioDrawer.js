@@ -93,17 +93,7 @@ class StudioDrawer extends React.Component {
 							Studio
 						</ListItem>
 					</Link>
-					<Link to="/">
-						<ListItem onTouchTap={this.props.onToggleDrawer}>
-							About
-						</ListItem>
-					</Link>
-					<Link to="/">
-						<ListItem onTouchTap={this.props.onToggleDrawer}>
-							Works
-						</ListItem>
-					</Link>
-					{this.props.auth.authentificated && this.props.auth.user.canAdmin() && this.getAdminListItems()}
+						{this.props.auth.authentificated && this.props.auth.user.canAdmin() && this.getAdminListItems()}
 					<Divider />
 					{authentificated}
 				</List>

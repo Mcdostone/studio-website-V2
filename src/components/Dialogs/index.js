@@ -1,4 +1,5 @@
 import DeleteDialog from './DeleteDialog';
+import CguDialog from './CguDialog';
 
 
-export { DeleteDialog };
+export { DeleteDialog, CguDialog };

@@ -1,15 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Footer.css';
 import { authWrapper } from 'wrappers';
-
+import { CguDialog } from 'components/Dialogs';
+import './Footer.css';
 
 class Footer extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			open: false
+		}
+		this.closeCGU = this.closeCGU.bind(this);
+	}
+
+	closeCGU() {
+		this.setState({open: false});
+	}
 
 	render() {
 		return (
 			<div className="footer">
-				<Link to="/cgu"><p>CGU</p></Link>
+				<CguDialog open={this.state.open} handleClose={this.closeCGU} />
+				<p style={{cursor: 'pointer'}} onClick={() => this.setState({open: true})}>CGU</p>
 				<p>studio@telecomnancy.net</p>
 				{this.props.auth.authentificated  && <p>Suppression de compte</p>}
 			</div>
