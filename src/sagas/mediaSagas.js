@@ -77,21 +77,6 @@ function* createMediumFromFirebase(medium) {
 	}
 }
 
-/*function *fetchAllMedia(action) {
-	const { resource } = action.payload;
-	try {
-		const snapshot = yield call(database.get, resource);
-		const response = snapshot.val();
-		if(response) {
-			yield all(Object.keys(response).map(idMedium => {
-			 return put(addMedium(response[idMedium]));
-			}));
-		}
-	} catch(err) {
-		logger.error(err);
-	}
-}*/
-
 function *fetchMedium(action) {
 	const { resource, id } = action.payload;
 	try {
@@ -140,7 +125,6 @@ function *tagMedium(action) {
 
 function* mediaSagas() {
 	yield takeEvery(MEDIA_FETCH_ONE, fetchMedium);
-	// yield takeEvery(MEDIA_FETCH_ALL, fetchAllMedia);
 	yield takeEvery(MEDIA_UPDATE, createMedium);
 	yield takeEvery(MEDIA_CREATE, createMedium);
 	yield takeEvery(MEDIA_DELETE, deleteMedium);

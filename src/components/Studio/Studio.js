@@ -15,7 +15,7 @@ import Waypoint from 'react-waypoint';
 const SORT_LAST_ADDED = 0;
 const SORT_POPULARITY = 1;
 const SORT_LIKES = 2;
-const INCR = 12;
+const INCR = 5;
 
 class Studio extends React.Component {
 
@@ -72,7 +72,6 @@ class Studio extends React.Component {
 
 	getFilters() {
 		return ['all', ...getUniquePropertyFromDataset('type', this.props.media)];
-		//return ['all'];
 	}
 
 	getSortingTypes() {
